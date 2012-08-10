@@ -1,12 +1,8 @@
 #include "cocos_scene.hpp"
 
 #include "master.hpp"
-#include "event_manager.hpp"
 #include "config.hpp"
-#include "network.hpp"
 #include "game_layer.hpp"
-#include "menu_layer.hpp"
-#include "game_controller.hpp"
 
 #include "CCFileUtils.h"
 
@@ -37,10 +33,7 @@ CCScene* cocos_scene_t::scene()
     
     scene->m_master.add_external_subsystem<cocos_scene_t>(scene);
     scene->m_master.add_unmanaged_subsystem<config_t>(cfg_str);
-    scene->m_master.add_managed_subsystem<event_manager_t>();
-    scene->m_master.add_managed_subsystem<game_controller_t>();
     scene->m_master.add_managed_subsystem<game_layer_t>();
-    scene->m_master.add_managed_subsystem<menu_layer_t>();
     
     scene->m_master.start();
 
@@ -53,7 +46,6 @@ CCScene* cocos_scene_t::scene()
 
 void cocos_scene_t::tick(cocos2d::CCTime dt)
 {
-    m_master.subsystem<event_manager_t>().receive_events();
     m_master.subsystem<game_layer_t>().update_scene();
 }
 

@@ -1,7 +1,5 @@
 #include "game_layer.hpp"
-#include "game_controller.hpp"
 #include "cocos_scene.hpp"
-#include "menu_layer.hpp"
 
 USING_NS_CC;
 
@@ -30,170 +28,54 @@ bool game_layer_t::init()
         return false;
     }
 
-    _size = CCDirector::sharedDirector()->getWinSize();
+    this->setTouchEnabled(true);
+    
+    m_size = CCDirector::sharedDirector()->getWinSize();
 
+    CCSprite *background = CCSprite::create("HelloWorld.png");
+
+    cocos2d::CCSize bg_size = background->getContentSize();
+    float bg_scale_x = m_size.width / bg_size.width;
+    float bg_scale_y = m_size.height / bg_size.height;
+    background->setScaleX(bg_scale_x);
+    background->setScaleY(bg_scale_y);
+    background->setPosition( ccp(m_size.width/2, m_size.height/2) );
+    this->addChild(background, 0);
+    
+    
     CCMenuItemImage *pMenuItem = CCMenuItemImage::create(
                                         "shesterenka.png",
                                         "shesterenka_p.png",
                                         this,
                                         menu_selector(game_layer_t::menuOpenCallback) );
-    pMenuItem->setPosition( ccp(_size.width - 27, 28) );
+    pMenuItem->setPosition( ccp(m_size.width - 27, 28) );
 
-
-    CCMenuItemImage *left_button = CCMenuItemImage::create(
-                                        "test_button.png",
-                                        "test_button_pressed.png",
-                                        &master_t::subsystem<game_controller_t>(),
-                                        menu_selector(game_controller_t::left_fire) 
-                                        );
-    left_button->setPosition( ccp(_size.width /2 - 60, 20) );
-
-    CCMenuItemImage *right_button = CCMenuItemImage::create(
-                                        "test_button.png",
-                                        "test_button_pressed.png",
-                                        &master_t::subsystem<game_controller_t>(),
-                                        menu_selector(game_controller_t::right_fire) 
-                                        );
-    right_button->setPosition( ccp(_size.width / 2 + 60, 20) );
-
-    // create menu, it's an autorelease object
-    _pMenu = CCMenu::create(pMenuItem, left_button, right_button, NULL);
-    _pMenu->setPosition( CCPointZero );
-    _pMenu->setVisible(false);
-    this->addChild(_pMenu, 1);
-
-
-    _tip = CCLabelTTF::create("", "Arial", 36);
-    _tip->setPosition( ccp(_size.width/2, _size.height/2) );
-    _tip->setVisible(false);
-    this->addChild(_tip, 1);
-
-    _good_tip = CCLabelTTF::create("", "Arial", 36);
-    _good_tip->setPosition( ccp(_size.width/2, _size.height/2) );
-    _good_tip->setColor(ccc3(100, 100, 255));
-    _good_tip->setVisible(false);
-    this->addChild(_good_tip, 1);
-
-    _bad_tip = CCLabelTTF::create("", "Arial", 36);
-    _bad_tip->setPosition( ccp(_size.width/2, _size.height/2) );
-    _bad_tip->setColor(ccc3(255, 100, 100));
-    _bad_tip->setVisible(false);
-    this->addChild(_bad_tip, 1);
-
-    CCSprite* pSprite = CCSprite::create("background.png");
-    pSprite->setPosition( ccp(_size.width/2, _size.height/2) );
-    this->addChild(pSprite, 0);    
-
-    _player = CCSprite::create("good_face.png");
-    _player->setPosition( ccp(_size.width/2, 20) );
-    this->addChild(_player, 0);    
-    _player_hp = CCSprite::create("blue_hp.png");
-    _player_hp->setPosition( ccp(_size.width/2, 2) );
-    this->addChild(_player_hp, 0);    
-    _player_name = CCLabelTTF::create("", "Arial", 20);
-    _player_name->setPosition( ccp(_size.width / 2, 55) );
-    this->addChild(_player_name, 1);
-
-    _enemy = CCSprite::create("good_face.png");
-    _enemy->setPosition( ccp(_size.width/2, _size.height - 20) );
-    this->addChild(_enemy, 0);    
-    _enemy_hp = CCSprite::create("red_hp.png");
-    _enemy_hp->setPosition( ccp(_size.width/2, _size.height - 2) );
-    this->addChild(_enemy_hp, 0);    
-    _enemy_name = CCLabelTTF::create("", "Arial", 20);
-    _enemy_name->setPosition( ccp(_size.width / 2, _size.height - 45) );
-    this->addChild(_enemy_name, 1);
+    m_menu = CCMenu::create(pMenuItem, NULL);
+    m_menu->setPosition( CCPointZero );
+    m_menu->setVisible(true);
+    this->addChild(m_menu, 1);
 
     return true;
 }
 
 void game_layer_t::menuOpenCallback(CCObject* pSender)
 {
-    hide();
-    master_t::subsystem<menu_layer_t>().show();
+    master_t::subsystem<cocos_scene_t>().end_scene();
 }
 
 void game_layer_t::show()
 {
-    _pMenu->setVisible(true);
+    m_menu->setVisible(true);
 }
 
 void game_layer_t::hide()
 {
-    _pMenu->setVisible(false);
+    m_menu->setVisible(false);
 }
 
 void game_layer_t::update_scene()
 {
-    update_tip(_tip, 2, 2);
-    update_tip(_bad_tip, 0, -2);
-    update_tip(_good_tip, 0, 2);
+
 }
 
-void game_layer_t::update_tip(CCSprite *tip, float dx, float dy)
-{
-    if (tip->isVisible())
-    {
-        CCPoint pos = tip->getPosition();
-        pos.x += dx;
-        pos.y += dy;
-        tip->setPosition(pos);
-
-        if (pos.x > _size.width || pos.y > _size.height || pos.x < 0 || pos.y < 0)
-        {
-            tip->setVisible(false);
-        }
-    }
-}
-
-void game_layer_t::show_good_tip(const std::string &tip)
-{
-    _good_tip->setString(tip.c_str());
-    _good_tip->setPosition( ccp(_size.width/2, _size.height/2) );
-    _good_tip->setVisible(true);
-}
-
-void game_layer_t::show_bad_tip(const std::string &tip)
-{
-    _bad_tip->setString(tip.c_str());
-    _bad_tip->setPosition( ccp(_size.width/2, _size.height/2) );
-    _bad_tip->setVisible(true);
-}
-
-void game_layer_t::show_tip(const std::string &tip)
-{
-    _tip->setString(tip.c_str());
-    _tip->setPosition( ccp(_size.width/2, _size.height/2) );
-    _tip->setVisible(true);
-}
-
-void game_layer_t::update_player(const std::string &name, double hp)
-{
-    update_someone(name, hp, _player);
-    _player_hp->setScaleX(hp > 0 ? hp / 100 : 0);
-    _player_name->setString(name.c_str());
-}
-
-void game_layer_t::update_enemy(const std::string &name, double hp)
-{
-    update_someone(name, hp, _enemy);
-    _enemy_hp->setScaleX(hp > 0 ? hp / 100 : 0);
-    _enemy_name->setString(name.c_str());
-}
-
-void game_layer_t::update_someone(const std::string &name, double hp, CCSprite *sprite)
-{
-    if (hp > 50)
-    {
-        sprite->setTexture(CCTextureCache::sharedTextureCache()->addImage("good_face.png"));
-    }
-    else if (hp > 0)
-    {
-        sprite->setTexture(CCTextureCache::sharedTextureCache()->addImage("angry_face.png"));
-    }
-    else
-    {
-        sprite->setTexture(CCTextureCache::sharedTextureCache()->addImage("rip_face.png"));
-    }
-}
 

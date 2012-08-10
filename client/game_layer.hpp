@@ -24,32 +24,10 @@ public:
 
     void update_scene();
 
-    void show_tip(const std::string &tip);
-    void show_good_tip(const std::string &tip);
-    void show_bad_tip(const std::string &tip);
-
-    void update_player(const std::string &name, double hp);
-    void update_enemy(const std::string &name, double hp);
-
 private:
+    cocos2d::CCSize m_size;
 
-    void update_someone(const std::string &name, double hp, cocos2d::CCSprite *sprite);
-    void update_tip(cocos2d::CCSprite *tip, float dx, float dy);
-
-    cocos2d::CCSize _size;
-    cocos2d::CCLabelTTF *_tip;
-    cocos2d::CCLabelTTF *_good_tip;
-    cocos2d::CCLabelTTF *_bad_tip;
-
-    cocos2d::CCSprite *_player;
-    cocos2d::CCSprite *_player_hp;
-    cocos2d::CCLabelTTF *_player_name;
-
-    cocos2d::CCSprite *_enemy;
-    cocos2d::CCSprite *_enemy_hp;
-    cocos2d::CCLabelTTF *_enemy_name;
-
-    cocos2d::CCMenu *_pMenu;
+    cocos2d::CCMenu *m_menu;
 };
 
 #endif //_GAME_LAYER_HPP_
