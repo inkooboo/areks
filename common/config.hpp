@@ -141,9 +141,13 @@ inline void config_t::store()
     
     std::ofstream f(m_file_name.c_str(), std::ios_base::out | std::ios_base::trunc);
     
-    for (auto &property : m_properties)
+    //for (auto &property : m_properties)
+    //{
+    //    f << escape(property.first) << " " << escape(property.second) << std::endl;
+    //}
+    for (auto it = m_properties.begin(); it != m_properties.end(); ++it)
     {
-        f << escape(property.first) << " " << escape(property.second) << std::endl;
+        f << escape(it->first) << " " << escape(it->second) << std::endl;
     }
 }
 

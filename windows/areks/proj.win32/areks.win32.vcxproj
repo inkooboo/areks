@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>.;..\Classes;..\..\..\cocos2dx\cocos2dx;..\..\..\cocos2dx\cocos2dx\include;..\..\..\cocos2dx\cocos2dx\kazmath\include;..\..\..\cocos2dx\cocos2dx\platform\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32\OGLES;..\..\..\cocos2dx;..\..\..\cocos2dx\CocosDenshion\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\common;..\..\..\client;.;..\Classes;..\..\..\cocos2dx\cocos2dx\platform;..\..\..\cocos2dx\cocos2dx;..\..\..\cocos2dx\cocos2dx\include;..\..\..\cocos2dx\cocos2dx\kazmath\include;..\..\..\cocos2dx\cocos2dx\platform\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32\OGLES;..\..\..\cocos2dx;..\..\..\cocos2dx\CocosDenshion\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -134,14 +134,20 @@
     <ResourceCompile Include="areks.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\client\cocos_scene.hpp" />
+    <ClInclude Include="..\..\..\client\game_layer.hpp" />
+    <ClInclude Include="..\..\..\common\config.hpp" />
+    <ClInclude Include="..\..\..\common\master.hpp" />
+    <ClInclude Include="..\..\..\common\noncopyable.hpp" />
+    <ClInclude Include="..\..\..\common\subsystem.hpp" />
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\HelloWorldScene.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\client\cocos_scene.cpp" />
+    <ClCompile Include="..\..\..\client\game_layer.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\HelloWorldScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

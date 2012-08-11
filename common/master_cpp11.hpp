@@ -24,11 +24,11 @@
 class master_t : private noncopyable_t
 {
 public:
-    template <typename SubsystemType>
-    inline void add_managed_subsystem();
+    template <typename SubsystemType, typename... Args>
+    inline void add_managed_subsystem(Args ...args);
     
-    template <typename SubsystemType, typename Arg1>
-    inline void add_unmanaged_subsystem(Arg1 arg);
+    template <typename SubsystemType, typename... Args>
+    inline void add_unmanaged_subsystem(Args ...args);
     
     template <typename SubsystemType>
     inline void add_external_subsystem(SubsystemType *raw_pointer);
@@ -49,26 +49,18 @@ private:
 
 inline void master_t::start()
 {
-    //for (auto &subsystem : m_subsystems)
-    //{
-    //    subsystem->start();
-    //}
-    for (auto it = m_subsystems.begin(); it != m_subsystems.end(); ++it)
+    for (auto &subsystem : m_subsystems)
     {
-        (*it)->start();
+        subsystem->start();
     }
 }
 
 inline void master_t::stop()
 {
-    //for (auto &subsystem : m_subsystems)
-    //{
-    //    subsystem->stop();
-    //}
-    for (auto it = m_subsystems.begin(); it != m_subsystems.end(); ++it)
+    for (auto &subsystem : m_subsystems)
     {
-        (*it)->stop();
-	}
+        subsystem->stop();
+    }
 }
 
 inline master_t::master_t()
@@ -90,29 +82,29 @@ namespace internal
     template <typename SubsystemType>
     struct unmanaged_holder_t : public subsystem_t
     {
-        template <typename Arg1>
-        inline unmanaged_holder_t(Arg1 arg1) : holder(arg1) {}
+        template <typename... Args>
+        inline unmanaged_holder_t(Args ...args) : holder(args...) {}
         SubsystemType holder;
     };
 }
 
-template <typename SubsystemType>
-inline void master_t::add_managed_subsystem()
+template <typename SubsystemType, typename... Args>
+inline void master_t::add_managed_subsystem(Args ...args)
 {
     SubsystemType **instance = internal::subsystem_instance<SubsystemType>();
     assert(*instance == 0 && "Instance for this subsystem was already added!");
     
-    *instance = new SubsystemType();
+    *instance = new SubsystemType(args...);
     m_subsystems.push_back(std::unique_ptr<subsystem_t>(*instance));
 }
 
-template <typename SubsystemType, typename Arg1>
-inline void master_t::add_unmanaged_subsystem(Arg1 arg1)
+template <typename SubsystemType, typename... Args>
+inline void master_t::add_unmanaged_subsystem(Args ...args)
 {
     SubsystemType **instance = internal::subsystem_instance<SubsystemType>();
     assert(*instance == 0 && "Instance for this subsystem was already added!");
     
-    internal::unmanaged_holder_t<SubsystemType> *unmanaged_holder = new internal::unmanaged_holder_t<SubsystemType>(arg1);
+    internal::unmanaged_holder_t<SubsystemType> *unmanaged_holder = new internal::unmanaged_holder_t<SubsystemType>(args...);
     *instance = &(unmanaged_holder->holder);
     m_subsystems.push_back(std::unique_ptr<subsystem_t>(unmanaged_holder));
 }
