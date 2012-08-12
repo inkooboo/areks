@@ -7,13 +7,18 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\World.cpp">
+    <ClCompile Include="..\..\..\client\cocos_scene.cpp.bak" />
+    <ClCompile Include="..\..\..\client\game_layer.cpp.bak" />
+    <ClCompile Include="..\..\..\client\Physics.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\game_layer.cpp.bak">
+    <ClCompile Include="..\..\..\client\View.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\cocos_scene.cpp.bak">
+    <ClCompile Include="..\..\..\client\Loop.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\ActionHandler.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,19 +41,27 @@
     <ClInclude Include="resource.h">
       <Filter>Source\Win</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\game_layer.hpp">
-      <Filter>Source\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\AppDelegate.h">
       <Filter>Source\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\cocos_scene.hpp">
-      <Filter>Source\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\World.hpp">
-      <Filter>Source\Game</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\client\defs.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\cocos_scene.hpp" />
+    <ClInclude Include="..\..\..\client\game_layer.hpp" />
+    <ClInclude Include="..\..\..\client\Primitives.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\Physics.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\View.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\ActionHandler.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\Loop.hpp">
       <Filter>Source\Game</Filter>
     </ClInclude>
   </ItemGroup>

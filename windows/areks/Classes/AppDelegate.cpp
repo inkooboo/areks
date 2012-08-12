@@ -3,7 +3,10 @@
 #include "SimpleAudioEngine.h"
 #include "config.hpp"
 
-#include "World.hpp"
+#include "Physics.hpp"
+#include "View.hpp"
+#include "Loop.hpp"
+#include "ActionHandler.hpp"
 
 using namespace CocosDenshion;
 
@@ -35,7 +38,10 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setAnimationInterval(1.0 / 60);
 
     //init master
-    _master.add_managed_subsystem<World>();
+    _master.add_managed_subsystem<Physics>();
+    _master.add_managed_subsystem<View>();
+    _master.add_managed_subsystem<Loop>();
+    _master.add_managed_subsystem<ActionHandler>();
 
     //init config_t
     const char *full_path = CCFileUtils::sharedFileUtils()->fullPathFromRelativePath("config.txt");
