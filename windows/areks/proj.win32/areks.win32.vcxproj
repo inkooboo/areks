@@ -135,7 +135,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\client\cocos_scene.hpp" />
+    <ClInclude Include="..\..\..\client\defs.hpp" />
     <ClInclude Include="..\..\..\client\game_layer.hpp" />
+    <ClInclude Include="..\..\..\client\World.hpp" />
     <ClInclude Include="..\..\..\common\config.hpp" />
     <ClInclude Include="..\..\..\common\master.hpp" />
     <ClInclude Include="..\..\..\common\noncopyable.hpp" />
@@ -145,8 +147,9 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\client\cocos_scene.cpp" />
-    <ClCompile Include="..\..\..\client\game_layer.cpp" />
+    <ClCompile Include="..\..\..\client\cocos_scene.cpp.bak" />
+    <ClCompile Include="..\..\..\client\game_layer.cpp.bak" />
+    <ClCompile Include="..\..\..\client\World.cpp" />
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

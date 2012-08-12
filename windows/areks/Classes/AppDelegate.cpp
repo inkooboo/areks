@@ -1,8 +1,9 @@
-#include "cocos2d.h"
-#include "CCEGLView.h"
 #include "AppDelegate.h"
-#include "cocos_scene.hpp"
+#include "CCEGLView.h"
 #include "SimpleAudioEngine.h"
+#include "config.hpp"
+
+#include "World.hpp"
 
 using namespace CocosDenshion;
 
@@ -14,6 +15,7 @@ AppDelegate::AppDelegate()
 
 AppDelegate::~AppDelegate()
 {
+    _master.stop();
     SimpleAudioEngine::end();
 }
 
@@ -32,11 +34,25 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
 
-    // create a scene. it's an autorelease object
-    CCScene *pScene = cocos_scene_t::scene();
+    //init master
+    _master.add_managed_subsystem<World>();
+
+    //init config_t
+    const char *full_path = CCFileUtils::sharedFileUtils()->fullPathFromRelativePath("config.txt");
+    unsigned char *data = 0;
+    unsigned long size = 0;
+    data = CCFileUtils::sharedFileUtils()->getFileData(full_path, "r", &size);
+    
+    std::string cfg_str;
+    if (data && size)
+    {
+        cfg_str.assign((char *)data, size);
+    }
+    _master.add_unmanaged_subsystem<config_t>(cfg_str);
+    
 
     // run
-    pDirector->runWithScene(pScene);
+    _master.start();
     return true;
 }
 

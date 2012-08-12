@@ -1,7 +1,8 @@
 #ifndef __APP_DELEGATE_H__
 #define __APP_DELEGATE_H__
 
-#include "cocos2d.h"
+# include "defs.hpp"
+# include "master.hpp"
 
 /**
 @brief    The cocos2d Application.
@@ -32,6 +33,9 @@ public:
     @param  the pointer of the application
     */
     virtual void applicationWillEnterForeground();
+
+private:
+    master_t _master;
 };
 
 #endif  // __APP_DELEGATE_H__

@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source\Win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\AppDelegate.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\World.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\game_layer.cpp.bak">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\cocos_scene.cpp.bak">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\..\common\subsystem.hpp">
+      <Filter>Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\noncopyable.hpp">
+      <Filter>Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\master.hpp">
+      <Filter>Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\config.hpp">
+      <Filter>Source\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Source\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Source\Win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\game_layer.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\AppDelegate.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\cocos_scene.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\World.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\defs.hpp">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="areks.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\areks.ico" />
+    <None Include="..\Resources\CloseNormal.png">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\CloseSelected.png">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\fps_images-hd.png">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\fps_images-ipadhd.png">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\fps_images.png">
+      <Filter>Resources</Filter>
+    </None>
+    <None Include="..\Resources\HelloWorld.png">
+      <Filter>Resources</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{cc8f9a9c-d14a-4fa1-8f76-4dc71f5e19e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source">
+      <UniqueIdentifier>{54c8ce72-fbe6-41ab-881c-f2440b0ed21c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Common">
+      <UniqueIdentifier>{5c39037d-1329-4f49-8f22-86cbdb86da18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Win">
+      <UniqueIdentifier>{01cdf574-1d26-4793-ac76-731caad561d4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game">
+      <UniqueIdentifier>{97baf809-7d3d-4ec9-96a0-ed7d8869294d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
