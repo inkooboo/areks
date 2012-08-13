@@ -135,29 +135,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\client\ActionHandler.hpp" />
-    <ClInclude Include="..\..\..\client\cocos_scene.hpp" />
+    <ClInclude Include="..\..\..\client\AppDelegate.h" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
     <ClInclude Include="..\..\..\client\Loop.hpp" />
     <ClInclude Include="..\..\..\client\Primitives.hpp" />
-    <ClInclude Include="..\..\..\client\game_layer.hpp" />
     <ClInclude Include="..\..\..\client\Physics.hpp" />
     <ClInclude Include="..\..\..\client\View.hpp" />
     <ClInclude Include="..\..\..\common\config.hpp" />
     <ClInclude Include="..\..\..\common\master.hpp" />
     <ClInclude Include="..\..\..\common\noncopyable.hpp" />
     <ClInclude Include="..\..\..\common\subsystem.hpp" />
-    <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\client\ActionHandler.cpp" />
-    <ClCompile Include="..\..\..\client\cocos_scene.cpp.bak" />
-    <ClCompile Include="..\..\..\client\game_layer.cpp.bak" />
+    <ClCompile Include="..\..\..\client\AppDelegate.cpp" />
     <ClCompile Include="..\..\..\client\Loop.cpp" />
     <ClCompile Include="..\..\..\client\Physics.cpp" />
     <ClCompile Include="..\..\..\client\View.cpp" />
-    <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
