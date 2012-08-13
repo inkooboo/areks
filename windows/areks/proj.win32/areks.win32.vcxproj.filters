@@ -19,6 +19,9 @@
     <ClCompile Include="..\..\..\client\AppDelegate.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\BaseObject.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -58,6 +61,9 @@
       <Filter>Source\Game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\AppDelegate.h">
+      <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\BaseObject.hpp">
       <Filter>Source\Game</Filter>
     </ClInclude>
   </ItemGroup>

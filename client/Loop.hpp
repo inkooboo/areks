@@ -6,16 +6,16 @@
 
 class Loop : public cc::CCScheduler, public subsystem_t
 {
-public:
     virtual void start();
     virtual void stop();
 
+public:
     Loop();
 
     void Resume();
-
     void Pause();
 
+private:
     void tick(float t);
 };
 

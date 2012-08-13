@@ -6,15 +6,16 @@
 
 class ActionHandler : public cc::CCObject, public cc::CCTargetedTouchDelegate, public subsystem_t
 {
-public:
     virtual void start();
     virtual void stop();
 
+public:
     ActionHandler();
 
     void Enable();
     void Disable();
 
+private:
     //touches handle
     virtual bool ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent);
     virtual void ccTouchMoved (cc::CCTouch *pTouch, cc::CCEvent *pEvent);

@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\client\ActionHandler.hpp" />
     <ClInclude Include="..\..\..\client\AppDelegate.h" />
+    <ClInclude Include="..\..\..\client\BaseObject.hpp" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
     <ClInclude Include="..\..\..\client\Loop.hpp" />
     <ClInclude Include="..\..\..\client\Primitives.hpp" />
@@ -151,6 +152,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\client\ActionHandler.cpp" />
     <ClCompile Include="..\..\..\client\AppDelegate.cpp" />
+    <ClCompile Include="..\..\..\client\BaseObject.cpp" />
     <ClCompile Include="..\..\..\client\Loop.cpp" />
     <ClCompile Include="..\..\..\client\Physics.cpp" />
     <ClCompile Include="..\..\..\client\View.cpp" />

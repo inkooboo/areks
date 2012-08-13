@@ -8,11 +8,10 @@
 //managed subsystem Physics
 class Physics : public subsystem_t 
 {
-public:
-    //subsytems methods
     virtual void start();
     virtual void strop();
-    
+
+public:    
     Physics();
 
     
