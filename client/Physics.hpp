@@ -15,9 +15,15 @@ public:
     
     Physics();
 
+    
+    //temp for scene navigation logic
+    b2Vec2 worldSize() const
+    {
+        return b2Vec2(48.f, 32.f); // we should create world and background with corresponding propotions
+    }
+    
 private:
     std::unique_ptr<b2World> _b2World_ptr;
-
 };
 
 #endif
