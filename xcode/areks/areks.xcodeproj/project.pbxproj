@@ -237,13 +237,15 @@
 		8404AEB815D539F10030B061 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEB715D539F10030B061 /* main.m */; };
 		8404AEBB15D539F10030B061 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEBA15D539F10030B061 /* AppController.mm */; };
 		8404AEBE15D539F10030B061 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEBD15D539F10030B061 /* RootViewController.mm */; };
-		8404AEC215D539F10030B061 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEC115D539F10030B061 /* AppDelegate.cpp */; };
 		8404AEC715D539F10030B061 /* blocks.png in Resources */ = {isa = PBXBuildFile; fileRef = 8404AEC615D539F10030B061 /* blocks.png */; };
-		8404AED715D53A610030B061 /* cocos_scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AECE15D53A610030B061 /* cocos_scene.cpp */; };
-		8404AED815D53A610030B061 /* game_layer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AED015D53A610030B061 /* game_layer.cpp */; };
 		8404AEE015D53D9A0030B061 /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 8404AEDD15D53D9A0030B061 /* config.txt */; };
 		8404AEE115D53D9A0030B061 /* shesterenka_p.png in Resources */ = {isa = PBXBuildFile; fileRef = 8404AEDE15D53D9A0030B061 /* shesterenka_p.png */; };
 		8404AEE215D53D9A0030B061 /* shesterenka.png in Resources */ = {isa = PBXBuildFile; fileRef = 8404AEDF15D53D9A0030B061 /* shesterenka.png */; };
+		8404AEF115D8DE680030B061 /* ActionHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEE715D8DE680030B061 /* ActionHandler.cpp */; };
+		8404AEF215D8DE680030B061 /* Loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEEA15D8DE680030B061 /* Loop.cpp */; };
+		8404AEF315D8DE680030B061 /* Physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEEC15D8DE680030B061 /* Physics.cpp */; };
+		8404AEF415D8DE680030B061 /* View.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEEF15D8DE680030B061 /* View.cpp */; };
+		8404AEF715D8FAF20030B061 /* AppDelegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEF515D8FAF20030B061 /* AppDelegate.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -737,13 +739,7 @@
 		8404AEBA15D539F10030B061 /* AppController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = AppController.mm; path = ios/AppController.mm; sourceTree = "<group>"; };
 		8404AEBC15D539F10030B061 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = ios/RootViewController.h; sourceTree = "<group>"; };
 		8404AEBD15D539F10030B061 /* RootViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = RootViewController.mm; path = ios/RootViewController.mm; sourceTree = "<group>"; };
-		8404AEC015D539F10030B061 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = Classes/AppDelegate.h; sourceTree = "<group>"; };
-		8404AEC115D539F10030B061 /* AppDelegate.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = AppDelegate.cpp; path = Classes/AppDelegate.cpp; sourceTree = "<group>"; };
 		8404AEC615D539F10030B061 /* blocks.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = blocks.png; path = Resources/blocks.png; sourceTree = "<group>"; };
-		8404AECE15D53A610030B061 /* cocos_scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = cocos_scene.cpp; sourceTree = "<group>"; };
-		8404AECF15D53A610030B061 /* cocos_scene.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = cocos_scene.hpp; sourceTree = "<group>"; };
-		8404AED015D53A610030B061 /* game_layer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game_layer.cpp; sourceTree = "<group>"; };
-		8404AED115D53A610030B061 /* game_layer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = game_layer.hpp; sourceTree = "<group>"; };
 		8404AED315D53A610030B061 /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
 		8404AED415D53A610030B061 /* master.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = master.hpp; sourceTree = "<group>"; };
 		8404AED515D53A610030B061 /* noncopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = noncopyable.hpp; sourceTree = "<group>"; };
@@ -751,6 +747,18 @@
 		8404AEDD15D53D9A0030B061 /* config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.txt; path = Resources/config.txt; sourceTree = "<group>"; };
 		8404AEDE15D53D9A0030B061 /* shesterenka_p.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shesterenka_p.png; path = Resources/shesterenka_p.png; sourceTree = "<group>"; };
 		8404AEDF15D53D9A0030B061 /* shesterenka.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = shesterenka.png; path = Resources/shesterenka.png; sourceTree = "<group>"; };
+		8404AEE715D8DE680030B061 /* ActionHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ActionHandler.cpp; sourceTree = "<group>"; };
+		8404AEE815D8DE680030B061 /* ActionHandler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ActionHandler.hpp; sourceTree = "<group>"; };
+		8404AEE915D8DE680030B061 /* defs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = defs.hpp; sourceTree = "<group>"; };
+		8404AEEA15D8DE680030B061 /* Loop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Loop.cpp; sourceTree = "<group>"; };
+		8404AEEB15D8DE680030B061 /* Loop.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Loop.hpp; sourceTree = "<group>"; };
+		8404AEEC15D8DE680030B061 /* Physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Physics.cpp; sourceTree = "<group>"; };
+		8404AEED15D8DE680030B061 /* Physics.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Physics.hpp; sourceTree = "<group>"; };
+		8404AEEE15D8DE680030B061 /* Primitives.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Primitives.hpp; sourceTree = "<group>"; };
+		8404AEEF15D8DE680030B061 /* View.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = View.cpp; sourceTree = "<group>"; };
+		8404AEF015D8DE680030B061 /* View.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = View.hpp; sourceTree = "<group>"; };
+		8404AEF515D8FAF20030B061 /* AppDelegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AppDelegate.cpp; sourceTree = "<group>"; };
+		8404AEF615D8FAF20030B061 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1742,8 +1750,6 @@
 		8404AEBF15D539F10030B061 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				8404AEC015D539F10030B061 /* AppDelegate.h */,
-				8404AEC115D539F10030B061 /* AppDelegate.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -1751,10 +1757,18 @@
 		8404AECD15D53A610030B061 /* client */ = {
 			isa = PBXGroup;
 			children = (
-				8404AECE15D53A610030B061 /* cocos_scene.cpp */,
-				8404AECF15D53A610030B061 /* cocos_scene.hpp */,
-				8404AED015D53A610030B061 /* game_layer.cpp */,
-				8404AED115D53A610030B061 /* game_layer.hpp */,
+				8404AEF515D8FAF20030B061 /* AppDelegate.cpp */,
+				8404AEF615D8FAF20030B061 /* AppDelegate.h */,
+				8404AEE715D8DE680030B061 /* ActionHandler.cpp */,
+				8404AEE815D8DE680030B061 /* ActionHandler.hpp */,
+				8404AEE915D8DE680030B061 /* defs.hpp */,
+				8404AEEA15D8DE680030B061 /* Loop.cpp */,
+				8404AEEB15D8DE680030B061 /* Loop.hpp */,
+				8404AEEC15D8DE680030B061 /* Physics.cpp */,
+				8404AEED15D8DE680030B061 /* Physics.hpp */,
+				8404AEEE15D8DE680030B061 /* Primitives.hpp */,
+				8404AEEF15D8DE680030B061 /* View.cpp */,
+				8404AEF015D8DE680030B061 /* View.hpp */,
 			);
 			name = client;
 			path = ../../../client;
@@ -2058,9 +2072,11 @@
 				8404AEB815D539F10030B061 /* main.m in Sources */,
 				8404AEBB15D539F10030B061 /* AppController.mm in Sources */,
 				8404AEBE15D539F10030B061 /* RootViewController.mm in Sources */,
-				8404AEC215D539F10030B061 /* AppDelegate.cpp in Sources */,
-				8404AED715D53A610030B061 /* cocos_scene.cpp in Sources */,
-				8404AED815D53A610030B061 /* game_layer.cpp in Sources */,
+				8404AEF115D8DE680030B061 /* ActionHandler.cpp in Sources */,
+				8404AEF215D8DE680030B061 /* Loop.cpp in Sources */,
+				8404AEF315D8DE680030B061 /* Physics.cpp in Sources */,
+				8404AEF415D8DE680030B061 /* View.cpp in Sources */,
+				8404AEF715D8FAF20030B061 /* AppDelegate.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

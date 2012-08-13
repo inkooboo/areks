@@ -8,7 +8,6 @@ void ActionHandler::start()
 void ActionHandler::stop()
 {
     this->Disable();
-    cc::CCObject::release();
 }
 
 ActionHandler::ActionHandler()

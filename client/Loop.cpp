@@ -7,7 +7,6 @@ void Loop::start()
 void Loop::stop() 
 { 
     this->Pause();
-    cc::CCScheduler::release();
 }
 
 Loop::Loop()

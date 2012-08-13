@@ -1,4 +1,6 @@
 #include "View.hpp"
+#include "master.hpp"
+#include "AppDelegate.h"
 
 void View::start()
 {
@@ -35,7 +37,6 @@ void View::start()
 
 void View::stop()
 { 
-    cc::CCObject::release();
 }
 
 View::View()
@@ -47,5 +48,5 @@ View::View()
 
 void View::menuExit(cocos2d::CCObject* pSender)
 {
-    cc::CCDirector::sharedDirector()->end();
+    master_t::subsystem<AppDelegate>().end_application();
 }
