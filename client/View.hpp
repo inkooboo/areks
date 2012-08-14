@@ -3,6 +3,7 @@
 
 # include "defs.hpp"
 # include "subsystem.hpp"
+# include "Physics.hpp"
 
 class View : public cc::CCObject, public subsystem_t
 {
@@ -15,15 +16,23 @@ public:
     void menuExit(cocos2d::CCObject* pSender);
 
     
-    float toPixel(float world_size);
-    float toWorld(float pixel_size);
-    
+    cc::CCPoint toScreenCoordinates(b2Vec2 &world_coord) const;
+    b2Vec2 toWorldCoordinates(cc::CCPoint screen_coord) const;
+    float toPixel(float world_size) const;
+    float toWorld(float screen_size) const;
+    cc::CCLayer * gameLayer();
+
 private:
-    cc::CCScene* _scene;
-    cc::CCLayer* _mainLayer;
+    cc::CCScene *m_scene;
+    cc::CCLayer *m_mainLayer;
     
-    float _view_scale;
-    float _world_scale;
+    cc::CCSize m_size;
+    
+    float m_view_scale;
+    float m_default_view_scale;
+    float m_world_scale;
+    
+    b2Vec2 m_cur_positon;
 };
 
 #endif

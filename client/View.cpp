@@ -1,7 +1,6 @@
 #include "View.hpp"
 #include "master.hpp"
 #include "AppDelegate.h"
-#include "Physics.hpp"
 
 #include <cassert>
 #include <algorithm>
@@ -9,14 +8,14 @@
 void View::start()
 {
     using namespace cocos2d;
-
+    
     // run scene
-    cc::CCDirector::sharedDirector()->runWithScene(_scene);
+    cc::CCDirector::sharedDirector()->runWithScene(m_scene);
     
     cc::CCSize m_size = cc::CCDirector::sharedDirector()->getWinSize();
     b2Vec2 world_size = master_t::subsystem<Physics>().worldSize();
 
-    cc::CCSprite *background = cc::CCSprite::create("HelloWorld.png");
+    cc::CCSprite *background = cc::CCSprite::create("HelloWorld_very_big.png");
     cc::CCSize bg_size = background->getContentSize();
     
     float x_world_scale = bg_size.width / world_size.x;
@@ -24,19 +23,30 @@ void View::start()
     
     assert(x_world_scale == y_world_scale && "background and world should be with corresponding proportions");
 
-    _world_scale = x_world_scale;
+    m_world_scale = x_world_scale;
     
     float x_view_scale = m_size.width / bg_size.width;
     float y_view_scale = m_size.height / bg_size.height;
     
-    //float
+    float max_view_scale = std::max(x_view_scale, y_view_scale);
     
-    float bg_scale_x = m_size.width / bg_size.width;
-    float bg_scale_y = m_size.height / bg_size.height;
-    background->setScaleX(bg_scale_x);
-    background->setScaleY(bg_scale_y);
-    background->setPosition( ccp(m_size.width/2, m_size.height/2) );
-    _mainLayer->addChild(background, 0);
+    if (max_view_scale <= 1.f)
+    {
+        m_default_view_scale = 1.f;
+    }
+    else
+    {
+        m_default_view_scale = max_view_scale;
+    }
+    
+    m_view_scale = m_default_view_scale;
+    
+    m_cur_positon = b2Vec2(toWorld(m_size.width / 2), toWorld(m_size.height / 2));
+    
+    background->setScaleX(m_view_scale);
+    background->setScaleY(m_view_scale);
+    background->setPosition( ccp(toPixel(m_cur_positon.x), toPixel(m_cur_positon.y)) );
+    m_mainLayer->addChild(background, 0);
     
     
     cc::CCMenuItemImage *pMenuItem = cc::CCMenuItemImage::create(
@@ -50,7 +60,7 @@ void View::start()
     cc::CCMenu* menu = cc::CCMenu::create(pMenuItem, NULL);
     menu->setPosition( cc::CCPointZero );
     menu->setVisible(true);
-    _mainLayer->addChild(menu, 1);
+    m_mainLayer->addChild(menu, 1);
 }
 
 void View::stop()
@@ -59,9 +69,9 @@ void View::stop()
 
 View::View()
 {
-    _scene = cc::CCScene::create();
-    _mainLayer = cc::CCLayer::create();
-    _scene->addChild( _mainLayer );
+    m_scene = cc::CCScene::create();
+    m_mainLayer = cc::CCLayer::create();
+    m_scene->addChild( m_mainLayer );
 }
 
 void View::menuExit(cocos2d::CCObject* pSender)
@@ -69,13 +79,34 @@ void View::menuExit(cocos2d::CCObject* pSender)
     master_t::subsystem<AppDelegate>().end_application();
 }
 
-float View::toPixel(float world_size)
+cc::CCPoint View::toScreenCoordinates(b2Vec2 &world_coord) const
 {
-    return world_size * _world_scale;
+    world_coord -= m_cur_positon;
+    return cc::CCPoint(toPixel(world_coord.x), toPixel(world_coord.y));
 }
 
-float View::toWorld(float pixel_size)
+b2Vec2 View::toWorldCoordinates(cc::CCPoint screen_coord) const
 {
-    return pixel_size / _world_scale;
+    b2Vec2 world_coord = b2Vec2(toWorld(screen_coord.x), toWorld(screen_coord.y));
+    world_coord += m_cur_positon;
+    return world_coord;
+}
+
+
+float View::toPixel(float world_size) const
+{
+    return world_size * m_world_scale * m_view_scale;
+}
+
+
+float View::toWorld(float screen_size) const
+{
+    return screen_size / (m_world_scale * m_view_scale);
+}
+
+
+cc::CCLayer * View::gameLayer()
+{
+    return m_mainLayer;
 }
 
