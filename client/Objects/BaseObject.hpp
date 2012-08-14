@@ -6,8 +6,10 @@
 class BaseObject
 {
 public:
-    //BaseObject();
-    //virtual ~BaseObject() = 0;
+    BaseObject();
+    virtual ~BaseObject() = 0;
+    
+    virtual void Draw() = 0;
     
 };
 

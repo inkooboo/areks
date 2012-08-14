@@ -12,11 +12,31 @@ class Loop : public cc::CCScheduler, public subsystem_t
 public:
     Loop();
 
-    void Resume();
-    void Pause();
+    void resumeTime();
+    void pauseTime();
+    
+    void resumeGame();
+    void pauseGame();
 
 private:
-    void tick(float t);
+
+    class TimeLoop_t : public cc::CCObject
+    {
+    public:
+        tick( float t );
+        
+    };
+    
+    class ViewLoop_t : public cc::CCObject
+    {
+    public:
+        tick( float t );
+        
+    };
+    
+    TimeLoop_t _time_loop;
+    ViewLoop_t _view_loop;    
+    //void tick(float t);
 };
 
 #endif
