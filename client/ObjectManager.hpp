@@ -2,7 +2,7 @@
 #define _AREKS_OBJECT_MANAGER_HPP_
 
 #include "subsystem.hpp"
-#include "Objects/BaseObject.hpp"
+#include "objects/BaseObject.hpp"
 
 # include <vector>
 

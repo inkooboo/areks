@@ -12,8 +12,7 @@ namespace objects
     class Paltform : public StaticObject
     {
     public:
-        template <typename T>
-        static Platform* create(primitives::Vec2<T> const& coordinates, primitives::Vec2<T> const& size);
+        static Platform* create(primitives::Vec2<Meter> const& coordinates, primitives::Vec2<Meter> const& size);
         
         virtual void draw() override;
         
