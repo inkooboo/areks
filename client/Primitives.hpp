@@ -75,8 +75,25 @@ namespace primitives
         float getPixelX() const { return ConvertToPixel(_x); }
         float getPixelY() const { return ConvertToPixel(_y); }
 
+        cc::CCSize getPixelSize() const
+        {
+            return cc::CCSize( ConvertToPixel(_x), ConvertToPixel(_y) );
+        }
+
+        cc::CCPoint getPixelPoint() const
+        {
+            return cc::CCPoint( ConvertToPixel(_x), ConvertToPixel(_y) );
+        }
+
+        b2Vec2 getMeters() const
+        {
+            return b2Vec2( _x, _y );
+        }
+
         float& x() { return _x; }
         float& y() { return _y; }
+        float x() const { return _x; }
+        float y() const { return _y; }
 
     private:
         float _x;

@@ -31,6 +31,9 @@
     <ClCompile Include="..\..\..\client\Objects\ObjectInterfaces.cpp">
       <Filter>Source\Game\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\GameLogic.cpp">
+      <Filter>Source\Game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -83,6 +86,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\client\Objects\ObjectInterfaces.hpp">
       <Filter>Source\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\GameLogic.hpp">
+      <Filter>Source\Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

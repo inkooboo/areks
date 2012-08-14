@@ -3,10 +3,12 @@
 #include "SimpleAudioEngine.h"
 #include "config.hpp"
 
+#include "ObjectManager.hpp"
 #include "Physics.hpp"
 #include "View.hpp"
 #include "Loop.hpp"
 #include "ActionHandler.hpp"
+#include "GameLogic.hpp"
 
 using namespace CocosDenshion;
 
@@ -53,10 +55,12 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     m_master_ptr->add_external_subsystem<AppDelegate>(this);
     m_master_ptr->add_unmanaged_subsystem<config_t>(cfg_str);
+    m_master_ptr->add_managed_subsystem<ObjectManager>();
     m_master_ptr->add_managed_subsystem<Physics>();
     m_master_ptr->add_managed_subsystem<View>();
     m_master_ptr->add_managed_subsystem<Loop>();
     m_master_ptr->add_managed_subsystem<ActionHandler>();
+    m_master_ptr->add_managed_subsystem<GameLogic>();
 
     // run
     m_master_ptr->start();

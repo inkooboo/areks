@@ -2,6 +2,27 @@
 
 #include <algorithm>
 
+void ObjectManager::start()
+{
+}
+
+void ObjectManager::stop()
+{
+    //TODO destroy all objects
+
+    //auto it = _objects.begin();
+    //auto end = _objects.end();
+
+    //for( ; it != end; ++it )
+    //{
+    //    (*it)->destroy();
+    //}
+}
+
+ObjectManager::ObjectManager()
+{
+}
+
 void ObjectManager::registerObject( BaseObject* obj_ptr )
 {
     assert( std::find( _objects.begin(), _objects.end(), obj_ptr ) == _objects.end() );

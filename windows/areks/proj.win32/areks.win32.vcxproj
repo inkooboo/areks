@@ -137,6 +137,7 @@
     <ClInclude Include="..\..\..\client\ActionHandler.hpp" />
     <ClInclude Include="..\..\..\client\AppDelegate.h" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
+    <ClInclude Include="..\..\..\client\GameLogic.hpp" />
     <ClInclude Include="..\..\..\client\Loop.hpp" />
     <ClInclude Include="..\..\..\client\ObjectManager.hpp" />
     <ClInclude Include="..\..\..\client\Objects\BaseObject.hpp" />
@@ -155,6 +156,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\client\ActionHandler.cpp" />
     <ClCompile Include="..\..\..\client\AppDelegate.cpp" />
+    <ClCompile Include="..\..\..\client\GameLogic.cpp" />
     <ClCompile Include="..\..\..\client\Loop.cpp" />
     <ClCompile Include="..\..\..\client\ObjectManager.cpp" />
     <ClCompile Include="..\..\..\client\Objects\BaseObject.cpp" />

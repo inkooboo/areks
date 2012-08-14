@@ -14,6 +14,7 @@ class Physics : public subsystem_t
 public:    
     Physics();
 
+    b2World* worldEngine();
     
     //temp for scene navigation logic
     b2Vec2 worldSize() const

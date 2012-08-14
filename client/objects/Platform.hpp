@@ -9,15 +9,21 @@
 namespace objects
 {
 
-    class Paltform : public StaticObject
+    class Platform : public StaticObject
     {
     public:
-        static Platform* create(primitives::Vec2<Meter> const& coordinates, primitives::Vec2<Meter> const& size);
+        static Platform* create(pr::Vec2 const& coordinates, pr::Vec2 const& size);
+
+        ~Platform();
         
         virtual void draw() override;
         
     private:
-        Platform();
+        Platform(pr::Vec2 const& coordinates, pr::Vec2 const& size);
+
+        b2Body* _body;
+        cc::CCSprite* _sprite;
+        pr::Vec2 _position;
     };
     
 }//end namespace objects
