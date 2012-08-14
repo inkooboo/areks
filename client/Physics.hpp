@@ -8,8 +8,8 @@
 //managed subsystem Physics
 class Physics : public subsystem_t 
 {
-    virtual void start();
-    virtual void strop();
+    virtual void start() override;
+    virtual void stop() override;
 
 public:    
     Physics();

@@ -1,7 +1,7 @@
 #include "Physics.hpp"
 
 void Physics::start() {}
-void Physics::strop() {}
+void Physics::stop() {}
     
 Physics::Physics() 
 {

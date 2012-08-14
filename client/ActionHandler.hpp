@@ -6,8 +6,8 @@
 
 class ActionHandler : public cc::CCObject, public cc::CCTargetedTouchDelegate, public subsystem_t
 {
-    virtual void start();
-    virtual void stop();
+    virtual void start() override;
+    virtual void stop() override;
 
 public:
     ActionHandler();
@@ -17,10 +17,10 @@ public:
 
 private:
     //touches handle
-    virtual bool ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent);
-    virtual void ccTouchMoved (cc::CCTouch *pTouch, cc::CCEvent *pEvent);
-    virtual void ccTouchEnded (cc::CCTouch *pTouch, cc::CCEvent *pEvent);
-    virtual void ccTouchCancelled (cc::CCTouch *pTouch, cc::CCEvent *pEvent);
+    virtual bool ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent) override;
+    virtual void ccTouchMoved (cc::CCTouch *pTouch, cc::CCEvent *pEvent) override;
+    virtual void ccTouchEnded (cc::CCTouch *pTouch, cc::CCEvent *pEvent) override;
+    virtual void ccTouchCancelled (cc::CCTouch *pTouch, cc::CCEvent *pEvent) override;
 };
 
 #endif

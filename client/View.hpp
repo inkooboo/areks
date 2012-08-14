@@ -7,8 +7,8 @@
 
 class View : public cc::CCObject, public subsystem_t
 {
-    virtual void start();
-    virtual void stop();
+    virtual void start() override;
+    virtual void stop() override;
     
 public:
     View();
