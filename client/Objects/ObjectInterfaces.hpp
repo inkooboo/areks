@@ -10,7 +10,7 @@ public:
     DynamicObject();
     virtual ~DynamicObject() = 0;
     
-    virtual Update( float t ) = 0;
+    virtual void updateState( float t ) = 0;
 };
 
 class StaticObject : BaseObject

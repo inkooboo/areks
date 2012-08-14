@@ -15,7 +15,7 @@ namespace objects
         template <typename T>
         static Platform* create(primitives::Vec2<T> const& coordinates, primitives::Vec2<T> const& size);
         
-        virtual void Draw();
+        virtual void draw() override;
         
     private:
         Platform();

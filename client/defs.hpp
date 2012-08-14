@@ -6,4 +6,9 @@
 
 namespace cc = cocos2d;
 
+//for using std::max
+#ifdef _WINDOWS
+    #undef max
+#endif
+
 #endif

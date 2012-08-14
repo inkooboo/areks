@@ -19,8 +19,17 @@
     <ClCompile Include="..\..\..\client\AppDelegate.cpp">
       <Filter>Source\Game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\BaseObject.cpp">
+    <ClCompile Include="..\..\..\client\ObjectManager.cpp">
       <Filter>Source\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\Objects\BaseObject.cpp">
+      <Filter>Source\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\Objects\Platform.cpp">
+      <Filter>Source\Game\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\Objects\ObjectInterfaces.cpp">
+      <Filter>Source\Game\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -63,8 +72,17 @@
     <ClInclude Include="..\..\..\client\AppDelegate.h">
       <Filter>Source\Game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\BaseObject.hpp">
+    <ClInclude Include="..\..\..\client\ObjectManager.hpp">
       <Filter>Source\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\Objects\BaseObject.hpp">
+      <Filter>Source\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\Objects\Platform.hpp">
+      <Filter>Source\Game\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\Objects\ObjectInterfaces.hpp">
+      <Filter>Source\Game\Objects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -106,6 +124,9 @@
     </Filter>
     <Filter Include="Source\Game">
       <UniqueIdentifier>{97baf809-7d3d-4ec9-96a0-ed7d8869294d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Game\Objects">
+      <UniqueIdentifier>{cc6ebe2c-c54f-4613-9973-0d7230a3f184}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -23,15 +23,13 @@ private:
     class TimeLoop_t : public cc::CCObject
     {
     public:
-        tick( float t );
+        void tick( float t );
         
     };
     
     class ViewLoop_t : public cc::CCObject
     {
-    public:
-        tick( float t );
-        
+        virtual void update( float t ) override;   
     };
     
     TimeLoop_t _time_loop;

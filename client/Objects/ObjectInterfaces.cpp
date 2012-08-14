@@ -11,7 +11,7 @@ DynamicObject::DynamicObject()
     master_t::subsystem<ObjectManager>().registerDynamicObject( this );
 }
 
-DynamicObject~DynamicObject()
+DynamicObject::~DynamicObject()
 {
     master_t::subsystem<ObjectManager>().removeDynamicObject( this );
 }

@@ -9,7 +9,7 @@ public:
     BaseObject();
     virtual ~BaseObject() = 0;
     
-    virtual void Draw() = 0;
+    virtual void draw() = 0;
     
 };
 

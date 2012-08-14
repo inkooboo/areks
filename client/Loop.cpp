@@ -3,6 +3,7 @@
 #include "master.hpp"
 
 #include "ObjectManager.hpp"
+#include "Objects\ObjectInterfaces.hpp"
 
 void Loop::start()
 {
@@ -21,7 +22,7 @@ Loop::Loop()
     cc::CCDirector::sharedDirector()->setScheduler(this);
 
     cc::CCScheduler::scheduleSelector( schedule_selector(TimeLoop_t::tick), &_time_loop, 1.f, true);
-    // cc::CCScheduler::scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, true);
+    cc::CCScheduler::scheduleUpdateForTarget( &_view_loop, 0, true);
 }
 
 void Loop::resumeTime()
@@ -39,7 +40,7 @@ void Loop::resumeGame()
     cc::CCScheduler::pauseTarget(&_view_loop);
 }
 
-void Loop::pausePause()
+void Loop::pauseGame()
 {
     cc::CCScheduler::resumeTarget(&_view_loop);
 }
@@ -52,6 +53,18 @@ void Loop::TimeLoop_t::tick(float t)
     
     for( ; it != end; ++it )
     {
-        it->Update( t );
+        (*it)->updateState( t );
+    }
+}
+
+void Loop::ViewLoop_t::update( float t )
+{
+    auto objects = master_t::subsystem<ObjectManager>().getObjects();
+    auto it = objects.begin();
+    auto end = objects.end();
+    
+    for( ; it != end; ++it )
+    {
+        (*it)->draw();
     }
 }

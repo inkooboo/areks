@@ -20,7 +20,11 @@ public:
     void removeObject( BaseObject* obj_otr );
     
     void registerDynamicObject( DynamicObject* obj_ptr );
-    void RemoveDynamicObject( DynamicObject* obj_ptr );
+    void removeDynamicObject( DynamicObject* obj_ptr );
+
+    std::vector< BaseObject* >& getObjects();
+    std::vector< DynamicObject* >& getDynamicObjects();
+
     
 private:
     std::vector< BaseObject* > _objects;
