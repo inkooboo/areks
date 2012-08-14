@@ -12,7 +12,7 @@ void View::start()
     // run scene
     cc::CCDirector::sharedDirector()->runWithScene(m_scene);
     
-    cc::CCSize m_size = cc::CCDirector::sharedDirector()->getWinSize();
+    m_size = cc::CCDirector::sharedDirector()->getWinSize();
     b2Vec2 world_size = master_t::subsystem<Physics>().worldSize();
 
     cc::CCSprite *background = cc::CCSprite::create("HelloWorld_very_big.png");
@@ -40,6 +40,9 @@ void View::start()
     }
     
     m_view_scale = m_default_view_scale;
+    
+    m_x_margin = toWorld(m_size.width / 2);
+    m_y_margin = toWorld(m_size.height / 2);
     
     m_cur_positon = b2Vec2(toWorld(m_size.width / 2), toWorld(m_size.height / 2));
     
@@ -110,3 +113,35 @@ cc::CCLayer * View::gameLayer()
     return m_mainLayer;
 }
 
+void View::on_touch_move(cc::CCPoint &from, cc::CCPoint &to)
+{
+    moveView(to.x - from.x, to.y - from.y);
+}
+
+void View::moveView(float dx, float dy)
+{
+    dx = toWorld(dx);
+    dy = toWorld(dy);
+    
+    b2Vec2 world_size = master_t::subsystem<Physics>().worldSize();
+
+    m_cur_positon.x += dx;
+    if (m_cur_positon.x < m_x_margin)
+    {
+        m_cur_positon.x = m_x_margin;
+    }
+    if (m_cur_positon.x > world_size.x - m_x_margin)
+    {
+        m_cur_positon.x = world_size.x - m_x_margin;
+    }
+
+    m_cur_positon.y += dy;
+    if (m_cur_positon.y < m_y_margin)
+    {
+        m_cur_positon.y = m_y_margin;
+    }
+    if (m_cur_positon.y > world_size.y - m_y_margin)
+    {
+        m_cur_positon.y = world_size.y - m_y_margin;
+    }
+}
