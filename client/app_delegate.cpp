@@ -9,6 +9,7 @@
 #include "loop.hpp"
 #include "action_handler.hpp"
 #include "game_logic.hpp"
+#include "level_manager.hpp"
 
 using namespace CocosDenshion;
 
@@ -57,6 +58,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_unmanaged_subsystem<config_t>(cfg_str);
     m_master_ptr->add_managed_subsystem<ObjectManager>();
     m_master_ptr->add_managed_subsystem<Physics>();
+    m_master_ptr->add_managed_subsystem<LevelManager>();
     m_master_ptr->add_managed_subsystem<View>();
     m_master_ptr->add_managed_subsystem<Loop>();
     m_master_ptr->add_managed_subsystem<ActionHandler>();

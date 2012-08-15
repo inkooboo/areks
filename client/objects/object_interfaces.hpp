@@ -4,7 +4,7 @@
 #include "defs.hpp"
 #include "base_object.hpp"
 
-class DynamicObject : BaseObject
+class DynamicObject : public BaseObject
 {
 public:
     DynamicObject();
@@ -13,7 +13,7 @@ public:
     virtual void updateState( float t ) = 0;
 };
 
-class StaticObject : BaseObject
+class StaticObject : public BaseObject
 {
 public:
     StaticObject();

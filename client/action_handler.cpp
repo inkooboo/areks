@@ -62,6 +62,8 @@ void ActionHandler::ccTouchMoved (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     {
         touch.on_move(from, to);
     }
+
+    touch.previous = to;
 }
 
 void ActionHandler::ccTouchEnded (cc::CCTouch *pTouch, cc::CCEvent *pEvent)

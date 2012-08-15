@@ -3,7 +3,7 @@
 
 # include "defs.hpp"
 # include "subsystem.hpp"
-# include "physics.hpp"
+# include "primitives.hpp"
 
 class View : public cc::CCObject, public subsystem_t
 {
@@ -18,8 +18,9 @@ public:
     void on_touch_move(cc::CCPoint &from, cc::CCPoint &to);
     
     
-    cc::CCPoint toScreenCoordinates(b2Vec2 &world_coord) const;
-    b2Vec2 toWorldCoordinates(cc::CCPoint screen_coord) const;
+    float pixel_scale() const;
+    cc::CCPoint toScreenCoordinates(pr::Vec2 world_coord) const;
+    pr::Vec2 toWorldCoordinates(cc::CCPoint screen_coord) const;
     float toPixel(float world_size) const;
     float toWorld(float screen_size) const;
     cc::CCLayer * gameLayer();
@@ -38,7 +39,7 @@ private:
     float m_x_margin;
     float m_y_margin;
     
-    b2Vec2 m_cur_positon;
+    pr::Vec2 m_cur_positon;
 };
 
 #endif

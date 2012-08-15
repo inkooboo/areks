@@ -4,20 +4,12 @@
 # include "defs.hpp"
 # include <Box2D/Box2D.h>
 
-#include "master.hpp"
-#include "view.hpp"
+# include "master.hpp"
 
 namespace primitives
 {
-    inline float toPixel(float world)
-    {
-        return master_t::subsystem<View>().toPixel( world );
-    }
-    
-    inline float toWorld(float pixel)
-    {
-        return master_t::subsystem<View>().toWorld( pixel );
-    }
+    float toPixel(float world);
+    float toWorld(float pixel);
     
     class Vec2
     {
@@ -25,6 +17,11 @@ namespace primitives
         float x;
         float y;
 
+        Vec2()
+            : x(0)
+            , y(0)
+        {}
+        
         Vec2( cc::CCSize const& s )
             : x( toWorld( s.width ) )
             , y( toWorld( s.height) )
@@ -59,6 +56,31 @@ namespace primitives
         {
             return b2Vec2(x, y);
         }
+        
+        Vec2 operator-() const
+        {
+            Vec2 v(-x, -y);
+            return v;
+        }
+        
+        void operator+=(const Vec2& v)
+        {
+            x += v.x;
+            y += v.y;
+        }
+        
+        void operator-=(const Vec2& v)
+        {
+            x -= v.x;
+            y -= v.y;
+        }
+        
+        void operator*=(float a)
+        {
+            x *= a;
+            y *= a;
+        }
+        
 };
 
 }//end namespace primitives

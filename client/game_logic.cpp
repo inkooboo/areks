@@ -1,9 +1,9 @@
 #include "game_logic.hpp"
 
 #include "physics.hpp"
+#include "level_manager.hpp"
+#include "objects/background.hpp"
 #include "objects/platform.hpp"
-#include "master.hpp"
-
 
 void GameLogic::start()
 {
@@ -21,6 +21,8 @@ GameLogic::GameLogic()
 //just for testing
 void GameLogic::CreateExampleLevel()
 {
+    auto background = new objects::Background(master_t::subsystem<LevelManager>().backgroundName());
+    
     pr::Vec2 w_size = master_t::subsystem<Physics>().worldSize();
     w_size.x /= 2;
     w_size.y /= 2;

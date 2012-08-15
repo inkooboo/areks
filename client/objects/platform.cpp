@@ -3,6 +3,7 @@
 #include "master.hpp"
 
 #include "physics.hpp"
+#include "view.hpp"
 
 namespace objects
 {
@@ -34,6 +35,7 @@ namespace objects
 
         _sprite = cc::CCSprite::create( texture );
         
+        draw();
         master_t::subsystem<View>().gameLayer()->addChild( _sprite );
     }
 
@@ -46,7 +48,8 @@ namespace objects
         
     void Platform::draw()
     {
-        _sprite->setPosition( _position.toCCPoint() );
+        _sprite->setPosition(master_t::subsystem<View>().toScreenCoordinates(_position));
+        _sprite->setScale(master_t::subsystem<View>().pixel_scale());
     }
 
 }//end namespace objects

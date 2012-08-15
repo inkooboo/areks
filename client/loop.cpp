@@ -27,22 +27,22 @@ Loop::Loop()
 
 void Loop::resumeTime()
 {
-    cc::CCScheduler::pauseTarget(&_time_loop);
+    cc::CCScheduler::resumeTarget(&_time_loop);
 }
 
 void Loop::pauseTime()
 {
-    cc::CCScheduler::resumeTarget(&_time_loop);
+    cc::CCScheduler::pauseTarget(&_time_loop);
 }
 
 void Loop::resumeGame()
 {
-    cc::CCScheduler::pauseTarget(&_view_loop);
+    cc::CCScheduler::resumeTarget(&_view_loop);
 }
 
 void Loop::pauseGame()
 {
-    cc::CCScheduler::resumeTarget(&_view_loop);
+    cc::CCScheduler::pauseTarget(&_view_loop);
 }
 
 void Loop::TimeLoop_t::tick(float t)
