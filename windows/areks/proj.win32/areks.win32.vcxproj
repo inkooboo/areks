@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -138,7 +138,9 @@
     <ClInclude Include="..\..\..\client\app_delegate.h" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
     <ClInclude Include="..\..\..\client\game_logic.hpp" />
+    <ClInclude Include="..\..\..\client\level_manager.hpp" />
     <ClInclude Include="..\..\..\client\loop.hpp" />
+    <ClInclude Include="..\..\..\client\objects\background.hpp" />
     <ClInclude Include="..\..\..\client\object_manager.hpp" />
     <ClInclude Include="..\..\..\client\objects\base_object.hpp" />
     <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp" />
@@ -158,12 +160,15 @@
     <ClCompile Include="..\..\..\client\action_handler.cpp" />
     <ClCompile Include="..\..\..\client\app_delegate.cpp" />
     <ClCompile Include="..\..\..\client\game_logic.cpp" />
+    <ClCompile Include="..\..\..\client\level_manager.cpp" />
     <ClCompile Include="..\..\..\client\loop.cpp" />
+    <ClCompile Include="..\..\..\client\objects\background.cpp" />
     <ClCompile Include="..\..\..\client\object_manager.cpp" />
     <ClCompile Include="..\..\..\client\objects\base_object.cpp" />
     <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp" />
     <ClCompile Include="..\..\..\client\objects\platform.cpp" />
     <ClCompile Include="..\..\..\client\physics.cpp" />
+    <ClCompile Include="..\..\..\client\primitives.cpp" />
     <ClCompile Include="..\..\..\client\view.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

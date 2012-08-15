@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -32,6 +32,15 @@
       <Filter>source\game\objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\game_logic.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\objects\background.cpp">
+      <Filter>source\game\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\level_manager.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\primitives.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -88,6 +97,13 @@
       <Filter>source\game\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\game_logic.hpp">
+      <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
+    <ClInclude Include="..\..\..\client\objects\background.hpp">
+      <Filter>source\game\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\level_manager.hpp">
       <Filter>source\game</Filter>
     </ClInclude>
   </ItemGroup>
