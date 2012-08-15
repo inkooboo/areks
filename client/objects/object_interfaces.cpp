@@ -1,8 +1,8 @@
-#include "ObjectInterfaces.hpp"
+#include "object_interfaces.hpp"
 
 #include "master.hpp"
 
-#include "ObjectManager.hpp"
+#include "object_manager.hpp"
 
 
 DynamicObject::DynamicObject()

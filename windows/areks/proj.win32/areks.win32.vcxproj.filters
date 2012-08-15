@@ -1,94 +1,94 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="main.cpp">
-      <Filter>Source\Win</Filter>
+      <Filter>source\win</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\Physics.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\..\client\physics.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\View.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\..\client\view.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\Loop.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\..\client\loop.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\ActionHandler.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\..\client\action_handler.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\AppDelegate.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\..\client\app_delegate.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\ObjectManager.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\..\client\object_manager.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\Objects\BaseObject.cpp">
-      <Filter>Source\Game\Objects</Filter>
+    <ClCompile Include="..\..\..\client\objects\base_object.cpp">
+      <Filter>source\game\objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\Objects\Platform.cpp">
-      <Filter>Source\Game\Objects</Filter>
+    <ClCompile Include="..\..\..\client\objects\platform.cpp">
+      <Filter>source\game\objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\Objects\ObjectInterfaces.cpp">
-      <Filter>Source\Game\Objects</Filter>
+    <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp">
+      <Filter>source\game\objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\GameLogic.cpp">
-      <Filter>Source\Game</Filter>
+    <ClCompile Include="..\..\..\client\game_logic.cpp">
+      <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
-      <Filter>Source\Common</Filter>
+      <Filter>source\common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\common\noncopyable.hpp">
-      <Filter>Source\Common</Filter>
+      <Filter>source\common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\common\master.hpp">
-      <Filter>Source\Common</Filter>
+      <Filter>source\common</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\common\config.hpp">
-      <Filter>Source\Common</Filter>
+      <Filter>source\common</Filter>
     </ClInclude>
     <ClInclude Include="main.h">
-      <Filter>Source\Win</Filter>
+      <Filter>source\win</Filter>
     </ClInclude>
     <ClInclude Include="resource.h">
-      <Filter>Source\Win</Filter>
+      <Filter>source\win</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\defs.hpp">
-      <Filter>Source\Game</Filter>
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\Primitives.hpp">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\primitives.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\Physics.hpp">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\physics.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\View.hpp">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\view.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\ActionHandler.hpp">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\action_handler.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\Loop.hpp">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\loop.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\AppDelegate.h">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\app_delegate.h">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\ObjectManager.hpp">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\object_manager.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\Objects\BaseObject.hpp">
-      <Filter>Source\Game\Objects</Filter>
+    <ClInclude Include="..\..\..\client\objects\base_object.hpp">
+      <Filter>source\game\objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\Objects\Platform.hpp">
-      <Filter>Source\Game\Objects</Filter>
+    <ClInclude Include="..\..\..\client\objects\platform.hpp">
+      <Filter>source\game\objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\Objects\ObjectInterfaces.hpp">
-      <Filter>Source\Game\Objects</Filter>
+    <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp">
+      <Filter>source\game\objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\GameLogic.hpp">
-      <Filter>Source\Game</Filter>
+    <ClInclude Include="..\..\..\client\game_logic.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -96,42 +96,42 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\areks.ico" />
-    <None Include="..\Resources\CloseNormal.png">
-      <Filter>Resources</Filter>
+    <None Include="..\resources\CloseNormal.png">
+      <Filter>resources</Filter>
     </None>
-    <None Include="..\Resources\CloseSelected.png">
-      <Filter>Resources</Filter>
+    <None Include="..\resources\CloseSelected.png">
+      <Filter>resources</Filter>
     </None>
-    <None Include="..\Resources\fps_images-hd.png">
-      <Filter>Resources</Filter>
+    <None Include="..\resources\fps_images-hd.png">
+      <Filter>resources</Filter>
     </None>
-    <None Include="..\Resources\fps_images-ipadhd.png">
-      <Filter>Resources</Filter>
+    <None Include="..\resources\fps_images-ipadhd.png">
+      <Filter>resources</Filter>
     </None>
-    <None Include="..\Resources\fps_images.png">
-      <Filter>Resources</Filter>
+    <None Include="..\resources\fps_images.png">
+      <Filter>resources</Filter>
     </None>
-    <None Include="..\Resources\HelloWorld.png">
-      <Filter>Resources</Filter>
+    <None Include="..\resources\HelloWorld.png">
+      <Filter>resources</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Resources">
+    <Filter Include="resources">
       <UniqueIdentifier>{cc8f9a9c-d14a-4fa1-8f76-4dc71f5e19e1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source">
+    <Filter Include="source">
       <UniqueIdentifier>{54c8ce72-fbe6-41ab-881c-f2440b0ed21c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Common">
+    <Filter Include="source\common">
       <UniqueIdentifier>{5c39037d-1329-4f49-8f22-86cbdb86da18}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Win">
+    <Filter Include="source\win">
       <UniqueIdentifier>{01cdf574-1d26-4793-ac76-731caad561d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Game">
+    <Filter Include="source\game">
       <UniqueIdentifier>{97baf809-7d3d-4ec9-96a0-ed7d8869294d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source\Game\Objects">
+    <Filter Include="source\game\objects">
       <UniqueIdentifier>{cc6ebe2c-c54f-4613-9973-0d7230a3f184}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

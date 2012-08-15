@@ -1,5 +1,5 @@
-#include "ActionHandler.hpp"
-#include "View.hpp"
+#include "action_handler.hpp"
+#include "view.hpp"
 #include "master.hpp"
 
 void ActionHandler::start()

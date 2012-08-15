@@ -1,14 +1,14 @@
-#include "AppDelegate.h"
+#include "app_delegate.h"
 #include "CCEGLView.h"
 #include "SimpleAudioEngine.h"
 #include "config.hpp"
 
-#include "ObjectManager.hpp"
-#include "Physics.hpp"
-#include "View.hpp"
-#include "Loop.hpp"
-#include "ActionHandler.hpp"
-#include "GameLogic.hpp"
+#include "object_manager.hpp"
+#include "physics.hpp"
+#include "view.hpp"
+#include "loop.hpp"
+#include "action_handler.hpp"
+#include "game_logic.hpp"
 
 using namespace CocosDenshion;
 

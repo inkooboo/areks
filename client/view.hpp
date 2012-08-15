@@ -3,7 +3,7 @@
 
 # include "defs.hpp"
 # include "subsystem.hpp"
-# include "Physics.hpp"
+# include "physics.hpp"
 
 class View : public cc::CCObject, public subsystem_t
 {

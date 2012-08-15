@@ -2,9 +2,9 @@
 #define _AREKS_OBJECT_PLATFORM_HPP_
 
 #include "defs.hpp"
-#include "ObjectInterfaces.hpp"
+#include "object_interfaces.hpp"
 
-#include "Primitives.hpp"
+#include "primitives.hpp"
 
 namespace objects
 {

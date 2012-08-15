@@ -1,7 +1,7 @@
-#include "GameLogic.hpp"
+#include "game_logic.hpp"
 
-#include "Physics.hpp"
-#include "objects/Platform.hpp"
+#include "physics.hpp"
+#include "objects/platform.hpp"
 #include "master.hpp"
 
 
@@ -22,9 +22,9 @@ GameLogic::GameLogic()
 void GameLogic::CreateExampleLevel()
 {
     pr::Vec2 w_size = master_t::subsystem<Physics>().worldSize();
-    w_size.x() /= 2;
-    w_size.y() /= 2;
+    w_size.x /= 2;
+    w_size.y /= 2;
 
-    auto obj = objects::Platform::create( w_size, pr::Vec2( w_size.x()/2, w_size.y()/4 ) );
+    auto obj = objects::Platform::create( w_size, pr::Vec2( w_size.x/2, w_size.y/4 ) );
 
 }

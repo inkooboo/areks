@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -122,30 +122,31 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\Resources\CloseNormal.png" />
-    <None Include="..\Resources\CloseSelected.png" />
-    <None Include="..\Resources\fps_images-hd.png" />
-    <None Include="..\Resources\fps_images-ipadhd.png" />
-    <None Include="..\Resources\fps_images.png" />
-    <None Include="..\Resources\HelloWorld.png" />
+    <None Include="..\resources\CloseNormal.png" />
+    <None Include="..\resources\CloseSelected.png" />
+    <None Include="..\resources\fps_images-hd.png" />
+    <None Include="..\resources\fps_images-ipadhd.png" />
+    <None Include="..\resources\fps_images.png" />
+    <None Include="..\resources\HelloWorld.png" />
     <None Include="res\areks.ico" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="areks.rc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\client\ActionHandler.hpp" />
-    <ClInclude Include="..\..\..\client\AppDelegate.h" />
+    <ClInclude Include="..\..\..\client\action_handler.hpp" />
+    <ClInclude Include="..\..\..\client\app_delegate.h" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
-    <ClInclude Include="..\..\..\client\GameLogic.hpp" />
-    <ClInclude Include="..\..\..\client\Loop.hpp" />
-    <ClInclude Include="..\..\..\client\ObjectManager.hpp" />
-    <ClInclude Include="..\..\..\client\Objects\BaseObject.hpp" />
-    <ClInclude Include="..\..\..\client\Objects\ObjectInterfaces.hpp" />
-    <ClInclude Include="..\..\..\client\Objects\Platform.hpp" />
-    <ClInclude Include="..\..\..\client\Primitives.hpp" />
-    <ClInclude Include="..\..\..\client\Physics.hpp" />
-    <ClInclude Include="..\..\..\client\View.hpp" />
+    <ClInclude Include="..\..\..\client\game_logic.hpp" />
+    <ClInclude Include="..\..\..\client\loop.hpp" />
+    <ClInclude Include="..\..\..\client\object_manager.hpp" />
+    <ClInclude Include="..\..\..\client\objects\base_object.hpp" />
+    <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp" />
+    <ClInclude Include="..\..\..\client\objects\platform.hpp" />
+    <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
+    <ClInclude Include="..\..\..\client\primitives.hpp" />
+    <ClInclude Include="..\..\..\client\physics.hpp" />
+    <ClInclude Include="..\..\..\client\view.hpp" />
     <ClInclude Include="..\..\..\common\config.hpp" />
     <ClInclude Include="..\..\..\common\master.hpp" />
     <ClInclude Include="..\..\..\common\noncopyable.hpp" />
@@ -154,16 +155,16 @@
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\client\ActionHandler.cpp" />
-    <ClCompile Include="..\..\..\client\AppDelegate.cpp" />
-    <ClCompile Include="..\..\..\client\GameLogic.cpp" />
-    <ClCompile Include="..\..\..\client\Loop.cpp" />
-    <ClCompile Include="..\..\..\client\ObjectManager.cpp" />
-    <ClCompile Include="..\..\..\client\Objects\BaseObject.cpp" />
-    <ClCompile Include="..\..\..\client\Objects\ObjectInterfaces.cpp" />
-    <ClCompile Include="..\..\..\client\Objects\Platform.cpp" />
-    <ClCompile Include="..\..\..\client\Physics.cpp" />
-    <ClCompile Include="..\..\..\client\View.cpp" />
+    <ClCompile Include="..\..\..\client\action_handler.cpp" />
+    <ClCompile Include="..\..\..\client\app_delegate.cpp" />
+    <ClCompile Include="..\..\..\client\game_logic.cpp" />
+    <ClCompile Include="..\..\..\client\loop.cpp" />
+    <ClCompile Include="..\..\..\client\object_manager.cpp" />
+    <ClCompile Include="..\..\..\client\objects\base_object.cpp" />
+    <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp" />
+    <ClCompile Include="..\..\..\client\objects\platform.cpp" />
+    <ClCompile Include="..\..\..\client\physics.cpp" />
+    <ClCompile Include="..\..\..\client\view.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

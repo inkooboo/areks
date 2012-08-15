@@ -1,6 +1,6 @@
-#include "View.hpp"
+#include "view.hpp"
 #include "master.hpp"
-#include "AppDelegate.h"
+#include "app_delegate.h"
 
 #include <cassert>
 #include <algorithm>

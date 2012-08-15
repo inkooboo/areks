@@ -1,9 +1,9 @@
-#include "Loop.hpp"
+#include "loop.hpp"
 
 #include "master.hpp"
 
-#include "ObjectManager.hpp"
-#include "Objects\ObjectInterfaces.hpp"
+#include "object_manager.hpp"
+#include "objects/object_interfaces.hpp"
 
 void Loop::start()
 {

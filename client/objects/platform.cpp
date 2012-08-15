@@ -1,8 +1,8 @@
-#include "Platform.hpp"
+#include "platform.hpp"
 
 #include "master.hpp"
 
-#include "Physics.hpp"
+#include "physics.hpp"
 
 namespace objects
 {
@@ -17,12 +17,12 @@ namespace objects
     {
         //init physics
         b2BodyDef bodyDef;
-        bodyDef.position.Set( _position.x(), _position.y() );
+        bodyDef.position.Set( _position.x, _position.y );
 
         _body = master_t::subsystem<Physics>().worldEngine()->CreateBody(&bodyDef);
 
         b2PolygonShape shape;
-        shape.SetAsBox(size.x()/2, size.y()/2);
+        shape.SetAsBox(size.x/2, size.y/2);
 
         _body->CreateFixture(&shape, 0.0f);
 
@@ -30,7 +30,7 @@ namespace objects
         unsigned char color[] = {100, 100, 100};
         cc::CCTexture2D* texture = new cc::CCTexture2D();
         texture->autorelease();
-        texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, size.getPixelSize() );
+        texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, size.toCCSize() );
 
         _sprite = cc::CCSprite::create( texture );
         
@@ -46,7 +46,7 @@ namespace objects
         
     void Platform::draw()
     {
-        _sprite->setPosition( _position.getPixelPoint() );
+        _sprite->setPosition( _position.toCCPoint() );
     }
 
 }//end namespace objects

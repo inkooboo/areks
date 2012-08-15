@@ -2,7 +2,7 @@
 #define _AREKS_OBJECT_INTERFACES_HPP_
 
 #include "defs.hpp"
-#include "BaseObject.hpp"
+#include "base_object.hpp"
 
 class DynamicObject : BaseObject
 {

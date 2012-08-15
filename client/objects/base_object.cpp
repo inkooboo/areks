@@ -1,8 +1,8 @@
-#include "BaseObject.hpp"
+#include "base_object.hpp"
 
 #include "master.hpp"
 
-#include "ObjectManager.hpp"
+#include "object_manager.hpp"
 
 BaseObject::BaseObject()
 {
