@@ -8,8 +8,8 @@
 
 namespace primitives
 {
-    float toPixel(float world);
-    float toWorld(float pixel);
+    float worldToPixel(float world);
+    float pixelToWorld(float pixel);
     
     class Vec2
     {
@@ -23,13 +23,13 @@ namespace primitives
         {}
         
         Vec2( cc::CCSize const& s )
-            : x( toWorld( s.width ) )
-            , y( toWorld( s.height) )
+            : x( pixelToWorld( s.width ) )
+            , y( pixelToWorld( s.height) )
         {}
         
         Vec2( cc::CCPoint const& s )
-            : x( toWorld( s.x ) )
-            , y( toWorld( s.y) )
+            : x( pixelToWorld( s.x ) )
+            , y( pixelToWorld( s.y) )
         {}
         
         Vec2( b2Vec2 const& v )
@@ -44,12 +44,12 @@ namespace primitives
         
         cc::CCSize toCCSize() const
         {
-            return cc::CCSize(toPixel(x), toPixel(y));
+            return cc::CCSize(worldToPixel(x), worldToPixel(y));
         }
 
         cc::CCPoint toCCPoint() const
         {
-            return cc::CCPoint(toPixel(x), toPixel(y));
+            return cc::CCPoint(worldToPixel(x), worldToPixel(y));
         }
         
         b2Vec2 tob2Vec2() const

@@ -21,8 +21,10 @@ public:
     float pixel_scale() const;
     cc::CCPoint toScreenCoordinates(pr::Vec2 world_coord) const;
     pr::Vec2 toWorldCoordinates(cc::CCPoint screen_coord) const;
-    float toPixel(float world_size) const;
-    float toWorld(float screen_size) const;
+    float worldToPixel(float world_size) const;
+    float pixelToScreen(float pixel_size) const;
+    float screenToPixel(float screen_size) const;
+    float pixelToWorld(float pixel_size) const;
     cc::CCLayer * gameLayer();
     
     void moveView(float dx, float dy);

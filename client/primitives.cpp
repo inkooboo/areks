@@ -12,14 +12,14 @@
 namespace primitives
 {
 
-    float toPixel(float world)
+    float worldToPixel(float world)
     {
-        return master_t::subsystem<View>().toPixel( world );
+        return master_t::subsystem<View>().worldToPixel( world );
     }
 
-    float toWorld(float pixel)
+    float pixelToWorld(float pixel)
     {
-        return master_t::subsystem<View>().toWorld( pixel );
+        return master_t::subsystem<View>().pixelToWorld( pixel );
     }
 
 }

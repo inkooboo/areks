@@ -48,8 +48,7 @@ namespace objects
         
     void Platform::draw()
     {
-        _sprite->setPosition(master_t::subsystem<View>().toScreenCoordinates(_position));
-        _sprite->setScale(master_t::subsystem<View>().pixel_scale());
+        draw_sprite_helper(_sprite, _position);
     }
 
 }//end namespace objects

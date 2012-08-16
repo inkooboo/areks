@@ -44,8 +44,8 @@ void View::start()
     
     m_view_scale = m_default_view_scale;
     
-    m_x_margin = toWorld(m_size.width / 2);
-    m_y_margin = toWorld(m_size.height / 2);
+    m_x_margin = pixelToWorld(screenToPixel(m_size.width));
+    m_y_margin = pixelToWorld(screenToPixel(m_size.height));
     
     m_cur_positon = pr::Vec2(0, 0);
     
@@ -87,28 +87,36 @@ float View::pixel_scale() const
 cc::CCPoint View::toScreenCoordinates(pr::Vec2 world_coord) const
 {
     world_coord -= m_cur_positon;
-    return cc::CCPoint(toPixel(world_coord.x), toPixel(world_coord.y));
+    return cc::CCPoint(pixelToScreen(worldToPixel(world_coord.x)), pixelToScreen(worldToPixel(world_coord.y)));
 }
 
 pr::Vec2 View::toWorldCoordinates(cc::CCPoint screen_coord) const
 {
-    pr::Vec2 world_coord = pr::Vec2(toWorld(screen_coord.x), toWorld(screen_coord.y));
+    pr::Vec2 world_coord = pr::Vec2(pixelToWorld(screenToPixel(screen_coord.x)), pixelToWorld(screenToPixel(screen_coord.y)));
     world_coord += m_cur_positon;
     return world_coord;
 }
 
 
-float View::toPixel(float world_size) const
+float View::worldToPixel(float world_size) const
 {
-    return world_size * m_world_scale * m_view_scale;
+    return world_size * m_world_scale;
 }
 
-
-float View::toWorld(float screen_size) const
+float View::pixelToScreen(float pixel_size) const
 {
-    return screen_size / (m_world_scale * m_view_scale);
+    return pixel_size * m_view_scale;
 }
 
+float View::screenToPixel(float screen_size) const
+{
+    return screen_size / m_view_scale;
+}
+
+float View::pixelToWorld(float pixel_size) const
+{
+    return pixel_size / m_world_scale;
+}
 
 cc::CCLayer * View::gameLayer()
 {
@@ -122,8 +130,8 @@ void View::on_touch_move(cc::CCPoint &from, cc::CCPoint &to)
 
 void View::moveView(float dx, float dy)
 {
-    dx = -toWorld(dx);
-    dy = toWorld(dy);
+    dx = -pixelToWorld(screenToPixel(dx));
+    dy = pixelToWorld(screenToPixel(dy));
     
     pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
 
@@ -132,9 +140,9 @@ void View::moveView(float dx, float dy)
     {
         m_cur_positon.x = 0;
     }
-    if (m_cur_positon.x > world_size.x - m_x_margin * 2)
+    if (m_cur_positon.x > world_size.x - m_x_margin)
     {
-        m_cur_positon.x = world_size.x - m_x_margin * 2;
+        m_cur_positon.x = world_size.x - m_x_margin;
     }
 
     m_cur_positon.y += dy;
@@ -142,8 +150,8 @@ void View::moveView(float dx, float dy)
     {
         m_cur_positon.y = 0;
     }
-    if (m_cur_positon.y > world_size.y - m_y_margin * 2)
+    if (m_cur_positon.y > world_size.y - m_y_margin)
     {
-        m_cur_positon.y = world_size.y - m_y_margin * 2;
+        m_cur_positon.y = world_size.y - m_y_margin;
     }
 }
