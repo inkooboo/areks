@@ -1,6 +1,12 @@
 #include "physics.hpp"
 
-void Physics::start() {}
+#include "level_manager.hpp"
+
+void Physics::start()
+{
+    m_world_size = master_t::subsystem<LevelManager>().worldSize();
+}
+
 void Physics::stop() {}
     
 Physics::Physics() 
@@ -14,4 +20,9 @@ Physics::Physics()
 b2World* Physics::worldEngine()
 {
     return _b2World_ptr.get();
+}
+
+pr::Vec2 Physics::worldSize() const
+{
+    return m_world_size;
 }

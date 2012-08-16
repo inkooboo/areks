@@ -17,14 +17,10 @@ public:
 
     b2World* worldEngine();
     
-    //temp for scene navigation logic
-    pr::Vec2 worldSize() const
-    {
-        return pr::Vec2(48.f, 32.f); // we should create world and background with corresponding propotions
-    }
-    
+    pr::Vec2 worldSize() const;
 private:
     std::unique_ptr<b2World> _b2World_ptr;
+    pr::Vec2 m_world_size;
 };
 
 #endif

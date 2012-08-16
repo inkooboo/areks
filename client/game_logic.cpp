@@ -24,9 +24,7 @@ void GameLogic::CreateExampleLevel()
     auto background = new objects::Background(master_t::subsystem<LevelManager>().backgroundName());
     
     pr::Vec2 w_size = master_t::subsystem<Physics>().worldSize();
-    w_size.x /= 2;
-    w_size.y /= 2;
 
-    auto obj = objects::Platform::create( w_size, pr::Vec2( w_size.x/2, w_size.y/4 ) );
+    auto obj = objects::Platform::create( pr::Vec2(10, 4), pr::Vec2(10, 1) );
 
 }

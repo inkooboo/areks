@@ -10,6 +10,7 @@
 #define __areks__level_manager__
 
 # include "subsystem.hpp"
+# include "primitives.hpp"
 
 class LevelManager : public subsystem_t
 {
@@ -19,7 +20,8 @@ class LevelManager : public subsystem_t
 public:
     LevelManager();
 
-    const char * backgroundName();
+    const char * backgroundName() const;
+    pr::Vec2 worldSize() const;
 };
 
 
