@@ -11,15 +11,15 @@ if not exist "%cd%\create-android-project.bat" echo Error!!! You should run it u
 if not exist "%~dpn0.sh" echo Script "%~dpn0.sh" not found & pause & exit 3
 
 :: modify it to work under your environment	 
-set _CYGBIN=e:\cygwin\bin
+set _CYGBIN=C:\cygwin\bin
 if not exist "%_CYGBIN%" echo Couldn't find Cygwin at "%_CYGBIN%" & pause & exit 4
 
 :: modify it to work under your environment
-set _ANDROIDTOOLS=e:\android\android-sdk\tools
+set _ANDROIDTOOLS=D:\dev\android\android-sdk\tools
 if not exist "%_ANDROIDTOOLS%" echo Couldn't find android sdk tools at "%_ANDROIDTOOLS%" & pause & exit 5
 
 :: modify it to work under your environment
-set _NDKROOT=e:\android\android-ndk-r8
+set _NDKROOT=D:\dev\android\android-ndk-r8b
 if not exist "%_NDKROOT%" echo Couldn't find ndk at "%_NDKROOT%" & pause & exit 6
 
 :: create android project
