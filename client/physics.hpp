@@ -18,6 +18,9 @@ public:
     b2World* worldEngine();
     
     pr::Vec2 worldSize() const;
+	
+	//don't call this method manually!
+    void step( float dt );
 private:
     std::unique_ptr<b2World> _b2World_ptr;
     pr::Vec2 m_world_size;

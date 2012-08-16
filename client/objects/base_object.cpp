@@ -15,6 +15,11 @@ BaseObject::~BaseObject()
     master_t::subsystem<ObjectManager>().removeObject(this);
 }
 
+void BaseObject::destroy()
+{
+    delete this;
+}
+
 void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position)
 {
     const cc::CCPoint &prev_position = sprite->getPosition();

@@ -26,3 +26,11 @@ pr::Vec2 Physics::worldSize() const
 {
     return m_world_size;
 }
+
+void Physics::step( float dt )
+{
+    static int velocityIterations = 8;
+    static int positionIterations = 3;
+    
+    _b2World_ptr->Step( dt, velocityIterations, positionIterations );
+}

@@ -11,6 +11,9 @@ public:
     virtual ~BaseObject() = 0;
     
     virtual void draw() = 0;
+	
+	//possible remake this for lazy destruction
+    void destroy();
     
     void draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position);
 };

@@ -59,6 +59,8 @@ void Loop::TimeLoop_t::tick(float t)
 
 void Loop::ViewLoop_t::update( float t )
 {
+	master_t::subsystem<Physics>().step( float dt );
+	
     auto objects = master_t::subsystem<ObjectManager>().getObjects();
     auto it = objects.begin();
     auto end = objects.end();
