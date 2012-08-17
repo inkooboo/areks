@@ -1,9 +1,13 @@
+#!/bin/bash
+
+THIS_DIR=$PWD
+
 # set params
-NDK_ROOT=/cygdrive/d/dev/android/android-ndk-r8b
-COCOS2DX_ROOT=/cygdrive/d/dev/areks/cocos2dx
-GAME_ROOT=$COCOS2DX_ROOT/areks
-GAME_ANDROID_ROOT=$GAME_ROOT/proj.android
-RESOURCE_ROOT=$GAME_ROOT/Resources
+NDK_ROOT=$THIS_DIR/../../../../android/android-ndk-r8b
+COCOS2DX_ROOT=$THIS_DIR/../../../cocos2dx
+GAME_ROOT=$THIS_DIR/../../..
+GAME_ANDROID_ROOT=$GAME_ROOT/android/areks/proj.android
+RESOURCE_ROOT=$GAME_ROOT/resources
 
 buildexternalsfromsource=
 
