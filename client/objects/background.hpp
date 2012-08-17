@@ -27,7 +27,7 @@ namespace objects
         explicit Background(const std::string &file_name);
         ~Background();
 
-        b2Body *_body;]
+        b2Body *_body;
         cc::CCSprite *_sprite;
         pr::Vec2 _position;
     };

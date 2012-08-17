@@ -3,7 +3,9 @@
 THIS_DIR=$PWD
 
 # set params
-NDK_ROOT=$THIS_DIR/../../../../android/android-ndk-r8b
+#NDK_ROOT=$THIS_DIR/../../../../android/android-ndk-r8b
+NDK_ROOT=~/android-ndk-r8b
+#NDK_ROOT=~/android-ndk-r7-crystax-5.beta2
 COCOS2DX_ROOT=$THIS_DIR/../../../cocos2dx
 GAME_ROOT=$THIS_DIR/../../..
 GAME_ANDROID_ROOT=$GAME_ROOT/android/areks/proj.android

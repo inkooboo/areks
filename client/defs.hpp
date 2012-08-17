@@ -6,6 +6,10 @@
 
 namespace cc = cocos2d;
 
+#if defined(__GNUC__)
+# define override 
+#endif
+
 //for using std::max
 #ifdef _WINDOWS
     #undef max
