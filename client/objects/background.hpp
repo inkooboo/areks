@@ -19,13 +19,14 @@ namespace objects
     class Background : public BaseObject
     {
     public:
-        explicit Background(const std::string &file_name);
-        
-        ~Background();
+        static Background* create(const std::string &file_name);
         
         virtual void draw() override;
         
     private:
+        explicit Background(const std::string &file_name);
+        ~Background();
+
         b2Body *_body;
         cc::CCSprite *_sprite;
         pr::Vec2 _position;

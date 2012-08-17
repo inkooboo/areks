@@ -13,13 +13,19 @@
 
 namespace objects
 {
+
+    Background* Background::create(const std::string &file_name)
+    {
+        return new Background( file_name );
+    }
     
     Background::Background(const std::string &file_name)
     {
         pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
         
         _sprite = cocos2d::CCSprite::create(file_name.c_str());
-        _sprite->setBlendFunc( (cc::ccBlendFunc){GL_ONE, GL_ZERO});
+        cc::ccBlendFunc func={GL_ONE, GL_ZERO};
+        _sprite->setBlendFunc( func );
         _position = world_size;
         _position *= .5;
 
@@ -31,7 +37,7 @@ namespace objects
     {
         _sprite->removeFromParentAndCleanup(true);
         _sprite->release();
-        master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
+        //master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
     }
         
     void Background::draw()

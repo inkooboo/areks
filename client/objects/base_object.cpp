@@ -17,7 +17,7 @@ BaseObject::~BaseObject()
 
 void BaseObject::destroy()
 {
-    delete this;
+//    delete this;
 }
 
 void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position)

@@ -5,6 +5,9 @@
 #include "object_manager.hpp"
 #include "objects/object_interfaces.hpp"
 
+#include "physics.hpp"
+
+
 void Loop::start()
 {
     this->resumeGame();
@@ -59,7 +62,7 @@ void Loop::TimeLoop_t::tick(float t)
 
 void Loop::ViewLoop_t::update( float t )
 {
-	master_t::subsystem<Physics>().step( float dt );
+	master_t::subsystem<Physics>().step( t );
 	
     auto objects = master_t::subsystem<ObjectManager>().getObjects();
     auto it = objects.begin();

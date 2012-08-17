@@ -87,4 +87,10 @@ namespace primitives
 
 namespace pr = primitives;
 
+float distance( pr::Vec2 const& a, pr::Vec2 const& b );
+inline pr::Vec2 operator-(pr::Vec2 const& a, pr::Vec2 const& b)
+{
+    return pr::Vec2( a.x - b.x, a.y - b.y );
+}
+
 #endif

@@ -21,7 +21,7 @@ GameLogic::GameLogic()
 //just for testing
 void GameLogic::CreateExampleLevel()
 {
-    auto background = new objects::Background(master_t::subsystem<LevelManager>().backgroundName());
+    auto background = objects::Background::create(master_t::subsystem<LevelManager>().backgroundName());
     
     pr::Vec2 w_size = master_t::subsystem<Physics>().worldSize();
 

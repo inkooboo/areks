@@ -13,13 +13,12 @@ namespace objects
     {
     public:
         static Platform* create(pr::Vec2 const& coordinates, pr::Vec2 const& size);
-
-        ~Platform();
         
         virtual void draw() override;
         
     private:
         Platform(pr::Vec2 const& coordinates, pr::Vec2 const& size);
+        ~Platform();
 
         b2Body* _body;
         cc::CCSprite* _sprite;

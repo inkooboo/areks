@@ -9,6 +9,8 @@
 #include "primitives.hpp"
 #include "view.hpp"
 
+#include <math.h>
+
 namespace primitives
 {
 
@@ -22,4 +24,9 @@ namespace primitives
         return master_t::subsystem<View>().pixelToWorld( pixel );
     }
 
+}
+
+float distance( pr::Vec2 const& a, pr::Vec2 const& b )
+{
+    return sqrt( pow( a.x-b.x, 2 ) + pow( a.y-b.y, 2 ) );
 }

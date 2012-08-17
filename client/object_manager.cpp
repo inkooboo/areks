@@ -8,15 +8,13 @@ void ObjectManager::start()
 
 void ObjectManager::stop()
 {
-    //TODO destroy all objects
+    auto it = _objects.begin();
+    auto end = _objects.end();
 
-    //auto it = _objects.begin();
-    //auto end = _objects.end();
-
-    //for( ; it != end; ++it )
-    //{
-    //    (*it)->destroy();
-    //}
+    for( ; it != end; ++it )
+    {
+        (*it)->destroy();
+    }
 }
 
 ObjectManager::ObjectManager()

@@ -18,4 +18,8 @@ public:
     void draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position);
 };
 
+namespace objects 
+{
+}
+
 #endif
