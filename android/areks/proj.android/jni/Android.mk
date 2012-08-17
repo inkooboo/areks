@@ -7,8 +7,8 @@ LOCAL_MODULE := game_shared
 LOCAL_MODULE_FILENAME := libgame
 
 LOCAL_SRC_FILES := main.cpp \
-                   $(wildcard ../../../client/*.cpp) \
-                   $(wildcard ../../../common/*.cpp) 
+                   $(wildcard ../../../../client/*.cpp) \
+                   $(wildcard ../../../../common/*.cpp) 
                    
 LOCAL_C_INCLUDES := \
                     ../../../client \

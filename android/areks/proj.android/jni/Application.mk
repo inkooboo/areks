@@ -1,2 +1,2 @@
 APP_STL := gnustl_static
-APP_CPPFLAGS := -frtti -std=c++0x
+APP_CPPFLAGS := -frtti -std=gnu++0x

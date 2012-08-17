@@ -6,7 +6,7 @@
 
 namespace cc = cocos2d;
 
-#if defined(__GNUC__)
+#if defined(__GNUC__) // gcc will support override since 4.7 version
 # define override 
 #endif
 
