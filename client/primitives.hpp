@@ -80,14 +80,19 @@ namespace primitives
             x *= a;
             y *= a;
         }
+
+        Vec2& absolute();
         
 };
+
+    float distance( Vec2 const& a, Vec2 const& b );
+    float angle( Vec2 const& a, Vec2 const& b );
+    float angleAxisX( Vec2 const& v );
 
 }//end namespace primitives
 
 namespace pr = primitives;
 
-float distance( pr::Vec2 const& a, pr::Vec2 const& b );
 inline pr::Vec2 operator-(pr::Vec2 const& a, pr::Vec2 const& b)
 {
     return pr::Vec2( a.x - b.x, a.y - b.y );

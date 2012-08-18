@@ -1,128 +1,240 @@
-//#include "rope.hpp"
-//
-//#include "master.hpp"
-//#include <math.h>
-//
-//#include "physics.hpp"
-//
-//namespace objects
-//{
-//    namespace detail
-//    {
-//
-//        void RopePoint::setPos(float new_x, float new_y)
-//        {
-//            x = old_x = new_x;
-//            y = old_y = new_y;
-//        }
-//
-//        void RopePoint::update()
-//        {
-//            float temp_x = x;
-//	        float temp_y = y;
-//	        x += x - old_x;
-//	        y += y - old_y;
-//	        old_x = temp_x;
-//            old_y = temp_y;
-//        }
-//
-//        void RopePoint::applyGravity(float dt)
-//        {
-//            y -= 10.0f*dt;
-//        }
-//
-//        RopeStick::RopeStick(RopePoint* a, RopePoint* b)
-//            : point_a( a )
-//            , point_b( b )
-//        {
-//            hypotenuse = sqrt( pow(point_b->x - point_a->x, 2) + pow(point_b->y - point_a->y, 2) );
-//        }
-//
-//        void RopeStick::contract()
-//        {
-//            float dx = point_b->x - point_a->x;
-//	        float dy = point_b->y - point_a->y;
-//	        float h = sqrt( pow(dx, 2) + pow(dy, 2) );
-//	        float diff = hypotenuse - h;
-//	        float offx = (diff * dx / h) * 0.5;
-//	        float offy = (diff * dy / h) * 0.5;
-//	        point_a->x-=offx;
-//	        point_a->y-=offy;
-//	        point_b->x+=offx;
-//	        point_b->y+=offy;
-//        }
-//
-//    }//end namespace detail
-//   
-//    Rope* Rope::create( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body )
-//    {
-//        return new Rope( a_point, a_body, b_point, b_body );
-//    }
-//
-//    Rope::Rope( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body )
-//        : _a_point( a_point )
-//        , _a_body( a_body )
-//        , _b_point( b_point )
-//        , _b_body( b_body )
-//    {
-//        //init physics
-//        b2RopeJointDef ropeDef;
-//        ropeDef.bodyA=a_body; //define bodies
-//        ropeDef.bodyB=b_body;
-//        ropeDef.localAnchorA = b2Vec2(0,0); //define anchors
-//        ropeDef.localAnchorB = b2Vec2(0,0);
-//        float dist = distance( a_point, b_point );
-//        ropeDef.maxLength= dist;
-//        master_t::subsystem<Physics>().worldEngine()->CreateJoint(&ropeDef); //create joint
-//
-//        //init view
-//        dist = pr::worldToPixel( dist );
-//	    int segmentFactor = 12; //increase value to have less segments per rope, decrease to have more segments
-//	    _num_points = dist/segmentFactor;
-//        pr::Vec2 diffVector = a_point - b_point;
-//	    float multiplier = dist / (numPoints-1);
-//	    _anti_sag_hack = 0.1f; //HACK: scale down rope points to cheat sag. set to 0 to disable, max suggested value 0.1
-//	    for(int i=0;i<_num_points;i++) {
-//		    CGPoint tmpVector = ccpAdd(pointA, ccpMult(ccpNormalize(diffVector),multiplier*i*(1-antiSagHack)));
-//		    VPoint *tmpPoint = [[VPoint alloc] init];
-//		    [tmpPoint setPos:tmpVector.x y:tmpVector.y];
-//		    [vPoints addObject:tmpPoint];
-//	    }
-//	    for(int i=0;i<numPoints-1;i++) {
-//		    VStick *tmpStick = [[VStick alloc] initWith:[vPoints objectAtIndex:i] pointb:[vPoints objectAtIndex:i+1]];
-//		    [vSticks addObject:tmpStick];
-//	    }
-//	    if(spriteSheet!=nil) {
-//		    for(int i=0;i<numPoints-1;i++) {
-//			    VPoint *point1 = [[vSticks objectAtIndex:i] getPointA];
-//			    VPoint *point2 = [[vSticks objectAtIndex:i] getPointB];
-//			    CGPoint stickVector = ccpSub(ccp(point1.x,point1.y),ccp(point2.x,point2.y));
-//			    float stickAngle = ccpToAngle(stickVector);
-//			    CCSprite *tmpSprite = [CCSprite spriteWithBatchNode:spriteSheet rect:CGRectMake(0,0,multiplier,[[[spriteSheet textureAtlas] texture] pixelsHigh])];
-//			    ccTexParams params = {GL_LINEAR,GL_LINEAR,GL_REPEAT,GL_REPEAT};
-//			    [tmpSprite.texture setTexParameters:&params];
-//			    [tmpSprite setPosition:ccpMidpoint(ccp(point1.x,point1.y),ccp(point2.x,point2.y))];
-//			    [tmpSprite setRotation:-1 * CC_RADIANS_TO_DEGREES(stickAngle)];
-//			    [spriteSheet addChild:tmpSprite];
-//			    [ropeSprites addObject:tmpSprite];
-//		    }
-//	    }
-//    }
-//
-//    void Rope::draw()
-//    {
-//    }
-//
-//    void updateState( float t )
-//    {
-//    }
-//
-//    Rope::~Rope()
-//    {
-//    }
-//
-//    void Rope::reset()
-//    {
-//    }
-//
-//}//end namespace objects
+#include "rope.hpp"
+
+#include "master.hpp"
+#include <math.h>
+
+#include "physics.hpp"
+#include "view.hpp"
+
+#define METER_IN_STICK (float)0.37
+#define ROPE_WIDTH (float)0.25
+//ROPE_DENSITY - mass of rope
+#define ROPE_DENSITY 0.5
+#define ROPE_FRICTION (float)0.0
+
+namespace objects
+{
+   
+    Rope* Rope::create( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body )
+    {
+        return new Rope( a_point, a_body, b_point, b_body );
+    }
+
+    Rope* Rope::create( pr::Vec2 const& a_point, BaseObject* a_body, pr::Vec2 const& b_point, BaseObject* b_body )
+    {
+        return new Rope( a_point, a_body->getBody(), b_point, b_body->getBody() );
+    }
+
+    Rope::Rope( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body )
+    {
+        float distance = pr::distance( a_point, b_point );
+
+        //
+        //init physics
+        //
+
+        size_t stick_count = distance/METER_IN_STICK; //length of stick: METER_IN_STICK < stick_length < METER_IN_STICK*2
+        float stick_length = distance/stick_count;
+
+        //prepare rope sticks
+
+        //calculate angle of sticks
+        pr::Vec2 v = a_point - b_point;
+        //float angle_y = pr::angle( v, pr::Vec2( 0, 1 ) );
+        float angle_y = pr::angleAxisX( v );
+        //float angle_x = pr::angle( v, pr::Vec2( 1, 0 ) );
+        //if( angle_x > b2_pi/2 ) angle_y = -angle_y;
+
+        //prepare sticks body definition
+        b2BodyDef body_def;
+        body_def.type = b2_dynamicBody;
+        body_def.angle = angle_y;
+
+        b2Body* cur_body;
+        b2Body* prev_body;
+
+        //prepare sticks shape definition
+        b2PolygonShape stick_shape;
+        stick_shape.SetAsBox( stick_length/2, ROPE_WIDTH/2 );
+
+        //prepare revolute joint definition
+        b2RevoluteJointDef revolute_def;
+        revolute_def.collideConnected = false;
+
+        //prepare distance joint definition
+        b2DistanceJointDef distance_def;
+        distance_def.collideConnected = false;
+
+        //prepare fixtures definition
+        b2FixtureDef fixture_def;
+        fixture_def.friction = ROPE_FRICTION;
+        fixture_def.density = ROPE_DENSITY;
+        fixture_def.shape = &stick_shape;
+        fixture_def.filter.categoryBits = 0x0001;
+        fixture_def.filter.maskBits = 0x0002;
+
+        //calculate dx and dy for sticks
+        float dx = (b_point.x - a_point.x)/stick_count;
+        float dy = (b_point.y - a_point.y)/stick_count;
+
+        //float d_height = stick_length * cos( angle_y );
+        //float d_width = stick_length * sin( angle_y );
+
+        //if(dx<0) d_width = -d_width;
+        //if(dy<0) d_height = -d_height;
+
+        //create rope sticks
+        b2World* worldEngine = master_t::subsystem<Physics>().worldEngine();
+        prev_body = a_body;
+        for( size_t i = 0; i<stick_count; ++i )
+        {
+            //position - center of body
+            body_def.position = b2Vec2( a_point.x + dx*i + dx/2, a_point.y + dy*i + dy/2);
+            cur_body = worldEngine->CreateBody( &body_def );
+            _sticks_bodies.push_back( cur_body );
+            cur_body->CreateFixture( &fixture_def );
+
+            b2Vec2 anchor(a_point.x + dx*i, a_point.y + dy*i);
+            revolute_def.Initialize(prev_body, cur_body, anchor);
+            _connections_bodies.push_back( worldEngine->CreateJoint( &revolute_def ) );
+
+            distance_def.Initialize( prev_body, cur_body, b2Vec2( a_point.x + dx*i - dx/16, a_point.y + dy*i - dy/16 ), b2Vec2( a_point.x + dx*i + dx/16, a_point.y + dy*i + dy/16 ) );
+            worldEngine->CreateJoint( &distance_def );
+
+            prev_body = cur_body;                        
+        }
+
+        b2Vec2 anchor(b_point.x, b_point.y);
+        revolute_def.Initialize(cur_body, b_body, anchor);
+        _connections_bodies.push_back( worldEngine->CreateJoint( &revolute_def ) );
+
+        distance_def.Initialize( prev_body, b_body, b2Vec2(anchor.x - dx/16, anchor.y - dy/16), b2Vec2(anchor.x + dx/16, anchor.y + dy/16) );
+        worldEngine->CreateJoint( &distance_def );
+
+        ////init RopeJoint for stablizing rope
+        //b2RopeJointDef ropeDef;
+        //ropeDef.bodyA=a_body; //define bodies
+        //ropeDef.bodyB=b_body;
+        ////TODO set anchor points
+        //ropeDef.localAnchorA = b2Vec2(0,0); //define anchors
+        //ropeDef.localAnchorB = b2Vec2(0,0);
+        //ropeDef.maxLength= distance + stick_length/3;
+        //worldEngine->CreateJoint(&ropeDef); //create joint
+
+        //
+        //init view
+        //
+        {
+            auto it = _sticks_bodies.begin();
+            auto end = _sticks_bodies.end();
+
+            unsigned char color[] = {100, 100, 100};
+            cc::CCTexture2D* texture = new cc::CCTexture2D();
+            texture->autorelease();
+            texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(stick_length, ROPE_WIDTH).toCCSize() );
+
+            for( ; it!=end; ++it )
+            {
+                _sticks_sprites.push_back( cc::CCSprite::create( texture ) );
+            }
+
+        }
+
+        {
+            auto it = _connections_bodies.begin();
+            auto end = _connections_bodies.end();
+
+            unsigned char color[] = {0, 0, 0};
+            cc::CCTexture2D* texture = new cc::CCTexture2D();
+            texture->autorelease();
+            texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2( (float)0.1, (float)0.1 ).toCCSize() );
+
+            for( ; it!=end; ++it )
+            {
+                _connections_sprites.push_back( cc::CCSprite::create( texture ) );
+            }
+
+        }
+
+        draw();
+
+        {
+            auto it = _sticks_sprites.begin();
+            auto end = _sticks_sprites.end();
+            for( ; it!=end; ++it )
+            {
+                master_t::subsystem<View>().gameLayer()->addChild( *it );
+            }
+
+        }
+
+        {
+            auto it = _connections_sprites.begin();
+            auto end = _connections_sprites.end();
+            for( ; it!=end; ++it )
+            {
+                master_t::subsystem<View>().gameLayer()->addChild( *it );
+            }
+
+        }
+
+
+
+
+        //for(size_t i=0; i<_sticks_bodies.size(); ++i)
+        //{
+        //    draw_sprite_helper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
+        //}
+
+        //for(size_t i=0; i<_connections_bodies.size(); ++i)
+        //{
+        //    draw_sprite_helper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
+        //}
+
+    }
+
+    void Rope::draw()
+    {
+        for(size_t i=0; i<_sticks_bodies.size(); ++i)
+        {
+            draw_sprite_helper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
+        }
+
+        for(size_t i=0; i<_connections_bodies.size(); ++i)
+        {
+            draw_sprite_helper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
+        }
+    }
+
+    void Rope::updateState( float t )
+    {
+    }
+
+    Rope::~Rope()
+    {
+        {
+            auto it = _sticks_sprites.begin();
+            auto end = _sticks_sprites.end();
+            for( ; it!=end; ++it )
+            {
+                (*it)->removeFromParentAndCleanup(true);
+                (*it)->release();
+            }
+        }
+        {
+            auto it = _sticks_bodies.begin();
+            auto end = _sticks_bodies.end();
+            for( ; it!=end; ++it )
+            {
+                master_t::subsystem<Physics>().worldEngine()->DestroyBody(*it);
+            }
+        }
+
+    }
+
+    b2Body* Rope::getBody()
+    {
+        return 0;
+    }
+
+}//end namespace objects

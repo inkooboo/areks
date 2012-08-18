@@ -24,9 +24,28 @@ namespace primitives
         return master_t::subsystem<View>().pixelToWorld( pixel );
     }
 
-}
+    Vec2& Vec2::absolute()
+    {
+        x = fabs(x);
+        y = fabs(y);
+        return *this;
+    }
 
-float distance( pr::Vec2 const& a, pr::Vec2 const& b )
-{
-    return sqrt( pow( a.x-b.x, 2 ) + pow( a.y-b.y, 2 ) );
+    float distance( Vec2 const& a, Vec2 const& b )
+    {
+        return sqrt( pow( a.x-b.x, 2 ) + pow( a.y-b.y, 2 ) );
+    }
+
+    float angle( Vec2 const& a, Vec2 const& b )
+    {
+        float cos_v = (a.x*b.x + a.y*b.y) / sqrt(( a.x*a.x + a.y*a.y )*( b.x*b.x + b.y*b.y ));
+        return acos( cos_v );
+
+    }
+
+    float angleAxisX( Vec2 const& v)
+    {
+        return atan2( v.y, v.x );
+    }
+
 }

@@ -15,6 +15,8 @@ namespace objects
         static Platform* create(pr::Vec2 const& coordinates, pr::Vec2 const& size);
         
         virtual void draw() override;
+
+        virtual b2Body* getBody() override;
         
     private:
         Platform(pr::Vec2 const& coordinates, pr::Vec2 const& size);

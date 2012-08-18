@@ -46,6 +46,9 @@
     <ClCompile Include="..\..\..\client\objects\rope.cpp">
       <Filter>source\game\objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\objects\ball.cpp">
+      <Filter>source\game\objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -110,6 +113,9 @@
       <Filter>source\game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\rope.hpp">
+      <Filter>source\game\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\objects\ball.hpp">
       <Filter>source\game\objects</Filter>
     </ClInclude>
   </ItemGroup>

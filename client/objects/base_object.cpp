@@ -20,7 +20,7 @@ void BaseObject::destroy()
 //    delete this;
 }
 
-void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position)
+void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position, float angle)
 {
     const cc::CCPoint &prev_position = sprite->getPosition();
     cc::CCPoint cur_position = master_t::subsystem<View>().toScreenCoordinates(position);
@@ -34,5 +34,14 @@ void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position)
     if (prev_scale != cur_scale)
     {
         sprite->setScale(cur_scale);
+    }
+
+    //rotation in Box2d - in radiance
+    //rotation in cocos2d-x - in degrees
+    float prev_angle = sprite->getRotation();
+    float cur_angle = -angle * 180/b2_pi;
+    if (prev_angle != angle)
+    {
+        sprite->setRotation( cur_angle );
     }
 }

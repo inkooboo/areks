@@ -48,7 +48,12 @@ namespace objects
         
     void Platform::draw()
     {
-        draw_sprite_helper(_sprite, _position);
+        draw_sprite_helper(_sprite, _position, 0);
+    }
+
+    b2Body* Platform::getBody()
+    {
+        return _body;
     }
 
 }//end namespace objects

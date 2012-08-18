@@ -6,6 +6,18 @@
 
 # include <Box2D/Box2D.h>
 
+class ContactListener : public b2ContactListener
+{
+public:
+    ContactListener()
+        : b2ContactListener()
+    {}
+
+    void BeginContact(b2Contact *contact)
+    {
+    }
+};
+
 //managed subsystem Physics
 class Physics : public subsystem_t 
 {
@@ -24,6 +36,8 @@ public:
 private:
     std::unique_ptr<b2World> _b2World_ptr;
     pr::Vec2 m_world_size;
+
+    ContactListener _contact_listener;
 };
 
 #endif

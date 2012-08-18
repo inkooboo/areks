@@ -142,6 +142,7 @@
     <ClInclude Include="..\..\..\client\loop.hpp" />
     <ClInclude Include="..\..\..\client\objects\background.hpp" />
     <ClInclude Include="..\..\..\client\objects\rope.hpp" />
+    <ClInclude Include="..\..\..\client\objects\ball.hpp" />
     <ClInclude Include="..\..\..\client\object_manager.hpp" />
     <ClInclude Include="..\..\..\client\objects\base_object.hpp" />
     <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp" />
@@ -165,6 +166,7 @@
     <ClCompile Include="..\..\..\client\loop.cpp" />
     <ClCompile Include="..\..\..\client\objects\background.cpp" />
     <ClCompile Include="..\..\..\client\objects\rope.cpp" />
+    <ClCompile Include="..\..\..\client\objects\ball.cpp" />
     <ClCompile Include="..\..\..\client\object_manager.cpp" />
     <ClCompile Include="..\..\..\client\objects\base_object.cpp" />
     <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp" />

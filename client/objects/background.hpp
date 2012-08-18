@@ -22,6 +22,8 @@ namespace objects
         static Background* create(const std::string &file_name);
         
         virtual void draw() override;
+
+        virtual b2Body* getBody() override;
         
     private:
         explicit Background(const std::string &file_name);

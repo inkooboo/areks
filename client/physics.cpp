@@ -15,6 +15,9 @@ Physics::Physics()
     bool doSleep = true;
     _b2World_ptr.reset( new b2World(gravity) );
     _b2World_ptr->SetAllowSleeping( doSleep );
+
+    // Set contact listener
+    _b2World_ptr->SetContactListener(&_contact_listener);
 }
 
 b2World* Physics::worldEngine()

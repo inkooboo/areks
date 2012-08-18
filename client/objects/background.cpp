@@ -42,7 +42,13 @@ namespace objects
         
     void Background::draw()
     {
-        draw_sprite_helper(_sprite, _position);
+        draw_sprite_helper(_sprite, _position, 0);
+    }
+
+    b2Body* Background::getBody()
+    {
+        //TODO
+        return 0;
     }
 
 } //namespace objects
