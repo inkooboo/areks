@@ -6,7 +6,7 @@
 #include "physics.hpp"
 #include "view.hpp"
 
-#define METER_IN_STICK (float)0.37
+#define METER_IN_STICK (float)0.5
 #define ROPE_WIDTH (float)0.25
 //ROPE_DENSITY - mass of rope
 #define ROPE_DENSITY 0.5
@@ -99,6 +99,7 @@ namespace objects
             _connections_bodies.push_back( worldEngine->CreateJoint( &revolute_def ) );
 
             distance_def.Initialize( prev_body, cur_body, b2Vec2( a_point.x + dx*i - dx/16, a_point.y + dy*i - dy/16 ), b2Vec2( a_point.x + dx*i + dx/16, a_point.y + dy*i + dy/16 ) );
+            //distance_def.Initialize( prev_body, cur_body, prev_body->GetWorldCenter(), cur_body->GetWorldCenter() );
             worldEngine->CreateJoint( &distance_def );
 
             prev_body = cur_body;                        
