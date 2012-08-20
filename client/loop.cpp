@@ -8,6 +8,8 @@
 #include "physics.hpp"
 #include "view.hpp"
 
+static const float DEFAULT_WORLD_TICK_TIME = 0.02;
+
 void Loop::start()
 {
     resumeGame();
@@ -26,7 +28,7 @@ Loop::Loop()
 
     cc::CCDirector::sharedDirector()->setScheduler(this);
 
-    cc::CCScheduler::scheduleSelector( schedule_selector(TimeLoop_t::tick), &_time_loop, 0.005, true);
+    cc::CCScheduler::scheduleSelector( schedule_selector(TimeLoop_t::tick), &_time_loop, DEFAULT_WORLD_TICK_TIME, true);
     cc::CCScheduler::scheduleUpdateForTarget( &_view_loop, 0, true);
 }
 
@@ -52,9 +54,20 @@ void Loop::pauseGame()
 
 void Loop::TimeLoop_t::tick(float t)
 {
+    float ft = t;
+    while (ft > 0)
+    {
+        float diff = DEFAULT_WORLD_TICK_TIME;
+        if (ft - DEFAULT_WORLD_TICK_TIME < 0)
+        {
+            diff = ft;
+        }
+        master_t::subsystem<Physics>().step( diff );
+        ft -= DEFAULT_WORLD_TICK_TIME;
+    }
+    
     master_t::subsystem<View>().on_rescale_tick(t); // manage dynamic scale
     
-	master_t::subsystem<Physics>().step( t );
     
     auto objects = master_t::subsystem<ObjectManager>().getDynamicObjects();
     auto it = objects.begin();
