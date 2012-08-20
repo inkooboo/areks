@@ -227,6 +227,7 @@
 		8404AEBB15D539F10030B061 /* AppController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEBA15D539F10030B061 /* AppController.mm */; };
 		8404AEBE15D539F10030B061 /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 8404AEBD15D539F10030B061 /* RootViewController.mm */; };
 		84634B0515DE45F0000713B6 /* rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84634B0315DE45EF000713B6 /* rope.cpp */; };
+		84634B0B15E21990000713B6 /* ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84634B0915E21990000713B6 /* ball.cpp */; };
 		84FD596A15DB7E82000E6454 /* action_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD595315DB7E82000E6454 /* action_handler.cpp */; };
 		84FD596B15DB7E82000E6454 /* app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD595515DB7E82000E6454 /* app_delegate.cpp */; };
 		84FD596C15DB7E82000E6454 /* game_logic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD595715DB7E82000E6454 /* game_logic.cpp */; };
@@ -749,6 +750,8 @@
 		8404AEE915D8DE680030B061 /* defs.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = defs.hpp; sourceTree = "<group>"; };
 		84634B0315DE45EF000713B6 /* rope.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = rope.cpp; sourceTree = "<group>"; };
 		84634B0415DE45F0000713B6 /* rope.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = rope.hpp; sourceTree = "<group>"; };
+		84634B0915E21990000713B6 /* ball.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ball.cpp; sourceTree = "<group>"; };
+		84634B0A15E21990000713B6 /* ball.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ball.hpp; sourceTree = "<group>"; };
 		84FD595315DB7E82000E6454 /* action_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = action_handler.cpp; sourceTree = "<group>"; };
 		84FD595415DB7E82000E6454 /* action_handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = action_handler.hpp; sourceTree = "<group>"; };
 		84FD595515DB7E82000E6454 /* app_delegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = app_delegate.cpp; sourceTree = "<group>"; };
@@ -1811,6 +1814,8 @@
 		84FD595D15DB7E82000E6454 /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				84634B0915E21990000713B6 /* ball.cpp */,
+				84634B0A15E21990000713B6 /* ball.hpp */,
 				84634B0315DE45EF000713B6 /* rope.cpp */,
 				84634B0415DE45F0000713B6 /* rope.hpp */,
 				84FD59AC15DB8DD0000E6454 /* object_interfaces.cpp */,
@@ -2170,6 +2175,7 @@
 				84FD59B115DB9ED4000E6454 /* primitives.cpp in Sources */,
 				84FD59B415DBA09B000E6454 /* level_manager.cpp in Sources */,
 				84634B0515DE45F0000713B6 /* rope.cpp in Sources */,
+				84634B0B15E21990000713B6 /* ball.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,16 +6,18 @@
 #include "objects/object_interfaces.hpp"
 
 #include "physics.hpp"
-
+#include "view.hpp"
 
 void Loop::start()
 {
-    this->resumeGame();
+    resumeGame();
+    resumeTime();
 }
 
 void Loop::stop() 
 { 
-    this->pauseGame();
+    pauseGame();
+    pauseTime();
 }
 
 Loop::Loop()
@@ -24,7 +26,7 @@ Loop::Loop()
 
     cc::CCDirector::sharedDirector()->setScheduler(this);
 
-    cc::CCScheduler::scheduleSelector( schedule_selector(TimeLoop_t::tick), &_time_loop, 1.f, true);
+    cc::CCScheduler::scheduleSelector( schedule_selector(TimeLoop_t::tick), &_time_loop, 0.005, true);
     cc::CCScheduler::scheduleUpdateForTarget( &_view_loop, 0, true);
 }
 
@@ -50,6 +52,10 @@ void Loop::pauseGame()
 
 void Loop::TimeLoop_t::tick(float t)
 {
+    master_t::subsystem<View>().on_rescale_tick(t); // manage dynamic scale
+    
+	master_t::subsystem<Physics>().step( t );
+    
     auto objects = master_t::subsystem<ObjectManager>().getDynamicObjects();
     auto it = objects.begin();
     auto end = objects.end();
@@ -62,8 +68,6 @@ void Loop::TimeLoop_t::tick(float t)
 
 void Loop::ViewLoop_t::update( float t )
 {
-	master_t::subsystem<Physics>().step( t );
-	
     auto objects = master_t::subsystem<ObjectManager>().getObjects();
     auto it = objects.begin();
     auto end = objects.end();

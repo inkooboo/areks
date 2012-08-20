@@ -1,6 +1,7 @@
 #include "action_handler.hpp"
 #include "view.hpp"
 #include "master.hpp"
+#include "objects/ball.hpp"
 
 void ActionHandler::start()
 {
@@ -31,14 +32,32 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     cc::CCPoint location = pTouch->locationInView();
     int id = pTouch->getID();
     
-    Touch touch;
-    touch.begin = location;
-    touch.previous = location;
+    TouchPtr touch = std::make_shared<Touch>();
+    touch->begin = location;
+    touch->from = location;
+
+    View &view = master_t::subsystem<View>();
+
     // determine touch type and init touch handlers
+    if (m_touches.size() == 0)
+    {
+        // 1. first scale touch OR
+        // 2. possible view move touch OR
+        // 3. main hero selection
+        touch->on_move = std::bind(&View::on_touch_move, &view, std::placeholders::_1);
+    }
     
-    View *view = &master_t::subsystem<View>();
+    if (m_touches.size() == 1)
+    {
+        //scale second touch
+        TouchPtr first_touch = m_touches.begin()->second;
+        first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
+        first_touch->on_end = std::bind(&View::on_touch_end, &view, first_touch);
+        touch->on_end = std::bind(&View::on_touch_end, &view, std::placeholders::_1);
+        touch->on_move = std::bind(&View::on_touch_scale, &view, first_touch, std::placeholders::_1);
+    }
     
-    touch.on_move = std::bind(&View::on_touch_move, view, std::placeholders::_1, std::placeholders::_2);
+    
     
     ///
     
@@ -51,32 +70,32 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 
 void ActionHandler::ccTouchMoved (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 {
-    cc::CCPoint to = pTouch->locationInView();
-    int id = pTouch->getID();
-    
-    Touch &touch = m_touches[id];
+    TouchPtr &touch = m_touches[pTouch->getID()];
 
-    cc::CCPoint from = touch.previous;
-    
-    if (touch.on_move)
+    touch->to = pTouch->locationInView();
+
+    if (touch->on_move)
     {
-        touch.on_move(from, to);
+        touch->on_move(touch);
     }
 
-    touch.previous = to;
+    touch->from = touch->to;
 }
 
 void ActionHandler::ccTouchEnded (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 {
-    cc::CCPoint end = pTouch->locationInView();
     int id = pTouch->getID();
     
-    Touch &touch = m_touches[id];
+    TouchPtr &touch = m_touches[id];
     
-    if (touch.on_end)
+    touch->end = pTouch->locationInView();
+    
+    if (touch->on_end)
     {
-        touch.on_end(touch.begin, end);
+        touch->on_end(touch);
     }
+    
+    touch->ended = true;
     
     m_touches.erase(id);
 }

@@ -4,6 +4,7 @@
 # include "defs.hpp"
 # include "subsystem.hpp"
 # include "primitives.hpp"
+# include "action_handler.hpp"
 
 class View : public cc::CCObject, public subsystem_t
 {
@@ -15,7 +16,9 @@ public:
 
     void menuExit(cocos2d::CCObject* pSender);
 
-    void on_touch_move(cc::CCPoint &from, cc::CCPoint &to);
+    void on_touch_move(ActionHandler::TouchPtr &touch);
+    void on_touch_scale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);
+    void on_touch_end(ActionHandler::TouchPtr &touch);
     
     
     float pixel_scale() const;
@@ -29,17 +32,22 @@ public:
     
     void moveView(float dx, float dy);
     
+    void on_rescale_tick(float t);
+    
+    void validate_scale();
+    
 private:
+    bool m_in_touch;
     cc::CCScene *m_scene;
     cc::CCLayer *m_mainLayer;
     
     cc::CCSize m_size;
     
     float m_view_scale;
+    float m_min_view_scale;
+    float m_max_view_scale;
     float m_default_view_scale;
     float m_world_scale;
-    float m_x_margin;
-    float m_y_margin;
     
     pr::Vec2 m_cur_positon;
 };

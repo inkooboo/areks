@@ -6,6 +6,7 @@
 
 # include <map>
 # include <functional>
+# include <memory>
 
 class ActionHandler : public cc::CCObject, public cc::CCTargetedTouchDelegate, public subsystem_t
 {
@@ -13,6 +14,21 @@ class ActionHandler : public cc::CCObject, public cc::CCTargetedTouchDelegate, p
     virtual void stop() override;
 
 public:
+    struct Touch;
+    typedef std::shared_ptr<Touch> TouchPtr;
+    
+    struct Touch
+    {
+        Touch() : ended(false) {}
+        cc::CCPoint begin;
+        cc::CCPoint from;
+        cc::CCPoint to;
+        cc::CCPoint end;
+        std::function<void(TouchPtr &touch)> on_move;
+        std::function<void(TouchPtr &touch)> on_end;
+        bool ended;
+    };
+    
     ActionHandler();
 
     void enable();
@@ -26,15 +42,7 @@ private:
     virtual void ccTouchCancelled (cc::CCTouch *pTouch, cc::CCEvent *pEvent) override;
 
     
-    struct Touch
-    {
-        cc::CCPoint begin;
-        cc::CCPoint previous;
-        std::function<void(cc::CCPoint &from, cc::CCPoint &to)> on_move;
-        std::function<void(cc::CCPoint &begin, cc::CCPoint &end)> on_end;
-    };
-    
-    std::map<int,Touch> m_touches;
+    std::map<int,TouchPtr> m_touches;
 };
 
 #endif

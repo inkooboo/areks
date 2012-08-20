@@ -32,5 +32,4 @@ void GameLogic::CreateExampleLevel()
     auto ball = objects::Ball::create( pr::Vec2(22, 15) );
     auto rope = objects::Rope::create( pr::Vec2(15, 10), platform, pr::Vec2(22, 15.5), ball );
     //auto rope = objects::Rope::create( pr::Vec2(7, 11), ball, pr::Vec2(10, 14.5), platform );
-
 }
