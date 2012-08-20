@@ -13,9 +13,7 @@ public:
         : b2ContactListener()
     {}
 
-    void BeginContact(b2Contact *contact)
-    {
-    }
+    void BeginContact(b2Contact *contact);
 };
 
 //managed subsystem Physics

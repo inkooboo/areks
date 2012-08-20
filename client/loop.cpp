@@ -8,7 +8,8 @@
 #include "physics.hpp"
 #include "view.hpp"
 
-static const float DEFAULT_WORLD_TICK_TIME = 0.02;
+static const float DEFAULT_WORLD_TICK_TIME = 0.017f;
+static const float DEFAULT_VIEW_TICK_TIME = 0.04f;
 
 void Loop::start()
 {
@@ -29,7 +30,7 @@ Loop::Loop()
     cc::CCDirector::sharedDirector()->setScheduler(this);
 
     cc::CCScheduler::scheduleSelector( schedule_selector(TimeLoop_t::tick), &_time_loop, DEFAULT_WORLD_TICK_TIME, true);
-    cc::CCScheduler::scheduleUpdateForTarget( &_view_loop, 0, true);
+    cc::CCScheduler::scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, DEFAULT_VIEW_TICK_TIME, true);
 }
 
 void Loop::resumeTime()
@@ -83,9 +84,12 @@ void Loop::TimeLoop_t::tick(float t)
     {
         (*it)->updateState( t );
     }
+
+    //delegate management to ObjectManager
+    master_t::subsystem<ObjectManager>().update();
 }
 
-void Loop::ViewLoop_t::update( float t )
+void Loop::ViewLoop_t::tick( float t )
 {
     auto objects = master_t::subsystem<ObjectManager>().getObjects();
     auto it = objects.begin();

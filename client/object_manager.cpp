@@ -49,6 +49,17 @@ void ObjectManager::removeDynamicObject( DynamicObject* obj_ptr )
     _dyn_objects.erase( to_delete );
 }
 
+void ObjectManager::destroyObject( BaseObject* obj_ptr )
+{
+    assert( std::find( _objects.begin(), _objects.end(), obj_ptr ) != _objects.end() );
+
+    auto it = std::find( _to_delete_list.begin(), _to_delete_list.end(), obj_ptr );
+    if( it == _to_delete_list.end() )
+    {
+        _to_delete_list.push_back( obj_ptr );
+    }
+}
+
 std::vector< BaseObject* >& ObjectManager::getObjects()
 {
     return _objects;
@@ -57,4 +68,16 @@ std::vector< BaseObject* >& ObjectManager::getObjects()
 std::vector< DynamicObject* >& ObjectManager::getDynamicObjects()
 {
     return _dyn_objects;
+}
+
+void ObjectManager::update()
+{
+    auto it = _to_delete_list.begin();
+    auto end = _to_delete_list.end();
+
+    for( ; it!=end; ++it )
+    {
+        delete (*it);
+    }
+    _to_delete_list.clear();
 }

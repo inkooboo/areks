@@ -23,6 +23,8 @@ namespace objects
 
         virtual b2Body* getBody() override;
 
+        virtual void deleteJoint( b2Joint* joint ) override;
+
     private:
         Rope( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body );
         ~Rope();

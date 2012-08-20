@@ -24,6 +24,8 @@ namespace objects
         virtual void draw() override;
 
         virtual b2Body* getBody() override;
+
+        virtual void collide( BaseObject* other ) override;
         
     private:
         explicit Background(const std::string &file_name);

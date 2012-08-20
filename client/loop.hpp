@@ -36,7 +36,8 @@ private:
     
     class ViewLoop_t : public cc::CCObject
     {
-        virtual void update( float t ) override;   
+    public:
+        void tick( float t );   
     };
     
     TimeLoop_t _time_loop;

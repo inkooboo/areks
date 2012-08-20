@@ -19,6 +19,7 @@ namespace objects
         //init physics
         b2BodyDef bodyDef;
         bodyDef.position.Set( _position.x, _position.y );
+        bodyDef.userData = (void*)this;
 
         _body = master_t::subsystem<Physics>().worldEngine()->CreateBody(&bodyDef);
 

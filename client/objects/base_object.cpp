@@ -17,7 +17,7 @@ BaseObject::~BaseObject()
 
 void BaseObject::destroy()
 {
-//    delete this;
+    master_t::subsystem<ObjectManager>().destroyObject( this );
 }
 
 void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position, float angle)
@@ -43,5 +43,26 @@ void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position, flo
     if (prev_angle != angle)
     {
         sprite->setRotation( cur_angle );
+    }
+}
+
+void BaseObject::release_joints( b2Body* body )
+{
+    b2JointEdge* j_e = body->GetJointList();
+    for( ; j_e; j_e = j_e->next )
+    {
+        b2Joint* joint = j_e->joint;
+        b2Body* cur_body;
+        if( body == joint->GetBodyA() )
+        {
+            cur_body = joint->GetBodyB();
+        }
+        else
+        {
+            cur_body = joint->GetBodyA();
+        }
+
+        BaseObject* obj = static_cast<BaseObject*>( cur_body->GetUserData() );
+        obj->deleteJoint( joint );
     }
 }

@@ -49,6 +49,8 @@ namespace objects
         b2BodyDef body_def;
         body_def.type = b2_dynamicBody;
         body_def.angle = angle_y;
+        body_def.gravityScale = 0.5f;
+        body_def.userData = (void*)this;
 
         b2Body* cur_body;
         b2Body* prev_body;
@@ -236,6 +238,16 @@ namespace objects
     b2Body* Rope::getBody()
     {
         return 0;
+    }
+
+    void Rope::deleteJoint( b2Joint* joint )
+    {
+        auto it = std::find( _connections_bodies.begin(), _connections_bodies.end(), joint );
+        //assert( it != _connections_bodies.end() );
+        if( it != _connections_bodies.end() )
+        {
+            _connections_bodies.erase( it );
+        }
     }
 
 }//end namespace objects

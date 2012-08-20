@@ -20,6 +20,7 @@ namespace objects
             b2BodyDef body_def;
             body_def.type = b2_dynamicBody;
             body_def.position = position.tob2Vec2();
+            body_def.userData = (void*)this;
 
             //b2CircleShape shape;
             //shape.m_radius = 3;
@@ -51,6 +52,10 @@ namespace objects
 
         Ball::~Ball()
         {
+            _sprite->removeFromParentAndCleanup( true );
+            _sprite->release();
+            release_joints( _body );
+            master_t::subsystem<Physics>().worldEngine()->DestroyBody( _body );
         }
 
         void Ball::draw()

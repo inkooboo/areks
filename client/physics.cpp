@@ -2,6 +2,17 @@
 
 #include "level_manager.hpp"
 
+#include "objects\base_object.hpp"
+
+void ContactListener::BeginContact(b2Contact *contact)
+{
+    BaseObject* obj_a = static_cast<BaseObject*>( contact->GetFixtureA()->GetBody()->GetUserData() );
+    BaseObject* obj_b = static_cast<BaseObject*>( contact->GetFixtureB()->GetBody()->GetUserData() );
+
+    obj_a->collide( obj_b );
+    obj_b->collide( obj_a );
+}
+
 void Physics::start()
 {
     m_world_size = master_t::subsystem<LevelManager>().worldSize();
