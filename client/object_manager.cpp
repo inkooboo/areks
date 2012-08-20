@@ -15,6 +15,8 @@ void ObjectManager::stop()
     {
         (*it)->destroy();
     }
+
+    update();
 }
 
 ObjectManager::ObjectManager()

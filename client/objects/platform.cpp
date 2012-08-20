@@ -31,7 +31,7 @@ namespace objects
         //init view
         unsigned char color[] = {100, 100, 100};
         cc::CCTexture2D* texture = new cc::CCTexture2D();
-        texture->autorelease();
+        //texture->autorelease();
         texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, size.toCCSize() );
 
         _sprite = cc::CCSprite::create( texture );

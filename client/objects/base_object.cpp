@@ -39,7 +39,7 @@ void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position, flo
     //rotation in Box2d - in radiance
     //rotation in cocos2d-x - in degrees
     float prev_angle = sprite->getRotation();
-    float cur_angle = -angle * 180/b2_pi;
+    float cur_angle = -angle * 180/b2_pi; //FIXME minus ??? are you sure?
     if (prev_angle != angle)
     {
         sprite->setRotation( cur_angle );

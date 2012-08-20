@@ -133,7 +133,7 @@ namespace objects
 
             unsigned char color[] = {100, 100, 100};
             cc::CCTexture2D* texture = new cc::CCTexture2D();
-            texture->autorelease();
+            //texture->autorelease();
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(stick_length, ROPE_WIDTH).toCCSize() );
 
             for( ; it!=end; ++it )
@@ -149,7 +149,7 @@ namespace objects
 
             unsigned char color[] = {0, 0, 0};
             cc::CCTexture2D* texture = new cc::CCTexture2D();
-            texture->autorelease();
+            //texture->autorelease();
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2( (float)0.1, (float)0.1 ).toCCSize() );
 
             for( ; it!=end; ++it )
