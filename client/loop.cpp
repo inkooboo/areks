@@ -54,17 +54,23 @@ void Loop::pauseGame()
 
 void Loop::TimeLoop_t::tick(float t)
 {
-    float ft = t;
+    float ft = t + _remainder;
+
+    float diff = DEFAULT_WORLD_TICK_TIME;
     while (ft > 0)
     {
-        float diff = DEFAULT_WORLD_TICK_TIME;
         if (ft - DEFAULT_WORLD_TICK_TIME < 0)
         {
-            diff = ft;
+            _remainder = ft;
         }
-        master_t::subsystem<Physics>().step( diff );
+        else
+        {
+            master_t::subsystem<Physics>().step( diff );
+        }
         ft -= DEFAULT_WORLD_TICK_TIME;
     }
+
+    t -= _remainder; // calculate real time
     
     master_t::subsystem<View>().on_rescale_tick(t); // manage dynamic scale
     

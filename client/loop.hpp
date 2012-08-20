@@ -23,7 +23,14 @@ private:
     class TimeLoop_t : public cc::CCObject
     {
     public:
+        TimeLoop_t()
+            : _remainder(0)
+        { }
+
         void tick( float t );
+
+    private:
+        float _remainder;
         
     };
     
