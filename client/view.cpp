@@ -92,6 +92,10 @@ void View::menuExit(cocos2d::CCObject* pSender)
 
 void View::menuReloadLevel(cocos2d::CCObject* pSender)
 {
+    /// test sound fx. Remove it.
+    master_t::subsystem<cd::SimpleAudioEngine>().playEffect(res::sound_effect("046").c_str());
+    ///
+    
     master_t::subsystem<LevelManager>().loadLevel("");
 }
 

@@ -11,6 +11,7 @@ void GameLogic::start()
 
 void GameLogic::stop()
 {
+    master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
 }
 
 GameLogic::GameLogic()
