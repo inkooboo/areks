@@ -16,6 +16,7 @@ LOCAL_SRC_FILES := main.cpp \
                    ../../../../client/physics.cpp \
                    ../../../../client/primitives.cpp \
                    ../../../../client/view.cpp \
+                   ../../../../client/resource_utils.cpp \
                    ../../../../client/objects/background.cpp \
                    ../../../../client/objects/ball.cpp \
                    ../../../../client/objects/base_object.cpp \

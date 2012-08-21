@@ -63,7 +63,7 @@ void LevelManager::loadLevel(const char *level_name)
     {
         const std::string bg_music_file = res::background_sound("test_bg_music");
         master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
-        master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str());
+        master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str(), true);
         master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
         master_t::subsystem<cd::SimpleAudioEngine>().setBackgroundMusicVolume(0.2);
     }
