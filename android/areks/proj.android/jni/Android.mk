@@ -7,8 +7,21 @@ LOCAL_MODULE := game_shared
 LOCAL_MODULE_FILENAME := libgame
 
 LOCAL_SRC_FILES := main.cpp \
-                   $(wildcard ../../../../client/*.cpp) \
-                   $(wildcard ../../../../common/*.cpp) 
+                   ../../../../client/action_handler.cpp \
+                   ../../../../client/app_delegate.cpp \
+                   ../../../../client/game_logic.cpp \
+                   ../../../../client/level_manager.cpp \
+                   ../../../../client/loop.cpp \
+                   ../../../../client/object_manager.cpp \
+                   ../../../../client/physics.cpp \
+                   ../../../../client/primitives.cpp \
+                   ../../../../client/view.cpp \
+                   ../../../../client/objects/background.cpp \
+                   ../../../../client/objects/ball.cpp \
+                   ../../../../client/objects/base_object.cpp \
+                   ../../../../client/objects/object_interfaces.cpp \
+                   ../../../../client/objects/platform.cpp \
+                   ../../../../client/objects/rope.cpp 
                    
 LOCAL_C_INCLUDES := \
                     ../../../client \
