@@ -2,7 +2,9 @@
 #define __APP_DELEGATE_H__
 
 # include "defs.hpp"
+
 # include "master.hpp"
+
 # include <memory>
 
 /**

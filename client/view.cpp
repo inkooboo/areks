@@ -3,6 +3,7 @@
 #include "app_delegate.h"
 #include "physics.hpp"
 #include "level_manager.hpp"
+#include "resource_utils.hpp"
 
 #include <cassert>
 #include <algorithm>
@@ -62,18 +63,18 @@ void View::createMainLayer()
     m_size = cc::CCDirector::sharedDirector()->getWinSize();
     
     cc::CCMenuItemImage *pClose = cc::CCMenuItemImage::create(
-                                                                 "CloseNormal.png",
-                                                                 "CloseSelected.png",
-                                                                 this,
-                                                                 menu_selector(View::menuExit) );
+                                                            res::picture("CloseNormal").c_str(),
+                                                            res::picture("CloseSelected").c_str(),
+                                                            this,
+                                                            menu_selector(View::menuExit) );
     
     pClose->setPosition( ccp(m_size.width - 27, m_size.height - 28) );
     
     cc::CCMenuItemImage *pReload = cc::CCMenuItemImage::create(
-                                                                 "shesterenka.png",
-                                                                 "shesterenka_p.png",
-                                                                 this,
-                                                                 menu_selector(View::menuReloadLevel) );
+                                                               res::picture("shesterenka").c_str(),
+                                                               res::picture("shesterenka_p").c_str(),
+                                                               this,
+                                                               menu_selector(View::menuReloadLevel) );
     
     pReload->setPosition( ccp(m_size.width - 27, 28) );
 

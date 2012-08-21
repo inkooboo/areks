@@ -12,6 +12,8 @@
 #include "physics.hpp"
 #include "object_manager.hpp"
 
+#include "resource_utils.hpp"
+
 #include "objects/background.hpp"
 #include "objects/platform.hpp"
 #include "objects/ball.hpp"
@@ -34,28 +36,36 @@ LevelManager::LevelManager()
 
 void LevelManager::loadLevel(const char *level_name)
 {
-    // 0. Clear all objects
+    // 0. Show loading splash screen
+    // TODO
+    
+    // 1. Clear all objects
     master_t::subsystem<ObjectManager>().reloadObjectManager();
     
-    // 1. Load background
-    const char *bg_name = "HelloWorld_big.png";
+    // 2. Load background
+    const std::string bg_name = res::picture("HelloWorld_big");
     
-    cc::CCSprite *bg = cc::CCSprite::create(bg_name);
+    cc::CCSprite *bg = cc::CCSprite::create(bg_name.c_str());
     cc::CCSize bg_size = bg->getContentSize();
     bg->release();
     
-    // 2. Load world params
+    // 3. Load world params
     pr::Vec2 world_size(48.f, 32.f);
     
     master_t::subsystem<Physics>().reloadWorldParams(world_size);
     
-    // 3. Reload view parameters
+    // 4. Reload view parameters
     
     master_t::subsystem<View>().reloadViewParams(bg_size, world_size);
     
+    // 5. Preload background music
+    const std::string bg_music_file = res::background_sound("test_bg_music");
+    master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
+    master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str());
+    master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
     
-    // 4. Create level objects
-    auto background = objects::Background::create("HelloWorld_big.png");
+    // 6. Create level objects
+    auto background = objects::Background::create(bg_name);
 
     auto platform = objects::Platform::create( pr::Vec2(15, 10), pr::Vec2(10, 1) );
     auto ball = objects::Ball::create( pr::Vec2(22, 15) );

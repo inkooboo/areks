@@ -5,6 +5,8 @@
 void GameLogic::start()
 {
     master_t::subsystem<LevelManager>().loadLevel("");
+    
+    master_t::subsystem<cd::SimpleAudioEngine>().resumeBackgroundMusic();
 }
 
 void GameLogic::stop()

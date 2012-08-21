@@ -5,12 +5,12 @@
 
 void ActionHandler::start()
 {
-    this->enable();
+    enable();
 }
 
 void ActionHandler::stop()
 {
-    this->disable();
+    disable();
 }
 
 ActionHandler::ActionHandler()
