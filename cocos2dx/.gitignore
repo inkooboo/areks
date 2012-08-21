@@ -32,15 +32,15 @@ _ReSharper*/
 [Tt]est[Rr]esult*
 
 # Ignore files build by ndk and eclipse
-libs/
-bin/
-obj/
-gen/
-assets/
+#libs/
+#bin/
+#obj/
+#gen/
+#assets/
 #.classpath
 #.project
 #.cproject
-local.properties
+#local.properties
 
 # Ignore files build by linux
 *.o
