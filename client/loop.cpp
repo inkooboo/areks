@@ -8,8 +8,8 @@
 #include "physics.hpp"
 #include "view.hpp"
 
-static const float DEFAULT_WORLD_TICK_TIME = 0.017f;
-static const float DEFAULT_VIEW_TICK_TIME = 0.02f;
+static const float DEFAULT_WORLD_TICK_TIME = 1.f/60.f;
+static const float DEFAULT_VIEW_TICK_TIME = 1.f/40.f;
 
 void Loop::start()
 {
