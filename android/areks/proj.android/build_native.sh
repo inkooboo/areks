@@ -56,6 +56,9 @@ do
     fi
 done
 
+rm -f $GAME_ANDROID_ROOT/assets/sound_fx/*.wav
+rm -f $GAME_ANDROID_ROOT/assets/bg_sound/*.wav
+
 # copy icons (if they exist)
 file=$GAME_ANDROID_ROOT/assets/Icon-72.png
 if [ -f "$file" ]; then
