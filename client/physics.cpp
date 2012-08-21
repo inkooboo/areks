@@ -4,6 +4,8 @@
 
 #include "objects/base_object.hpp"
 
+static const float TOUCH_ACCURACY = 0.001f;
+
 void ContactListener::BeginContact(b2Contact *contact)
 {
     BaseObject* obj_a = static_cast<BaseObject*>( contact->GetFixtureA()->GetBody()->GetUserData() );
@@ -54,4 +56,34 @@ void Physics::step( float dt )
     static int positionIterations = 3;
     
     _b2World_ptr->Step( dt, velocityIterations, positionIterations );
+}
+
+class OneObjectQueryCallback : public b2QueryCallback
+{
+public:
+    OneObjectQueryCallback()
+        : result_obj(0)
+    { }
+
+    bool ReportFixture(b2Fixture* fixture)
+    {
+        result_obj = static_cast<BaseObject*>( fixture->GetBody()->GetUserData() );
+
+        // Return false to break the query.
+        return false;
+    }
+
+    BaseObject* result_obj;
+};
+
+BaseObject* Physics::getObject( pr::Vec2 const& point )
+{    
+    b2AABB aabb;
+    aabb.lowerBound = b2Vec2( point.x - TOUCH_ACCURACY, point.y - TOUCH_ACCURACY );
+    aabb.upperBound = b2Vec2( point.x + TOUCH_ACCURACY, point.y + TOUCH_ACCURACY );
+    
+    OneObjectQueryCallback callback;
+    _b2World_ptr->QueryAABB( &callback, aabb );
+
+    return callback.result_obj;
 }
