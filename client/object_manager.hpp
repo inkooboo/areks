@@ -16,6 +16,8 @@ class ObjectManager : public subsystem_t
 public:
     ObjectManager();
     
+    void reloadObjectManager();
+    
     //don't uses this methods manually!
     void registerObject( BaseObject* obj_ptr );
     void removeObject( BaseObject* obj_otr );
@@ -36,8 +38,6 @@ private:
     std::vector< DynamicObject* > _dyn_objects;
 
     std::vector<BaseObject*> _to_delete_list;
-    
-    
 };
 
 #endif

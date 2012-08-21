@@ -44,7 +44,7 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         // 1. first scale touch OR
         // 2. possible view move touch OR
         // 3. main hero selection
-        touch->on_move = std::bind(&View::on_touch_move, &view, std::placeholders::_1);
+        touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
     }
     
     if (m_touches.size() == 1)
@@ -52,9 +52,9 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         //scale second touch
         TouchPtr first_touch = m_touches.begin()->second;
         first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
-        first_touch->on_end = std::bind(&View::on_touch_end, &view, first_touch);
-        touch->on_end = std::bind(&View::on_touch_end, &view, std::placeholders::_1);
-        touch->on_move = std::bind(&View::on_touch_scale, &view, first_touch, std::placeholders::_1);
+        first_touch->on_end = std::bind(&View::onTouchEnd, &view, first_touch);
+        touch->on_end = std::bind(&View::onTouchEnd, &view, std::placeholders::_1);
+        touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
     }
     
     

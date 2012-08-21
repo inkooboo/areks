@@ -40,7 +40,7 @@ void BaseObject::drawSpriteHelper(cc::CCSprite *sprite, pr::Vec2 position, float
     }
     
     float prev_scale = sprite->getScale();
-    float cur_scale = master_t::subsystem<View>().pixel_scale();
+    float cur_scale = master_t::subsystem<View>().pixelScale();
     if (prev_scale != cur_scale)
     {
         sprite->setScale(cur_scale);

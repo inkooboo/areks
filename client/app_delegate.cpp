@@ -58,11 +58,12 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_unmanaged_subsystem<config_t>(cfg_str);
     m_master_ptr->add_managed_subsystem<ObjectManager>();
     m_master_ptr->add_managed_subsystem<Physics>();
-    m_master_ptr->add_managed_subsystem<LevelManager>();
     m_master_ptr->add_managed_subsystem<View>();
     m_master_ptr->add_managed_subsystem<Loop>();
     m_master_ptr->add_managed_subsystem<ActionHandler>();
-    m_master_ptr->add_managed_subsystem<GameLogic>();
+    m_master_ptr->add_managed_subsystem<LevelManager>();
+
+    m_master_ptr->add_managed_subsystem<GameLogic>(); //should be last
 
     // run
     m_master_ptr->start();

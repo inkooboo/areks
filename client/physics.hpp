@@ -4,7 +4,7 @@
 # include "subsystem.hpp"
 # include "primitives.hpp"
 
-# include <Box2D/Box2D.h>
+# include "defs.hpp"
 
 class ContactListener : public b2ContactListener
 {
@@ -24,6 +24,8 @@ class Physics : public subsystem_t
 
 public:    
     Physics();
+    
+    void reloadWorldParams(pr::Vec2 world_size);
 
     b2World* worldEngine();
     

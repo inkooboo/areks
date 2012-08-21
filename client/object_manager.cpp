@@ -23,6 +23,12 @@ ObjectManager::ObjectManager()
 {
 }
 
+void ObjectManager::reloadObjectManager()
+{
+    stop();
+    start();
+}
+
 void ObjectManager::registerObject( BaseObject* obj_ptr )
 {
     assert( std::find( _objects.begin(), _objects.end(), obj_ptr ) == _objects.end() );

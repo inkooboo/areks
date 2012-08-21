@@ -15,20 +15,27 @@ void ContactListener::BeginContact(b2Contact *contact)
 
 void Physics::start()
 {
-    m_world_size = master_t::subsystem<LevelManager>().worldSize();
+    b2Vec2 gravity(0.0f, -10.0f);
+    _b2World_ptr.reset( new b2World(gravity) );
+    _b2World_ptr->SetAllowSleeping( true );
+    
+    // Set contact listener
+    _b2World_ptr->SetContactListener(&_contact_listener);
 }
 
-void Physics::stop() {}
+void Physics::stop()
+{
+}
     
 Physics::Physics() 
 {
-    b2Vec2 gravity(0.0f, -10.0f);
-    bool doSleep = true;
-    _b2World_ptr.reset( new b2World(gravity) );
-    _b2World_ptr->SetAllowSleeping( doSleep );
+}
 
-    // Set contact listener
-    _b2World_ptr->SetContactListener(&_contact_listener);
+void Physics::reloadWorldParams(pr::Vec2 world_size)
+{
+    stop();
+    start();
+    m_world_size = world_size;
 }
 
 b2World* Physics::worldEngine()

@@ -9,28 +9,38 @@
 
 void View::start()
 {
-    using namespace cocos2d;
-    
-    // run scene
-    cc::CCDirector::sharedDirector()->runWithScene(m_scene);
-    
-    m_size = cc::CCDirector::sharedDirector()->getWinSize();
-    pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
+    createMainLayer();
 
-    cc::CCSprite *background_img = cc::CCSprite::create(master_t::subsystem<LevelManager>().backgroundName());
-    cc::CCSize bg_size = background_img->getContentSize();
-    background_img->release();
+    m_in_touch = false;
+}
+
+void View::stop()
+{
+    m_scene->removeChild(m_mainLayer, true);
+}
+
+View::View()
+{
+    m_scene = cc::CCScene::create();
+
+    cc::CCDirector::sharedDirector()->runWithScene(m_scene);
+}
+
+void View::reloadViewParams(cc::CCSize bg_size, pr::Vec2 world_size)
+{
+    stop();
+    start();
     
     float x_world_scale = bg_size.width / world_size.x;
     float y_world_scale = bg_size.height / world_size.y;
     
     assert(x_world_scale == y_world_scale && "background and world should be with corresponding proportions");
-
+    
     m_world_scale = x_world_scale;
     
     float x_view_scale = m_size.width / bg_size.width;
     float y_view_scale = m_size.height / bg_size.height;
-
+    
     m_min_view_scale = std::max(x_view_scale, y_view_scale);
     m_max_view_scale = m_min_view_scale * 2;
     
@@ -40,38 +50,51 @@ void View::start()
     
     m_cur_positon = pr::Vec2(0, 0);
     
-    cc::CCMenuItemImage *pMenuItem = cc::CCMenuItemImage::create(
-                                        "shesterenka.png",
-                                        "shesterenka_p.png",
-                                        this,
-                                        menu_selector(View::menuExit) );
+}
 
-    pMenuItem->setPosition( ccp(m_size.width - 27, 28) );
+void View::createMainLayer()
+{
+    using namespace cocos2d;
+    
+    m_mainLayer = cc::CCLayer::create();
+    m_scene->addChild( m_mainLayer );
+    
+    m_size = cc::CCDirector::sharedDirector()->getWinSize();
+    
+    cc::CCMenuItemImage *pClose = cc::CCMenuItemImage::create(
+                                                                 "CloseNormal.png",
+                                                                 "CloseSelected.png",
+                                                                 this,
+                                                                 menu_selector(View::menuExit) );
+    
+    pClose->setPosition( ccp(m_size.width - 27, m_size.height - 28) );
+    
+    cc::CCMenuItemImage *pReload = cc::CCMenuItemImage::create(
+                                                                 "shesterenka.png",
+                                                                 "shesterenka_p.png",
+                                                                 this,
+                                                                 menu_selector(View::menuReloadLevel) );
+    
+    pReload->setPosition( ccp(m_size.width - 27, 28) );
 
-    cc::CCMenu* menu = cc::CCMenu::create(pMenuItem, NULL);
+    cc::CCMenu* menu = cc::CCMenu::create(pClose, pReload, NULL);
     menu->setPosition( cc::CCPointZero );
     menu->setVisible(true);
     m_mainLayer->addChild(menu, 1);
 }
 
-void View::stop()
-{ 
-}
-
-View::View()
-{
-    m_in_touch = false;
-    m_scene = cc::CCScene::create();
-    m_mainLayer = cc::CCLayer::create();
-    m_scene->addChild( m_mainLayer );
-}
 
 void View::menuExit(cocos2d::CCObject* pSender)
 {
     master_t::subsystem<AppDelegate>().end_application();
 }
 
-float View::pixel_scale() const
+void View::menuReloadLevel(cocos2d::CCObject* pSender)
+{
+    master_t::subsystem<LevelManager>().loadLevel("");
+}
+
+float View::pixelScale() const
 {
     return m_view_scale;
 }
@@ -115,17 +138,17 @@ cc::CCLayer * View::gameLayer()
     return m_mainLayer;
 }
 
-void View::on_touch_end(ActionHandler::TouchPtr &touch)
+void View::onTouchEnd(ActionHandler::TouchPtr &touch)
 {
     m_in_touch = false;
 }
 
-void View::on_touch_move(ActionHandler::TouchPtr &touch)
+void View::onTouchMove(ActionHandler::TouchPtr &touch)
 {
     moveView(touch->to.x - touch->from.x, touch->to.y - touch->from.y);
 }
 
-void View::on_touch_scale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2)
+void View::onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2)
 {
     m_in_touch = true;
     float dx1 = touch1->from.x - touch2->from.x;
@@ -141,11 +164,11 @@ void View::on_touch_scale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchP
     float touch_scale_speed = m_default_view_scale / 100;
     
     m_view_scale += d * touch_scale_speed;
-    validate_scale();
+    validateScale();
     moveView(0,0);
 }
 
-void View::on_rescale_tick(float t)
+void View::onRescaleTick(float t)
 {
     if (m_in_touch)
     {
@@ -171,11 +194,11 @@ void View::on_rescale_tick(float t)
         }
     }
 
-    validate_scale();
+    validateScale();
     moveView(0,0);
 }
 
-void View::validate_scale()
+void View::validateScale()
 {
     if (m_view_scale < m_min_view_scale)
     {

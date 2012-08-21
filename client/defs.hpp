@@ -2,6 +2,8 @@
 #define _AREKS_DEFS_HPP_
 
 # include <cocos2d.h>
+# include <Box2D/Box2D.h>
+
 # include <memory>
 
 namespace cc = cocos2d;

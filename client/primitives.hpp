@@ -2,7 +2,6 @@
 #define _AREKS_PRIMITIVES_HPP_
 
 # include "defs.hpp"
-# include <Box2D/Box2D.h>
 
 # include "master.hpp"
 

@@ -15,13 +15,15 @@ public:
     View();
 
     void menuExit(cocos2d::CCObject* pSender);
+    void menuReloadLevel(cocos2d::CCObject* pSender);
 
-    void on_touch_move(ActionHandler::TouchPtr &touch);
-    void on_touch_scale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);
-    void on_touch_end(ActionHandler::TouchPtr &touch);
+    void onTouchMove(ActionHandler::TouchPtr &touch);
+    void onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);
+    void onTouchEnd(ActionHandler::TouchPtr &touch);
     
+    void reloadViewParams(cc::CCSize bg_size, pr::Vec2 world_size);
     
-    float pixel_scale() const;
+    float pixelScale() const;
     cc::CCPoint toScreenCoordinates(pr::Vec2 world_coord) const;
     pr::Vec2 toWorldCoordinates(cc::CCPoint screen_coord) const;
     float worldToPixel(float world_size) const;
@@ -32,11 +34,14 @@ public:
     
     void moveView(float dx, float dy);
     
-    void on_rescale_tick(float t);
+    void onRescaleTick(float t);
     
-    void validate_scale();
+    void validateScale();
     
 private:
+    void createMainLayer();
+//    void createMenuLayer();
+    
     bool m_in_touch;
     cc::CCScene *m_scene;
     cc::CCLayer *m_mainLayer;

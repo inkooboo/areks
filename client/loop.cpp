@@ -73,7 +73,7 @@ void Loop::TimeLoop_t::tick(float t)
 
     t -= _remainder; // calculate real time
     
-    master_t::subsystem<View>().on_rescale_tick(t); // manage dynamic scale
+    master_t::subsystem<View>().onRescaleTick(t); // manage dynamic scale
     
     
     auto objects = master_t::subsystem<ObjectManager>().getDynamicObjects();

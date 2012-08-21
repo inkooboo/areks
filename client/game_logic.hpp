@@ -11,9 +11,6 @@ class GameLogic : public subsystem_t
 
 public:
     GameLogic();
-
-    //just for testing
-    void CreateExampleLevel();
 };
 
 #endif

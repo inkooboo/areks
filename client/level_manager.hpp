@@ -12,6 +12,8 @@
 # include "subsystem.hpp"
 # include "primitives.hpp"
 
+# include "defs.hpp"
+
 class LevelManager : public subsystem_t
 {
     virtual void start() override;
@@ -19,9 +21,8 @@ class LevelManager : public subsystem_t
     
 public:
     LevelManager();
-
-    const char * backgroundName() const;
-    pr::Vec2 worldSize() const;
+    
+    void loadLevel(const char *level_name);
 };
 
 
