@@ -27,7 +27,7 @@ private:
             : _remainder(0)
         { }
 
-        void tick( float t );
+        void update( float t );
 
     private:
         float _remainder;

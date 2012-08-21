@@ -27,24 +27,12 @@ namespace objects
         //init physics
         //
 
-        //prepare body definition
-        b2BodyDef body_def;
-        body_def.type = b2_staticBody;
-        body_def.userData = (void*)this;
-
-        //prepare shape
-        b2EdgeShape sea_shape;
+        defs::st::OneShapeDef def;
+        def.setUserData( (void*)this );
         float sea_level = world_size.y/25;
-        sea_shape.Set( b2Vec2(-world_size.x, sea_level), b2Vec2(world_size.x * 3, sea_level) );
-
-        //prepare fixture shape
-        b2FixtureDef sea_fix_def;
-        sea_fix_def.isSensor = true;
-        sea_fix_def.shape = &sea_shape;
-
-        //create physics
-        _body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &body_def );
-        _body->CreateFixture( &sea_fix_def );
+        def.setShapeEdge( b2Vec2(-world_size.x, sea_level), b2Vec2(world_size.x * 3, sea_level) );
+        def.setSensor(true);
+        _body = master_t::subsystem<Physics>().CreateBody( def );
 
         //
         //init view
@@ -63,7 +51,7 @@ namespace objects
     Background::~Background()
     {
         removeSprite(_sprite);
-        master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
+        //master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
     }
         
     void Background::draw()

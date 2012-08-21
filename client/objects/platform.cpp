@@ -17,16 +17,11 @@ namespace objects
         : _position( coordinates )
     {
         //init physics
-        b2BodyDef bodyDef;
-        bodyDef.position.Set( _position.x, _position.y );
-        bodyDef.userData = (void*)this;
-
-        _body = master_t::subsystem<Physics>().worldEngine()->CreateBody(&bodyDef);
-
-        b2PolygonShape shape;
-        shape.SetAsBox(size.x/2, size.y/2);
-
-        _body->CreateFixture(&shape, 0.0f);
+        defs::st::OneShapeDef def;
+        def.setPosition( _position.tob2Vec2() );
+        def.setUserData( (void*)this );
+        def.setShapeBox( size.x/2, size.y/2 );
+        _body = master_t::subsystem<Physics>().CreateBody( def );
 
         //init view
         unsigned char color[] = {100, 100, 100};
@@ -43,7 +38,7 @@ namespace objects
     Platform::~Platform()
     {
         removeSprite(_sprite);
-        master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
+        //master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
     }
         
     void Platform::draw()
@@ -53,7 +48,7 @@ namespace objects
 
     b2Body* Platform::getBody()
     {
-        return _body;
+        return _body.get();
     }
 
 }//end namespace objects

@@ -11,6 +11,7 @@
 
 # include "base_object.hpp"
 # include "primitives.hpp"
+# include "body_definitions.hpp"
 
 # include <string>
 
@@ -31,7 +32,7 @@ namespace objects
         explicit Background(const std::string &file_name);
         ~Background();
 
-        b2Body *_body;
+        BodyOwner _body;
         cc::CCSprite *_sprite;
         pr::Vec2 _position;
     };

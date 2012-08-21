@@ -87,3 +87,11 @@ BaseObject* Physics::getObject( pr::Vec2 const& point )
 
     return callback.result_obj;
 }
+
+BodyOwner Physics::CreateBody( defs::OneShapeBaseDef& def )
+{
+    assert( def.check() && "Error in init body!" );
+    BodyOwner ret( _b2World_ptr->CreateBody( def.getBodyDef() ) );
+    ret->CreateFixture( def.getFixtureDef() );
+    return ret;
+}

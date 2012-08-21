@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\..\client\action_handler.hpp" />
     <ClInclude Include="..\..\..\client\app_delegate.h" />
+    <ClInclude Include="..\..\..\client\body_definitions.hpp" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
     <ClInclude Include="..\..\..\client\game_logic.hpp" />
     <ClInclude Include="..\..\..\client\level_manager.hpp" />
@@ -156,6 +157,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\client\action_handler.cpp" />
     <ClCompile Include="..\..\..\client\app_delegate.cpp" />
+    <ClCompile Include="..\..\..\client\body_definitions.cpp" />
     <ClCompile Include="..\..\..\client\game_logic.cpp" />
     <ClCompile Include="..\..\..\client\level_manager.cpp" />
     <ClCompile Include="..\..\..\client\loop.cpp" />
