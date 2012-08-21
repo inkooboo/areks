@@ -23,8 +23,10 @@ public:
 	
     void destroy();
     
-    void draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position, float angle);
-    void release_joints(b2Body* body);
+    void addSprite(cc::CCSprite *sprite);
+    void removeSprite(cc::CCSprite *sprite);
+    void drawSpriteHelper(cc::CCSprite *sprite, pr::Vec2 position, float angle);
+    void releaseJoints(b2Body* body);
 };
 
 namespace objects 

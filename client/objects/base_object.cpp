@@ -20,7 +20,17 @@ void BaseObject::destroy()
     master_t::subsystem<ObjectManager>().destroyObject( this );
 }
 
-void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position, float angle)
+void BaseObject::addSprite(cc::CCSprite *sprite)
+{
+    master_t::subsystem<View>().gameLayer()->addChild( sprite );
+}
+
+void BaseObject::removeSprite(cc::CCSprite *sprite)
+{
+    sprite->removeFromParentAndCleanup(true);
+}
+
+void BaseObject::drawSpriteHelper(cc::CCSprite *sprite, pr::Vec2 position, float angle)
 {
     const cc::CCPoint &prev_position = sprite->getPosition();
     cc::CCPoint cur_position = master_t::subsystem<View>().toScreenCoordinates(position);
@@ -46,7 +56,7 @@ void BaseObject::draw_sprite_helper(cc::CCSprite *sprite, pr::Vec2 position, flo
     }
 }
 
-void BaseObject::release_joints( b2Body* body )
+void BaseObject::releaseJoints( b2Body* body )
 {
     b2JointEdge* j_e = body->GetJointList();
     for( ; j_e; j_e = j_e->next )

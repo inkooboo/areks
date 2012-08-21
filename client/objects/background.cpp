@@ -34,8 +34,8 @@ namespace objects
 
         //prepare shape
         b2EdgeShape sea_shape;
-        float sea_level = world_size.y/20;
-        sea_shape.Set( b2Vec2(0, sea_level), b2Vec2(world_size.x, sea_level) );
+        float sea_level = world_size.y/25;
+        sea_shape.Set( b2Vec2(-world_size.x, sea_level), b2Vec2(world_size.x * 3, sea_level) );
 
         //prepare fixture shape
         b2FixtureDef sea_fix_def;
@@ -51,25 +51,24 @@ namespace objects
         //
         
         _sprite = cocos2d::CCSprite::create(file_name.c_str());
-        cc::ccBlendFunc func={GL_ONE, GL_ZERO};
+        cc::ccBlendFunc func = {GL_ONE, GL_ZERO};
         _sprite->setBlendFunc( func );
         _position = world_size;
         _position *= .5;
 
         draw();
-        master_t::subsystem<View>().gameLayer()->addChild( _sprite );
+        addSprite(_sprite);
     }
 
     Background::~Background()
     {
-        _sprite->removeFromParentAndCleanup(true);
-        _sprite->release();
+        removeSprite(_sprite);
         master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
     }
         
     void Background::draw()
     {
-        draw_sprite_helper(_sprite, _position, 0);
+        drawSpriteHelper(_sprite, _position, 0);
     }
 
     b2Body* Background::getBody()

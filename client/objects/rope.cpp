@@ -133,12 +133,12 @@ namespace objects
 
             unsigned char color[] = {100, 100, 100};
             cc::CCTexture2D* texture = new cc::CCTexture2D();
-            //texture->autorelease();
+            texture->autorelease();
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(stick_length, ROPE_WIDTH).toCCSize() );
 
             for( ; it!=end; ++it )
             {
-                _sticks_sprites.push_back( cc::CCSprite::create( texture ) );
+                _sticks_sprites.push_back(cc::CCSprite::create( texture ));
             }
 
         }
@@ -149,12 +149,12 @@ namespace objects
 
             unsigned char color[] = {0, 0, 0};
             cc::CCTexture2D* texture = new cc::CCTexture2D();
-            //texture->autorelease();
+            texture->autorelease();
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2( (float)0.1, (float)0.1 ).toCCSize() );
 
             for( ; it!=end; ++it )
             {
-                _connections_sprites.push_back( cc::CCSprite::create( texture ) );
+                _connections_sprites.push_back(cc::CCSprite::create( texture ));
             }
 
         }
@@ -166,7 +166,7 @@ namespace objects
             auto end = _sticks_sprites.end();
             for( ; it!=end; ++it )
             {
-                master_t::subsystem<View>().gameLayer()->addChild( *it );
+                addSprite(*it);
             }
 
         }
@@ -176,36 +176,22 @@ namespace objects
             auto end = _connections_sprites.end();
             for( ; it!=end; ++it )
             {
-                master_t::subsystem<View>().gameLayer()->addChild( *it );
+                addSprite(*it);
             }
 
         }
-
-
-
-
-        //for(size_t i=0; i<_sticks_bodies.size(); ++i)
-        //{
-        //    draw_sprite_helper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
-        //}
-
-        //for(size_t i=0; i<_connections_bodies.size(); ++i)
-        //{
-        //    draw_sprite_helper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
-        //}
-
     }
 
     void Rope::draw()
     {
         for(size_t i=0; i<_sticks_bodies.size(); ++i)
         {
-            draw_sprite_helper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
+            drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
         }
 
         for(size_t i=0; i<_connections_bodies.size(); ++i)
         {
-            draw_sprite_helper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
+            drawSpriteHelper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
         }
     }
 
@@ -220,8 +206,15 @@ namespace objects
             auto end = _sticks_sprites.end();
             for( ; it!=end; ++it )
             {
-                (*it)->removeFromParentAndCleanup(true);
-                (*it)->release();
+                removeSprite(*it);
+            }
+        }
+        {
+            auto it = _connections_sprites.begin();
+            auto end = _connections_sprites.end();
+            for( ; it!=end; ++it )
+            {
+                removeSprite(*it);
             }
         }
         {

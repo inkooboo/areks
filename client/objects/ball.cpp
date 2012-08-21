@@ -41,27 +41,26 @@ namespace objects
             //
             unsigned char color[] = {150, 150, 150};
             cc::CCTexture2D* texture = new cc::CCTexture2D();
-            //texture->autorelease();
+            texture->autorelease();
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(1, 1).toCCSize() );
             _sprite = cc::CCSprite::create( texture );
-
+            
             draw();
 
-            master_t::subsystem<View>().gameLayer()->addChild( _sprite );
+            addSprite(_sprite);
         }
 
         Ball::~Ball()
         {
-            _sprite->removeFromParentAndCleanup( true );
-            _sprite->release();
-            release_joints( _body );
+            removeSprite(_sprite);
+            releaseJoints( _body );
             master_t::subsystem<Physics>().worldEngine()->DestroyBody( _body );
         }
 
         void Ball::draw()
         {
             //angle = 0, circle don't need it =)
-            draw_sprite_helper( _sprite, pr::Vec2( _body->GetPosition() ), 0 );
+            drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), 0 );
         }
 
         void Ball::updateState( float t )

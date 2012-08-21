@@ -9,7 +9,7 @@
 #include "view.hpp"
 
 static const float DEFAULT_WORLD_TICK_TIME = 0.017f;
-static const float DEFAULT_VIEW_TICK_TIME = 0.04f;
+static const float DEFAULT_VIEW_TICK_TIME = 0.02f;
 
 void Loop::start()
 {

@@ -31,25 +31,24 @@ namespace objects
         //init view
         unsigned char color[] = {100, 100, 100};
         cc::CCTexture2D* texture = new cc::CCTexture2D();
-        //texture->autorelease();
+        texture->autorelease();
         texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, size.toCCSize() );
 
         _sprite = cc::CCSprite::create( texture );
         
         draw();
-        master_t::subsystem<View>().gameLayer()->addChild( _sprite );
+        addSprite(_sprite);
     }
 
     Platform::~Platform()
     {
-        _sprite->removeFromParentAndCleanup(true);
-        _sprite->release();
+        removeSprite(_sprite);
         master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
     }
         
     void Platform::draw()
     {
-        draw_sprite_helper(_sprite, _position, 0);
+        drawSpriteHelper(_sprite, _position, 0);
     }
 
     b2Body* Platform::getBody()
