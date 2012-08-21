@@ -122,12 +122,6 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="..\resources\CloseNormal.png" />
-    <None Include="..\resources\CloseSelected.png" />
-    <None Include="..\resources\fps_images-hd.png" />
-    <None Include="..\resources\fps_images-ipadhd.png" />
-    <None Include="..\resources\fps_images.png" />
-    <None Include="..\resources\HelloWorld.png" />
     <None Include="res\areks.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +144,7 @@
     <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
     <ClInclude Include="..\..\..\client\primitives.hpp" />
     <ClInclude Include="..\..\..\client\physics.hpp" />
+    <ClInclude Include="..\..\..\client\resource_utils.hpp" />
     <ClInclude Include="..\..\..\client\view.hpp" />
     <ClInclude Include="..\..\..\common\config.hpp" />
     <ClInclude Include="..\..\..\common\master.hpp" />
@@ -173,6 +168,7 @@
     <ClCompile Include="..\..\..\client\objects\platform.cpp" />
     <ClCompile Include="..\..\..\client\physics.cpp" />
     <ClCompile Include="..\..\..\client\primitives.cpp" />
+    <ClCompile Include="..\..\..\client\resource_utils.cpp" />
     <ClCompile Include="..\..\..\client\view.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

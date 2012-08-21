@@ -49,6 +49,9 @@
     <ClCompile Include="..\..\..\client\objects\ball.cpp">
       <Filter>source\game\objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\resource_utils.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -118,35 +121,17 @@
     <ClInclude Include="..\..\..\client\objects\ball.hpp">
       <Filter>source\game\objects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\client\resource_utils.hpp">
+      <Filter>source\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="areks.rc" />
   </ItemGroup>
   <ItemGroup>
     <None Include="res\areks.ico" />
-    <None Include="..\resources\CloseNormal.png">
-      <Filter>resources</Filter>
-    </None>
-    <None Include="..\resources\CloseSelected.png">
-      <Filter>resources</Filter>
-    </None>
-    <None Include="..\resources\fps_images-hd.png">
-      <Filter>resources</Filter>
-    </None>
-    <None Include="..\resources\fps_images-ipadhd.png">
-      <Filter>resources</Filter>
-    </None>
-    <None Include="..\resources\fps_images.png">
-      <Filter>resources</Filter>
-    </None>
-    <None Include="..\resources\HelloWorld.png">
-      <Filter>resources</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="resources">
-      <UniqueIdentifier>{cc8f9a9c-d14a-4fa1-8f76-4dc71f5e19e1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="source">
       <UniqueIdentifier>{54c8ce72-fbe6-41ab-881c-f2440b0ed21c}</UniqueIdentifier>
     </Filter>
