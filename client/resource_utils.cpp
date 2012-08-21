@@ -12,7 +12,8 @@ namespace res
 {
     std::string picture(const char *name)
     {
-        std::string ret(name);
+        std::string ret("pictures/");
+        ret += name;
         
         ret += ".png";
         

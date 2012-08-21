@@ -59,10 +59,14 @@ void LevelManager::loadLevel(const char *level_name)
     master_t::subsystem<View>().reloadViewParams(bg_size, world_size);
     
     // 5. Preload background music
-    const std::string bg_music_file = res::background_sound("test_bg_music");
-    master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
-    master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str());
-    master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
+    if (!master_t::subsystem<cd::SimpleAudioEngine>().isBackgroundMusicPlaying())
+    {
+        const std::string bg_music_file = res::background_sound("test_bg_music");
+        master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
+        master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str());
+        master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
+        master_t::subsystem<cd::SimpleAudioEngine>().setBackgroundMusicVolume(0.2);
+    }
     
     // 6. Create level objects
     auto background = objects::Background::create(bg_name);
