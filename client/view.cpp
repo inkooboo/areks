@@ -10,21 +10,35 @@
 
 void View::start()
 {
-    createMainLayer();
+    m_game_layer = cc::CCLayer::create();
+    
+    createGameLayerMenu();
+
+    m_scene->addChild(m_game_layer);
 
     m_in_touch = false;
 }
 
 void View::stop()
 {
-    m_scene->removeChild(m_mainLayer, true);
+    m_scene->removeChild(m_game_layer, true);
 }
 
 View::View()
 {
     m_scene = cc::CCScene::create();
+    m_scene->retain();
+    m_size = cc::CCDirector::sharedDirector()->getWinSize();
+}
 
-    cc::CCDirector::sharedDirector()->runWithScene(m_scene);
+View::~View()
+{
+    m_scene->release();
+}
+
+cc::CCScene * View::scene()
+{
+    return m_scene;
 }
 
 void View::reloadViewParams(cc::CCSize bg_size, pr::Vec2 world_size)
@@ -56,14 +70,9 @@ void View::reloadViewParams(cc::CCSize bg_size, pr::Vec2 world_size)
     
 }
 
-void View::createMainLayer()
+void View::createGameLayerMenu()
 {
     using namespace cocos2d;
-    
-    m_mainLayer = cc::CCLayer::create();
-    m_scene->addChild( m_mainLayer );
-    
-    m_size = cc::CCDirector::sharedDirector()->getWinSize();
     
     cc::CCMenuItemImage *pClose = cc::CCMenuItemImage::create(
                                                             res::picture("CloseNormal").c_str(),
@@ -84,7 +93,7 @@ void View::createMainLayer()
     cc::CCMenu* menu = cc::CCMenu::create(pClose, pReload, NULL);
     menu->setPosition( cc::CCPointZero );
     menu->setVisible(true);
-    m_mainLayer->addChild(menu, 100);
+    m_game_layer->addChild(menu, 100);
 }
 
 
@@ -145,7 +154,7 @@ float View::pixelToWorld(float pixel_size) const
 
 cc::CCLayer * View::gameLayer()
 {
-    return m_mainLayer;
+    return m_game_layer;
 }
 
 void View::onTouchEnd(ActionHandler::TouchPtr &touch)

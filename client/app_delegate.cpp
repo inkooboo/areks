@@ -11,6 +11,7 @@
 #include "action_handler.hpp"
 #include "game_logic.hpp"
 #include "level_manager.hpp"
+#include "splash_screen.hpp"
 
 AppDelegate::AppDelegate()
 {
@@ -59,6 +60,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_managed_subsystem<Loop>();
     m_master_ptr->add_managed_subsystem<ActionHandler>();
     m_master_ptr->add_managed_subsystem<LevelManager>();
+    m_master_ptr->add_managed_subsystem<SplashScreen>();
 
     m_master_ptr->add_managed_subsystem<GameLogic>(); //should be last
 

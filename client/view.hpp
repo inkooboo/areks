@@ -13,6 +13,9 @@ class View : public cc::CCObject, public subsystem_t
     
 public:
     View();
+    ~View();
+
+    cc::CCScene * scene();
 
     void menuExit(cocos2d::CCObject* pSender);
     void menuReloadLevel(cocos2d::CCObject* pSender);
@@ -39,13 +42,13 @@ public:
     pr::Vec2 currentCameraPosition() const;
 
 private:
-    void createMainLayer();
+    void createGameLayerMenu();
 
     void validateScale();
     
     bool m_in_touch;
     cc::CCScene *m_scene;
-    cc::CCLayer *m_mainLayer;
+    cc::CCLayer *m_game_layer;
     
     cc::CCSize m_size;
     

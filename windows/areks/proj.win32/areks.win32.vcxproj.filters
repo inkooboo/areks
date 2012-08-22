@@ -55,6 +55,9 @@
     <ClCompile Include="..\..\..\client\body_definitions.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\splash_screen.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -125,6 +128,9 @@
       <Filter>source\game\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\resource_utils.hpp">
+      <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\splash_screen.hpp">
       <Filter>source\game</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\body_definitions.hpp">

@@ -146,6 +146,7 @@
     <ClInclude Include="..\..\..\client\primitives.hpp" />
     <ClInclude Include="..\..\..\client\physics.hpp" />
     <ClInclude Include="..\..\..\client\resource_utils.hpp" />
+    <ClInclude Include="..\..\..\client\splash_screen.hpp" />
     <ClInclude Include="..\..\..\client\view.hpp" />
     <ClInclude Include="..\..\..\common\config.hpp" />
     <ClInclude Include="..\..\..\common\master.hpp" />
@@ -171,6 +172,7 @@
     <ClCompile Include="..\..\..\client\physics.cpp" />
     <ClCompile Include="..\..\..\client\primitives.cpp" />
     <ClCompile Include="..\..\..\client\resource_utils.cpp" />
+    <ClCompile Include="..\..\..\client\splash_screen.cpp" />
     <ClCompile Include="..\..\..\client\view.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
