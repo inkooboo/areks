@@ -51,7 +51,7 @@ namespace definitions
     class OneShapeBaseDef
     {
     public:
-        virtual ~OneShapeBaseDef() = 0 { };
+        inline virtual ~OneShapeBaseDef() = 0;
 
         void setPosition( b2Vec2 const& pos )
         {
@@ -111,6 +111,8 @@ namespace definitions
         b2BodyDef _body_def;
         b2FixtureDef _fixture_def;
     };
+    
+    inline OneShapeBaseDef::~OneShapeBaseDef() {}
 
     namespace static_body
     {
