@@ -5,6 +5,7 @@
 #include "object_interfaces.hpp"
 
 #include "primitives.hpp"
+#include "body_definitions.hpp"
 
 namespace objects
 {
@@ -22,7 +23,7 @@ namespace objects
         Platform(pr::Vec2 const& coordinates, pr::Vec2 const& size);
         ~Platform();
 
-        b2Body* _body;
+        BodyOwner _body;
         cc::CCSprite* _sprite;
         pr::Vec2 _position;
     };

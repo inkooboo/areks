@@ -29,7 +29,7 @@ Loop::Loop()
 
     cc::CCDirector::sharedDirector()->setScheduler(this);
 
-    cc::CCScheduler::scheduleSelector( schedule_selector(TimeLoop_t::tick), &_time_loop, DEFAULT_WORLD_TICK_TIME, true);
+    cc::CCScheduler::scheduleUpdateForTarget( &_time_loop, 0, true);
     cc::CCScheduler::scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, DEFAULT_VIEW_TICK_TIME, true);
 }
 
@@ -53,7 +53,7 @@ void Loop::pauseGame()
     cc::CCScheduler::pauseTarget(&_view_loop);
 }
 
-void Loop::TimeLoop_t::tick(float t)
+void Loop::TimeLoop_t::update(float t)
 {
     float ft = t + _remainder;
 

@@ -5,6 +5,7 @@
 
 #include "primitives.hpp"
 #include "object_interfaces.hpp"
+#include "body_definitions.hpp"
 
 namespace objects
 {
@@ -24,7 +25,7 @@ namespace objects
         Ball( pr::Vec2 const& position );
         ~Ball();
 
-        b2Body* _body;
+        BodyOwner _body;
         cc::CCSprite* _sprite;
     };
 

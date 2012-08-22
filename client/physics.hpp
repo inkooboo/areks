@@ -6,6 +6,8 @@
 
 # include "defs.hpp"
 
+#include "body_definitions.hpp"
+
 class ContactListener : public b2ContactListener
 {
 public:
@@ -15,6 +17,8 @@ public:
 
     void BeginContact(b2Contact *contact);
 };
+
+class BaseObject;
 
 //managed subsystem Physics
 class Physics : public subsystem_t 
@@ -33,6 +37,11 @@ public:
 	
 	//don't call this method manually!
     void step( float dt );
+
+    BaseObject* getObject(pr::Vec2 const& point);
+
+    BodyOwner CreateBody( defs::OneShapeBaseDef& def );
+
 private:
     std::unique_ptr<b2World> _b2World_ptr;
     pr::Vec2 m_world_size;

@@ -4,6 +4,8 @@
 #include "physics.hpp"
 #include "view.hpp"
 
+#include "body_definitions.hpp"
+
 namespace objects
 {
 
@@ -17,24 +19,15 @@ namespace objects
             //
             //init physics
             //
-            b2BodyDef body_def;
-            body_def.type = b2_dynamicBody;
-            body_def.position = position.tob2Vec2();
-            body_def.userData = (void*)this;
+            defs::dyn::OneShapeDef def;
+            def.setPosition( position.tob2Vec2() );
+            def.setUserData( (void*)this );
+            def.setShapeBox( 0.5, 0.5 );
+            def.setDensity( 1 );
+            def.setFriction( 0.2f );
+            def.setRestitution( 0.7f );
 
-            //b2CircleShape shape;
-            //shape.m_radius = 3;
-            b2PolygonShape shape;
-            shape.SetAsBox( 0.5, 0.5 );
-
-            b2FixtureDef fixture_def;
-            fixture_def.shape = &shape;
-            fixture_def.density = 1;
-            fixture_def.friction = (float)0.2;
-            fixture_def.restitution = (float)0.7;
-
-            _body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &body_def );
-            _body->CreateFixture( &fixture_def );
+            _body = master_t::subsystem<Physics>().CreateBody( def );
 
             //
             //init view
@@ -52,8 +45,8 @@ namespace objects
         Ball::~Ball()
         {
             removeSprite(_sprite);
-            releaseJoints( _body );
-            master_t::subsystem<Physics>().worldEngine()->DestroyBody( _body );
+            releaseJoints( _body.get() );
+            //master_t::subsystem<Physics>().worldEngine()->DestroyBody( _body );
         }
 
         void Ball::draw()
@@ -68,7 +61,7 @@ namespace objects
 
         b2Body* Ball::getBody()
         {
-            return _body;
+            return _body.get();
         }
 
 }//end namespace objects
