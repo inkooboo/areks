@@ -49,7 +49,10 @@ void View::reloadViewParams(cc::CCSize bg_size, pr::Vec2 world_size)
     
     m_view_scale = m_default_view_scale;
     
-    m_cur_positon = pr::Vec2(0, 0);
+    m_half_screen_in_world_size.x = pixelToWorld(screenToPixel(m_size.width)) / 2;;
+    m_half_screen_in_world_size.y = pixelToWorld(screenToPixel(m_size.height)) / 2;
+    
+    m_cur_positon = pr::Vec2(world_size.x / 2 , world_size.y / 2);
     
 }
 
@@ -81,7 +84,7 @@ void View::createMainLayer()
     cc::CCMenu* menu = cc::CCMenu::create(pClose, pReload, NULL);
     menu->setPosition( cc::CCPointZero );
     menu->setVisible(true);
-    m_mainLayer->addChild(menu, 1);
+    m_mainLayer->addChild(menu, 100);
 }
 
 
@@ -106,6 +109,7 @@ float View::pixelScale() const
 
 cc::CCPoint View::toScreenCoordinates(pr::Vec2 world_coord) const
 {
+    world_coord += m_half_screen_in_world_size;
     world_coord -= m_cur_positon;
     return cc::CCPoint(pixelToScreen(worldToPixel(world_coord.x)), pixelToScreen(worldToPixel(world_coord.y)));
 }
@@ -114,6 +118,7 @@ pr::Vec2 View::toWorldCoordinates(cc::CCPoint screen_coord) const
 {
     pr::Vec2 world_coord = pr::Vec2(pixelToWorld(screenToPixel(screen_coord.x)), pixelToWorld(screenToPixel(m_size.height - screen_coord.y)));
     world_coord += m_cur_positon;
+    world_coord -= m_half_screen_in_world_size;
     return world_coord;
 }
 
@@ -180,7 +185,7 @@ void View::onRescaleTick(float t)
         return;
     }
     
-    static const float timed_rescale_speed = .5;
+    static const float timed_rescale_speed = .25;
  
     if (m_view_scale > m_default_view_scale)
     {
@@ -203,6 +208,11 @@ void View::onRescaleTick(float t)
     moveView(0,0);
 }
 
+pr::Vec2 View::currentCameraPosition() const
+{
+    return m_cur_positon;
+}
+
 void View::validateScale()
 {
     if (m_view_scale < m_min_view_scale)
@@ -217,19 +227,21 @@ void View::validateScale()
 
 void View::moveView(float dx, float dy)
 {
+    m_half_screen_in_world_size.x = pixelToWorld(screenToPixel(m_size.width)) / 2;;
+    m_half_screen_in_world_size.y = pixelToWorld(screenToPixel(m_size.height)) / 2;
 
-    float x_margin = pixelToWorld(screenToPixel(m_size.width));
-    float y_margin = pixelToWorld(screenToPixel(m_size.height));
+    float x_margin = m_half_screen_in_world_size.x;
+    float y_margin = m_half_screen_in_world_size.y;
     
     dx = -pixelToWorld(screenToPixel(dx));
     dy = pixelToWorld(screenToPixel(dy));
     
     pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
-
+    
     m_cur_positon.x += dx;
-    if (m_cur_positon.x < 0)
+    if (m_cur_positon.x < x_margin)
     {
-        m_cur_positon.x = 0;
+        m_cur_positon.x = x_margin;
     }
     if (m_cur_positon.x > world_size.x - x_margin)
     {
@@ -237,9 +249,9 @@ void View::moveView(float dx, float dy)
     }
 
     m_cur_positon.y += dy;
-    if (m_cur_positon.y < 0)
+    if (m_cur_positon.y < y_margin)
     {
-        m_cur_positon.y = 0;
+        m_cur_positon.y = y_margin;
     }
     if (m_cur_positon.y > world_size.y - y_margin)
     {

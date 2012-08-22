@@ -45,9 +45,8 @@ namespace objects
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(1, 1).toCCSize() );
             _sprite = cc::CCSprite::create( texture );
             
-            draw();
-
             addSprite(_sprite);
+            draw();
         }
 
         Ball::~Ball()

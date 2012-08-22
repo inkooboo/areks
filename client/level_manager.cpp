@@ -43,14 +43,15 @@ void LevelManager::loadLevel(const char *level_name)
     master_t::subsystem<ObjectManager>().reloadObjectManager();
     
     // 2. Load background
-    const std::string bg_name = res::picture("HelloWorld_big");
+    const std::string bg_name_base = res::picture("test_background_base");
+    const std::string bg_name_lvl_1 = res::picture("test_background_lvl_1");
     
-    cc::CCSprite *bg = cc::CCSprite::create(bg_name.c_str());
+    cc::CCSprite *bg = cc::CCSprite::create(bg_name_base.c_str());
     cc::CCSize bg_size = bg->getContentSize();
     bg->release();
     
     // 3. Load world params
-    pr::Vec2 world_size(48.f, 32.f);
+    pr::Vec2 world_size(96.f, 32.f);
     
     master_t::subsystem<Physics>().reloadWorldParams(world_size);
     
@@ -61,7 +62,7 @@ void LevelManager::loadLevel(const char *level_name)
     // 5. Preload background music
     if (!master_t::subsystem<cd::SimpleAudioEngine>().isBackgroundMusicPlaying())
     {
-        const std::string bg_music_file = res::background_sound("test_bg_music");
+        const std::string bg_music_file = res::background_sound("wow_trek_7");
         master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
         master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str(), true);
         master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
@@ -69,10 +70,17 @@ void LevelManager::loadLevel(const char *level_name)
     }
     
     // 6. Create level objects
-    auto background = objects::Background::create(bg_name);
+    auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
 
-    auto platform = objects::Platform::create( pr::Vec2(15, 10), pr::Vec2(10, 1) );
-    auto ball = objects::Ball::create( pr::Vec2(22, 15) );
-    auto rope = objects::Rope::create( pr::Vec2(15, 10), platform, pr::Vec2(22, 15.5), ball );
+    auto platform00 = objects::Platform::create( pr::Vec2(0, 0), pr::Vec2(1, 1) );
+    auto platformx0 = objects::Platform::create( pr::Vec2(world_size.x, 0), pr::Vec2(1, 1) );
+    auto platform0y = objects::Platform::create( pr::Vec2(0, world_size.y), pr::Vec2(1, 1) );
+    auto platformxy = objects::Platform::create( pr::Vec2(world_size.x, world_size.y), pr::Vec2(1, 1) );
+    
+    auto platform1 = objects::Platform::create( pr::Vec2(47, 19), pr::Vec2(10, 1) );
+    auto platform2 = objects::Platform::create( pr::Vec2(17, 10), pr::Vec2(13, 4) );
+    auto platform3 = objects::Platform::create( pr::Vec2(77, 12), pr::Vec2(17, 2) );
+    auto ball = objects::Ball::create( pr::Vec2(49, 15) );
+    auto rope = objects::Rope::create( pr::Vec2(47, 17.5), platform1, pr::Vec2(49, 15.5), ball );
     //auto rope = objects::Rope::create( pr::Vec2(7, 11), ball, pr::Vec2(10, 14.5), platform );
 }

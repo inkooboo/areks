@@ -19,7 +19,7 @@ namespace objects
     class Background : public BaseObject
     {
     public:
-        static Background* create(const std::string &file_name);
+        static Background* create(const std::string &file_name_base, const std::string &file_name_lvl_1);
         
         virtual void draw() override;
 
@@ -28,12 +28,12 @@ namespace objects
         virtual void collide( BaseObject* other ) override;
         
     private:
-        explicit Background(const std::string &file_name);
+        Background(const std::string &file_name_base, const std::string &file_name_lvl_1);
         ~Background();
 
         b2Body *_body;
-        cc::CCSprite *_sprite;
-        pr::Vec2 _position;
+        cc::CCSprite *_sprite_base;
+        cc::CCSprite *_sprite_lvl_1;
     };
 }
 

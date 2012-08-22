@@ -159,7 +159,6 @@ namespace objects
 
         }
 
-        draw();
 
         {
             auto it = _sticks_sprites.begin();
@@ -180,6 +179,7 @@ namespace objects
             }
 
         }
+        draw();
     }
 
     void Rope::draw()

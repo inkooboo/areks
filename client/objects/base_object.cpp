@@ -20,9 +20,9 @@ void BaseObject::destroy()
     master_t::subsystem<ObjectManager>().destroyObject( this );
 }
 
-void BaseObject::addSprite(cc::CCSprite *sprite)
+void BaseObject::addSprite(cc::CCSprite *sprite, int z_order)
 {
-    master_t::subsystem<View>().gameLayer()->addChild( sprite );
+    master_t::subsystem<View>().gameLayer()->addChild( sprite, z_order );
 }
 
 void BaseObject::removeSprite(cc::CCSprite *sprite)

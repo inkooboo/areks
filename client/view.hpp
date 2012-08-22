@@ -36,11 +36,12 @@ public:
     
     void onRescaleTick(float t);
     
-    void validateScale();
-    
+    pr::Vec2 currentCameraPosition() const;
+
 private:
     void createMainLayer();
-//    void createMenuLayer();
+
+    void validateScale();
     
     bool m_in_touch;
     cc::CCScene *m_scene;
@@ -54,6 +55,7 @@ private:
     float m_default_view_scale;
     float m_world_scale;
     
+    pr::Vec2 m_half_screen_in_world_size;
     pr::Vec2 m_cur_positon;
 };
 

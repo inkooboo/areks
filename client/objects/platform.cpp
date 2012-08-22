@@ -36,8 +36,8 @@ namespace objects
 
         _sprite = cc::CCSprite::create( texture );
         
-        draw();
         addSprite(_sprite);
+        draw();
     }
 
     Platform::~Platform()
