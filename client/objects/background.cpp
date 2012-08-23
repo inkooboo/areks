@@ -56,7 +56,6 @@ namespace objects
     {
         removeSprite(_sprite_base);
         removeSprite(_sprite_lvl_1);
-        //master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
     }
         
     void Background::draw()

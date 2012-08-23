@@ -38,7 +38,6 @@ namespace objects
     Platform::~Platform()
     {
         removeSprite(_sprite);
-        //master_t::subsystem<Physics>().worldEngine()->DestroyBody(_body);
     }
         
     void Platform::draw()

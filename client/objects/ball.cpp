@@ -46,7 +46,6 @@ namespace objects
         {
             removeSprite(_sprite);
             releaseJoints( _body.get() );
-            //master_t::subsystem<Physics>().worldEngine()->DestroyBody( _body );
         }
 
         void Ball::draw()
