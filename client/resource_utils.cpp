@@ -15,6 +15,8 @@ namespace res
         std::string ret("pictures/");
         ret += name;
         
+        //TODO: for real good devices load HD resources
+        
         ret += ".png";
         
         return ret;

@@ -1,11 +1,11 @@
 #include "view.hpp"
-#include "master.hpp"
-#include "app_delegate.h"
-#include "physics.hpp"
-#include "level_manager.hpp"
-#include "resource_utils.hpp"
 
-#include <cassert>
+#include "master.hpp"
+#include "physics.hpp"
+#include "resource_utils.hpp"
+#include "game_logic.hpp"
+#include "main_menu.hpp"
+
 #include <algorithm>
 
 void View::start()
@@ -86,7 +86,7 @@ void View::createGameLayerMenu()
                                                                res::picture("shesterenka").c_str(),
                                                                res::picture("shesterenka_p").c_str(),
                                                                this,
-                                                               menu_selector(View::menuReloadLevel) );
+                                                               menu_selector(View::menuTest) );
     
     pReload->setPosition( ccp(m_size.width - 27, 28) );
 
@@ -97,18 +97,16 @@ void View::createGameLayerMenu()
 }
 
 
-void View::menuExit(cocos2d::CCObject* pSender)
+void View::menuExit(cocos2d::CCObject*)
 {
-    master_t::subsystem<AppDelegate>().end_application();
+    master_t::subsystem<GameLogic>().loadScene(master_t::subsystem<MainMenu>().scene());
 }
 
-void View::menuReloadLevel(cocos2d::CCObject* pSender)
+void View::menuTest(cocos2d::CCObject*s)
 {
     /// test sound fx. Remove it.
     master_t::subsystem<cd::SimpleAudioEngine>().playEffect(res::sound_effect("046").c_str());
     ///
-    
-    master_t::subsystem<LevelManager>().loadLevel("");
 }
 
 float View::pixelScale() const

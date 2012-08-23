@@ -17,8 +17,8 @@ public:
 
     cc::CCScene * scene();
 
-    void menuExit(cocos2d::CCObject* pSender);
-    void menuReloadLevel(cocos2d::CCObject* pSender);
+    void menuExit(cc::CCObject*s);
+    void menuTest(cc::CCObject*);
 
     void onTouchMove(ActionHandler::TouchPtr &touch);
     void onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);

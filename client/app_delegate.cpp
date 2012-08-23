@@ -12,6 +12,8 @@
 #include "game_logic.hpp"
 #include "level_manager.hpp"
 #include "splash_screen.hpp"
+#include "main_menu.hpp"
+#include "loading_screen.hpp"
 
 AppDelegate::AppDelegate()
 {
@@ -61,6 +63,8 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_managed_subsystem<ActionHandler>();
     m_master_ptr->add_managed_subsystem<LevelManager>();
     m_master_ptr->add_managed_subsystem<SplashScreen>();
+    m_master_ptr->add_managed_subsystem<LoadingScreen>();
+    m_master_ptr->add_managed_subsystem<MainMenu>();
 
     m_master_ptr->add_managed_subsystem<GameLogic>(); //should be last
 

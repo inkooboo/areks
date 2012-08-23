@@ -4,13 +4,23 @@
 # include "subsystem.hpp"
 # include "defs.hpp"
 
-class GameLogic : public subsystem_t
+class GameLogic : public cc::CCObject, public subsystem_t
 {
     virtual void start() override;
     virtual void stop() override;
 
 public:
     GameLogic();
+    
+    void loadScene(cc::CCScene *scene, float delay = 0);
+
+    void onLoadScene(cc::CCObject *);
+    
+    
+private:
+    
+    cc::CCScene *m_current_scene;
+    cc::CCScene *m_new_scene;
 };
 
 #endif

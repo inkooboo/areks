@@ -60,14 +60,11 @@ void LevelManager::loadLevel(const char *level_name)
     master_t::subsystem<View>().reloadViewParams(bg_size, world_size);
     
     // 5. Preload background music
-    if (!master_t::subsystem<cd::SimpleAudioEngine>().isBackgroundMusicPlaying())
-    {
-        const std::string bg_music_file = res::background_sound("wow_trek_7");
-        master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
-        master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str(), true);
-        master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
-        master_t::subsystem<cd::SimpleAudioEngine>().setBackgroundMusicVolume(float(0.1));
-    }
+    const std::string bg_music_file = res::background_sound("wow_trek_7");
+    master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
+    master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str(), true);
+    master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
+    master_t::subsystem<cd::SimpleAudioEngine>().setBackgroundMusicVolume(float(0.1));
     
     // 6. Create level objects
     auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
@@ -80,7 +77,7 @@ void LevelManager::loadLevel(const char *level_name)
     auto platform1 = objects::Platform::create( pr::Vec2(47, 19), pr::Vec2(10, 1) );
     auto platform2 = objects::Platform::create( pr::Vec2(17, 10), pr::Vec2(13, 4) );
     auto platform3 = objects::Platform::create( pr::Vec2(77, 12), pr::Vec2(17, 2) );
-    auto ball = objects::Ball::create( pr::Vec2(49, 15) );
-    auto rope = objects::Rope::create( pr::Vec2(47, 17.5), platform1, pr::Vec2(49, 15.5), ball );
+    auto ball = objects::Ball::create( pr::Vec2(60, 15) );
+    auto rope = objects::Rope::create( pr::Vec2(47, 17.5), platform1, pr::Vec2(60, 15.5), ball );
     //auto rope = objects::Rope::create( pr::Vec2(7, 11), ball, pr::Vec2(10, 14.5), platform );
 }
