@@ -39,26 +39,26 @@ namespace objects
         //
         //init view
         //
-        unsigned char color[] = {150, 150, 150};
-        cc::CCTexture2D* texture = new cc::CCTexture2D();
-        texture->autorelease();
-        texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(1, 1).toCCSize() );
-        _sprite = cc::CCSprite::create( texture );
-        
-        addSprite(_sprite);
+//        unsigned char color[] = {150, 150, 150};
+//        cc::CCTexture2D* texture = new cc::CCTexture2D();
+//        texture->autorelease();
+//        texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(1, 1).toCCSize() );
+//        _sprite = cc::CCSprite::create( texture );
+//        
+//        addSprite(_sprite);
         draw();
     }
     
     Enemy::~Enemy()
     {
-        removeSprite(_sprite);
+//        removeSprite(_sprite);
         releaseJoints( _body.get() );
     }
     
     void Enemy::draw()
     {
         //angle = 0, circle don't need it =)
-        drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), 0 );
+//        drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), 0 );
     }
     
     void Enemy::updateState( float t )

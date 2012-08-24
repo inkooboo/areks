@@ -22,6 +22,18 @@ namespace res
         return ret;
     }
 
+    std::string animation(const char *name)
+    {
+        std::string ret("animations/");
+        ret += name;
+        
+        //TODO: for real good devices load HD resources
+        
+        ret += ".plist";
+        
+        return ret;
+    }
+    
     std::string sound_effect(const char *name)
     {
         std::string ret("sound_fx/");

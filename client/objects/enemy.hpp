@@ -35,7 +35,6 @@ namespace objects
         ~Enemy();
         
         BodyOwner _body;
-        cc::CCSprite* _sprite;
     };
     
 }//end namespace objects
