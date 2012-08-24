@@ -80,7 +80,8 @@ namespace primitives
             y *= a;
         }
 
-        Vec2& absolute();
+        Vec2& absolutize();
+        Vec2& normalize();
         
 };
 

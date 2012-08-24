@@ -21,6 +21,8 @@ namespace objects
 
         virtual b2Body* getBody() override;
 
+        virtual pr::Vec2 getPosition() const override;
+
     private:
         Ball( pr::Vec2 const& position );
         ~Ball();

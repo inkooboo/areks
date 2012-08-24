@@ -42,6 +42,11 @@ public:
         return _body;
     }
 
+    const b2Body* const operator->() const
+    {
+        return _body;
+    }
+
 private:
     mutable b2Body* _body;
 };
@@ -86,6 +91,11 @@ namespace definitions
         void setUserData( void* userData )
         {
             _body_def.userData = userData;
+        }
+
+        void setFilterGroup( int16 index )
+        {
+            _fixture_def.filter.groupIndex = index;
         }
 
         void setShapeBox( float half_width, float half_height );

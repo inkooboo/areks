@@ -13,19 +13,18 @@ namespace objects
     class Platform : public StaticObject
     {
     public:
-        static Platform* create(pr::Vec2 const& coordinates, pr::Vec2 const& size);
+        static Platform* create(const pr::Vec2* vertices, size_t count);
         
         virtual void draw() override;
 
         virtual b2Body* getBody() override;
         
     private:
-        Platform(pr::Vec2 const& coordinates, pr::Vec2 const& size);
+        Platform(const pr::Vec2* vertices, size_t count);
         ~Platform();
 
         BodyOwner _body;
         cc::CCSprite* _sprite;
-        pr::Vec2 _position;
     };
     
 }//end namespace objects

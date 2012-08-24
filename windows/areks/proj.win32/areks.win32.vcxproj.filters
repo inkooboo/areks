@@ -55,7 +55,20 @@
     <ClCompile Include="..\..\..\client\body_definitions.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\..\..\client\splash_screen.cpp">
+=======
+    <ClCompile Include="..\..\..\client\player.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\objects\player\body.cpp">
+      <Filter>source\game\objects\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\objects\player\head.cpp">
+      <Filter>source\game\objects\player</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\triangulator.cpp">
+>>>>>>> Continue work on platform. Temp disable platform. Subsystem Player. Player Body and Head
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -136,6 +149,18 @@
     <ClInclude Include="..\..\..\client\body_definitions.hpp">
       <Filter>source\game</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\client\player.hpp">
+      <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\objects\player\body.hpp">
+      <Filter>source\game\objects\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\objects\player\head.hpp">
+      <Filter>source\game\objects\player</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\triangulator.hpp">
+      <Filter>source\game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="areks.rc" />
@@ -158,6 +183,9 @@
     </Filter>
     <Filter Include="source\game\objects">
       <UniqueIdentifier>{cc6ebe2c-c54f-4613-9973-0d7230a3f184}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\game\objects\player">
+      <UniqueIdentifier>{56579b1f-d725-445f-ad86-7e0e34199099}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

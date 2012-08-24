@@ -243,4 +243,9 @@ namespace objects
         }
     }
 
+    pr::Vec2 Rope::getPosition() const
+    {
+        return pr::Vec2(0,0);
+    }
+
 }//end namespace objects

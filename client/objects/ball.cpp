@@ -63,4 +63,9 @@ namespace objects
             return _body.get();
         }
 
+        pr::Vec2 Ball::getPosition() const
+        {
+            return pr::Vec2(_body->GetPosition());
+        }
+
 }//end namespace objects

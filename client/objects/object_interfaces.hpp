@@ -3,6 +3,7 @@
 
 #include "defs.hpp"
 #include "base_object.hpp"
+#include "primitives.hpp"
 
 class DynamicObject : public BaseObject
 {
@@ -11,6 +12,8 @@ public:
     virtual ~DynamicObject() = 0;
     
     virtual void updateState( float t ) = 0;
+
+    virtual pr::Vec2 getPosition() const = 0;
 };
 
 class StaticObject : public BaseObject

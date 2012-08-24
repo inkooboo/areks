@@ -24,10 +24,18 @@ namespace primitives
         return master_t::subsystem<View>().pixelToWorld( pixel );
     }
 
-    Vec2& Vec2::absolute()
+    Vec2& Vec2::absolutize()
     {
         x = fabs(x);
         y = fabs(y);
+        return *this;
+    }
+
+    Vec2& Vec2::normalize()
+    {
+        float d = sqrt( x*x + y*y );
+        x /= d;
+        y /= d;
         return *this;
     }
 

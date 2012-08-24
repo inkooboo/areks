@@ -1,5 +1,5 @@
-#ifndef _AREKS_ROPE_HPP_
-#define _AREKS_ROPE_HPP_
+#ifndef _AREKS_PLAYER_NECK_HPP_
+#define _AREKS_PLAYER_NECK_HPP_
 
 #include "defs.hpp"
 
@@ -24,6 +24,8 @@ namespace objects
         virtual b2Body* getBody() override;
 
         virtual void deleteJoint( b2Joint* joint ) override;
+
+        virtual pr::Vec2 getPosition() const override;
 
     private:
         Rope( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body );

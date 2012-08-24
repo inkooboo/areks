@@ -69,15 +69,26 @@ void LevelManager::loadLevel(const char *level_name)
     // 6. Create level objects
     auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
 
-    auto platform00 = objects::Platform::create( pr::Vec2(0, 0), pr::Vec2(1, 1) );
-    auto platformx0 = objects::Platform::create( pr::Vec2(world_size.x, 0), pr::Vec2(1, 1) );
-    auto platform0y = objects::Platform::create( pr::Vec2(0, world_size.y), pr::Vec2(1, 1) );
-    auto platformxy = objects::Platform::create( pr::Vec2(world_size.x, world_size.y), pr::Vec2(1, 1) );
+    //auto platform00 = objects::Platform::create( pr::Vec2(0, 0), pr::Vec2(1, 1) );
+    //auto platformx0 = objects::Platform::create( pr::Vec2(world_size.x, 0), pr::Vec2(1, 1) );
+    //auto platform0y = objects::Platform::create( pr::Vec2(0, world_size.y), pr::Vec2(1, 1) );
+    //auto platformxy = objects::Platform::create( pr::Vec2(world_size.x, world_size.y), pr::Vec2(1, 1) );
     
-    auto platform1 = objects::Platform::create( pr::Vec2(47, 19), pr::Vec2(10, 1) );
-    auto platform2 = objects::Platform::create( pr::Vec2(17, 10), pr::Vec2(13, 4) );
-    auto platform3 = objects::Platform::create( pr::Vec2(77, 12), pr::Vec2(17, 2) );
-    auto ball = objects::Ball::create( pr::Vec2(60, 15) );
-    auto rope = objects::Rope::create( pr::Vec2(47, 17.5), platform1, pr::Vec2(60, 15.5), ball );
+    //auto platform1 = objects::Platform::create( pr::Vec2(47, 19), pr::Vec2(10, 1) );
+    //auto platform2 = objects::Platform::create( pr::Vec2(17, 10), pr::Vec2(13, 4) );
+    //auto platform3 = objects::Platform::create( pr::Vec2(77, 12), pr::Vec2(17, 2) );
+    //auto ball = objects::Ball::create( pr::Vec2(60, 15) );
+    //auto rope = objects::Rope::create( pr::Vec2(47, 17.5), platform1, pr::Vec2(60, 15.5), ball );
+
+    //pr::Vec2* vertices = new pr::Vec2[4];
+    //vertices[0] = pr::Vec2(10,20);
+    //vertices[1] = pr::Vec2(10,10);
+    //vertices[2] = pr::Vec2(20,10);
+    //vertices[3] = pr::Vec2(20,20);
+    //auto platform = objects::Platform::create( vertices, 4 );
+    //delete[] vertices;
+    //auto ball = objects::Ball::create( pr::Vec2(22, 15) );
+    //auto rope = objects::Rope::create( pr::Vec2(15, 10), platform, pr::Vec2(22, 15.5), ball );
+
     //auto rope = objects::Rope::create( pr::Vec2(7, 11), ball, pr::Vec2(10, 14.5), platform );
 }

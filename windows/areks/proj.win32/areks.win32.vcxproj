@@ -136,6 +136,8 @@
     <ClInclude Include="..\..\..\client\level_manager.hpp" />
     <ClInclude Include="..\..\..\client\loop.hpp" />
     <ClInclude Include="..\..\..\client\objects\background.hpp" />
+    <ClInclude Include="..\..\..\client\objects\player\body.hpp" />
+    <ClInclude Include="..\..\..\client\objects\player\head.hpp" />
     <ClInclude Include="..\..\..\client\objects\rope.hpp" />
     <ClInclude Include="..\..\..\client\objects\ball.hpp" />
     <ClInclude Include="..\..\..\client\object_manager.hpp" />
@@ -143,10 +145,15 @@
     <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp" />
     <ClInclude Include="..\..\..\client\objects\platform.hpp" />
     <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
+    <ClInclude Include="..\..\..\client\player.hpp" />
     <ClInclude Include="..\..\..\client\primitives.hpp" />
     <ClInclude Include="..\..\..\client\physics.hpp" />
     <ClInclude Include="..\..\..\client\resource_utils.hpp" />
+<<<<<<< HEAD
     <ClInclude Include="..\..\..\client\splash_screen.hpp" />
+=======
+    <ClInclude Include="..\..\..\client\triangulator.hpp" />
+>>>>>>> Continue work on platform. Temp disable platform. Subsystem Player. Player Body and Head
     <ClInclude Include="..\..\..\client\view.hpp" />
     <ClInclude Include="..\..\..\common\config.hpp" />
     <ClInclude Include="..\..\..\common\master.hpp" />
@@ -163,6 +170,8 @@
     <ClCompile Include="..\..\..\client\level_manager.cpp" />
     <ClCompile Include="..\..\..\client\loop.cpp" />
     <ClCompile Include="..\..\..\client\objects\background.cpp" />
+    <ClCompile Include="..\..\..\client\objects\player\body.cpp" />
+    <ClCompile Include="..\..\..\client\objects\player\head.cpp" />
     <ClCompile Include="..\..\..\client\objects\rope.cpp" />
     <ClCompile Include="..\..\..\client\objects\ball.cpp" />
     <ClCompile Include="..\..\..\client\object_manager.cpp" />
@@ -170,9 +179,14 @@
     <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp" />
     <ClCompile Include="..\..\..\client\objects\platform.cpp" />
     <ClCompile Include="..\..\..\client\physics.cpp" />
+    <ClCompile Include="..\..\..\client\player.cpp" />
     <ClCompile Include="..\..\..\client\primitives.cpp" />
     <ClCompile Include="..\..\..\client\resource_utils.cpp" />
+<<<<<<< HEAD
     <ClCompile Include="..\..\..\client\splash_screen.cpp" />
+=======
+    <ClCompile Include="..\..\..\client\triangulator.cpp" />
+>>>>>>> Continue work on platform. Temp disable platform. Subsystem Player. Player Body and Head
     <ClCompile Include="..\..\..\client\view.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

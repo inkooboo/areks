@@ -25,4 +25,12 @@ namespace cd = CocosDenshion;
     #undef max
 #endif
 
+namespace group
+{
+    enum
+    {
+        PLAYER = -1
+    };
+}
+
 #endif
