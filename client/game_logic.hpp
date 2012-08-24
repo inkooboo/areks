@@ -14,7 +14,7 @@ public:
     
     void loadScene(cc::CCScene *scene, float delay = 0);
 
-    void onLoadScene(cc::CCObject *);
+    void onLoadScene(float);
     
     
 private:

@@ -46,7 +46,7 @@ void GameLogic::loadScene(cc::CCScene *scene, float delay)
 }
 
 
-void GameLogic::onLoadScene(cc::CCObject *)
+void GameLogic::onLoadScene(float)
 {
     if (m_new_scene == master_t::subsystem<View>().scene())
     {

@@ -57,7 +57,7 @@ cc::CCScene * MainMenu::scene()
 
 void MainMenu::onStart(cc::CCObject *)
 {
-    master_t::subsystem<GameLogic>().loadScene(master_t::subsystem<LoadingScreen>().scene());
+    master_t::subsystem<GameLogic>().loadScene(master_t::subsystem<LoadingScreen>().scene(), 1);
 }
 
 void MainMenu::onExit(cc::CCObject *)

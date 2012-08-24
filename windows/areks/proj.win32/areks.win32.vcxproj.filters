@@ -55,9 +55,6 @@
     <ClCompile Include="..\..\..\client\body_definitions.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="..\..\..\client\splash_screen.cpp">
-=======
     <ClCompile Include="..\..\..\client\player.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
@@ -68,7 +65,15 @@
       <Filter>source\game\objects\player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\triangulator.cpp">
->>>>>>> Continue work on platform. Temp disable platform. Subsystem Player. Player Body and Head
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\splash_screen.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\loading_screen.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\main_menu.cpp">
       <Filter>source\game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -159,6 +164,9 @@
       <Filter>source\game\objects\player</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\triangulator.hpp">
+      <Filter>source\game</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\main_menu.hpp">
       <Filter>source\game</Filter>
     </ClInclude>
   </ItemGroup>

@@ -135,6 +135,7 @@
     <ClInclude Include="..\..\..\client\game_logic.hpp" />
     <ClInclude Include="..\..\..\client\level_manager.hpp" />
     <ClInclude Include="..\..\..\client\loop.hpp" />
+    <ClInclude Include="..\..\..\client\main_menu.hpp" />
     <ClInclude Include="..\..\..\client\objects\background.hpp" />
     <ClInclude Include="..\..\..\client\objects\player\body.hpp" />
     <ClInclude Include="..\..\..\client\objects\player\head.hpp" />
@@ -149,11 +150,8 @@
     <ClInclude Include="..\..\..\client\primitives.hpp" />
     <ClInclude Include="..\..\..\client\physics.hpp" />
     <ClInclude Include="..\..\..\client\resource_utils.hpp" />
-<<<<<<< HEAD
     <ClInclude Include="..\..\..\client\splash_screen.hpp" />
-=======
     <ClInclude Include="..\..\..\client\triangulator.hpp" />
->>>>>>> Continue work on platform. Temp disable platform. Subsystem Player. Player Body and Head
     <ClInclude Include="..\..\..\client\view.hpp" />
     <ClInclude Include="..\..\..\common\config.hpp" />
     <ClInclude Include="..\..\..\common\master.hpp" />
@@ -168,7 +166,9 @@
     <ClCompile Include="..\..\..\client\body_definitions.cpp" />
     <ClCompile Include="..\..\..\client\game_logic.cpp" />
     <ClCompile Include="..\..\..\client\level_manager.cpp" />
+    <ClCompile Include="..\..\..\client\loading_screen.cpp" />
     <ClCompile Include="..\..\..\client\loop.cpp" />
+    <ClCompile Include="..\..\..\client\main_menu.cpp" />
     <ClCompile Include="..\..\..\client\objects\background.cpp" />
     <ClCompile Include="..\..\..\client\objects\player\body.cpp" />
     <ClCompile Include="..\..\..\client\objects\player\head.cpp" />
@@ -182,11 +182,8 @@
     <ClCompile Include="..\..\..\client\player.cpp" />
     <ClCompile Include="..\..\..\client\primitives.cpp" />
     <ClCompile Include="..\..\..\client\resource_utils.cpp" />
-<<<<<<< HEAD
     <ClCompile Include="..\..\..\client\splash_screen.cpp" />
-=======
     <ClCompile Include="..\..\..\client\triangulator.cpp" />
->>>>>>> Continue work on platform. Temp disable platform. Subsystem Player. Player Body and Head
     <ClCompile Include="..\..\..\client\view.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
