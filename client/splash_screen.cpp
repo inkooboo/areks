@@ -24,14 +24,12 @@ void SplashScreen::stop()
 
 SplashScreen::SplashScreen()
 {
-    m_scene = cc::CCScene::create();
-    m_scene->retain();
+    m_scene = new cc::CCScene();
+    m_scene->init();
 }
 
 SplashScreen::~SplashScreen()
 {
-    m_scene = cc::CCScene::create();
-    m_scene->release();
 }
 
 cc::CCScene * SplashScreen::scene()

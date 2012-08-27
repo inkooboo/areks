@@ -4,7 +4,7 @@
 #include "player.hpp"
 #include "physics.hpp"
 
-#include "objects/player/body.hpp"
+#include "body.hpp"
 
 static const float HEAD_SPEED = 10.f;
 static const float RETURN_ACCURACY = 0.1f;

@@ -31,14 +31,12 @@ void LoadingScreen::stop()
 
 LoadingScreen::LoadingScreen()
 {
-    m_scene = cc::CCScene::create();
-    m_scene->retain();
+    m_scene = new cc::CCScene();
+    m_scene->init();
 }
 
 LoadingScreen::~LoadingScreen()
 {
-    m_scene = cc::CCScene::create();
-    m_scene->release();
 }
 
 cc::CCScene * LoadingScreen::scene()

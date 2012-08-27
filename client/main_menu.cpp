@@ -40,14 +40,12 @@ void MainMenu::stop()
 
 MainMenu::MainMenu()
 {
-    m_scene = cc::CCScene::create();
-    m_scene->retain();
+    m_scene = new cc::CCScene();
+    m_scene->init();
 }
 
 MainMenu::~MainMenu()
 {
-    m_scene = cc::CCScene::create();
-    m_scene->release();
 }
 
 cc::CCScene * MainMenu::scene()

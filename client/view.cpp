@@ -26,14 +26,13 @@ void View::stop()
 
 View::View()
 {
-    m_scene = cc::CCScene::create();
-    m_scene->retain();
+    m_scene = new cc::CCScene();
+    m_scene->init();
     m_size = cc::CCDirector::sharedDirector()->getWinSize();
 }
 
 View::~View()
 {
-    m_scene->release();
 }
 
 cc::CCScene * View::scene()

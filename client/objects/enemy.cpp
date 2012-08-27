@@ -64,10 +64,16 @@ namespace objects
     void Enemy::updateState( float t )
     {
     }
-    
+
     b2Body * Enemy::getBody()
     {
         return _body.get();
+    }
+    
+
+    pr::Vec2 Enemy::getPosition() const
+    {
+        return pr::Vec2();
     }
     
 }//end namespace objects
