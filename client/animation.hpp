@@ -17,13 +17,17 @@
 
 class Animation
 {
-    Animation(const std::string &name)
+public:
+    Animation(const char *name, cc::CCNode *node);
+
+    void start(const char *action_name)
     {
         
     }
     
-public:
-    
+private:
+    Json::Value m_descr;
+    cc::CCNode *m_node;
 };
 
 #endif /* defined(__areks__animation__) */

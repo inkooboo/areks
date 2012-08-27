@@ -15,6 +15,7 @@
 # include "primitives.hpp"
 # include "object_interfaces.hpp"
 # include "body_definitions.hpp"
+# include "animation.hpp"
 
 namespace objects
 {
@@ -37,6 +38,7 @@ namespace objects
         ~Enemy();
         
         BodyOwner _body;
+        Animation m_animation;
     };
     
 }//end namespace objects

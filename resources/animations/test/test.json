@@ -1,0 +1,12 @@
+{
+  "stay" :
+  {
+    "interval" : 1,
+    "frames" : ["stay1" "stay2"]
+  }
+  "move" :
+  {
+    "interval" : 0.5,
+    "frames" : ["move1" "move2"]
+  }
+}

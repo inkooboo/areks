@@ -15,6 +15,7 @@
 #include "main_menu.hpp"
 #include "loading_screen.hpp"
 #include "player.hpp"
+#include "resource_utils.hpp"
 
 AppDelegate::AppDelegate()
 {
@@ -40,16 +41,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     pDirector->setAnimationInterval(1.0 / 60);
 
     //init config_t
-    const char *full_path = cc::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath("config.txt");
-    unsigned char *data = 0;
-    unsigned long size = 0;
-    data = cc::CCFileUtils::sharedFileUtils()->getFileData(full_path, "r", &size);
-    
-    std::string cfg_str;
-    if (data && size)
-    {
-        cfg_str.assign((char *)data, size);
-    }
+    std::string cfg_str(res::load_file_content("config.txt"));
     
     //init master
     m_master_ptr.reset( new master_t);

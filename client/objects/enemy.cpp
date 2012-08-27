@@ -22,6 +22,7 @@ namespace objects
     }
     
     Enemy::Enemy( pr::Vec2 const& position )
+        : m_animation("test", nullptr)
     {
         //
         //init physics

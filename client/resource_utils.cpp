@@ -22,14 +22,14 @@ namespace res
         return ret;
     }
 
-    std::string animation(const char *name)
+    std::string animation_base_path(const char *name)
     {
         std::string ret("animations/");
         ret += name;
         
         //TODO: for real good devices load HD resources
         
-        ret += ".plist";
+        ret += "/";
         
         return ret;
     }
@@ -56,6 +56,22 @@ namespace res
 #else
         ret += ".mp3";
 #endif
+        return ret;
+    }
+    
+    std::string load_file_content(const std::string &file_name)
+    {
+        const char *full_path = cc::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(file_name.c_str());
+        unsigned char *data = 0;
+        unsigned long size = 0;
+        data = cc::CCFileUtils::sharedFileUtils()->getFileData(full_path, "r", &size);
+        
+        std::string ret;
+        if (data && size)
+        {
+            ret.assign((char *)data, size);
+        }
+        
         return ret;
     }
 }
