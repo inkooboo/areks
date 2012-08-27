@@ -9,9 +9,11 @@
 #ifndef __areks__animation__
 #define __areks__animation__
 
-#include "defs.hpp"
+# include "defs.hpp"
 
-#include <string>
+# include <string>
+
+# include <json/value.h>
 
 class Animation
 {

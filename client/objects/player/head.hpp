@@ -2,7 +2,7 @@
 #define _AREKS_PLAYER_HEAD_HPP_
 
 #include "defs.hpp"
-#include "../object_interfaces.hpp"
+#include "objects/object_interfaces.hpp"
 #include "primitives.hpp"
 #include "body_definitions.hpp"
 
