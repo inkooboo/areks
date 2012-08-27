@@ -80,6 +80,12 @@ namespace primitives
             y *= a;
         }
 
+		void operator/=(float a)
+        {
+            x /= a;
+            y /= a;
+        }
+
         Vec2& absolutize();
         Vec2& normalize();
         

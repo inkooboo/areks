@@ -7,24 +7,27 @@
 #include "primitives.hpp"
 #include "body_definitions.hpp"
 
+#include <vector>
+
 namespace objects
 {
 
     class Platform : public StaticObject
     {
     public:
-        static Platform* create(const pr::Vec2* vertices, size_t count);
+        static Platform* create(std::vector<pr::Vec2> const& vertices);
         
         virtual void draw() override;
 
         virtual b2Body* getBody() override;
         
     private:
-        Platform(const pr::Vec2* vertices, size_t count);
+        Platform(std::vector<pr::Vec2> const& vertices);
         ~Platform();
 
         BodyOwner _body;
         cc::CCSprite* _sprite;
+		std::vector<cc::CCSprite*> _sprites;
     };
     
 }//end namespace objects

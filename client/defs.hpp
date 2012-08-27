@@ -20,9 +20,10 @@ namespace cd = CocosDenshion;
 # define override 
 #endif
 
-//for using std::max
+//for using std::max, std::min
 #ifdef _WINDOWS
     #undef max
+	#undef min
 #endif
 
 namespace group
