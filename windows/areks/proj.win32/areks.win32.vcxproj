@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>..\..\..\common;..\..\..\client;.;..\Classes;..\..\..\cocos2dx\cocos2dx\platform;..\..\..\cocos2dx\cocos2dx;..\..\..\cocos2dx\cocos2dx\include;..\..\..\cocos2dx\cocos2dx\kazmath\include;..\..\..\cocos2dx\cocos2dx\platform\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32\OGLES;..\..\..\cocos2dx;..\..\..\cocos2dx\CocosDenshion\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\..\common;..\..\..;..\..\..\client;.;..\Classes;..\..\..\cocos2dx\cocos2dx\platform;..\..\..\cocos2dx\cocos2dx;..\..\..\cocos2dx\cocos2dx\include;..\..\..\cocos2dx\cocos2dx\kazmath\include;..\..\..\cocos2dx\cocos2dx\platform\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32;..\..\..\cocos2dx\cocos2dx\platform\third_party\win32\OGLES;..\..\..\cocos2dx;..\..\..\cocos2dx\CocosDenshion\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
@@ -122,6 +122,9 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <None Include="..\..\..\json\json_internalarray.inl" />
+    <None Include="..\..\..\json\json_internalmap.inl" />
+    <None Include="..\..\..\json\json_valueiterator.inl" />
     <None Include="res\areks.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -129,14 +132,17 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\client\action_handler.hpp" />
+    <ClInclude Include="..\..\..\client\animation.hpp" />
     <ClInclude Include="..\..\..\client\app_delegate.h" />
     <ClInclude Include="..\..\..\client\body_definitions.hpp" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
     <ClInclude Include="..\..\..\client\game_logic.hpp" />
     <ClInclude Include="..\..\..\client\level_manager.hpp" />
+    <ClInclude Include="..\..\..\client\loading_screen.hpp" />
     <ClInclude Include="..\..\..\client\loop.hpp" />
     <ClInclude Include="..\..\..\client\main_menu.hpp" />
     <ClInclude Include="..\..\..\client\objects\background.hpp" />
+    <ClInclude Include="..\..\..\client\objects\enemy.hpp" />
     <ClInclude Include="..\..\..\client\objects\player\body.hpp" />
     <ClInclude Include="..\..\..\client\objects\player\head.hpp" />
     <ClInclude Include="..\..\..\client\objects\rope.hpp" />
@@ -157,11 +163,22 @@
     <ClInclude Include="..\..\..\common\master.hpp" />
     <ClInclude Include="..\..\..\common\noncopyable.hpp" />
     <ClInclude Include="..\..\..\common\subsystem.hpp" />
+    <ClInclude Include="..\..\..\json\autolink.h" />
+    <ClInclude Include="..\..\..\json\config.h" />
+    <ClInclude Include="..\..\..\json\features.h" />
+    <ClInclude Include="..\..\..\json\forwards.h" />
+    <ClInclude Include="..\..\..\json\json.h" />
+    <ClInclude Include="..\..\..\json\json_batchallocator.h" />
+    <ClInclude Include="..\..\..\json\json_tool.h" />
+    <ClInclude Include="..\..\..\json\reader.h" />
+    <ClInclude Include="..\..\..\json\value.h" />
+    <ClInclude Include="..\..\..\json\writer.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\client\action_handler.cpp" />
+    <ClCompile Include="..\..\..\client\animation.cpp" />
     <ClCompile Include="..\..\..\client\app_delegate.cpp" />
     <ClCompile Include="..\..\..\client\body_definitions.cpp" />
     <ClCompile Include="..\..\..\client\game_logic.cpp" />
@@ -170,6 +187,7 @@
     <ClCompile Include="..\..\..\client\loop.cpp" />
     <ClCompile Include="..\..\..\client\main_menu.cpp" />
     <ClCompile Include="..\..\..\client\objects\background.cpp" />
+    <ClCompile Include="..\..\..\client\objects\enemy.cpp" />
     <ClCompile Include="..\..\..\client\objects\player\body.cpp" />
     <ClCompile Include="..\..\..\client\objects\player\head.cpp" />
     <ClCompile Include="..\..\..\client\objects\rope.cpp" />
@@ -185,6 +203,9 @@
     <ClCompile Include="..\..\..\client\splash_screen.cpp" />
     <ClCompile Include="..\..\..\client\triangulator.cpp" />
     <ClCompile Include="..\..\..\client\view.cpp" />
+    <ClCompile Include="..\..\..\json\json_reader.cpp" />
+    <ClCompile Include="..\..\..\json\json_value.cpp" />
+    <ClCompile Include="..\..\..\json\json_writer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

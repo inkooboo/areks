@@ -5,76 +5,91 @@
       <Filter>source\win</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\physics.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\view.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\loop.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\action_handler.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\app_delegate.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\object_manager.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\base_object.cpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\platform.cpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\game_logic.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\background.cpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\level_manager.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\primitives.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\rope.cpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\ball.cpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\resource_utils.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\body_definitions.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\player.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\player\body.cpp">
-      <Filter>source\game\objects\player</Filter>
+      <Filter>source\client\objects\player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\player\head.cpp">
-      <Filter>source\game\objects\player</Filter>
+      <Filter>source\client\objects\player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\triangulator.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\splash_screen.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\loading_screen.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\main_menu.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\json\json_reader.cpp">
+      <Filter>source\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\json\json_value.cpp">
+      <Filter>source\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\json\json_writer.cpp">
+      <Filter>source\json</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\objects\enemy.cpp">
+      <Filter>source\client\objects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\animation.cpp">
+      <Filter>source\client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,77 +112,116 @@
       <Filter>source\win</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\defs.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\primitives.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\physics.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\view.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\action_handler.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\loop.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\app_delegate.h">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\object_manager.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\base_object.hpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\platform.hpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\game_logic.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
     <ClInclude Include="..\..\..\client\objects\background.hpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\level_manager.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\rope.hpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\ball.hpp">
-      <Filter>source\game\objects</Filter>
+      <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\resource_utils.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\splash_screen.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\body_definitions.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\player.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\player\body.hpp">
-      <Filter>source\game\objects\player</Filter>
+      <Filter>source\client\objects\player</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\player\head.hpp">
-      <Filter>source\game\objects\player</Filter>
+      <Filter>source\client\objects\player</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\triangulator.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\main_menu.hpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\autolink.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\config.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\features.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\forwards.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\json.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\json_batchallocator.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\json_tool.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\reader.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\value.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\json\writer.h">
+      <Filter>source\json</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\objects\enemy.hpp">
+      <Filter>source\client\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\animation.hpp">
+      <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\loading_screen.hpp">
+      <Filter>source\client</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -175,6 +229,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="res\areks.ico" />
+    <None Include="..\..\..\json\json_internalarray.inl">
+      <Filter>source\json</Filter>
+    </None>
+    <None Include="..\..\..\json\json_internalmap.inl">
+      <Filter>source\json</Filter>
+    </None>
+    <None Include="..\..\..\json\json_valueiterator.inl">
+      <Filter>source\json</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">
@@ -186,13 +249,16 @@
     <Filter Include="source\win">
       <UniqueIdentifier>{01cdf574-1d26-4793-ac76-731caad561d4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\game">
+    <Filter Include="source\json">
+      <UniqueIdentifier>{ea6b3ad6-4ab8-45de-9d6c-92004af81a21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\client">
       <UniqueIdentifier>{97baf809-7d3d-4ec9-96a0-ed7d8869294d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\game\objects">
+    <Filter Include="source\client\objects">
       <UniqueIdentifier>{cc6ebe2c-c54f-4613-9973-0d7230a3f184}</UniqueIdentifier>
     </Filter>
-    <Filter Include="source\game\objects\player">
+    <Filter Include="source\client\objects\player">
       <UniqueIdentifier>{56579b1f-d725-445f-ad86-7e0e34199099}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
