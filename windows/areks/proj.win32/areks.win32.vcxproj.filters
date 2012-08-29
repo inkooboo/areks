@@ -4,22 +4,7 @@
     <ClCompile Include="main.cpp">
       <Filter>source\win</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\physics.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\view.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\loop.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\action_handler.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\client\app_delegate.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\object_manager.cpp">
       <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\base_object.cpp">
@@ -31,14 +16,8 @@
     <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp">
       <Filter>source\client\objects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\game_logic.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\client\objects\background.cpp">
       <Filter>source\client\objects</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\level_manager.cpp">
-      <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\primitives.cpp">
       <Filter>source\client</Filter>
@@ -55,9 +34,6 @@
     <ClCompile Include="..\..\..\client\body_definitions.cpp">
       <Filter>source\client</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\player.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\client\objects\player\body.cpp">
       <Filter>source\client\objects\player</Filter>
     </ClCompile>
@@ -65,15 +41,6 @@
       <Filter>source\client\objects\player</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\triangulator.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\splash_screen.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\loading_screen.cpp">
-      <Filter>source\client</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\client\main_menu.cpp">
       <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\json\json_reader.cpp">
@@ -92,7 +59,40 @@
       <Filter>source\client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\client\polygon_sprite.cpp">
-      <Filter>source\game</Filter>
+      <Filter>source\client</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\loop.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\action_handler.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\game_logic.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\level_manager.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\loading_screen.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\main_menu.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\object_manager.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\physics.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\player.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\splash_screen.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\view.cpp">
+      <Filter>source\client\subsystems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -120,22 +120,7 @@
     <ClInclude Include="..\..\..\client\primitives.hpp">
       <Filter>source\client</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\physics.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\view.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\action_handler.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\loop.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\client\app_delegate.h">
-      <Filter>source\client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\object_manager.hpp">
       <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\base_object.hpp">
@@ -147,15 +132,8 @@
     <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp">
       <Filter>source\client\objects</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\game_logic.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
     <ClInclude Include="..\..\..\client\objects\background.hpp">
       <Filter>source\client\objects</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\level_manager.hpp">
-      <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\rope.hpp">
       <Filter>source\client\objects</Filter>
@@ -166,13 +144,7 @@
     <ClInclude Include="..\..\..\client\resource_utils.hpp">
       <Filter>source\client</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\splash_screen.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\client\body_definitions.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\player.hpp">
       <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\player\body.hpp">
@@ -182,9 +154,6 @@
       <Filter>source\client\objects\player</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\triangulator.hpp">
-      <Filter>source\client</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\client\main_menu.hpp">
       <Filter>source\client</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\json\autolink.h">
@@ -223,11 +192,41 @@
     <ClInclude Include="..\..\..\client\animation.hpp">
       <Filter>source\client</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\loading_screen.hpp">
+    <ClInclude Include="..\..\..\client\polygon_sprite.hpp">
       <Filter>source\client</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\polygon_sprite.hpp">
-      <Filter>source\game</Filter>
+    <ClInclude Include="..\..\..\client\loop.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\action_handler.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\game_logic.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\level_manager.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\loading_screen.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\main_menu.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\object_manager.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\physics.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\player.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\splash_screen.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\view.hpp">
+      <Filter>source\client\subsystems</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -266,6 +265,9 @@
     </Filter>
     <Filter Include="source\client\objects\player">
       <UniqueIdentifier>{56579b1f-d725-445f-ad86-7e0e34199099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\client\subsystems">
+      <UniqueIdentifier>{119ba086-770d-463e-99ca-8c23d0995116}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

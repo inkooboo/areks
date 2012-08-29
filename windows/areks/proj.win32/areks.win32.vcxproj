@@ -151,7 +151,6 @@
     <ClInclude Include="..\..\..\client\objects\base_object.hpp" />
     <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp" />
     <ClInclude Include="..\..\..\client\objects\platform.hpp" />
-    <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
     <ClInclude Include="..\..\..\client\player.hpp" />
     <ClInclude Include="..\..\..\client\polygon_sprite.hpp" />
     <ClInclude Include="..\..\..\client\primitives.hpp" />
