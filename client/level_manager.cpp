@@ -11,6 +11,7 @@
 #include "view.hpp"
 #include "physics.hpp"
 #include "object_manager.hpp"
+#include "player.hpp"
 
 #include "resource_utils.hpp"
 
@@ -19,6 +20,10 @@
 #include "objects/ball.hpp"
 #include "objects/rope.hpp"
 #include "objects/enemy.hpp"
+
+
+//for testing
+#include <time.h>
 
 void LevelManager::start()
 {
@@ -71,6 +76,58 @@ void LevelManager::loadLevel(const char *level_name)
     auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
     
     auto enemy1 = objects::Enemy::create(pr::Vec2(48.f, 16.f));
+
+	//need using CCW winding for platform description!
+	std::vector<pr::Vec2> points;
+	points.push_back( pr::Vec2(40, 30) );
+	points.push_back( pr::Vec2(37.5, 25) );
+	points.push_back( pr::Vec2(32.5, 22.5) );
+	points.push_back( pr::Vec2(37.5, 20) );
+	points.push_back( pr::Vec2(40, 15) );
+	points.push_back( pr::Vec2(42.5, 20) );
+	points.push_back( pr::Vec2(47.5, 22.5) );
+	points.push_back( pr::Vec2(42.5, 25) );
+
+	auto platform1 = objects::Platform::create( points );
+	auto ball1 = objects::Ball::create( pr::Vec2(40, 40) );
+	auto ball2 = objects::Ball::create( pr::Vec2(41, 40) );
+	auto ball3 = objects::Ball::create( pr::Vec2(42, 40) );
+	auto ball4 = objects::Ball::create( pr::Vec2(43, 40) );
+	auto ball5 = objects::Ball::create( pr::Vec2(44, 40) );
+	auto ball6 = objects::Ball::create( pr::Vec2(45, 40) );
+
+	for( auto it = points.begin(), end = points.end(); it!=end; ++it )
+	{
+		it->x+=15;
+		it->y-=7;
+	}
+
+	auto platform2 = objects::Platform::create( points );
+
+	points.clear();
+
+	pr::Vec2 ground_begin(10, 7);
+	float ground_length = 60;
+	pr::Vec2 ground_coord = ground_begin;
+	points.push_back( ground_coord );
+
+	ground_coord.y -= 4;
+	points.push_back( ground_coord );
+
+	ground_coord.x += ground_length;
+	points.push_back( ground_coord );
+
+	std::srand( time(0) );
+
+	size_t min_ground_y = 3;
+	for( float x = ground_coord.x - 5; x > ground_begin.x; x-=5 )
+	{
+		points.push_back( pr::Vec2( x, (rand() % 6 + min_ground_y + 1) ) );
+	}
+
+	auto platform3 = objects::Platform::create( points );
+
+	master_t::subsystem<Player>().createAvatar( pr::Vec2(ground_begin.x + 40.f, min_ground_y + 8) );
 
     //auto platform00 = objects::Platform::create( pr::Vec2(0, 0), pr::Vec2(1, 1) );
     //auto platformx0 = objects::Platform::create( pr::Vec2(world_size.x, 0), pr::Vec2(1, 1) );

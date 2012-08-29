@@ -20,17 +20,17 @@ void BaseObject::destroy()
     master_t::subsystem<ObjectManager>().destroyObject( this );
 }
 
-void BaseObject::addSprite(cc::CCSprite *sprite, int z_order)
+void BaseObject::addSprite(cc::CCNode *sprite, int z_order)
 {
     master_t::subsystem<View>().gameLayer()->addChild( sprite, z_order );
 }
 
-void BaseObject::removeSprite(cc::CCSprite *sprite)
+void BaseObject::removeSprite(cc::CCNode *sprite)
 {
     sprite->removeFromParentAndCleanup(true);
 }
 
-void BaseObject::drawSpriteHelper(cc::CCSprite *sprite, pr::Vec2 position, float angle)
+void BaseObject::drawSpriteHelper(cc::CCNode *sprite, pr::Vec2 position, float angle)
 {
     const cc::CCPoint &prev_position = sprite->getPosition();
     cc::CCPoint cur_position = master_t::subsystem<View>().toScreenCoordinates(position);

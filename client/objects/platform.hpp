@@ -26,8 +26,9 @@ namespace objects
         ~Platform();
 
         BodyOwner _body;
-        cc::CCSprite* _sprite;
+        cc::CCNode* _sprite;
 		std::vector<cc::CCSprite*> _sprites;
+		pr::Vec2 _center;
     };
     
 }//end namespace objects

@@ -1,7 +1,9 @@
 #include "action_handler.hpp"
-#include "view.hpp"
+
 #include "master.hpp"
-#include "objects/ball.hpp"
+
+#include "view.hpp"
+#include "player.hpp"
 
 void ActionHandler::start()
 {
@@ -44,7 +46,9 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         // 1. first scale touch OR
         // 2. possible view move touch OR
         // 3. main hero selection
-        touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
+        
+		touch->on_end = std::bind(&Player::onTouchTarget, master_t::subsystem<Player>(), std::placeholders::_1);
+		//touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
     }
     
     if (m_touches.size() == 1)

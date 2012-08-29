@@ -24,15 +24,15 @@ namespace objects
             def.setUserData( (void*)this );
             def.setShapeBox( 0.5, 0.5 );
             def.setDensity( 1 );
-            def.setFriction( 0.2f );
-            def.setRestitution( 0.7f );
+            def.setFriction( 0.9f );
+            def.setRestitution( 0.3f );
 
             _body = master_t::subsystem<Physics>().CreateBody( def );
 
             //
             //init view
             //
-            unsigned char color[] = {150, 150, 150};
+            unsigned char color[] = {255, 0, 0};
             cc::CCTexture2D* texture = new cc::CCTexture2D();
             texture->autorelease();
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(1, 1).toCCSize() );
@@ -50,8 +50,7 @@ namespace objects
 
         void Ball::draw()
         {
-            //angle = 0, circle don't need it =)
-            drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), 0 );
+			drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
         }
 
         void Ball::updateState( float t )

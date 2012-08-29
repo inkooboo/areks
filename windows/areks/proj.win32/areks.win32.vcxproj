@@ -153,6 +153,7 @@
     <ClInclude Include="..\..\..\client\objects\platform.hpp" />
     <ClInclude Include="..\..\..\client\objects\backoground.hpp" />
     <ClInclude Include="..\..\..\client\player.hpp" />
+    <ClInclude Include="..\..\..\client\polygon_sprite.hpp" />
     <ClInclude Include="..\..\..\client\primitives.hpp" />
     <ClInclude Include="..\..\..\client\physics.hpp" />
     <ClInclude Include="..\..\..\client\resource_utils.hpp" />
@@ -198,6 +199,7 @@
     <ClCompile Include="..\..\..\client\objects\platform.cpp" />
     <ClCompile Include="..\..\..\client\physics.cpp" />
     <ClCompile Include="..\..\..\client\player.cpp" />
+    <ClCompile Include="..\..\..\client\polygon_sprite.cpp" />
     <ClCompile Include="..\..\..\client\primitives.cpp" />
     <ClCompile Include="..\..\..\client\resource_utils.cpp" />
     <ClCompile Include="..\..\..\client\splash_screen.cpp" />

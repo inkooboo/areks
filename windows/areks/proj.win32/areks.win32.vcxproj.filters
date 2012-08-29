@@ -91,6 +91,9 @@
     <ClCompile Include="..\..\..\client\animation.cpp">
       <Filter>source\client</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\polygon_sprite.cpp">
+      <Filter>source\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -222,6 +225,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\client\loading_screen.hpp">
       <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\polygon_sprite.hpp">
+      <Filter>source\game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

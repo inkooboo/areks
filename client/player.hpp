@@ -5,6 +5,8 @@
 #include "subsystem.hpp"
 
 #include "primitives.hpp"
+
+#include "action_handler.hpp"
     
 namespace objects
 {
@@ -35,8 +37,11 @@ public:
 
     objects::player::Body* getBody();
     objects::player::Head* getHead();
-    
+
 public:
+	void onTouchTarget(ActionHandler::TouchPtr &touch);
+    
+private:
     objects::player::Body* _body;
     objects::player::Head* _head;
     static const float _neck_max_lenght;

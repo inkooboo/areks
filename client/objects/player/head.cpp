@@ -81,6 +81,7 @@ namespace objects
                     }
                     else
                     {
+                        _body->SetLinearVelocity( _target_vec.tob2Vec2() );
                     }
                     break;
                 }
@@ -131,7 +132,8 @@ namespace objects
         
         void Head::collide( BaseObject* other )
         {
-            
+            _state = RETURN;
+            updateState( 0.f );
         }
 
         pr::Vec2 Head::getPosition() const

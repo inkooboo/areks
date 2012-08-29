@@ -103,5 +103,9 @@ inline pr::Vec2 operator-(pr::Vec2 const& a, pr::Vec2 const& b)
 {
     return pr::Vec2( a.x - b.x, a.y - b.y );
 }
+inline pr::Vec2 operator+(pr::Vec2 const& a, pr::Vec2 const& b)
+{
+    return pr::Vec2( a.x + b.x, a.y + b.y );
+}
 
 #endif

@@ -34,7 +34,7 @@ namespace objects
             //
             //init view
             //
-            unsigned char color[] = {140, 55, 100};
+            unsigned char color[] = {0, 255, 0};
             cc::CCTexture2D* texture = new cc::CCTexture2D();
             texture->autorelease();
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, size.toCCSize() );

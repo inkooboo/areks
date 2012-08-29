@@ -3,6 +3,11 @@
 #include "objects/player/body.hpp"
 #include "objects/player/head.hpp"
 
+#include "master.hpp"
+
+#include "view.hpp"
+
+
 const float Player::_neck_max_lenght = 10.0;
 
 void Player::start()
@@ -50,5 +55,11 @@ objects::player::Head* Player::getHead()
 float Player::getNeckMaxLength() const
 {
     return _neck_max_lenght;
+}
+
+void Player::onTouchTarget(ActionHandler::TouchPtr &touch)
+{
+	View& view = master_t::subsystem<View>();
+	shoot( view.toWorldCoordinates(touch->end) );
 }
     

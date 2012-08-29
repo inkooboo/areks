@@ -53,12 +53,12 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_managed_subsystem<Physics>();
     m_master_ptr->add_managed_subsystem<View>();
     m_master_ptr->add_managed_subsystem<Loop>();
-    m_master_ptr->add_managed_subsystem<ActionHandler>();
     m_master_ptr->add_managed_subsystem<LevelManager>();
     m_master_ptr->add_managed_subsystem<SplashScreen>();
     m_master_ptr->add_managed_subsystem<LoadingScreen>();
     m_master_ptr->add_managed_subsystem<MainMenu>();
     m_master_ptr->add_managed_subsystem<Player>();
+	m_master_ptr->add_managed_subsystem<ActionHandler>();
 
     m_master_ptr->add_managed_subsystem<GameLogic>(); //should be last
 
