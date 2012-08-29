@@ -19,6 +19,7 @@ namespace res
     std::string picture(const char *name);
     
     std::string animation_base_path(const char *name);
+    std::string animation_frame(const char *path);
     
     /// Manages different resources for different devices.
     std::string sound_effect(const char *name);

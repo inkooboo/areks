@@ -37,14 +37,14 @@ Animation::Animation(const char *name)
         float interval = cur["interval"].asFloat();
         
         const Json::Value &frames = cur["frames"];
-        assert(cur.isArray());
+        assert(frames.isArray());
         
         cc::CCArray *anim_frames = cc::CCArray::create(frames.size());
         for (int i = 0; i < frames.size(); ++i)
         {
             std::string frame = frames[i].asString();
             
-            std::string frame_path = res::picture((base_path + frame).c_str());
+            std::string frame_path = res::animation_frame((base_path + frame).c_str());
             
             cc::CCTexture2D *texture = cc::CCTextureCache::sharedTextureCache()->addImage(frame_path.c_str());
             

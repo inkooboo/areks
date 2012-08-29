@@ -22,6 +22,17 @@ namespace res
         return ret;
     }
 
+    std::string animation_frame(const char *path)
+    {
+        std::string ret(path);
+
+        //TODO: for real good devices load HD resources
+        
+        ret += ".png";
+        
+        return ret;
+    }
+
     std::string animation_base_path(const char *name)
     {
         std::string ret("animations/");
