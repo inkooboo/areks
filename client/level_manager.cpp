@@ -18,6 +18,7 @@
 #include "objects/platform.hpp"
 #include "objects/ball.hpp"
 #include "objects/rope.hpp"
+#include "objects/enemy.hpp"
 
 void LevelManager::start()
 {
@@ -68,6 +69,8 @@ void LevelManager::loadLevel(const char *level_name)
     
     // 6. Create level objects
     auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
+    
+//    auto enemy1 = objects::Enemy::create(pr::Vec2(48.f, 16.f));
 
     //auto platform00 = objects::Platform::create( pr::Vec2(0, 0), pr::Vec2(1, 1) );
     //auto platformx0 = objects::Platform::create( pr::Vec2(world_size.x, 0), pr::Vec2(1, 1) );

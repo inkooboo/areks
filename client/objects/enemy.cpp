@@ -22,7 +22,7 @@ namespace objects
     }
     
     Enemy::Enemy( pr::Vec2 const& position )
-        : m_animation("test", nullptr)
+        : m_animation("test")
     {
         //
         //init physics
@@ -40,26 +40,21 @@ namespace objects
         //
         //init view
         //
-//        unsigned char color[] = {150, 150, 150};
-//        cc::CCTexture2D* texture = new cc::CCTexture2D();
-//        texture->autorelease();
-//        texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(1, 1).toCCSize() );
-//        _sprite = cc::CCSprite::create( texture );
-//        
-//        addSprite(_sprite);
+
+        addSprite(m_animation.sprite());
         draw();
     }
     
     Enemy::~Enemy()
     {
-//        removeSprite(_sprite);
+        removeSprite(m_animation.sprite());
         releaseJoints( _body.get() );
     }
     
     void Enemy::draw()
     {
         //angle = 0, circle don't need it =)
-//        drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), 0 );
+        drawSpriteHelper( m_animation.sprite(), pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
     }
     
     void Enemy::updateState( float t )

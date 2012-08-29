@@ -11,8 +11,14 @@
 
 #include <json/json.h>
 
-Animation::Animation(const char *name, cc::CCNode *node)
-    : m_node(node)
+cc::CCSprite * Animation::sprite()
+{
+    return m_sprite;
+}
+
+
+Animation::Animation(const char *name)
+    : m_sprite(0)
 {
     std::string base_path = res::animation_base_path(name);
     
@@ -21,20 +27,19 @@ Animation::Animation(const char *name, cc::CCNode *node)
     Json::Value description;
     parser.parse(description_str, description);
     
-    
-    
     auto action_names = description.getMemberNames();
     for (auto it = action_names.begin(); it != action_names.end(); ++it)
     {
-        const Json::Value &cur = description[*it];
+        std::string cur_name = *it;
+        const Json::Value &cur = description[cur_name];
         assert(cur.isObject());
         
-        float interval = cur["interbal"].asFloat();
+        float interval = cur["interval"].asFloat();
         
         const Json::Value &frames = cur["frames"];
         assert(cur.isArray());
         
-        cc::CCArray* animFrames = cc::CCArray::create(frames.size());
+        cc::CCArray *anim_frames = cc::CCArray::create(frames.size());
         for (int i = 0; i < frames.size(); ++i)
         {
             std::string frame = frames[i].asString();
@@ -45,19 +50,25 @@ Animation::Animation(const char *name, cc::CCNode *node)
             
             cc::CCSpriteFrame *sprite_frame = cc::CCSpriteFrame::create(texture, cc::CCRect(0, 0, texture->getContentSize().width, texture->getContentSize().height));
             
-            animFrames->addObject(sprite_frame);
+            if (!m_sprite)
+            {
+                m_sprite = cc::CCSprite::create(sprite_frame);
+            }
+            
+            anim_frames->addObject(sprite_frame);
         }
 
-//        CCAnimation *animation = CCAnimation::create(animFrames, 0.2f);
-//        CCAnimate *animate = CCAnimate::create(animation);
-//        CCActionInterval* seq = (CCActionInterval*)(CCSequence::create( animate,
-//                                                                       CCFlipX::create(true),
-//                                                                       animate->copy()->autorelease(),
-//                                                                       CCFlipX::create(false),
-//                                                                       NULL) );
-//        
-//        sprite->runAction(CCRepeatForever::create( seq ) );
-
+        cc::CCAnimation *animation = cc::CCAnimation::create(anim_frames, interval);
+        cc::CCAnimate *animate = cc::CCAnimate::create(animation);
+        cc::CCActionInterval* seq = (cc::CCActionInterval *)(cc::CCSequence::create( animate,
+                                                                       cc::CCFlipX::create(true),
+                                                                       animate->copy()->autorelease(),
+                                                                       cc::CCFlipX::create(false),
+                                                                       NULL) );
+        
+        m_sprite->runAction(cc::CCRepeatForever::create( seq ) );
+        
+        break; //TEMP for testing one animation
     }
     
 }

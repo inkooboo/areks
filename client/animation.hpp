@@ -18,16 +18,13 @@
 class Animation
 {
 public:
-    Animation(const char *name, cc::CCNode *node);
+    Animation(const char *name);
 
-    void start(const char *action_name)
-    {
-        
-    }
+    cc::CCSprite *sprite();
     
 private:
     Json::Value m_descr;
-    cc::CCNode *m_node;
+    cc::CCSprite *m_sprite;
 };
 
 #endif /* defined(__areks__animation__) */
