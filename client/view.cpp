@@ -104,7 +104,9 @@ void View::menuExit(cocos2d::CCObject*)
 void View::menuTest(cocos2d::CCObject*s)
 {
     /// test sound fx. Remove it.
+#ifndef NO_SOUND
     master_t::subsystem<cd::SimpleAudioEngine>().playEffect(res::sound_effect("046").c_str());
+#endif
     ///
 }
 

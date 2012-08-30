@@ -256,6 +256,7 @@
 		84B5214115EE3D1F00F149A8 /* iTunesArtwork in Resources */ = {isa = PBXBuildFile; fileRef = 84B5213115EE3D1F00F149A8 /* iTunesArtwork */; };
 		84B5214215EE3D1F00F149A8 /* pictures in Resources */ = {isa = PBXBuildFile; fileRef = 84B5213215EE3D1F00F149A8 /* pictures */; };
 		84B5214315EE3D1F00F149A8 /* sound_fx in Resources */ = {isa = PBXBuildFile; fileRef = 84B5213315EE3D1F00F149A8 /* sound_fx */; };
+		84B5215315EF76D000F149A8 /* polygon_sprite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B5215115EF76D000F149A8 /* polygon_sprite.cpp */; };
 		84EFD03215E37CD500A5A72A /* resource_utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84EFD03015E37CD400A5A72A /* resource_utils.cpp */; };
 		84FD596A15DB7E82000E6454 /* action_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD595315DB7E82000E6454 /* action_handler.cpp */; };
 		84FD596B15DB7E82000E6454 /* app_delegate.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD595515DB7E82000E6454 /* app_delegate.cpp */; };
@@ -811,6 +812,8 @@
 		84B5213115EE3D1F00F149A8 /* iTunesArtwork */ = {isa = PBXFileReference; lastKnownFileType = file; name = iTunesArtwork; path = ../../../resources/iTunesArtwork; sourceTree = "<group>"; };
 		84B5213215EE3D1F00F149A8 /* pictures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pictures; path = ../../../resources/pictures; sourceTree = "<group>"; };
 		84B5213315EE3D1F00F149A8 /* sound_fx */ = {isa = PBXFileReference; lastKnownFileType = folder; name = sound_fx; path = ../../../resources/sound_fx; sourceTree = "<group>"; };
+		84B5215115EF76D000F149A8 /* polygon_sprite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = polygon_sprite.cpp; sourceTree = "<group>"; };
+		84B5215215EF76D000F149A8 /* polygon_sprite.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = polygon_sprite.hpp; sourceTree = "<group>"; };
 		84EFD03015E37CD400A5A72A /* resource_utils.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = resource_utils.cpp; sourceTree = "<group>"; };
 		84EFD03115E37CD500A5A72A /* resource_utils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = resource_utils.hpp; sourceTree = "<group>"; };
 		84FD595315DB7E82000E6454 /* action_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = action_handler.cpp; sourceTree = "<group>"; };
@@ -1814,6 +1817,8 @@
 		8404AECD15D53A610030B061 /* client */ = {
 			isa = PBXGroup;
 			children = (
+				84B5215115EF76D000F149A8 /* polygon_sprite.cpp */,
+				84B5215215EF76D000F149A8 /* polygon_sprite.hpp */,
 				849B9D5815EB59A700366740 /* player.cpp */,
 				849B9D5915EB59A900366740 /* player.hpp */,
 				849B9D5A15EB59AB00366740 /* triangulator.cpp */,
@@ -2262,6 +2267,7 @@
 				849B9DC015EBBC2500366740 /* json_reader.cpp in Sources */,
 				849B9DC115EBBC2500366740 /* json_value.cpp in Sources */,
 				849B9DC315EBBC2500366740 /* json_writer.cpp in Sources */,
+				84B5215315EF76D000F149A8 /* polygon_sprite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

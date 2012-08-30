@@ -16,7 +16,14 @@
 namespace cc = cocos2d;
 namespace cd = CocosDenshion;
 
-#if defined(__GNUC__) && !defined(__clang__) // gcc will support override since 4.7 version
+// development defines
+#define NO_MENU
+#define NO_SOUND
+
+
+
+
+#if defined(__GNUC__) && !defined(__clang__) // gcc will support "override" since 4.7 version
 # define override 
 #endif
 

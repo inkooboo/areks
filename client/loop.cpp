@@ -27,30 +27,28 @@ Loop::Loop()
 {
     using namespace cocos2d;
 
-    cc::CCDirector::sharedDirector()->setScheduler(this);
-
-    cc::CCScheduler::scheduleUpdateForTarget( &_time_loop, 0, true);
-    cc::CCScheduler::scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, DEFAULT_VIEW_TICK_TIME, true);
+    cc::CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget( &_time_loop, 0, true);
+    cc::CCDirector::sharedDirector()->getScheduler()->scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, DEFAULT_VIEW_TICK_TIME, true);
 }
 
 void Loop::resumeTime()
 {
-    cc::CCScheduler::resumeTarget(&_time_loop);
+    cc::CCDirector::sharedDirector()->getScheduler()->resumeTarget(&_time_loop);
 }
 
 void Loop::pauseTime()
 {
-    cc::CCScheduler::pauseTarget(&_time_loop);
+    cc::CCDirector::sharedDirector()->getScheduler()->pauseTarget(&_time_loop);
 }
 
 void Loop::resumeGame()
 {
-    cc::CCScheduler::resumeTarget(&_view_loop);
+    cc::CCDirector::sharedDirector()->getScheduler()->resumeTarget(&_view_loop);
 }
 
 void Loop::pauseGame()
 {
-    cc::CCScheduler::pauseTarget(&_view_loop);
+    cc::CCDirector::sharedDirector()->getScheduler()->pauseTarget(&_view_loop);
 }
 
 void Loop::TimeLoop_t::update(float t)

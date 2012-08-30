@@ -12,19 +12,25 @@
 # include "defs.hpp"
 
 # include <string>
-
+# include <map>
 # include <json/value.h>
 
 class Animation
 {
+    typedef std::map<std::string, cc::CCActionInterval *> AnimationsMap;
 public:
     Animation(const char *name);
+    ~Animation();
 
     cc::CCSprite *sprite();
+    
+    void animate(const std::string &name);
     
 private:
     Json::Value m_descr;
     cc::CCSprite *m_sprite;
+    
+    AnimationsMap m_animations;
 };
 
 #endif /* defined(__areks__animation__) */

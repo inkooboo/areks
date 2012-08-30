@@ -30,7 +30,7 @@ namespace objects
         defs::dyn::OneShapeDef def;
         def.setPosition( position.tob2Vec2() );
         def.setUserData( (void*)this );
-        def.setShapeBox( 0.5, 0.5 );
+        def.setShapeBox( 2, 2 );
         def.setDensity( 1 );
         def.setFriction( 0.2f );
         def.setRestitution( 0.7f );
@@ -43,6 +43,8 @@ namespace objects
 
         addSprite(m_animation.sprite());
         draw();
+        
+        m_animation.animate("stay");
     }
     
     Enemy::~Enemy()
@@ -53,7 +55,6 @@ namespace objects
     
     void Enemy::draw()
     {
-        //angle = 0, circle don't need it =)
         drawSpriteHelper( m_animation.sprite(), pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
     }
     

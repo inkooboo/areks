@@ -61,15 +61,28 @@ Animation::Animation(const char *name)
         cc::CCAnimation *animation = cc::CCAnimation::create(anim_frames, interval);
         cc::CCAnimate *animate = cc::CCAnimate::create(animation);
         cc::CCActionInterval* seq = (cc::CCActionInterval *)(cc::CCSequence::create( animate,
-                                                                       cc::CCFlipX::create(true),
                                                                        animate->copy()->autorelease(),
-                                                                       cc::CCFlipX::create(false),
                                                                        NULL) );
-        
-        m_sprite->runAction(cc::CCRepeatForever::create( seq ) );
-        
-        break; //TEMP for testing one animation
+
+        seq->retain();
+        m_animations[cur_name] = seq;
     }
     
 }
 
+Animation::~Animation()
+{
+    for (auto it = m_animations.begin(); it != m_animations.end(); ++it)
+    {
+        it->second->release();
+    }
+}
+
+void Animation::animate(const std::string &name)
+{
+    auto find = m_animations.find(name);
+    if (find != m_animations.end())
+    {
+        m_sprite->runAction(cc::CCRepeatForever::create( find->second ) );
+    }
+}

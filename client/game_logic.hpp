@@ -15,12 +15,12 @@ public:
     void loadScene(cc::CCScene *scene, float delay = 0);
 
     void onLoadScene(float);
-    
+    void onEndLoading(float);
     
 private:
+    void transitScene(cc::CCScene *scene);
     
     cc::CCScene *m_current_scene;
-    cc::CCScene *m_new_scene;
 };
 
 #endif

@@ -4,7 +4,7 @@
 # include "defs.hpp"
 # include "subsystem.hpp"
 
-class Loop : public cc::CCScheduler, public subsystem_t
+class Loop : public subsystem_t
 {
     virtual void start() override;
     virtual void stop() override;
