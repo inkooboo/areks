@@ -15,6 +15,7 @@ namespace objects
     {
         class Head;
         class Body;
+		class Neck;
     }//end namespace player
     
 }//end namespace objects
@@ -33,19 +34,33 @@ public:
     
     void shoot( pr::Vec2 const& point );
 
+	void unhook();
+
     float getNeckMaxLength() const;
+
+	void createNeck();
+	void destroyNeck();
 
     objects::player::Body* getBody();
     objects::player::Head* getHead();
+	objects::player::Neck* getNeck();
 
 public:
 	void onTouchTarget(ActionHandler::TouchPtr &touch);
+
+	void onTouchBodyBegin(ActionHandler::TouchPtr &touch);
+	void onTouchBodyMove(ActionHandler::TouchPtr &touch);
+	void onTouchBodyEnd(ActionHandler::TouchPtr &touch);
     
 private:
     objects::player::Body* _body;
     objects::player::Head* _head;
+	objects::player::Neck* _neck;
     static const float _neck_max_lenght;
-    
+
+	//for testing
+	b2Body* _temp_body;
+	b2Joint* _mouse_joint;
 };
 
 #endif

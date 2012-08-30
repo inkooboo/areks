@@ -98,6 +98,16 @@ namespace definitions
             _fixture_def.filter.groupIndex = index;
         }
 
+		void setFilterMask( uint16 mask )
+		{
+			_fixture_def.filter.maskBits = mask;
+		}
+
+		void setFilterCategory( uint16 category )
+		{
+			_fixture_def.filter.categoryBits = category;
+		}
+
         void setShapeBox( float half_width, float half_height );
         //void setShapePolygon( b2Vec2* mas, size_t count );
         void setShapeChain( b2Vec2* vertices, size_t count );

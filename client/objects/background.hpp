@@ -26,7 +26,7 @@ namespace objects
 
         virtual b2Body* getBody() override;
 
-        virtual void collide( BaseObject* other ) override;
+        virtual void collide( BaseObject* other, b2Contact *contact ) override;
         
     private:
         Background(const std::string &file_name_base, const std::string &file_name_lvl_1);

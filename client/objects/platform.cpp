@@ -53,6 +53,8 @@ namespace objects
 		fixt_def.friction = PLATFORM_FRICTION;
 		fixt_def.restitution = PLATFORM_RESTITUTION;
 		fixt_def.shape = &shape;
+		fixt_def.filter.categoryBits = filter::PLATFORMS;
+		fixt_def.filter.maskBits = filter::ALL;
 
 		_body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &body_def );
 

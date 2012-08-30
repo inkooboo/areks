@@ -11,8 +11,8 @@ void ContactListener::BeginContact(b2Contact *contact)
     BaseObject* obj_a = static_cast<BaseObject*>( contact->GetFixtureA()->GetBody()->GetUserData() );
     BaseObject* obj_b = static_cast<BaseObject*>( contact->GetFixtureB()->GetBody()->GetUserData() );
 
-    obj_a->collide( obj_b );
-    obj_b->collide( obj_a );
+    obj_a->collide( obj_b, contact );
+    obj_b->collide( obj_a, contact );
 }
 
 void Physics::start()

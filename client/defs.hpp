@@ -41,4 +41,18 @@ namespace group
     };
 }
 
+namespace filter
+{
+    enum
+    {
+		NONE = 0,
+
+        PLATFORMS = 1,
+		OBJECTS = 1 << 1,
+		HEAD = 1 << 2,
+
+		ALL = 0xffff
+    };
+}
+
 #endif

@@ -94,6 +94,9 @@
     <ClCompile Include="..\..\..\client\view.cpp">
       <Filter>source\client\subsystems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\objects\player\neck.cpp">
+      <Filter>source\client\objects\player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -227,6 +230,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\client\view.hpp">
       <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\objects\player\neck.hpp">
+      <Filter>source\client\objects\player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -94,7 +94,7 @@ namespace objects
         return 0;
     }
 
-    void Background::collide( BaseObject* other )
+    void Background::collide( BaseObject* other, b2Contact *contact )
     {
         other->destroy();
     }

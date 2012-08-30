@@ -26,6 +26,8 @@ namespace objects
             def.setDensity( 1 );
             def.setFriction( 0.9f );
             def.setRestitution( 0.3f );
+			def.setFilterCategory( filter::OBJECTS );
+			def.setFilterMask( filter::ALL );
 
             _body = master_t::subsystem<Physics>().CreateBody( def );
 
@@ -45,7 +47,7 @@ namespace objects
         Ball::~Ball()
         {
             removeSprite(_sprite);
-            releaseJoints( _body.get() );
+            //releaseJoints( _body.get() );
         }
 
         void Ball::draw()

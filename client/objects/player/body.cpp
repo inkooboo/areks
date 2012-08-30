@@ -28,6 +28,8 @@ namespace objects
             def.setFriction( 0.2f );
             def.setRestitution( 0.7f );
             def.setFilterGroup( group::PLAYER );
+			def.setFilterCategory( filter::OBJECTS );
+			def.setFilterMask( filter::ALL );
 
             _body = master_t::subsystem<Physics>().CreateBody( def );
 

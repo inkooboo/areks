@@ -54,7 +54,7 @@ CCObject::~CCObject(void)
     // if the object is managed, we should remove it
     // from pool manager
     if (m_bManaged)
-    {
+    { 
         CCPoolManager::sharedPoolManager()->removeObject(this);
     }
 

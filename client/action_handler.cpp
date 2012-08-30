@@ -5,6 +5,10 @@
 #include "view.hpp"
 #include "player.hpp"
 
+#include "physics.hpp"
+#include "objects/base_object.hpp"
+#include "objects/player/body.hpp"
+
 void ActionHandler::start()
 {
     enable();
@@ -39,6 +43,7 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     touch->from = location;
 
     View &view = master_t::subsystem<View>();
+	Player &player = master_t::subsystem<Player>();
 
     // determine touch type and init touch handlers
     if (m_touches.size() == 0)
@@ -46,21 +51,30 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         // 1. first scale touch OR
         // 2. possible view move touch OR
         // 3. main hero selection
-        
-		touch->on_end = std::bind(&Player::onTouchTarget, master_t::subsystem<Player>(), std::placeholders::_1);
+		BaseObject* obj = master_t::subsystem<Physics>().getObject( view.toWorldCoordinates(touch->begin) );
+		if( obj && obj == static_cast<BaseObject*>( player.getBody() ) )
+		{
+			player.onTouchBodyBegin(touch);
+			touch->on_move = std::bind(&Player::onTouchBodyMove, player, std::placeholders::_1); 
+			touch->on_end = std::bind(&Player::onTouchBodyEnd, player, std::placeholders::_1);
+		}
+		else
+		{
+			touch->on_end = std::bind(&Player::onTouchTarget, player, std::placeholders::_1);
+		}
 		//touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
     }
     
-    if (m_touches.size() == 1)
-    {
-        //scale second touch
-        TouchPtr first_touch = m_touches.begin()->second;
-        first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
-        first_touch->on_end = std::bind(&View::onTouchEnd, &view, first_touch);
-        touch->on_end = std::bind(&View::onTouchEnd, &view, std::placeholders::_1);
-        touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
-    }
-    
+    //if (m_touches.size() == 1)
+    //{
+    //    //scale second touch
+    //    TouchPtr first_touch = m_touches.begin()->second;
+    //    first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
+    //    first_touch->on_end = std::bind(&View::onTouchEnd, &view, first_touch);
+    //    touch->on_end = std::bind(&View::onTouchEnd, &view, std::placeholders::_1);
+    //    touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
+    //}
+    //
     
     
     ///

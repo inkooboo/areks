@@ -17,7 +17,7 @@ public:
 
     virtual b2Body* getBody() = 0;
 
-    virtual void collide( BaseObject* other ) { }
+    virtual void collide( BaseObject* other, b2Contact *contact ) { }
 
     virtual void deleteJoint( b2Joint* joint ) { }
 	

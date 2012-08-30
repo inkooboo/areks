@@ -15,7 +15,19 @@ namespace objects
         class Head : public DynamicObject
         {
         public:
+            enum State
+            {
+                REST = 0,
+                FLY,
+                RETURN,
+                HOOK,
+
+				UNKNOWN
+            };
+
+        public:
             static Head* create( pr::Vec2 const& position );
+            static Head* create();
 
             ~Head();
             
@@ -25,28 +37,36 @@ namespace objects
 
             virtual b2Body* getBody() override;
             
-            virtual void collide( BaseObject* other ) override;
+            virtual void collide( BaseObject* other, b2Contact *contact ) override;
 
             virtual pr::Vec2 getPosition() const override;
             
             void fly( pr::Vec2 const& point );
+			void return_home();
+
+            size_t getState() const;
             
         private:
             Head( pr::Vec2 const& position );
-            
-            enum State
-            {
-                IMMOBILITY = 0,
-                FLY,
-                RETURN,
-                HOOK
-            };
+
+            void attachToBody();
+
+			void hook(BaseObject* obj, pr::Vec2 const& point);
+			void unhook();
+
+			void setCollideNormal();
+			void setCollideNone();
             
             State _state;
             pr::Vec2 _target_vec;
             
             BodyOwner _body;
             cc::CCSprite* _sprite;
+
+			b2Joint* _attach_joint;
+			b2RevoluteJointDef _attach_joint_def;
+
+			bool _new_hook;
         };
         
     }//end namespace player

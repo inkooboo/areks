@@ -145,6 +145,7 @@
     <ClInclude Include="..\..\..\client\objects\enemy.hpp" />
     <ClInclude Include="..\..\..\client\objects\player\body.hpp" />
     <ClInclude Include="..\..\..\client\objects\player\head.hpp" />
+    <ClInclude Include="..\..\..\client\objects\player\neck.hpp" />
     <ClInclude Include="..\..\..\client\objects\rope.hpp" />
     <ClInclude Include="..\..\..\client\objects\ball.hpp" />
     <ClInclude Include="..\..\..\client\object_manager.hpp" />
@@ -190,6 +191,7 @@
     <ClCompile Include="..\..\..\client\objects\enemy.cpp" />
     <ClCompile Include="..\..\..\client\objects\player\body.cpp" />
     <ClCompile Include="..\..\..\client\objects\player\head.cpp" />
+    <ClCompile Include="..\..\..\client\objects\player\neck.cpp" />
     <ClCompile Include="..\..\..\client\objects\rope.cpp" />
     <ClCompile Include="..\..\..\client\objects\ball.cpp" />
     <ClCompile Include="..\..\..\client\object_manager.cpp" />

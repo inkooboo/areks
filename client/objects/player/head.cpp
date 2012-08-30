@@ -6,8 +6,8 @@
 
 #include "body.hpp"
 
-static const float HEAD_SPEED = 10.f;
-static const float RETURN_ACCURACY = 0.1f;
+static const float HEAD_SPEED = 30.f;
+static const float RETURN_ACCURACY = 0.5f;
 
 namespace objects
 {
@@ -19,9 +19,17 @@ namespace objects
         {
             return new Head( position );
         }
+
+        Head* Head::create()
+        {
+            DynamicObject* body = master_t::subsystem<Player>().getBody();
+            return new Head( body->getPosition() );
+        }
         
         Head::Head( pr::Vec2 const& position )
-            : _state( IMMOBILITY )
+            : _state( REST )
+			, _attach_joint(0)
+			, _new_hook(false)
         {
             static const pr::Vec2 size = pr::Vec2( 0.4f, 0.4f );
             //
@@ -50,6 +58,12 @@ namespace objects
             draw();
 
             addSprite(_sprite);
+
+			//
+			//extend init
+			//
+			setCollideNone();
+			attachToBody();
         }
         
         Head::~Head()
@@ -64,9 +78,17 @@ namespace objects
 
         void Head::updateState( float t )
         {
+			if(_new_hook)
+			{
+				_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
+				master_t::subsystem<Player>().createNeck();
+
+				_new_hook = false;
+			}
+
             switch( _state )
             {
-                case IMMOBILITY:
+                case REST:
                 {
                     break;
                 }
@@ -76,8 +98,7 @@ namespace objects
                     float dis = pr::distance( pr::Vec2(_body->GetPosition()), obj->getPosition() );
                     if( dis >= master_t::subsystem<Player>().getNeckMaxLength() )
                     {
-                        _state = RETURN;
-                        updateState( t );
+                        return_home();
                     }
                     else
                     {
@@ -94,9 +115,10 @@ namespace objects
                     dis = (dis > 0) ? dis : -dis;
                     if( dis < RETURN_ACCURACY )
                     {
-                        _state = IMMOBILITY;
+                        _state = REST;
                         _body->SetLinearVelocity( b2Vec2(0,0) );
                         _body->SetTransform( home_pos.tob2Vec2(), 0.f ); //FIXME very, VERY dangerous. It breaks all associated joint
+						attachToBody();
                     }
                     else
                     {
@@ -123,23 +145,91 @@ namespace objects
         
         void Head::fly( pr::Vec2 const& point )
         {
+			assert( _state == REST && "Head can fly only from REST!" );
+			master_t::subsystem<Physics>().worldEngine()->DestroyJoint( _attach_joint );
+			_attach_joint = 0;
+
             _state = FLY;
             _target_vec = point - pr::Vec2(_body->GetPosition());
             _target_vec = _target_vec.normalize();
             _target_vec *= HEAD_SPEED;
             _body->SetLinearVelocity( _target_vec.tob2Vec2() );
+
+			setCollideNormal();
         }
+
+		void Head::return_home()
+		{
+			if( _state == HOOK )
+			{
+				unhook();
+			}
+
+			_state = RETURN;
+			setCollideNone();
+			updateState(0.f);
+		}
         
-        void Head::collide( BaseObject* other )
+        void Head::collide( BaseObject* other, b2Contact *contact )
         {
-            _state = RETURN;
-            updateState( 0.f );
+			b2WorldManifold m;
+			contact->GetWorldManifold( &m );
+			pr::Vec2 p(m.points[0]);
+			hook( other, p );
         }
 
         pr::Vec2 Head::getPosition() const
         {
             return pr::Vec2( _body->GetPosition() );
         }
+
+        size_t Head::getState() const
+        {
+            return _state;
+        }
+
+        void Head::attachToBody()
+        {
+			_attach_joint_def.Initialize( _body.get(), master_t::subsystem<Player>().getBody()->getBody(), _body->GetPosition() );
+			_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
+        }
+
+		void Head::setCollideNormal()
+		{	
+			b2Filter filter;
+			filter.groupIndex = group::PLAYER;
+			filter.categoryBits = filter::OBJECTS;
+			filter.maskBits = filter::ALL;
+			_body->GetFixtureList()->SetFilterData(filter);
+		}
+
+		void Head::setCollideNone()
+		{
+			b2Filter filter;
+			filter.groupIndex = group::PLAYER;
+			filter.categoryBits = filter::NONE;
+			filter.maskBits = filter::NONE;
+			_body->GetFixtureList()->SetFilterData(filter);
+		}
+
+		void Head::hook(BaseObject* obj, pr::Vec2 const& point)
+		{
+			_state = HOOK;
+			setCollideNone();
+			_attach_joint_def.Initialize( _body.get(), obj->getBody(), point.tob2Vec2() );
+
+			_new_hook = true;
+			//_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
+		}
+
+		void Head::unhook()
+		{
+			_state = UNKNOWN;
+			assert( _state == HOOK && "State don't HOOK!" );
+			master_t::subsystem<Physics>().worldEngine()->DestroyJoint( _attach_joint );
+			_attach_joint = 0;
+		}
+
         
     }//end namespace player
 
