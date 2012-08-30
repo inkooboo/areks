@@ -3,6 +3,7 @@
 #include "master.hpp"
 #include "player.hpp"
 #include "physics.hpp"
+#include "loop.hpp"
 
 #include "body.hpp"
 
@@ -29,7 +30,6 @@ namespace objects
         Head::Head( pr::Vec2 const& position )
             : _state( REST )
 			, _attach_joint(0)
-			, _new_hook(false)
         {
             static const pr::Vec2 size = pr::Vec2( 0.4f, 0.4f );
             //
@@ -78,14 +78,6 @@ namespace objects
 
         void Head::updateState( float t )
         {
-			if(_new_hook)
-			{
-				_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
-				master_t::subsystem<Player>().createNeck();
-
-				_new_hook = false;
-			}
-
             switch( _state )
             {
                 case REST:
@@ -175,7 +167,7 @@ namespace objects
 			b2WorldManifold m;
 			contact->GetWorldManifold( &m );
 			pr::Vec2 p(m.points[0]);
-			hook( other, p );
+            master_t::subsystem<Loop>().executeOnce( (Loop::LazyFunction)std::bind(&Head::hook, this, other, p) );
         }
 
         pr::Vec2 Head::getPosition() const
@@ -212,20 +204,22 @@ namespace objects
 			_body->GetFixtureList()->SetFilterData(filter);
 		}
 
-		void Head::hook(BaseObject* obj, pr::Vec2 const& point)
+        //don't use reference for point because lazy execute this function
+		void Head::hook(BaseObject* obj, pr::Vec2 point)
 		{
 			_state = HOOK;
 			setCollideNone();
 			_attach_joint_def.Initialize( _body.get(), obj->getBody(), point.tob2Vec2() );
 
-			_new_hook = true;
+			_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
+			master_t::subsystem<Player>().createNeck();
 			//_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
 		}
 
 		void Head::unhook()
 		{
-			_state = UNKNOWN;
 			assert( _state == HOOK && "State don't HOOK!" );
+            _state = UNKNOWN;
 			master_t::subsystem<Physics>().worldEngine()->DestroyJoint( _attach_joint );
 			_attach_joint = 0;
 		}

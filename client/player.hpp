@@ -41,6 +41,8 @@ public:
 	void createNeck();
 	void destroyNeck();
 
+    void reloadPlayer();
+
     objects::player::Body* getBody();
     objects::player::Head* getHead();
 	objects::player::Neck* getNeck();
@@ -53,6 +55,9 @@ public:
 	void onTouchBodyEnd(ActionHandler::TouchPtr &touch);
     
 private:
+    void controlBodyBegin();
+    void controlBodyEnd();
+
     objects::player::Body* _body;
     objects::player::Head* _head;
 	objects::player::Neck* _neck;

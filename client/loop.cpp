@@ -51,6 +51,11 @@ void Loop::pauseGame()
     cc::CCDirector::sharedDirector()->getScheduler()->pauseTarget(&_view_loop);
 }
 
+void Loop::executeOnce(std::function<void()>& func)
+{
+    _time_loop.executeOnce( func );
+}
+
 void Loop::TimeLoop_t::update(float t)
 {
     float ft = t + _remainder;
@@ -83,8 +88,20 @@ void Loop::TimeLoop_t::update(float t)
         (*it)->updateState( t );
     }
 
+    //execute lazy calculations
+    for( auto it = _exec_once.begin(), end = _exec_once.end(); it != end; ++it )
+    {
+        (*it)();
+    }
+    _exec_once.clear();
+
     //delegate management to ObjectManager
     master_t::subsystem<ObjectManager>().update();
+}
+
+void Loop::TimeLoop_t::executeOnce(std::function<void()>& func)
+{
+    _exec_once.push_back( func );
 }
 
 void Loop::ViewLoop_t::tick( float t )

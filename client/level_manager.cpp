@@ -47,6 +47,7 @@ void LevelManager::loadLevel(const char *level_name)
     
     // 1. Clear all objects
     master_t::subsystem<ObjectManager>().reloadObjectManager();
+    master_t::subsystem<Player>().reloadPlayer();
     
     // 2. Load background
     const std::string bg_name_base = res::picture("test_background_base");

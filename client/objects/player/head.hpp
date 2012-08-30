@@ -51,7 +51,8 @@ namespace objects
 
             void attachToBody();
 
-			void hook(BaseObject* obj, pr::Vec2 const& point);
+            //don't use reference for point because lazy execute this function
+			void hook(BaseObject* obj, pr::Vec2 point);
 			void unhook();
 
 			void setCollideNormal();
@@ -65,8 +66,6 @@ namespace objects
 
 			b2Joint* _attach_joint;
 			b2RevoluteJointDef _attach_joint_def;
-
-			bool _new_hook;
         };
         
     }//end namespace player

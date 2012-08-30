@@ -32,6 +32,7 @@ public:
     void reloadWorldParams(pr::Vec2 world_size);
 
     b2World* worldEngine();
+    b2World* const worldEngine() const;
     
     pr::Vec2 worldSize() const;
 	
@@ -47,6 +48,8 @@ private:
     pr::Vec2 m_world_size;
 
     ContactListener _contact_listener;
+
+    std::vector<shared_ptr<b2JointDef> > _joint_defs;
 };
 
 #endif

@@ -42,6 +42,12 @@ void Physics::reloadWorldParams(pr::Vec2 world_size)
 
 b2World* Physics::worldEngine()
 {
+    assert( ! _b2World_ptr->IsLocked() && "Physics in handle process. Can not access non const world object!");
+    return _b2World_ptr.get();
+}
+
+b2World* const Physics::worldEngine() const
+{
     return _b2World_ptr.get();
 }
 
@@ -54,6 +60,12 @@ void Physics::step( float dt )
 {
     static int velocityIterations = 8;
     static int positionIterations = 3;
+
+    for( auto it = _joint_defs.begin(), end = _joint_defs.end(); it != end; ++it )
+    {
+        _b2World_ptr->CreateJoint( it->get() );
+    }
+    _joint_defs.clear();
     
     _b2World_ptr->Step( dt, velocityIterations, positionIterations );
 }
@@ -95,3 +107,4 @@ BodyOwner Physics::CreateBody( defs::OneShapeBaseDef& def )
     ret->CreateFixture( def.getFixtureDef() );
     return ret;
 }
+

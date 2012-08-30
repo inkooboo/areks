@@ -4,10 +4,15 @@
 # include "defs.hpp"
 # include "subsystem.hpp"
 
+# include <functional>
+
 class Loop : public subsystem_t
 {
     virtual void start() override;
     virtual void stop() override;
+
+public:
+    typedef std::function<void()> LazyFunction;
 
 public:
     Loop();
@@ -17,6 +22,8 @@ public:
     
     void resumeGame();
     void pauseGame();
+
+    void executeOnce(std::function<void()>& func);
 
 private:
 
@@ -29,9 +36,12 @@ private:
 
         void update( float t );
 
+        void executeOnce(std::function<void()>& func);
+
     private:
         float _remainder;
-        
+
+        std::vector<std::function<void()> > _exec_once;        
     };
     
     class ViewLoop_t : public cc::CCObject
