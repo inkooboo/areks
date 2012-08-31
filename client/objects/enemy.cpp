@@ -56,14 +56,14 @@ namespace objects
     {
         if (m_state == STAY)
         {
-            _body->ApplyForceToCenter(b2Vec2(-2000.f, 100.0f));
+            _body->ApplyForceToCenter(b2Vec2(-2500.f, 100.0f));
             m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
             m_state = MOVE_LEFT;
             return;
         }
         if (m_state == MOVE_LEFT)
         {
-            _body->ApplyForceToCenter(b2Vec2(2000.f, 100.0f));
+            _body->ApplyForceToCenter(b2Vec2(2500.f, 100.0f));
             m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
             m_state = MOVE_RIGHT;
             m_animation.sprite()->setFlipX(true);
