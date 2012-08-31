@@ -7,7 +7,7 @@
 #include "loop.hpp"
 #include "loading_screen.hpp"
 
-const static float TRANSITION_TIME = 1.f;
+const static float TRANSITION_TIME = .5f;
 
 void GameLogic::start()
 {

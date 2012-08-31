@@ -24,13 +24,15 @@ namespace objects
     Enemy::Enemy( pr::Vec2 const& position )
         : m_animation("test")
     {
+        pr::Vec2 size = pr::Vec2(m_animation.sprite()->getContentSize());
+        
         //
         //init physics
         //
         defs::dyn::OneShapeDef def;
         def.setPosition( position.tob2Vec2() );
         def.setUserData( (void*)this );
-        def.setShapeBox( 2, 2 );
+        def.setShapeBox( size.x / 2, size.y / 2 );
         def.setDensity( 1 );
         def.setFriction( 0.2f );
         def.setRestitution( 0.7f );
@@ -54,12 +56,14 @@ namespace objects
     {
         if (m_state == STAY)
         {
+            _body->ApplyForceToCenter(b2Vec2(-2000.f, 100.0f));
             m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
             m_state = MOVE_LEFT;
             return;
         }
         if (m_state == MOVE_LEFT)
         {
+            _body->ApplyForceToCenter(b2Vec2(2000.f, 100.0f));
             m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
             m_state = MOVE_RIGHT;
             m_animation.sprite()->setFlipX(true);

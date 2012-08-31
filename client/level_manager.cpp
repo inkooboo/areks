@@ -79,7 +79,7 @@ void LevelManager::loadLevel(const char *level_name)
     // 6. Create level objects
     auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
     
-    auto enemy1 = objects::Enemy::create(pr::Vec2(48.f, 16.f));
+    auto enemy1 = objects::Enemy::create(pr::Vec2(42.f, 9.5f));
 
 	//need using CCW winding for platform description!
 	std::vector<pr::Vec2> points;
@@ -123,10 +123,10 @@ void LevelManager::loadLevel(const char *level_name)
 
 	std::srand( time(0) );
 
-	size_t min_ground_y = 3;
+	size_t min_ground_y = 7;
 	for( float x = ground_coord.x - 5; x > ground_begin.x; x-=5 )
 	{
-		points.push_back( pr::Vec2( x, (rand() % 6 + min_ground_y + 1) ) );
+		points.push_back( pr::Vec2( x, (float(rand() % 2) / 2.f + min_ground_y + 1) ) );
 	}
 
 	auto platform3 = objects::Platform::create( points );
