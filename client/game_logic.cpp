@@ -46,7 +46,7 @@ void GameLogic::loadScene(cc::CCScene *new_scene, float delay)
     }
 
     m_current_scene = new_scene;
-    cc::CCDirector::sharedDirector()->getScheduler()->scheduleSelector( schedule_selector(GameLogic::onLoadScene), this, 0, false, 0, delay);
+    cc::CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(GameLogic::onLoadScene), this, 0, false, 0, delay);
 }
 
 void GameLogic::onLoadScene(float)
@@ -58,7 +58,7 @@ void GameLogic::onLoadScene(float)
     if (m_current_scene == master_t::subsystem<LoadingScreen>().scene())
     {
         m_current_scene = master_t::subsystem<View>().scene();
-        cc::CCDirector::sharedDirector()->getScheduler()->scheduleSelector( schedule_selector(GameLogic::onEndLoading), this, 0, false, 0, TRANSITION_TIME*2);
+        cc::CCDirector::sharedDirector()->getScheduler()->scheduleSelector(schedule_selector(GameLogic::onEndLoading), this, 0, false, 0, TRANSITION_TIME*2);
     }
 }
 

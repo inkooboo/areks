@@ -22,6 +22,13 @@ namespace objects
     
     class Enemy : public DynamicObject
     {
+        enum State
+        {
+              STAY
+            , MOVE_LEFT
+            , MOVE_RIGHT
+        };
+        
     public:
         static Enemy * create(const pr::Vec2 &position);
         
@@ -32,8 +39,12 @@ namespace objects
         virtual b2Body* getBody() override;
         
         virtual pr::Vec2 getPosition() const override;
+                
+        void brain_xD();
         
     private:
+        State m_state;
+        
         Enemy( pr::Vec2 const& position );
         ~Enemy();
         

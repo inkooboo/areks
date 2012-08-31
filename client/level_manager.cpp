@@ -12,6 +12,7 @@
 #include "physics.hpp"
 #include "object_manager.hpp"
 #include "player.hpp"
+#include "loop.hpp"
 
 #include "resource_utils.hpp"
 
@@ -42,8 +43,8 @@ LevelManager::LevelManager()
 
 void LevelManager::loadLevel(const char *level_name)
 {
-    // 0. Show loading splash screen
-    // TODO
+    // 0. Unschedule all
+    master_t::subsystem<Loop>().reload();
     
     // 1. Clear all objects
     master_t::subsystem<ObjectManager>().reloadObjectManager();

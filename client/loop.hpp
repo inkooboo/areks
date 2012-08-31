@@ -6,24 +6,37 @@
 
 # include <functional>
 
+typedef std::function<void()> LazyFunction;
+inline void lazyDoNothing() {};
+
 class Loop : public subsystem_t
 {
     virtual void start() override;
     virtual void stop() override;
 
 public:
-    typedef std::function<void()> LazyFunction;
-
+    struct Scheduled : public cc::CCObject
+    {
+        Scheduled(LazyFunction func, cc::CCScheduler *sched) : m_func(func), m_sched(sched) {}
+        
+        void func(float)
+        {
+            using namespace cocos2d;
+            m_sched->unscheduleSelector( schedule_selector(Scheduled::func), this);
+            m_func();
+            delete this;
+        }
+        LazyFunction m_func;
+        cc::CCScheduler *m_sched;
+    };
+    
 public:
     Loop();
-
-    void resumeTime();
-    void pauseTime();
     
-    void resumeGame();
-    void pauseGame();
+    void reload();
 
-    void executeOnce(std::function<void()>& func);
+    void executeOnce(LazyFunction func);
+    void schedule(LazyFunction func, float delay);
 
 private:
 
@@ -36,12 +49,12 @@ private:
 
         void update( float t );
 
-        void executeOnce(std::function<void()>& func);
+        void executeOnce(LazyFunction func);
 
     private:
         float _remainder;
 
-        std::vector<std::function<void()> > _exec_once;        
+        std::vector<LazyFunction> _exec_once;        
     };
     
     class ViewLoop_t : public cc::CCObject
@@ -51,7 +64,9 @@ private:
     };
     
     TimeLoop_t _time_loop;
-    ViewLoop_t _view_loop;    
+    ViewLoop_t _view_loop;
+    
+    cc::CCScheduler m_sheduler;
     //void tick(float t);
 };
 

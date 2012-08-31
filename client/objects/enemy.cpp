@@ -46,7 +46,32 @@ namespace objects
         addSprite(m_animation.sprite());
         draw();
         
-        m_animation.animate("stay");
+        m_state = STAY;
+        m_animation.animate("stay", std::bind(&Enemy::brain_xD, this));
+    }
+    
+    void Enemy::brain_xD()
+    {
+        if (m_state == STAY)
+        {
+            m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
+            m_state = MOVE_LEFT;
+            return;
+        }
+        if (m_state == MOVE_LEFT)
+        {
+            m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
+            m_state = MOVE_RIGHT;
+            m_animation.sprite()->setFlipX(true);
+            return;
+        }
+        if (m_state == MOVE_RIGHT)
+        {
+            m_animation.animate("stay", std::bind(&Enemy::brain_xD, this));
+            m_state = STAY;
+            m_animation.sprite()->setFlipX(false);
+            return;
+        }
     }
     
     Enemy::~Enemy()

@@ -11,9 +11,13 @@
 
 # include "defs.hpp"
 
+# include <loop.hpp>
+
+# include <json/value.h>
+
 # include <string>
 # include <map>
-# include <json/value.h>
+# include <functional>
 
 class Animation
 {
@@ -24,11 +28,12 @@ public:
 
     cc::CCSprite *sprite();
     
-    void animate(const std::string &name);
+    void animate(const std::string &name, LazyFunction on_animation_loop_end);
     
 private:
     Json::Value m_descr;
     cc::CCSprite *m_sprite;
+    cc::CCAction *m_cur_action;
     
     AnimationsMap m_animations;
 };

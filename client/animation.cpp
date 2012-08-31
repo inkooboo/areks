@@ -9,6 +9,7 @@
 #include "animation.hpp"
 #include "resource_utils.hpp"
 
+#include "master.hpp"
 #include <json/json.h>
 
 cc::CCSprite * Animation::sprite()
@@ -19,19 +20,19 @@ cc::CCSprite * Animation::sprite()
 
 Animation::Animation(const char *name)
     : m_sprite(0)
+    , m_cur_action(0)
 {
     std::string base_path = res::animation_base_path(name);
     
     std::string description_str = res::load_file_content(base_path + name + ".json");
     Json::Reader parser;
-    Json::Value description;
-    parser.parse(description_str, description);
+    parser.parse(description_str, m_descr);
     
-    auto action_names = description.getMemberNames();
+    auto action_names = m_descr.getMemberNames();
     for (auto it = action_names.begin(); it != action_names.end(); ++it)
     {
         std::string cur_name = *it;
-        const Json::Value &cur = description[cur_name];
+        const Json::Value &cur = m_descr[cur_name];
         assert(cur.isObject());
         
         float interval = cur["interval"].asFloat();
@@ -78,11 +79,20 @@ Animation::~Animation()
     }
 }
 
-void Animation::animate(const std::string &name)
+void Animation::animate(const std::string &name, LazyFunction on_animation_loop_end)
 {
     auto find = m_animations.find(name);
     if (find != m_animations.end())
     {
-        m_sprite->runAction(cc::CCRepeatForever::create( find->second ) );
+        if (m_cur_action)
+        {
+            m_sprite->stopAction(m_cur_action);
+        }
+        m_cur_action = cc::CCRepeatForever::create( find->second );
+        m_sprite->runAction(m_cur_action);
+        
+        float delay = m_descr[name]["interval"].asFloat() * m_descr[name]["frames"].size();
+        
+        master_t::subsystem<Loop>().schedule(on_animation_loop_end, delay);
     }
 }

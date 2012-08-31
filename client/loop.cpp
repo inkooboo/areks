@@ -11,49 +11,40 @@
 static const float DEFAULT_WORLD_TICK_TIME = 1.f/60.f;
 static const float DEFAULT_VIEW_TICK_TIME = 1.f/40.f;
 
+Loop::Loop()
+{
+    using namespace cocos2d;
+    cc::CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget( &m_sheduler, 0, false);
+}
+
 void Loop::start()
 {
-    resumeGame();
-    resumeTime();
+    using namespace cocos2d;
+    m_sheduler.scheduleUpdateForTarget( &_time_loop, 0, false);
+    m_sheduler.scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, DEFAULT_VIEW_TICK_TIME, false);
 }
 
 void Loop::stop() 
 { 
-    pauseGame();
-    pauseTime();
+    m_sheduler.unscheduleAllSelectors();
 }
 
-Loop::Loop()
+void Loop::reload()
 {
-    using namespace cocos2d;
-
-    cc::CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget( &_time_loop, 0, true);
-    cc::CCDirector::sharedDirector()->getScheduler()->scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, DEFAULT_VIEW_TICK_TIME, true);
+    stop();
+    start();
 }
 
-void Loop::resumeTime()
-{
-    cc::CCDirector::sharedDirector()->getScheduler()->resumeTarget(&_time_loop);
-}
-
-void Loop::pauseTime()
-{
-    cc::CCDirector::sharedDirector()->getScheduler()->pauseTarget(&_time_loop);
-}
-
-void Loop::resumeGame()
-{
-    cc::CCDirector::sharedDirector()->getScheduler()->resumeTarget(&_view_loop);
-}
-
-void Loop::pauseGame()
-{
-    cc::CCDirector::sharedDirector()->getScheduler()->pauseTarget(&_view_loop);
-}
-
-void Loop::executeOnce(std::function<void()>& func)
+void Loop::executeOnce(LazyFunction func)
 {
     _time_loop.executeOnce( func );
+}
+
+void Loop::schedule(LazyFunction func, float delay)
+{
+    using namespace cocos2d;
+    Scheduled *sch = new Scheduled(func, &m_sheduler);
+    m_sheduler.scheduleSelector( schedule_selector(Scheduled::func), sch, 0, false, 0, delay);
 }
 
 void Loop::TimeLoop_t::update(float t)
@@ -99,7 +90,7 @@ void Loop::TimeLoop_t::update(float t)
     master_t::subsystem<ObjectManager>().update();
 }
 
-void Loop::TimeLoop_t::executeOnce(std::function<void()>& func)
+void Loop::TimeLoop_t::executeOnce(std::function<void()> func)
 {
     _exec_once.push_back( func );
 }

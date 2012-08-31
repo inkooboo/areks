@@ -167,7 +167,7 @@ namespace objects
 			b2WorldManifold m;
 			contact->GetWorldManifold( &m );
 			pr::Vec2 p(m.points[0]);
-            master_t::subsystem<Loop>().executeOnce( (Loop::LazyFunction)std::bind(&Head::hook, this, other, p) );
+            master_t::subsystem<Loop>().executeOnce( std::bind(&Head::hook, this, other, p) );
         }
 
         pr::Vec2 Head::getPosition() const

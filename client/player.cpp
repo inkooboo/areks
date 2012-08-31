@@ -122,7 +122,7 @@ void Player::onTouchBodyBegin(ActionHandler::TouchPtr &touch)
 {
 	if( _head->getState() == objects::player::Head::HOOK )
 	{
-        master_t::subsystem<Loop>().executeOnce( (Loop::LazyFunction)std::bind(&Player::controlBodyBegin, this) );
+        master_t::subsystem<Loop>().executeOnce( std::bind(&Player::controlBodyBegin, this) );
 	}
 }
 
@@ -134,7 +134,7 @@ void Player::onTouchBodyEnd(ActionHandler::TouchPtr &touch)
 {
 	if( _mouse_joint )
 	{
-        master_t::subsystem<Loop>().executeOnce( (Loop::LazyFunction)std::bind(&Player::controlBodyEnd, this) );
+        master_t::subsystem<Loop>().executeOnce( std::bind(&Player::controlBodyEnd, this) );
 	}
 }
 
