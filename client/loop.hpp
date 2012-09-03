@@ -5,6 +5,8 @@
 # include "subsystem.hpp"
 
 # include <functional>
+# include <memory>
+# include <list>
 
 typedef std::function<void()> LazyFunction;
 inline void lazyDoNothing() {};
@@ -17,17 +19,19 @@ class Loop : public subsystem_t
 public:
     struct Scheduled : public cc::CCObject
     {
-        Scheduled(LazyFunction func, cc::CCScheduler *sched) : m_func(func), m_sched(sched) {}
+        Scheduled(LazyFunction handler, cc::CCScheduler *sched) : handler(handler), sched(sched), die_bitch(false) {}
         
         void func(float)
         {
             using namespace cocos2d;
-            m_sched->unscheduleSelector( schedule_selector(Scheduled::func), this);
-            m_func();
-            delete this;
+            sched->unscheduleSelector( schedule_selector(Scheduled::func), this);
+            handler();
+            die_bitch = true;
         }
-        LazyFunction m_func;
-        cc::CCScheduler *m_sched;
+
+        LazyFunction handler;
+        cc::CCScheduler *sched;
+        bool die_bitch;
     };
     
 public:
@@ -40,26 +44,20 @@ public:
 
 private:
 
-    class TimeLoop_t : public cc::CCObject
+    struct TimeLoop_t : public cc::CCObject
     {
-    public:
-        TimeLoop_t()
-            : _remainder(0)
-        { }
+        TimeLoop_t() : remainder(0.f) {}
 
         void update( float t );
-
         void executeOnce(LazyFunction func);
 
-    private:
-        float _remainder;
-
-        std::vector<LazyFunction> _exec_once;        
+        float remainder;
+        std::vector<LazyFunction> exec_once;        
+        std::list<std::unique_ptr<Scheduled>> scheduled_list;
     };
     
-    class ViewLoop_t : public cc::CCObject
+    struct ViewLoop_t : public cc::CCObject
     {
-    public:
         void tick( float t );   
     };
     
@@ -67,7 +65,6 @@ private:
     ViewLoop_t _view_loop;
     
     cc::CCScheduler m_sheduler;
-    //void tick(float t);
 };
 
 #endif

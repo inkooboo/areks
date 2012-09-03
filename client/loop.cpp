@@ -43,20 +43,21 @@ void Loop::executeOnce(LazyFunction func)
 void Loop::schedule(LazyFunction func, float delay)
 {
     using namespace cocos2d;
-    Scheduled *sch = new Scheduled(func, &m_sheduler);
+    _time_loop.scheduled_list.push_back(std::unique_ptr<Scheduled>(new Scheduled(func, &m_sheduler)));
+    Scheduled *sch = _time_loop.scheduled_list.back().get();
     m_sheduler.scheduleSelector( schedule_selector(Scheduled::func), sch, 0, false, 0, delay);
 }
 
 void Loop::TimeLoop_t::update(float t)
 {
-    float ft = t + _remainder;
+    float ft = t + remainder;
 
     float diff = DEFAULT_WORLD_TICK_TIME;
     while (ft > 0)
     {
         if (ft - DEFAULT_WORLD_TICK_TIME < 0)
         {
-            _remainder = ft;
+            remainder = ft;
         }
         else
         {
@@ -65,10 +66,9 @@ void Loop::TimeLoop_t::update(float t)
         ft -= DEFAULT_WORLD_TICK_TIME;
     }
 
-    t -= _remainder; // calculate real time
+    t -= remainder; // calculate real time
     
     master_t::subsystem<View>().onRescaleTick(t); // manage dynamic scale
-    
     
     auto objects = master_t::subsystem<ObjectManager>().getDynamicObjects();
     auto it = objects.begin();
@@ -80,19 +80,33 @@ void Loop::TimeLoop_t::update(float t)
     }
 
     //execute lazy calculations
-    for( auto it = _exec_once.begin(), end = _exec_once.end(); it != end; ++it )
+    for( auto it = exec_once.begin(), end = exec_once.end(); it != end; ++it )
     {
         (*it)();
     }
-    _exec_once.clear();
+    exec_once.clear();
 
     //delegate management to ObjectManager
     master_t::subsystem<ObjectManager>().update();
+
+    // remove scheduled items
+    for (auto it = scheduled_list.begin(), end = scheduled_list.end(); it != end;)
+    {
+        if ((*it)->die_bitch)
+        {
+            it = scheduled_list.erase(it);
+        }
+        else
+        {
+            ++it;
+        }
+    }
+
 }
 
 void Loop::TimeLoop_t::executeOnce(std::function<void()> func)
 {
-    _exec_once.push_back( func );
+    exec_once.push_back( func );
 }
 
 void Loop::ViewLoop_t::tick( float t )

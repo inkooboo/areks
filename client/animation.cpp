@@ -41,7 +41,7 @@ Animation::Animation(const char *name)
         assert(frames.isArray());
         
         cc::CCArray *anim_frames = cc::CCArray::create(frames.size());
-        for (int i = 0; i < frames.size(); ++i)
+        for (size_t i = 0; i < frames.size(); ++i)
         {
             std::string frame = frames[i].asString();
             
