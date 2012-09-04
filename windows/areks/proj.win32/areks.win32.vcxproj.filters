@@ -99,6 +99,7 @@
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\player\neck2.cpp">
       <Filter>source\client\objects\player</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\client\effects\flying_text.cpp">
       <Filter>source\client\effects</Filter>
     </ClCompile>
@@ -244,6 +245,7 @@
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\player\neck2.hpp">
       <Filter>source\client\objects\player</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\client\effects\flying_text.hpp">
       <Filter>source\client\effects</Filter>
     </ClInclude>
