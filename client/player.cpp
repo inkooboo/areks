@@ -129,7 +129,7 @@ void Player::onTouchBodyMove(ActionHandler::TouchPtr &touch)
 	{
 		static_cast<b2MouseJoint*>(_mouse_joint)->SetTarget( master_t::subsystem<View>().toWorldCoordinates(touch->to).tob2Vec2() );
 		static size_t t = 0;
-		if( t == 33 )
+		if( t == 30 )
 		{
 			_neck->shorten();
 			t = 0;

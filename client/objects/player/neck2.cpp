@@ -158,10 +158,15 @@ namespace objects
 		{
 			if( _sticks_bodies.size() > 1 )
 			{
+				//if too far from body to first stick then do nothing
+				float distance = pr::distance( pr::Vec2(_distance_joints[0]->GetAnchorA()), pr::Vec2(_distance_joints[0]->GetAnchorB()) );
+				if( distance > 2*NECK2_STICK_DIAMETER ) return;
+
 				Physics& physics = master_t::subsystem<Physics>();
 
 				physics.worldEngine()->DestroyBody( *(_sticks_bodies.begin()) );
 				_sticks_bodies.erase( _sticks_bodies.begin() );
+
 
 				removeSprite( *(_sticks_sprites.begin()) );
 				_sticks_sprites.erase( _sticks_sprites.begin() );
@@ -173,6 +178,12 @@ namespace objects
 				_distance_def.Initialize( player_body, first_stick, player_body->GetPosition(), first_stick->GetPosition() );
 				_distance_def.length = NECK2_STICK_RADIUS;
 				_distance_joints[0] = static_cast<b2DistanceJoint*>( physics.worldEngine()->CreateJoint( &_distance_def ) );
+
+				//give some impulse to body to speed up shorten
+				pr::Vec2 impulse = pr::Vec2(first_stick->GetPosition()) - pr::Vec2(player_body->GetPosition());
+				impulse.normalize();
+				impulse *= player_body->GetMass();
+				player_body->ApplyLinearImpulse( impulse.tob2Vec2(), player_body->GetPosition() );
 			}
 		}
 
