@@ -33,11 +33,16 @@ namespace primitives
 
     Vec2& Vec2::normalize()
     {
-        float d = sqrt( x*x + y*y );
+		float d = this->length();
         x /= d;
         y /= d;
         return *this;
     }
+
+	float Vec2::length() const
+	{
+		return sqrt( x*x + y*y );
+	}
 
     float distance( Vec2 const& a, Vec2 const& b )
     {

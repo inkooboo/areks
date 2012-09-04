@@ -50,6 +50,7 @@ namespace filter
         PLATFORMS = 1,
 		OBJECTS = 1 << 1,
 		HEAD = 1 << 2,
+		NECK = 1 << 3,
 
 		ALL = 0xffff
     };

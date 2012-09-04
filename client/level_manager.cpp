@@ -79,7 +79,7 @@ void LevelManager::loadLevel(const char *level_name)
     // 6. Create level objects
     auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
     
-    auto enemy1 = objects::Enemy::create(pr::Vec2(48.5f, 9.5f));
+    auto enemy1 = objects::Enemy::create(pr::Vec2(40.5f, 9.5f));
 
 	//need using CCW winding for platform description!
 	std::vector<pr::Vec2> points;

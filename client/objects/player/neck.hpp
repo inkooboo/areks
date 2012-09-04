@@ -32,14 +32,22 @@ namespace objects
 
 			~Neck();
 
+			float getTension();
+
+			void shorten(float length);			
+
 		private:
 			Neck( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body );
 
 			std::vector<b2Body*> _sticks_bodies;
 			std::vector<cc::CCSprite*> _sticks_sprites;
 
-			std::vector<b2Joint*> _connections_bodies;
+			std::vector<b2RevoluteJoint*> _revolute_joints;
+			std::vector<b2DistanceJoint*> _distance_joints;
 			std::vector<cc::CCSprite*> _connections_sprites;
+
+			b2RevoluteJointDef _revolute_def;
+			b2DistanceJointDef _distance_def;
 		};
         
     }//end namespace player

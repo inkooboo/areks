@@ -40,6 +40,7 @@ public:
     void step( float dt );
 
     BaseObject* getObject(pr::Vec2 const& point);
+	bool checkObject(pr::Vec2 const& point, BaseObject* obj);
 
     BodyOwner CreateBody( defs::OneShapeBaseDef& def );
 

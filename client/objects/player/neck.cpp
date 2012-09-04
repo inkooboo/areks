@@ -38,6 +38,13 @@ namespace objects
 			//
 
 			size_t stick_count = distance/NECK_METER_IN_STICK; //length of stick: METER_IN_STICK < stick_length < METER_IN_STICK*2
+
+			//minimum stick count = 1
+			if(stick_count == 0)
+			{
+				stick_count = 1;
+			}
+
 			float stick_length = distance/stick_count;
 
 			//prepare rope sticks
@@ -64,20 +71,19 @@ namespace objects
 			stick_shape.SetAsBox( stick_length/2, NECK_WIDTH/2 );
 
 			//prepare revolute joint definition
-			b2RevoluteJointDef revolute_def;
-			revolute_def.collideConnected = false;
+			_revolute_def.collideConnected = false;
 
 			//prepare distance joint definition
-			b2DistanceJointDef distance_def;
-			distance_def.collideConnected = false;
+			_distance_def.collideConnected = false;
+			_distance_def.dampingRatio = 0;
 
 			//prepare fixtures definition
 			b2FixtureDef fixture_def;
 			fixture_def.friction = NECK_FRICTION;
 			fixture_def.density = NECK_DENSITY;
 			fixture_def.shape = &stick_shape;
-			fixture_def.filter.categoryBits = 0x0001;
-			fixture_def.filter.maskBits = 0x0002;
+			fixture_def.filter.categoryBits = filter::NECK;
+			fixture_def.filter.maskBits = filter::PLATFORMS;
 
 			//calculate dx and dy for sticks
 			float dx = (b_point.x - a_point.x)/stick_count;
@@ -101,22 +107,22 @@ namespace objects
 				cur_body->CreateFixture( &fixture_def );
 
 				b2Vec2 anchor(a_point.x + dx*i, a_point.y + dy*i);
-				revolute_def.Initialize(prev_body, cur_body, anchor);
-				_connections_bodies.push_back( worldEngine->CreateJoint( &revolute_def ) );
+				_revolute_def.Initialize(prev_body, cur_body, anchor);
+				_revolute_joints.push_back( static_cast<b2RevoluteJoint*>(worldEngine->CreateJoint( &_revolute_def )) );
 
-				distance_def.Initialize( prev_body, cur_body, b2Vec2( a_point.x + dx*i - dx/16, a_point.y + dy*i - dy/16 ), b2Vec2( a_point.x + dx*i + dx/16, a_point.y + dy*i + dy/16 ) );
+				_distance_def.Initialize( prev_body, cur_body, b2Vec2( a_point.x + dx*i - dx/16, a_point.y + dy*i - dy/16 ), b2Vec2( a_point.x + dx*i + dx/16, a_point.y + dy*i + dy/16 ) );
 				//distance_def.Initialize( prev_body, cur_body, prev_body->GetWorldCenter(), cur_body->GetWorldCenter() );
-				worldEngine->CreateJoint( &distance_def );
+				_distance_joints.push_back( static_cast<b2DistanceJoint*>(worldEngine->CreateJoint( &_distance_def )) );
 
 				prev_body = cur_body;                        
 			}
 
 			b2Vec2 anchor(b_point.x, b_point.y);
-			revolute_def.Initialize(cur_body, b_body, anchor);
-			_connections_bodies.push_back( worldEngine->CreateJoint( &revolute_def ) );
+			_revolute_def.Initialize(cur_body, b_body, anchor);
+			_revolute_joints.push_back( static_cast<b2RevoluteJoint*>(worldEngine->CreateJoint( &_revolute_def )) );
 
-			distance_def.Initialize( prev_body, b_body, b2Vec2(anchor.x - dx/16, anchor.y - dy/16), b2Vec2(anchor.x + dx/16, anchor.y + dy/16) );
-			worldEngine->CreateJoint( &distance_def );
+			_distance_def.Initialize( prev_body, b_body, b2Vec2(anchor.x - dx/16, anchor.y - dy/16), b2Vec2(anchor.x + dx/16, anchor.y + dy/16) );
+			_distance_joints.push_back( static_cast<b2DistanceJoint*>(worldEngine->CreateJoint( &_distance_def )) );
 
 			////init RopeJoint for stablizing rope
 			//b2RopeJointDef ropeDef;
@@ -148,8 +154,8 @@ namespace objects
 			}
 
 			{
-				auto it = _connections_bodies.begin();
-				auto end = _connections_bodies.end();
+				auto it = _revolute_joints.begin();
+				auto end = _revolute_joints.end();
 
 				unsigned char color[] = {0, 0, 0};
 				cc::CCTexture2D* texture = new cc::CCTexture2D();
@@ -193,9 +199,9 @@ namespace objects
 				drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
 			}
 
-			for(size_t i=0; i<_connections_bodies.size(); ++i)
+			for(size_t i=0; i<_revolute_joints.size(); ++i)
 			{
-				drawSpriteHelper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
+				drawSpriteHelper( _connections_sprites[i], _revolute_joints[i]->GetAnchorA(), 0 );
 			}
 		}
 
@@ -239,17 +245,43 @@ namespace objects
 
 		void Neck::deleteJoint( b2Joint* joint )
 		{
-			auto it = std::find( _connections_bodies.begin(), _connections_bodies.end(), joint );
+			auto it = std::find( _revolute_joints.begin(), _revolute_joints.end(), joint );
 			//assert( it != _connections_bodies.end() );
-			if( it != _connections_bodies.end() )
+			if( it != _revolute_joints.end() )
 			{
-				_connections_bodies.erase( it );
+				_revolute_joints.erase( it );
 			}
 		}
 
 		pr::Vec2 Neck::getPosition() const
 		{
 			return pr::Vec2(0,0);
+		}
+
+		float Neck::getTension()
+		{
+			float ret = 0;
+			for( auto it = _distance_joints.begin(), end = _distance_joints.end(); it != end; ++it )
+			{
+				ret += pr::Vec2((*it)->GetReactionForce(0.5f)).length();
+			}
+			return ret;
+		}
+
+		void Neck::shorten(float length)
+		{
+			if( _sticks_bodies.size() > 1 )
+			{
+				Physics& physics = master_t::subsystem<Physics>();
+
+				physics.worldEngine()->DestroyBody( _sticks_bodies[0] );
+				_sticks_bodies.erase( _sticks_bodies.begin() );
+				_sticks_sprites.erase( _sticks_sprites.begin() );
+
+				_revolute_joints.erase( _revolute_joints.begin() );
+				_distance_joints.erase( _distance_joints.begin() );
+				_connections_sprites.erase( _connections_sprites.begin() );
+			}
 		}
 
         

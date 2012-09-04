@@ -88,6 +88,8 @@ namespace primitives
 
         Vec2& absolutize();
         Vec2& normalize();
+
+		float length() const;
         
 };
 

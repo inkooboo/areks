@@ -51,16 +51,15 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         // 1. first scale touch OR
         // 2. possible view move touch OR
         // 3. main hero selection
-		BaseObject* obj = master_t::subsystem<Physics>().getObject( view.toWorldCoordinates(touch->begin) );
-		if( obj && obj == static_cast<BaseObject*>( player.getBody() ) )
+		if( master_t::subsystem<Physics>().checkObject( view.toWorldCoordinates(touch->begin), static_cast<BaseObject*>(player.getBody()) ) )
 		{
 			player.onTouchBodyBegin(touch);
-			touch->on_move = std::bind(&Player::onTouchBodyMove, player, std::placeholders::_1); 
-			touch->on_end = std::bind(&Player::onTouchBodyEnd, player, std::placeholders::_1);
+			touch->on_move = std::bind(&Player::onTouchBodyMove, &player, std::placeholders::_1); 
+			touch->on_end = std::bind(&Player::onTouchBodyEnd, &player, std::placeholders::_1);
 		}
 		else
 		{
-			touch->on_end = std::bind(&Player::onTouchTarget, player, std::placeholders::_1);
+			touch->on_end = std::bind(&Player::onTouchTarget, &player, std::placeholders::_1);
 		}
 		//touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
     }

@@ -100,6 +100,38 @@ BaseObject* Physics::getObject( pr::Vec2 const& point )
     return callback.result_obj;
 }
 
+class CheckObjectQueryCallback : public b2QueryCallback
+{
+public:
+    CheckObjectQueryCallback(BaseObject* obj)
+        : result(false)
+		, obj(obj)
+    { }
+
+    bool ReportFixture(b2Fixture* fixture)
+    {
+        result = (obj == static_cast<BaseObject*>(fixture->GetBody()->GetUserData()) );
+
+        // Return false to break the query or true to continue.
+        return (!result);
+    }
+
+    bool result;
+	BaseObject* obj;
+};
+
+bool Physics::checkObject(pr::Vec2 const& point, BaseObject* obj)
+{
+    b2AABB aabb;
+    aabb.lowerBound = b2Vec2( point.x - TOUCH_ACCURACY, point.y - TOUCH_ACCURACY );
+    aabb.upperBound = b2Vec2( point.x + TOUCH_ACCURACY, point.y + TOUCH_ACCURACY );
+    
+    CheckObjectQueryCallback callback(obj);
+    _b2World_ptr->QueryAABB( &callback, aabb );
+
+    return callback.result;	
+}
+
 BodyOwner Physics::CreateBody( defs::OneShapeBaseDef& def )
 {
     assert( def.check() && "Error in init body!" );
