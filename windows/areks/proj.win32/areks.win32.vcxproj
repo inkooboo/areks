@@ -136,6 +136,8 @@
     <ClInclude Include="..\..\..\client\app_delegate.h" />
     <ClInclude Include="..\..\..\client\body_definitions.hpp" />
     <ClInclude Include="..\..\..\client\defs.hpp" />
+    <ClInclude Include="..\..\..\client\effects\effect_base.hpp" />
+    <ClInclude Include="..\..\..\client\effects\flying_text.hpp" />
     <ClInclude Include="..\..\..\client\game_logic.hpp" />
     <ClInclude Include="..\..\..\client\level_manager.hpp" />
     <ClInclude Include="..\..\..\client\loading_screen.hpp" />
@@ -183,6 +185,8 @@
     <ClCompile Include="..\..\..\client\animation.cpp" />
     <ClCompile Include="..\..\..\client\app_delegate.cpp" />
     <ClCompile Include="..\..\..\client\body_definitions.cpp" />
+    <ClCompile Include="..\..\..\client\effects\effect_base.cpp" />
+    <ClCompile Include="..\..\..\client\effects\flying_text.cpp" />
     <ClCompile Include="..\..\..\client\game_logic.cpp" />
     <ClCompile Include="..\..\..\client\level_manager.cpp" />
     <ClCompile Include="..\..\..\client\loading_screen.cpp" />

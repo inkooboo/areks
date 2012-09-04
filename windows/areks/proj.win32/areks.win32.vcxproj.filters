@@ -99,6 +99,11 @@
     </ClCompile>
     <ClCompile Include="..\..\..\client\objects\player\neck2.cpp">
       <Filter>source\client\objects\player</Filter>
+    <ClCompile Include="..\..\..\client\effects\flying_text.cpp">
+      <Filter>source\client\effects</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\effects\effect_base.cpp">
+      <Filter>source\client\effects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +244,11 @@
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\player\neck2.hpp">
       <Filter>source\client\objects\player</Filter>
+    <ClInclude Include="..\..\..\client\effects\flying_text.hpp">
+      <Filter>source\client\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\effects\effect_base.hpp">
+      <Filter>source\client\effects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -280,6 +290,9 @@
     </Filter>
     <Filter Include="source\client\subsystems">
       <UniqueIdentifier>{119ba086-770d-463e-99ca-8c23d0995116}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="source\client\effects">
+      <UniqueIdentifier>{d137a6d9-1d71-4a17-8e0d-4ee53cd28373}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -8,10 +8,12 @@
 #ifndef __SUBSYSTEM_HPP__
 # define __SUBSYSTEM_HPP__
 
+# include "noncopyable.hpp"
+
 /** @class subsystem_t
  * @brief Interface for managed subsystem.
  */
-class subsystem_t
+class subsystem_t : private noncopyable_t
 {
 public:
     virtual void start() {}
