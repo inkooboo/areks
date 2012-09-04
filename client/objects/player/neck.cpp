@@ -9,7 +9,7 @@
 #define NECK_METER_IN_STICK (float)0.5
 #define NECK_WIDTH (float)0.25
 //ROPE_DENSITY - mass of rope
-#define NECK_DENSITY 0.5
+#define NECK_DENSITY 1.0f
 #define NECK_FRICTION (float)0.0
 
 

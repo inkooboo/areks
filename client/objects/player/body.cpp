@@ -16,7 +16,7 @@ namespace objects
         
         Body::Body( pr::Vec2 const& position )
         {
-            static const pr::Vec2 size = pr::Vec2( 1, 1 );
+            static const pr::Vec2 size = pr::Vec2( 1.5f, 1.5f );
             //
             //init physics
             //

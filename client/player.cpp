@@ -2,6 +2,7 @@
 
 #include "objects/player/body.hpp"
 #include "objects/player/head.hpp"
+#include "objects/player/neck2.hpp"
 #include "objects/player/neck.hpp"
 
 #include "master.hpp"
@@ -84,7 +85,7 @@ objects::player::Head* Player::getHead()
     return _head;
 }
 
-objects::player::Neck* Player::getNeck()
+objects::player::Neck2* Player::getNeck()
 {
     assert( _neck && "Player neck don't exist!");
     return _neck;
@@ -98,12 +99,12 @@ float Player::getNeckMaxLength() const
 void Player::createNeck()
 {
 	assert( !_neck && "Should not create more than one neck!" );
-	_neck = objects::player::Neck::create( _body->getPosition(), _body, _head->getPosition(), _head );
+	_neck = objects::player::Neck2::create( _body->getPosition(), _body, _head->getPosition(), _head );
 }
 
 void Player::destroyNeck()
 {
-	assert( _neck && "Neck don't exist!" );
+	assert( _neck && "Neck2 don't exist!" );
 	_neck->destroy();
 	_neck = 0;
 }
@@ -127,6 +128,13 @@ void Player::onTouchBodyMove(ActionHandler::TouchPtr &touch)
 	if(_mouse_joint)
 	{
 		static_cast<b2MouseJoint*>(_mouse_joint)->SetTarget( master_t::subsystem<View>().toWorldCoordinates(touch->to).tob2Vec2() );
+		static size_t t = 0;
+		if( t == 33 )
+		{
+			_neck->shorten();
+			t = 0;
+		}
+		else ++t;
 	}
 }
 

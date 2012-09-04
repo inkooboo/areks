@@ -131,7 +131,7 @@ void LevelManager::loadLevel(const char *level_name)
 
 	auto platform3 = objects::Platform::create( points );
 
-	master_t::subsystem<Player>().createAvatar( pr::Vec2(ground_begin.x + 40.f, min_ground_y + 8) );
+	master_t::subsystem<Player>().createAvatar( pr::Vec2(ground_begin.x + 37.f, min_ground_y + 25) );
 
     //auto platform00 = objects::Platform::create( pr::Vec2(0, 0), pr::Vec2(1, 1) );
     //auto platformx0 = objects::Platform::create( pr::Vec2(world_size.x, 0), pr::Vec2(1, 1) );

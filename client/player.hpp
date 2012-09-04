@@ -15,7 +15,7 @@ namespace objects
     {
         class Head;
         class Body;
-		class Neck;
+		class Neck2;
     }//end namespace player
     
 }//end namespace objects
@@ -45,7 +45,7 @@ public:
 
     objects::player::Body* getBody();
     objects::player::Head* getHead();
-	objects::player::Neck* getNeck();
+	objects::player::Neck2* getNeck();
 
 public:
 	void onTouchTarget(ActionHandler::TouchPtr &touch);
@@ -60,7 +60,7 @@ private:
 
     objects::player::Body* _body;
     objects::player::Head* _head;
-	objects::player::Neck* _neck;
+	objects::player::Neck2* _neck;
     static const float _neck_max_lenght;
 
 	//for testing
