@@ -244,6 +244,7 @@
 		849BF74F15F7431700F2972D /* effect_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF74B15F7431700F2972D /* effect_base.cpp */; };
 		849BF75015F7431700F2972D /* flying_text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF74D15F7431700F2972D /* flying_text.cpp */; };
 		849BF75315F74FCC00F2972D /* effect_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF75115F74FCB00F2972D /* effect_manager.cpp */; };
+		849BF75715F7702000F2972D /* arrow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF75515F7702000F2972D /* arrow.cpp */; };
 		84B5213415EE3D1F00F149A8 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212415EE3D1F00F149A8 /* animations */; };
 		84B5213515EE3D1F00F149A8 /* bg_sound in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212515EE3D1F00F149A8 /* bg_sound */; };
 		84B5213615EE3D1F00F149A8 /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212615EE3D1F00F149A8 /* config.txt */; };
@@ -809,6 +810,8 @@
 		849BF74E15F7431700F2972D /* flying_text.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = flying_text.hpp; path = effects/flying_text.hpp; sourceTree = "<group>"; };
 		849BF75115F74FCB00F2972D /* effect_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = effect_manager.cpp; sourceTree = "<group>"; };
 		849BF75215F74FCB00F2972D /* effect_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = effect_manager.hpp; sourceTree = "<group>"; };
+		849BF75515F7702000F2972D /* arrow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = arrow.cpp; path = effects/arrow.cpp; sourceTree = "<group>"; };
+		849BF75615F7702000F2972D /* arrow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = arrow.hpp; path = effects/arrow.hpp; sourceTree = "<group>"; };
 		84B5212415EE3D1F00F149A8 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = animations; path = ../../../resources/animations; sourceTree = "<group>"; };
 		84B5212515EE3D1F00F149A8 /* bg_sound */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bg_sound; path = ../../../resources/bg_sound; sourceTree = "<group>"; };
 		84B5212615EE3D1F00F149A8 /* config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.txt; path = ../../../resources/config.txt; sourceTree = "<group>"; };
@@ -1934,6 +1937,8 @@
 				849BF74C15F7431700F2972D /* effect_base.hpp */,
 				849BF74D15F7431700F2972D /* flying_text.cpp */,
 				849BF74E15F7431700F2972D /* flying_text.hpp */,
+				849BF75515F7702000F2972D /* arrow.cpp */,
+				849BF75615F7702000F2972D /* arrow.hpp */,
 			);
 			name = effects;
 			sourceTree = "<group>";
@@ -2314,6 +2319,7 @@
 				849BF74F15F7431700F2972D /* effect_base.cpp in Sources */,
 				849BF75015F7431700F2972D /* flying_text.cpp in Sources */,
 				849BF75315F74FCC00F2972D /* effect_manager.cpp in Sources */,
+				849BF75715F7702000F2972D /* arrow.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

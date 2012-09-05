@@ -36,9 +36,7 @@ namespace effects
         m_position.x += dt;
         m_position.y += dt;
         
-        cc::CCPoint screen_cood = master_t::subsystem<View>().toScreenCoordinates(m_position);
-
-        m_label->setPosition(screen_cood);
+        master_t::subsystem<View>().drawSpriteHelper(m_label, m_position, 0);
     }
 
     cc::CCNode * FlyingText::node()

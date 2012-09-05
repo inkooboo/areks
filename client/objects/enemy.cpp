@@ -59,6 +59,12 @@ namespace objects
             _body->ApplyForceToCenter(b2Vec2(-2500.f, 100.0f));
             m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
             m_state = MOVE_LEFT;
+            
+            
+            /// add test arrow effect
+            pr::Vec2 position(_body->GetPosition());
+            m_arrow = effects::Arrow::create(position, master_t::subsystem<View>().gameLayer(), b2_pi, 0.5f);
+            ///
             return;
         }
         if (m_state == MOVE_LEFT)
@@ -67,6 +73,12 @@ namespace objects
             m_animation.animate("move", std::bind(&Enemy::brain_xD, this));
             m_state = MOVE_RIGHT;
             m_animation.sprite()->setFlipX(true);
+
+            
+            /// add test arrow effect
+            pr::Vec2 position(_body->GetPosition());
+            m_arrow = effects::Arrow::create(position, master_t::subsystem<View>().gameLayer(), 0, 0.5f);
+            ///
             return;
         }
         if (m_state == MOVE_RIGHT)
@@ -86,7 +98,15 @@ namespace objects
     
     void Enemy::draw()
     {
-        master_t::subsystem<View>().drawSpriteHelper( m_animation.sprite(), pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
+        pr::Vec2 position(_body->GetPosition());
+        master_t::subsystem<View>().drawSpriteHelper( m_animation.sprite(), position, _body->GetAngle() );
+        
+        auto effect = m_arrow.lock();
+        if (effect)
+        {
+            effect->update_position(position);
+            effect->update_direction(_body->GetAngle());
+        }
     }
     
     void Enemy::updateState( float t )

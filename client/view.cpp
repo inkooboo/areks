@@ -128,12 +128,12 @@ cc::CCPoint View::toScreenCoordinates(pr::Vec2 world_coord) const
 {
     world_coord += m_half_screen_in_world_size;
     world_coord -= m_cur_positon;
-    return cc::CCPoint(pixelToScreen(worldToPixel(world_coord.x)), pixelToScreen(worldToPixel(world_coord.y)));
+    return cc::CCPoint(pixelToScreen(worldToPixel(world_coord.x)), /*m_size.height - */pixelToScreen(worldToPixel(world_coord.y)));
 }
 
 pr::Vec2 View::toWorldCoordinates(cc::CCPoint screen_coord) const
 {
-    pr::Vec2 world_coord = pr::Vec2(pixelToWorld(screenToPixel(screen_coord.x)), pixelToWorld(screenToPixel(m_size.height - screen_coord.y)));
+    pr::Vec2 world_coord = pr::Vec2(pixelToWorld(screenToPixel(screen_coord.x)), pixelToWorld(screenToPixel(/*m_size.height - */screen_coord.y)));
     world_coord += m_cur_positon;
     world_coord -= m_half_screen_in_world_size;
     return world_coord;
@@ -251,7 +251,7 @@ void View::moveView(float dx, float dy)
     float y_margin = m_half_screen_in_world_size.y;
     
     dx = -pixelToWorld(screenToPixel(dx));
-    dy = pixelToWorld(screenToPixel(dy));
+    dy = -pixelToWorld(screenToPixel(dy));
     
     pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
     

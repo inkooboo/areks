@@ -8,6 +8,7 @@
 #include "physics.hpp"
 #include "objects/base_object.hpp"
 #include "objects/player/body.hpp"
+#include "objects/ball.hpp"
 
 void ActionHandler::start()
 {
@@ -32,10 +33,16 @@ void ActionHandler::disable()
     cc::CCDirector::sharedDirector()->getTouchDispatcher()->removeDelegate(this);
 }
 
+cc::CCPoint invert_y_coord(cc::CCPoint pos)
+{
+    pos.y = cc::CCDirector::sharedDirector()->getWinSize().height - pos.y;
+    return pos;
+}
+
 //touches handle
 bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 {
-    cc::CCPoint location = pTouch->locationInView();
+    cc::CCPoint location = invert_y_coord(pTouch->locationInView());
     int id = pTouch->getID();
     
     TouchPtr touch = std::make_shared<Touch>();
@@ -51,6 +58,11 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         // 1. first scale touch OR
         // 2. possible view move touch OR
         // 3. main hero selection
+#ifdef DEBUG_VIEW_FUNCTIONALITY
+        auto ball = objects::Ball::create(view.toWorldCoordinates(touch->begin));
+        
+		touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
+#else
 		if( master_t::subsystem<Physics>().checkObject( view.toWorldCoordinates(touch->begin), static_cast<BaseObject*>(player.getBody()) ) )
 		{
 			player.onTouchBodyBegin(touch);
@@ -61,19 +73,21 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 		{
 			touch->on_end = std::bind(&Player::onTouchTarget, &player, std::placeholders::_1);
 		}
-		//touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
+#endif
     }
     
-    //if (m_touches.size() == 1)
-    //{
-    //    //scale second touch
-    //    TouchPtr first_touch = m_touches.begin()->second;
-    //    first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
-    //    first_touch->on_end = std::bind(&View::onTouchEnd, &view, first_touch);
-    //    touch->on_end = std::bind(&View::onTouchEnd, &view, std::placeholders::_1);
-    //    touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
-    //}
-    //
+#ifdef DEBUG_VIEW_FUNCTIONALITY
+    if (m_touches.size() == 1)
+    {
+        //scale second touch
+        TouchPtr first_touch = m_touches.begin()->second;
+        first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
+        first_touch->on_end = std::bind(&View::onTouchEnd, &view, first_touch);
+        touch->on_end = std::bind(&View::onTouchEnd, &view, std::placeholders::_1);
+        touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
+    }
+#endif
+    
     
     
     ///
@@ -89,7 +103,7 @@ void ActionHandler::ccTouchMoved (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 {
     TouchPtr &touch = m_touches[pTouch->getID()];
 
-    touch->to = pTouch->locationInView();
+    touch->to = invert_y_coord(pTouch->locationInView());
 
     if (touch->on_move)
     {
@@ -105,7 +119,7 @@ void ActionHandler::ccTouchEnded (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     
     TouchPtr &touch = m_touches[id];
     
-    touch->end = pTouch->locationInView();
+    touch->end = invert_y_coord(pTouch->locationInView());
     
     if (touch->on_end)
     {

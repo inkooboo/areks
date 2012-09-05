@@ -11,6 +11,7 @@ void EffectManager::start()
 
 void EffectManager::stop()
 {
+    m_effects_list.clear();
 }
 
 EffectManager::EffectManager()

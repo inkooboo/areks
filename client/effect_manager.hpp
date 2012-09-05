@@ -16,6 +16,9 @@ public:
     EffectManager();
     
     void reload();
+
+    
+public: //do not call methods belo directly
     
     void update_effects(float dt);
     
