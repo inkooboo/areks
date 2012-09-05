@@ -105,7 +105,14 @@ namespace objects
         if (effect)
         {
             effect->update_position(position);
-            effect->update_direction(_body->GetAngle());
+            if (m_state == MOVE_LEFT)
+            {
+                effect->update_direction(b2_pi + _body->GetAngle());
+            }
+            else
+            {
+                effect->update_direction(_body->GetAngle());
+            }
         }
     }
     
