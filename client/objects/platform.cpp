@@ -85,18 +85,18 @@ namespace objects
 		_sprite = PolygonSprite::create( tex, triangles, rect );
 		_sprite->setPosition( _center.toCCPoint() );
         
-		addSprite(_sprite);
+        master_t::subsystem<View>().addSprite(_sprite);
         draw();
     }
 
     Platform::~Platform()
     {
-        removeSprite(_sprite);
+        master_t::subsystem<View>().removeSprite(_sprite);
     }
         
     void Platform::draw()
     {
-        drawSpriteHelper(_sprite, _center.toCCPoint(), 0);
+        master_t::subsystem<View>().drawSpriteHelper(_sprite, _center.toCCPoint(), 0);
     }
 
     b2Body* Platform::getBody()

@@ -30,7 +30,7 @@ void Player::stop()
     _neck = 0;
 }
 
-void Player::reloadPlayer()
+void Player::reload()
 {
     stop();
     start();

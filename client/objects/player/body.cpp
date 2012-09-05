@@ -3,6 +3,8 @@
 #include "master.hpp"
 #include "physics.hpp"
 
+#include "view.hpp"
+
 namespace objects
 {
 
@@ -44,17 +46,17 @@ namespace objects
             
             draw();
 
-            addSprite(_sprite);
+            master_t::subsystem<View>().addSprite(_sprite);
         }
         
         Body::~Body()
         {
-            removeSprite(_sprite);
+            master_t::subsystem<View>().removeSprite(_sprite);
         }
         
         void Body::draw()
         {
-            drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
+            master_t::subsystem<View>().drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
         }
 
         void Body::updateState( float t )

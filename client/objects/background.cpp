@@ -42,20 +42,20 @@ namespace objects
         cc::ccBlendFunc func = {GL_ONE, GL_ZERO};
         _sprite_base->setBlendFunc( func );
 
-        addSprite(_sprite_base, -2);
+        master_t::subsystem<View>().addSprite(_sprite_base, -2);
 
         _sprite_lvl_1 = cocos2d::CCSprite::create(file_name_lvl_1.c_str());
         cc::ccBlendFunc blendFunc = {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA};
         _sprite_lvl_1->setBlendFunc( blendFunc );
         
-        addSprite(_sprite_lvl_1, -1);
+        master_t::subsystem<View>().addSprite(_sprite_lvl_1, -1);
         draw();
     }
 
     Background::~Background()
     {
-        removeSprite(_sprite_base);
-        removeSprite(_sprite_lvl_1);
+        master_t::subsystem<View>().removeSprite(_sprite_base);
+        master_t::subsystem<View>().removeSprite(_sprite_lvl_1);
     }
         
     void Background::draw()
@@ -63,7 +63,7 @@ namespace objects
         pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
         world_size *= .5;
 
-        drawSpriteHelper(_sprite_base, world_size, 0);
+        master_t::subsystem<View>().drawSpriteHelper(_sprite_base, world_size, 0);
         
         View &v = master_t::subsystem<View>();
 

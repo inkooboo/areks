@@ -16,7 +16,7 @@ class ObjectManager : public subsystem_t
 public:
     ObjectManager();
     
-    void reloadObjectManager();
+    void reload();
     
     //don't uses this methods manually!
     void registerObject( BaseObject* obj_ptr );
@@ -28,10 +28,10 @@ public:
 
     void destroyObject( BaseObject* obj_ptr );
 
-    std::vector< BaseObject* >& getObjects();
-    std::vector< DynamicObject* >& getDynamicObjects();
-
-    void update();
+    void update_dynamic_objects_state(float dt);
+    void update_objects(float dt);
+    
+    void collect_garbage_objects();
     
 private:
     std::vector< BaseObject* > _objects;

@@ -41,7 +41,7 @@ public:
 	void createNeck();
 	void destroyNeck();
 
-    void reloadPlayer();
+    void reload();
 
     objects::player::Body* getBody();
     objects::player::Head* getHead();

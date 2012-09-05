@@ -18,7 +18,10 @@ namespace effects
 
     struct EffectBase : private noncopyable_t
     {
-        void schedule_deletion(cc::CCNode *effect_node);
+        virtual ~EffectBase() = 0;
+
+        virtual void update(float dt) = 0;
+        virtual cc::CCNode * node() = 0;
     };
 }
 

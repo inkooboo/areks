@@ -4,6 +4,7 @@
 #include "player.hpp"
 #include "physics.hpp"
 #include "loop.hpp"
+#include "view.hpp"
 
 #include "body.hpp"
 
@@ -57,7 +58,7 @@ namespace objects
             
             draw();
 
-            addSprite(_sprite);
+            master_t::subsystem<View>().addSprite(_sprite);
 
 			//
 			//extend init
@@ -68,12 +69,12 @@ namespace objects
         
         Head::~Head()
         {
-            removeSprite(_sprite);
+            master_t::subsystem<View>().removeSprite(_sprite);
         }
         
         void Head::draw()
         {
-            drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
+            master_t::subsystem<View>().drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
         }
 
         void Head::updateState( float t )

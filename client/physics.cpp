@@ -33,7 +33,7 @@ Physics::Physics()
 {
 }
 
-void Physics::reloadWorldParams(pr::Vec2 world_size)
+void Physics::reload(pr::Vec2 world_size)
 {
     stop();
     start();

@@ -165,7 +165,7 @@ namespace objects
             auto end = _sticks_sprites.end();
             for( ; it!=end; ++it )
             {
-                addSprite(*it);
+                master_t::subsystem<View>().addSprite(*it);
             }
 
         }
@@ -175,7 +175,7 @@ namespace objects
             auto end = _connections_sprites.end();
             for( ; it!=end; ++it )
             {
-                addSprite(*it);
+                master_t::subsystem<View>().addSprite(*it);
             }
 
         }
@@ -186,12 +186,12 @@ namespace objects
     {
         for(size_t i=0; i<_sticks_bodies.size(); ++i)
         {
-            drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
+            master_t::subsystem<View>().drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
         }
 
         for(size_t i=0; i<_connections_bodies.size(); ++i)
         {
-            drawSpriteHelper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
+            master_t::subsystem<View>().drawSpriteHelper( _connections_sprites[i], _connections_bodies[i]->GetAnchorA(), 0 );
         }
     }
 
@@ -206,7 +206,7 @@ namespace objects
             auto end = _sticks_sprites.end();
             for( ; it!=end; ++it )
             {
-                removeSprite(*it);
+                master_t::subsystem<View>().removeSprite(*it);
             }
         }
         {
@@ -214,7 +214,7 @@ namespace objects
             auto end = _connections_sprites.end();
             for( ; it!=end; ++it )
             {
-                removeSprite(*it);
+                master_t::subsystem<View>().removeSprite(*it);
             }
         }
         {

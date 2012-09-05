@@ -113,7 +113,7 @@ namespace objects
 
 			for( auto it = _sticks_sprites.begin(), end = _sticks_sprites.end(); it!=end; ++it )
 			{
-				addSprite(*it);
+				master_t::subsystem<View>().addSprite(*it);
 			}
 
 			draw();
@@ -123,7 +123,7 @@ namespace objects
 		{
 			for(size_t i=0; i<_sticks_bodies.size(); ++i)
 			{
-				drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
+				master_t::subsystem<View>().drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
 			}
 		}
 
@@ -135,7 +135,7 @@ namespace objects
 		{
 			for( auto it = _sticks_sprites.begin(), end = _sticks_sprites.end(); it!=end; ++it )
 			{
-				removeSprite(*it);
+				master_t::subsystem<View>().removeSprite(*it);
 			}
 
 			for( auto it = _sticks_bodies.begin(), end = _sticks_bodies.end(); it!=end; ++it )
@@ -168,7 +168,7 @@ namespace objects
 				_sticks_bodies.erase( _sticks_bodies.begin() );
 
 
-				removeSprite( *(_sticks_sprites.begin()) );
+				master_t::subsystem<View>().removeSprite( *(_sticks_sprites.begin()) );
 				_sticks_sprites.erase( _sticks_sprites.begin() );
 
 				_distance_joints.erase( _distance_joints.begin() );

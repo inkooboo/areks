@@ -29,7 +29,7 @@ class Physics : public subsystem_t
 public:    
     Physics();
     
-    void reloadWorldParams(pr::Vec2 world_size);
+    void reload(pr::Vec2 world_size);
 
     b2World* worldEngine();
     b2World* const worldEngine() const;

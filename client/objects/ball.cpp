@@ -40,19 +40,19 @@ namespace objects
             texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(1, 1).toCCSize() );
             _sprite = cc::CCSprite::create( texture );
             
-            addSprite(_sprite);
+            master_t::subsystem<View>().addSprite(_sprite);
             draw();
         }
 
         Ball::~Ball()
         {
-            removeSprite(_sprite);
+            master_t::subsystem<View>().removeSprite(_sprite);
             //releaseJoints( _body.get() );
         }
 
         void Ball::draw()
         {
-			drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
+			master_t::subsystem<View>().drawSpriteHelper( _sprite, pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
         }
 
         void Ball::updateState( float t )

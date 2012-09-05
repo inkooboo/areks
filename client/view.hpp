@@ -24,7 +24,7 @@ public:
     void onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);
     void onTouchEnd(ActionHandler::TouchPtr &touch);
     
-    void reloadViewParams(cc::CCSize bg_size, pr::Vec2 world_size);
+    void reload(cc::CCSize bg_size, pr::Vec2 world_size);
     
     float pixelScale() const;
     cc::CCPoint toScreenCoordinates(pr::Vec2 world_coord) const;
@@ -40,6 +40,10 @@ public:
     void onRescaleTick(float t);
     
     pr::Vec2 currentCameraPosition() const;
+
+    void addSprite(cc::CCNode *sprite, int z_order = 0);
+    void removeSprite(cc::CCNode *sprite);
+    void drawSpriteHelper(cc::CCNode *sprite, pr::Vec2 position, float angle);
 
 private:
     void createGameLayerMenu();

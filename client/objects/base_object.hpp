@@ -23,9 +23,6 @@ public:
 	
     void destroy();
     
-    void addSprite(cc::CCNode *sprite, int z_order = 0);
-    void removeSprite(cc::CCNode *sprite);
-    void drawSpriteHelper(cc::CCNode *sprite, pr::Vec2 position, float angle);
     void releaseJoints(b2Body* body);
 };
 

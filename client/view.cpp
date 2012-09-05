@@ -6,6 +6,8 @@
 #include "game_logic.hpp"
 #include "main_menu.hpp"
 
+#include "effects/flying_text.hpp"
+
 #include <algorithm>
 
 void View::start()
@@ -40,7 +42,7 @@ cc::CCScene * View::scene()
     return m_scene;
 }
 
-void View::reloadViewParams(cc::CCSize bg_size, pr::Vec2 world_size)
+void View::reload(cc::CCSize bg_size, pr::Vec2 world_size)
 {
     stop();
     start();
@@ -107,6 +109,13 @@ void View::menuTest(cocos2d::CCObject*s)
 #ifndef NO_SOUND
     master_t::subsystem<cd::SimpleAudioEngine>().playEffect(res::sound_effect("046").c_str());
 #endif
+    ///
+    
+    /// test effects. Remove it.
+    pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
+    world_size *= .5f;
+    
+    effects::FlyingText::create(world_size, m_game_layer, "Test Text", 14, cc::ccc3(190, 255, 190), 5.f);
     ///
 }
 
@@ -266,3 +275,41 @@ void View::moveView(float dx, float dy)
         m_cur_positon.y = world_size.y - y_margin;
     }
 }
+
+void View::addSprite(cc::CCNode *sprite, int z_order)
+{
+    m_game_layer->addChild( sprite, z_order );
+}
+
+void View::removeSprite(cc::CCNode *sprite)
+{
+    sprite->removeFromParentAndCleanup(true);
+}
+
+void View::drawSpriteHelper(cc::CCNode *sprite, pr::Vec2 position, float angle)
+{
+    const cc::CCPoint &prev_position = sprite->getPosition();
+    cc::CCPoint cur_position = toScreenCoordinates(position);
+    if (prev_position.x != cur_position.x || prev_position.y != cur_position.y)
+    {
+        sprite->setPosition(cur_position);
+    }
+    
+    float prev_scale = sprite->getScale();
+    float cur_scale = pixelScale();
+    if (prev_scale != cur_scale)
+    {
+        sprite->setScale(cur_scale);
+    }
+    
+    //rotation in Box2d - in radiance
+    //rotation in cocos2d-x - in degrees
+    float prev_angle = sprite->getRotation();
+    float cur_angle = -angle * 180/b2_pi; //FIXME minus ??? are you sure?
+    if (prev_angle != angle)
+    {
+        sprite->setRotation( cur_angle );
+    }
+}
+
+

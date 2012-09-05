@@ -20,42 +20,6 @@ void BaseObject::destroy()
     master_t::subsystem<ObjectManager>().destroyObject( this );
 }
 
-void BaseObject::addSprite(cc::CCNode *sprite, int z_order)
-{
-    master_t::subsystem<View>().gameLayer()->addChild( sprite, z_order );
-}
-
-void BaseObject::removeSprite(cc::CCNode *sprite)
-{
-    sprite->removeFromParentAndCleanup(true);
-}
-
-void BaseObject::drawSpriteHelper(cc::CCNode *sprite, pr::Vec2 position, float angle)
-{
-    const cc::CCPoint &prev_position = sprite->getPosition();
-    cc::CCPoint cur_position = master_t::subsystem<View>().toScreenCoordinates(position);
-    if (prev_position.x != cur_position.x || prev_position.y != cur_position.y)
-    {
-        sprite->setPosition(cur_position);
-    }
-    
-    float prev_scale = sprite->getScale();
-    float cur_scale = master_t::subsystem<View>().pixelScale();
-    if (prev_scale != cur_scale)
-    {
-        sprite->setScale(cur_scale);
-    }
-
-    //rotation in Box2d - in radiance
-    //rotation in cocos2d-x - in degrees
-    float prev_angle = sprite->getRotation();
-    float cur_angle = -angle * 180/b2_pi; //FIXME minus ??? are you sure?
-    if (prev_angle != angle)
-    {
-        sprite->setRotation( cur_angle );
-    }
-}
-
 void BaseObject::releaseJoints( b2Body* body )
 {
     b2JointEdge* j_e = body->GetJointList();

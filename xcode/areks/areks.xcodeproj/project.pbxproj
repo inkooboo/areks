@@ -240,6 +240,10 @@
 		849B9DC015EBBC2500366740 /* json_reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849B9DB615EBBC2500366740 /* json_reader.cpp */; };
 		849B9DC115EBBC2500366740 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849B9DB815EBBC2500366740 /* json_value.cpp */; };
 		849B9DC315EBBC2500366740 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849B9DBA15EBBC2500366740 /* json_writer.cpp */; };
+		849BF74815F742FB00F2972D /* neck2.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF74615F742FB00F2972D /* neck2.cpp */; };
+		849BF74F15F7431700F2972D /* effect_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF74B15F7431700F2972D /* effect_base.cpp */; };
+		849BF75015F7431700F2972D /* flying_text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF74D15F7431700F2972D /* flying_text.cpp */; };
+		849BF75315F74FCC00F2972D /* effect_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF75115F74FCB00F2972D /* effect_manager.cpp */; };
 		84B5213415EE3D1F00F149A8 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212415EE3D1F00F149A8 /* animations */; };
 		84B5213515EE3D1F00F149A8 /* bg_sound in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212515EE3D1F00F149A8 /* bg_sound */; };
 		84B5213615EE3D1F00F149A8 /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212615EE3D1F00F149A8 /* config.txt */; };
@@ -797,6 +801,14 @@
 		849B9DBB15EBBC2500366740 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
 		849B9DBC15EBBC2500366740 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
 		849B9DBD15EBBC2500366740 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		849BF74615F742FB00F2972D /* neck2.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = neck2.cpp; path = player/neck2.cpp; sourceTree = "<group>"; };
+		849BF74715F742FB00F2972D /* neck2.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = neck2.hpp; path = player/neck2.hpp; sourceTree = "<group>"; };
+		849BF74B15F7431700F2972D /* effect_base.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = effect_base.cpp; path = effects/effect_base.cpp; sourceTree = "<group>"; };
+		849BF74C15F7431700F2972D /* effect_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = effect_base.hpp; path = effects/effect_base.hpp; sourceTree = "<group>"; };
+		849BF74D15F7431700F2972D /* flying_text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = flying_text.cpp; path = effects/flying_text.cpp; sourceTree = "<group>"; };
+		849BF74E15F7431700F2972D /* flying_text.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = flying_text.hpp; path = effects/flying_text.hpp; sourceTree = "<group>"; };
+		849BF75115F74FCB00F2972D /* effect_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = effect_manager.cpp; sourceTree = "<group>"; };
+		849BF75215F74FCB00F2972D /* effect_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = effect_manager.hpp; sourceTree = "<group>"; };
 		84B5212415EE3D1F00F149A8 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = animations; path = ../../../resources/animations; sourceTree = "<group>"; };
 		84B5212515EE3D1F00F149A8 /* bg_sound */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bg_sound; path = ../../../resources/bg_sound; sourceTree = "<group>"; };
 		84B5212615EE3D1F00F149A8 /* config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.txt; path = ../../../resources/config.txt; sourceTree = "<group>"; };
@@ -1820,42 +1832,20 @@
 		8404AECD15D53A610030B061 /* client */ = {
 			isa = PBXGroup;
 			children = (
+				849BF75415F74FD300F2972D /* subsystems */,
+				849BF74A15F7430A00F2972D /* effects */,
 				84B5215115EF76D000F149A8 /* polygon_sprite.cpp */,
 				84B5215215EF76D000F149A8 /* polygon_sprite.hpp */,
-				849B9D5815EB59A700366740 /* player.cpp */,
-				849B9D5915EB59A900366740 /* player.hpp */,
 				849B9D5A15EB59AB00366740 /* triangulator.cpp */,
 				849B9D5B15EB59AB00366740 /* triangulator.hpp */,
-				849B9D3115E62A4F00366740 /* splash_screen.hpp */,
-				849B9D3015E62A4F00366740 /* splash_screen.cpp */,
 				849B9D2615E4E4FC00366740 /* body_definitions.cpp */,
 				849B9D2715E4E4FD00366740 /* body_definitions.hpp */,
-				84FD595315DB7E82000E6454 /* action_handler.cpp */,
-				84FD595415DB7E82000E6454 /* action_handler.hpp */,
-				84FD595515DB7E82000E6454 /* app_delegate.cpp */,
-				84FD595615DB7E82000E6454 /* app_delegate.h */,
-				84FD595715DB7E82000E6454 /* game_logic.cpp */,
-				84FD595815DB7E82000E6454 /* game_logic.hpp */,
-				84FD595915DB7E82000E6454 /* loop.cpp */,
-				84FD595A15DB7E82000E6454 /* loop.hpp */,
-				84FD595B15DB7E82000E6454 /* object_manager.cpp */,
-				84FD595C15DB7E82000E6454 /* object_manager.hpp */,
 				84FD595D15DB7E82000E6454 /* objects */,
-				84FD596515DB7E82000E6454 /* physics.cpp */,
-				84FD596615DB7E82000E6454 /* physics.hpp */,
 				84FD59B015DB9ED4000E6454 /* primitives.cpp */,
 				84FD596715DB7E82000E6454 /* primitives.hpp */,
-				84FD596815DB7E82000E6454 /* view.cpp */,
-				84FD596915DB7E82000E6454 /* view.hpp */,
 				8404AEE915D8DE680030B061 /* defs.hpp */,
-				84FD59B215DBA099000E6454 /* level_manager.cpp */,
-				84FD59B315DBA09A000E6454 /* level_manager.hpp */,
 				84EFD03015E37CD400A5A72A /* resource_utils.cpp */,
 				84EFD03115E37CD500A5A72A /* resource_utils.hpp */,
-				849B9D3A15E6396D00366740 /* main_menu.cpp */,
-				849B9D3B15E6396D00366740 /* main_menu.hpp */,
-				849B9D3D15E63E6200366740 /* loading_screen.cpp */,
-				849B9D3E15E63E6200366740 /* loading_screen.hpp */,
 				849B9D5415E7BE4900366740 /* animation.cpp */,
 				849B9D5515E7BE4900366740 /* animation.hpp */,
 			);
@@ -1901,6 +1891,8 @@
 		849B9D5E15EB59B200366740 /* player */ = {
 			isa = PBXGroup;
 			children = (
+				849BF74615F742FB00F2972D /* neck2.cpp */,
+				849BF74715F742FB00F2972D /* neck2.hpp */,
 				84B5215B15F0A02200F149A8 /* neck.cpp */,
 				84B5215C15F0A02200F149A8 /* neck.hpp */,
 				849B9D5F15EB59BD00366740 /* body.cpp */,
@@ -1933,6 +1925,50 @@
 			);
 			name = json;
 			path = ../../../json;
+			sourceTree = "<group>";
+		};
+		849BF74A15F7430A00F2972D /* effects */ = {
+			isa = PBXGroup;
+			children = (
+				849BF74B15F7431700F2972D /* effect_base.cpp */,
+				849BF74C15F7431700F2972D /* effect_base.hpp */,
+				849BF74D15F7431700F2972D /* flying_text.cpp */,
+				849BF74E15F7431700F2972D /* flying_text.hpp */,
+			);
+			name = effects;
+			sourceTree = "<group>";
+		};
+		849BF75415F74FD300F2972D /* subsystems */ = {
+			isa = PBXGroup;
+			children = (
+				84FD596515DB7E82000E6454 /* physics.cpp */,
+				84FD596615DB7E82000E6454 /* physics.hpp */,
+				84FD596815DB7E82000E6454 /* view.cpp */,
+				84FD596915DB7E82000E6454 /* view.hpp */,
+				84FD59B215DBA099000E6454 /* level_manager.cpp */,
+				84FD59B315DBA09A000E6454 /* level_manager.hpp */,
+				849B9D3A15E6396D00366740 /* main_menu.cpp */,
+				849B9D3B15E6396D00366740 /* main_menu.hpp */,
+				849B9D3D15E63E6200366740 /* loading_screen.cpp */,
+				849B9D3E15E63E6200366740 /* loading_screen.hpp */,
+				849B9D5815EB59A700366740 /* player.cpp */,
+				849B9D5915EB59A900366740 /* player.hpp */,
+				849B9D3115E62A4F00366740 /* splash_screen.hpp */,
+				849B9D3015E62A4F00366740 /* splash_screen.cpp */,
+				849BF75115F74FCB00F2972D /* effect_manager.cpp */,
+				849BF75215F74FCB00F2972D /* effect_manager.hpp */,
+				84FD595315DB7E82000E6454 /* action_handler.cpp */,
+				84FD595415DB7E82000E6454 /* action_handler.hpp */,
+				84FD595515DB7E82000E6454 /* app_delegate.cpp */,
+				84FD595615DB7E82000E6454 /* app_delegate.h */,
+				84FD595715DB7E82000E6454 /* game_logic.cpp */,
+				84FD595815DB7E82000E6454 /* game_logic.hpp */,
+				84FD595915DB7E82000E6454 /* loop.cpp */,
+				84FD595A15DB7E82000E6454 /* loop.hpp */,
+				84FD595B15DB7E82000E6454 /* object_manager.cpp */,
+				84FD595C15DB7E82000E6454 /* object_manager.hpp */,
+			);
+			name = subsystems;
 			sourceTree = "<group>";
 		};
 		84FD595D15DB7E82000E6454 /* objects */ = {
@@ -2274,6 +2310,10 @@
 				849B9DC315EBBC2500366740 /* json_writer.cpp in Sources */,
 				84B5215315EF76D000F149A8 /* polygon_sprite.cpp in Sources */,
 				84B5215D15F0A02200F149A8 /* neck.cpp in Sources */,
+				849BF74815F742FB00F2972D /* neck2.cpp in Sources */,
+				849BF74F15F7431700F2972D /* effect_base.cpp in Sources */,
+				849BF75015F7431700F2972D /* flying_text.cpp in Sources */,
+				849BF75315F74FCC00F2972D /* effect_manager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

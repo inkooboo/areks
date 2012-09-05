@@ -8,3 +8,11 @@
 
 #include "effect_base.hpp"
 
+#include "master.hpp"
+
+namespace effects
+{
+    EffectBase::~EffectBase()
+    {
+    }
+}

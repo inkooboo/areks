@@ -7,6 +7,7 @@
 
 #include "physics.hpp"
 #include "view.hpp"
+#include "effect_manager.hpp"
 
 static const float DEFAULT_WORLD_TICK_TIME = 1.f/60.f;
 static const float DEFAULT_VIEW_TICK_TIME = 1.f/40.f;
@@ -70,14 +71,7 @@ void Loop::TimeLoop_t::update(float t)
     
     master_t::subsystem<View>().onRescaleTick(t); // manage dynamic scale
     
-    auto objects = master_t::subsystem<ObjectManager>().getDynamicObjects();
-    auto it = objects.begin();
-    auto end = objects.end();
-    
-    for( ; it != end; ++it )
-    {
-        (*it)->updateState( t );
-    }
+    master_t::subsystem<ObjectManager>().update_dynamic_objects_state(t);
 
     //execute lazy calculations
     for( auto it = exec_once.begin(), end = exec_once.end(); it != end; ++it )
@@ -87,7 +81,7 @@ void Loop::TimeLoop_t::update(float t)
     exec_once.clear();
 
     //delegate management to ObjectManager
-    master_t::subsystem<ObjectManager>().update();
+    master_t::subsystem<ObjectManager>().collect_garbage_objects();
 
     // remove scheduled items
     for (auto it = scheduled_list.begin(), end = scheduled_list.end(); it != end;)
@@ -101,7 +95,6 @@ void Loop::TimeLoop_t::update(float t)
             ++it;
         }
     }
-
 }
 
 void Loop::TimeLoop_t::executeOnce(std::function<void()> func)
@@ -111,12 +104,7 @@ void Loop::TimeLoop_t::executeOnce(std::function<void()> func)
 
 void Loop::ViewLoop_t::tick( float t )
 {
-    auto objects = master_t::subsystem<ObjectManager>().getObjects();
-    auto it = objects.begin();
-    auto end = objects.end();
+    master_t::subsystem<ObjectManager>().update_objects(t);
     
-    for( ; it != end; ++it )
-    {
-        (*it)->draw();
-    }
+    master_t::subsystem<EffectManager>().update_effects(t);
 }

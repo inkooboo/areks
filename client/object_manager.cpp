@@ -1,5 +1,7 @@
 #include "object_manager.hpp"
 
+#include "objects/object_interfaces.hpp"
+
 #include <algorithm>
 
 void ObjectManager::start()
@@ -16,14 +18,14 @@ void ObjectManager::stop()
         (*it)->destroy();
     }
 
-    update();
+    collect_garbage_objects();
 }
 
 ObjectManager::ObjectManager()
 {
 }
 
-void ObjectManager::reloadObjectManager()
+void ObjectManager::reload()
 {
     stop();
     start();
@@ -68,17 +70,29 @@ void ObjectManager::destroyObject( BaseObject* obj_ptr )
     }
 }
 
-std::vector< BaseObject* >& ObjectManager::getObjects()
+void ObjectManager::update_dynamic_objects_state(float dt)
 {
-    return _objects;
+    auto it = _dyn_objects.begin();
+    auto end = _dyn_objects.end();
+    
+    for (; it != end; ++it)
+    {
+        (*it)->updateState(dt);
+    }
 }
 
-std::vector< DynamicObject* >& ObjectManager::getDynamicObjects()
+void ObjectManager::update_objects(float dt)
 {
-    return _dyn_objects;
+    auto it = _objects.begin();
+    auto end = _objects.end();
+    
+    for( ; it != end; ++it )
+    {
+        (*it)->draw();
+    }    
 }
 
-void ObjectManager::update()
+void ObjectManager::collect_garbage_objects()
 {
     auto it = _to_delete_list.begin();
     auto end = _to_delete_list.end();

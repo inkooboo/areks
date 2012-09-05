@@ -47,8 +47,8 @@ void LevelManager::loadLevel(const char *level_name)
     master_t::subsystem<Loop>().reload();
     
     // 1. Clear all objects
-    master_t::subsystem<ObjectManager>().reloadObjectManager();
-    master_t::subsystem<Player>().reloadPlayer();
+    master_t::subsystem<ObjectManager>().reload();
+    master_t::subsystem<Player>().reload();
     
     // 2. Load background
     const std::string bg_name_base = res::picture("test_background_base");
@@ -61,11 +61,11 @@ void LevelManager::loadLevel(const char *level_name)
     // 3. Load world params
     pr::Vec2 world_size(96.f, 32.f);
     
-    master_t::subsystem<Physics>().reloadWorldParams(world_size);
+    master_t::subsystem<Physics>().reload(world_size);
     
     // 4. Reload view parameters
     
-    master_t::subsystem<View>().reloadViewParams(bg_size, world_size);
+    master_t::subsystem<View>().reload(bg_size, world_size);
     
     // 5. Preload background music
 #ifndef NO_SOUND

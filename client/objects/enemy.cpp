@@ -45,7 +45,7 @@ namespace objects
         //init view
         //
 
-        addSprite(m_animation.sprite());
+        master_t::subsystem<View>().addSprite(m_animation.sprite());
         draw();
         
         m_state = STAY;
@@ -80,13 +80,13 @@ namespace objects
     
     Enemy::~Enemy()
     {
-        removeSprite(m_animation.sprite());
+        master_t::subsystem<View>().removeSprite(m_animation.sprite());
         releaseJoints( _body.get() );
     }
     
     void Enemy::draw()
     {
-        drawSpriteHelper( m_animation.sprite(), pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
+        master_t::subsystem<View>().drawSpriteHelper( m_animation.sprite(), pr::Vec2( _body->GetPosition() ), _body->GetAngle() );
     }
     
     void Enemy::updateState( float t )
