@@ -31,7 +31,10 @@ namespace objects
 
 			~Neck2();
 
-			void shorten();			
+			void shorten();
+			void extend();
+
+			float getCurrentLength() const;
 
 		private:
 			Neck2( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body );
@@ -41,7 +44,11 @@ namespace objects
 
 			std::vector<b2DistanceJoint*> _distance_joints;
 
+			b2BodyDef _stick_def;
+			b2FixtureDef _stick_fixture_def;
+			b2CircleShape _stick_shape;
 			b2DistanceJointDef _distance_def;
+			cc::CCTexture2D* _stick_tex;
 		};
         
     }//end namespace player

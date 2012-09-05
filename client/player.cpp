@@ -18,9 +18,6 @@ const float Player::_neck_max_lenght = 10.0;
 
 void Player::start()
 {
-	//for testing
-	b2BodyDef bd;
-	_temp_body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &bd );
 }
 
 void Player::stop()
@@ -111,8 +108,11 @@ void Player::destroyNeck()
 
 void Player::onTouchTarget(ActionHandler::TouchPtr &touch)
 {
-	View& view = master_t::subsystem<View>();
-	shoot( view.toWorldCoordinates(touch->end) );
+	if( isAvatarCreated() )
+	{
+		View& view = master_t::subsystem<View>();
+		shoot( view.toWorldCoordinates(touch->end) );
+	}
 }
 
 void Player::onTouchBodyBegin(ActionHandler::TouchPtr &touch)
@@ -127,14 +127,28 @@ void Player::onTouchBodyMove(ActionHandler::TouchPtr &touch)
 {
 	if(_mouse_joint)
 	{
-		static_cast<b2MouseJoint*>(_mouse_joint)->SetTarget( master_t::subsystem<View>().toWorldCoordinates(touch->to).tob2Vec2() );
-		static size_t t = 0;
-		if( t == 30 )
+		pr::Vec2 touch_point = master_t::subsystem<View>().toWorldCoordinates(touch->to);
+
+		float dis = pr::distance(_body->getPosition(), touch_point);
+		if( dis > 1.f && dis < 5.f )
 		{
-			_neck->shorten();
-			t = 0;
+			pr::Vec2 normal = _head->getPosition() - _body->getPosition();
+			//normal.normalize();
+			pr::Vec2 vector = touch_point - _body->getPosition();
+			//vector.normalize();
+
+			float angle = pr::angle( normal, vector );
+			if( angle < b2_pi/18 ) // 10 degrees
+			{
+				_neck->shorten();
+			}
+			else if( angle > 17*b2_pi/18 ) // 170 degrees
+			{
+				_neck->extend();
+			}
 		}
-		else ++t;
+
+		static_cast<b2MouseJoint*>(_mouse_joint)->SetTarget( touch_point.tob2Vec2() );
 	}
 }
 
@@ -151,8 +165,11 @@ void Player::controlBodyBegin()
  //   	b2BodyDef bd;
 	//bd.type = b2_staticBody;
 	//_temp_body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &bd );
-
+	//for testing
+	b2BodyDef bd;
+	_temp_body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &bd );
     b2MouseJointDef mouse_def; 
+
 	mouse_def.bodyA = _temp_body;
 	mouse_def.bodyB = _body->getBody();
 	mouse_def.target = _body->getPosition().tob2Vec2();
@@ -162,8 +179,12 @@ void Player::controlBodyBegin()
 
 void Player::controlBodyEnd()
 {
-    master_t::subsystem<Physics>().worldEngine()->DestroyJoint( _mouse_joint );
+	master_t::subsystem<Physics>().worldEngine()->DestroyBody( _temp_body );
+	_temp_body = 0;
+
+	//mouse joint automatic delete with _temp_body
 	_mouse_joint = 0;
+
 	unhook();
 }
     

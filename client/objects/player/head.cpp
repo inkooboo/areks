@@ -208,6 +208,8 @@ namespace objects
         //don't use reference for point because lazy execute this function
 		void Head::hook(BaseObject* obj, pr::Vec2 point)
 		{
+			assert( _state != HOOK && "State already HOOK!" );
+
 			_state = HOOK;
 			setCollideNone();
 			_attach_joint_def.Initialize( _body.get(), obj->getBody(), point.tob2Vec2() );

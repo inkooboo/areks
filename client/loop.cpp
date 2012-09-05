@@ -10,7 +10,7 @@
 #include "effect_manager.hpp"
 
 static const float DEFAULT_WORLD_TICK_TIME = 1.f/60.f;
-static const float DEFAULT_VIEW_TICK_TIME = 1.f/40.f;
+static const float DEFAULT_VIEW_TICK_TIME = 1.f/33.f;
 
 Loop::Loop()
 {
@@ -27,7 +27,7 @@ void Loop::start()
 
 void Loop::stop() 
 { 
-    m_sheduler.unscheduleAllSelectors();
+    m_sheduler.unscheduleAllSelectors(); //FIXME our shedules will never destroy (they mark themselfs to destory on func() )
 }
 
 void Loop::reload()
@@ -51,6 +51,10 @@ void Loop::schedule(LazyFunction func, float delay)
 
 void Loop::TimeLoop_t::update(float t)
 {
+	//FOR TEST
+	t *= 1.4f;
+	//
+
     float ft = t + remainder;
 
     float diff = DEFAULT_WORLD_TICK_TIME;

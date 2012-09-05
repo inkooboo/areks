@@ -106,6 +106,12 @@
     <ClCompile Include="..\..\..\client\effects\effect_base.cpp">
       <Filter>source\client\effects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\effect_manager.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\client\effects\arrow.cpp">
+      <Filter>source\client\effects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -250,6 +256,12 @@
       <Filter>source\client\effects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\effects\effect_base.hpp">
+      <Filter>source\client\effects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\effect_manager.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\effects\arrow.hpp">
       <Filter>source\client\effects</Filter>
     </ClInclude>
   </ItemGroup>

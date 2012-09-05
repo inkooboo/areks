@@ -10,7 +10,7 @@
 #include "head.hpp"
 #include "body.hpp"
 
-#define NECK2_STICK_RADIUS 0.25f
+#define NECK2_STICK_RADIUS 0.20f
 #define NECK2_STICK_DIAMETER (2 * NECK2_STICK_RADIUS)
 //ROPE_DENSITY - mass of rope
 #define NECK2_DENSITY 1.0f
@@ -47,28 +47,26 @@ namespace objects
 			//prepare rope sticks
 
 			//prepare sticks body definition
-			b2BodyDef body_def;
-			body_def.type = b2_dynamicBody;
-			body_def.userData = (void*)this;                                              
+			_stick_def.type = b2_dynamicBody;
+			_stick_def.userData = (void*)this;                                              
+			_stick_def.linearDamping = 0;
 
 			b2Body* cur_body;
 			b2Body* prev_body;
 
 			//prepare sticks shape definition
-			b2CircleShape stick_shape;
-			stick_shape.m_radius = NECK2_STICK_RADIUS;
+			_stick_shape.m_radius = NECK2_STICK_RADIUS;
 
 			//prepare distance joint definition
 			_distance_def.collideConnected = false;
 			_distance_def.dampingRatio = 0;
 
 			//prepare fixtures definition
-			b2FixtureDef fixture_def;
-			fixture_def.friction = NECK2_FRICTION;
-			fixture_def.density = NECK2_DENSITY;
-			fixture_def.shape = &stick_shape;
-			fixture_def.filter.categoryBits = filter::NECK;
-			fixture_def.filter.maskBits = filter::PLATFORMS;
+			_stick_fixture_def.friction = NECK2_FRICTION;
+			_stick_fixture_def.density = NECK2_DENSITY;
+			_stick_fixture_def.shape = &_stick_shape;
+			_stick_fixture_def.filter.categoryBits = filter::NECK;
+			_stick_fixture_def.filter.maskBits = filter::PLATFORMS;
 
 			//calculate dx and dy for sticks
 				//calculate angle of sticks
@@ -82,10 +80,10 @@ namespace objects
 			prev_body = a_body;
 			for( size_t i = 0; i<stick_count; ++i )
 			{
-				body_def.position = b2Vec2( a_point.x + dx*i + dx/2, a_point.y + dy*i + dy/2);
-				cur_body = worldEngine->CreateBody( &body_def );
+				_stick_def.position = b2Vec2( a_point.x + dx*i + dx/2, a_point.y + dy*i + dy/2);
+				cur_body = worldEngine->CreateBody( &_stick_def );
 				_sticks_bodies.push_back( cur_body );
-				cur_body->CreateFixture( &fixture_def );
+				cur_body->CreateFixture( &_stick_fixture_def );
 
 				_distance_def.Initialize( prev_body, cur_body, prev_body->GetPosition(), cur_body->GetPosition() );
 				_distance_joints.push_back( static_cast<b2DistanceJoint*>(worldEngine->CreateJoint( &_distance_def )) );
@@ -101,13 +99,14 @@ namespace objects
 			//init view
 			//
 			unsigned char color[] = {100, 100, 100};
-			cc::CCTexture2D* texture = new cc::CCTexture2D();
-			texture->autorelease();
-			texture->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(NECK2_STICK_DIAMETER, NECK2_STICK_DIAMETER).toCCSize() );
+			_stick_tex = new cc::CCTexture2D();
+			//_stick_tex->autorelease();
+
+			_stick_tex->initWithData(color, cocos2d::kCCTexture2DPixelFormat_RGB888, 1, 1, pr::Vec2(NECK2_STICK_DIAMETER, NECK2_STICK_DIAMETER).toCCSize() );
 
 			for( auto it = _sticks_bodies.begin(), end = _sticks_bodies.end(); it!=end; ++it )
 			{
-				_sticks_sprites.push_back(cc::CCSprite::create( texture ));
+				_sticks_sprites.push_back(cc::CCSprite::create( _stick_tex ));
 			}
 
 
@@ -123,7 +122,7 @@ namespace objects
 		{
 			for(size_t i=0; i<_sticks_bodies.size(); ++i)
 			{
-				master_t::subsystem<View>().drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), _sticks_bodies[i]->GetAngle() );
+				master_t::subsystem<View>().drawSpriteHelper( _sticks_sprites[i], _sticks_bodies[i]->GetPosition(), 0.f );
 			}
 		}
 
@@ -137,6 +136,7 @@ namespace objects
 			{
 				master_t::subsystem<View>().removeSprite(*it);
 			}
+			_stick_tex->release();
 
 			for( auto it = _sticks_bodies.begin(), end = _sticks_bodies.end(); it!=end; ++it )
 			{
@@ -185,6 +185,48 @@ namespace objects
 				impulse *= player_body->GetMass();
 				player_body->ApplyLinearImpulse( impulse.tob2Vec2(), player_body->GetPosition() );
 			}
+		}
+
+		void Neck2::extend()
+		{
+			if( master_t::subsystem<Player>().getNeckMaxLength() > getCurrentLength() )
+			{
+				Physics& physics = master_t::subsystem<Physics>();
+				b2World* b2_world = physics.worldEngine();
+
+				b2_world->DestroyJoint( _distance_joints[0] );
+
+				b2Body* first_stick = *(_sticks_bodies.begin());
+				b2Body* player_body = master_t::subsystem<Player>().getBody()->getBody();
+
+				pr::Vec2 vector = pr::Vec2(player_body->GetPosition()) - pr::Vec2(first_stick->GetPosition());
+				vector.normalize();
+				vector *= NECK2_STICK_DIAMETER;
+				_stick_def.position = ( pr::Vec2(first_stick->GetPosition()) + vector ).tob2Vec2();
+				_sticks_bodies.insert( _sticks_bodies.begin(), b2_world->CreateBody(&_stick_def) );
+				_sticks_bodies[0]->CreateFixture( &_stick_fixture_def );
+
+				_sticks_sprites.insert( _sticks_sprites.begin(), cc::CCSprite::create(_stick_tex) );
+				master_t::subsystem<View>().addSprite( _sticks_sprites[0] );
+			
+				_distance_def.Initialize( _sticks_bodies[0], _sticks_bodies[1], _sticks_bodies[0]->GetPosition(), _sticks_bodies[1]->GetPosition() );
+				_distance_joints[0] = static_cast<b2DistanceJoint*>( b2_world->CreateJoint( &_distance_def ) );
+
+				_distance_def.Initialize( player_body, _sticks_bodies[0], player_body->GetPosition(), _sticks_bodies[0]->GetPosition() );
+				_distance_def.length = NECK2_STICK_RADIUS;
+				_distance_joints.insert( _distance_joints.begin(), static_cast<b2DistanceJoint*>( b2_world->CreateJoint(&_distance_def) ) );
+
+				//give some impulse to body to speed up extend
+				pr::Vec2 impulse = vector;
+				impulse.normalize();
+				impulse *= 2* player_body->GetMass();
+				player_body->ApplyLinearImpulse( impulse.tob2Vec2(), player_body->GetPosition() );
+			}
+		}
+
+		float Neck2::getCurrentLength() const
+		{
+			return ( NECK2_STICK_DIAMETER * _sticks_bodies.size() );
 		}
 
         

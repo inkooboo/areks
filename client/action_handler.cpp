@@ -63,15 +63,18 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         
 		touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
 #else
-		if( master_t::subsystem<Physics>().checkObject( view.toWorldCoordinates(touch->begin), static_cast<BaseObject*>(player.getBody()) ) )
+		if( player.isAvatarCreated() )
 		{
-			player.onTouchBodyBegin(touch);
-			touch->on_move = std::bind(&Player::onTouchBodyMove, &player, std::placeholders::_1); 
-			touch->on_end = std::bind(&Player::onTouchBodyEnd, &player, std::placeholders::_1);
-		}
-		else
-		{
-			touch->on_end = std::bind(&Player::onTouchTarget, &player, std::placeholders::_1);
+			if( master_t::subsystem<Physics>().checkObject( view.toWorldCoordinates(touch->begin), static_cast<BaseObject*>(player.getBody()) ) )
+			{
+				player.onTouchBodyBegin(touch);
+				touch->on_move = std::bind(&Player::onTouchBodyMove, &player, std::placeholders::_1); 
+				touch->on_end = std::bind(&Player::onTouchBodyEnd, &player, std::placeholders::_1);
+			}
+			else
+			{
+				touch->on_end = std::bind(&Player::onTouchTarget, &player, std::placeholders::_1);
+			}
 		}
 #endif
     }
@@ -87,12 +90,6 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
     }
 #endif
-    
-    
-    
-    ///
-    
-    
     
     m_touches[id] = touch;
     
