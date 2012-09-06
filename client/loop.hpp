@@ -48,7 +48,7 @@ private:
     {
         TimeLoop_t() : remainder(0.f) {}
 
-        void update( float t );
+        virtual void update( float t ) override;
         void executeOnce(LazyFunction func);
 
         float remainder;

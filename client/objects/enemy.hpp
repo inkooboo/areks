@@ -17,10 +17,6 @@
 # include "body_definitions.hpp"
 # include "animation.hpp"
 
-/// test arrow effect
-#include "effects/arrow.hpp"
-///
-
 namespace objects
 {
     
@@ -31,6 +27,8 @@ namespace objects
               STAY
             , MOVE_LEFT
             , MOVE_RIGHT
+            , HIT_LEFT
+            , HIT_RIGHT
         };
         
     public:
@@ -54,11 +52,7 @@ namespace objects
         
         BodyOwner _body;
         Animation m_animation;
-        
-        /// test arrow effect
-        std::weak_ptr<effects::Arrow> m_arrow;
-        ///
-    };
+};
     
 }//end namespace objects
 

@@ -20,9 +20,11 @@ public:
     void menuExit(cc::CCObject*s);
     void menuTest(cc::CCObject*);
 
+#ifdef DEBUG_VIEW_FUNCTIONALITY
     void onTouchMove(ActionHandler::TouchPtr &touch);
     void onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);
     void onTouchEnd(ActionHandler::TouchPtr &touch);
+#endif
     
     void reload(cc::CCSize bg_size, pr::Vec2 world_size);
     
@@ -35,9 +37,10 @@ public:
     float pixelToWorld(float pixel_size) const;
     cc::CCLayer * gameLayer();
     
-    void moveView(float dx, float dy);
+    void moveViewBy(float dx, float dy);
+    void moveViewToPosition(const pr::Vec2 &position);
     
-    void onRescaleTick(float t);
+    void manageCameraPositionAndScale(float t);
     
     pr::Vec2 currentCameraPosition() const;
 
@@ -49,8 +52,11 @@ private:
     void createGameLayerMenu();
 
     void validateScale();
+    void validatePosition();
     
+#ifdef DEBUG_VIEW_FUNCTIONALITY
     bool m_in_touch;
+#endif
     cc::CCScene *m_scene;
     cc::CCLayer *m_game_layer;
     

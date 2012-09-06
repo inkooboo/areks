@@ -1,0 +1,35 @@
+{
+    "stay": {
+        "interval": 0.5,
+        "frames": [
+            "stay1",
+            "stay2"
+        ]
+    },
+    "move_left": {
+        "interval": 0.25,
+        "frames": [
+            "move_left1",
+            "move_left2"
+        ]
+    },
+    "move_right": {
+        "interval": 0.25,
+        "frames": [
+            "move_right1",
+            "move_right2"
+        ]
+    },
+    "hit_left": {
+        "interval": 1,
+        "frames": [
+            "hit_left"
+        ]
+    },
+    "hit_right": {
+        "interval": 1,
+        "frames": [
+            "hit_right"
+        ]
+    }
+}

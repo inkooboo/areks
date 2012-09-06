@@ -19,7 +19,7 @@ namespace cd = CocosDenshion;
 // development defines
 #define NO_MENU
 #define NO_SOUND
-//#define DEBUG_VIEW_FUNCTIONALITY
+#define DEBUG_VIEW_FUNCTIONALITY
 
 
 

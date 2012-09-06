@@ -5,6 +5,8 @@
 #include "resource_utils.hpp"
 #include "game_logic.hpp"
 #include "main_menu.hpp"
+#include "player.hpp"
+#include "objects/player/body.hpp"
 
 #include "effects/flying_text.hpp"
 
@@ -18,7 +20,9 @@ void View::start()
 
     m_scene->addChild(m_game_layer);
 
+#ifdef DEBUG_VIEW_FUNCTIONALITY
     m_in_touch = false;
+#endif
 }
 
 void View::stop()
@@ -165,6 +169,7 @@ cc::CCLayer * View::gameLayer()
     return m_game_layer;
 }
 
+#ifdef DEBUG_VIEW_FUNCTIONALITY
 void View::onTouchEnd(ActionHandler::TouchPtr &touch)
 {
     m_in_touch = false;
@@ -172,7 +177,7 @@ void View::onTouchEnd(ActionHandler::TouchPtr &touch)
 
 void View::onTouchMove(ActionHandler::TouchPtr &touch)
 {
-    moveView(touch->to.x - touch->from.x, touch->to.y - touch->from.y);
+    moveViewBy(touch->to.x - touch->from.x, touch->to.y - touch->from.y);
 }
 
 void View::onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2)
@@ -192,11 +197,13 @@ void View::onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr
     
     m_view_scale += d * touch_scale_speed;
     validateScale();
-    moveView(0,0);
+    validatePosition();
 }
+#endif
 
-void View::onRescaleTick(float t)
+void View::manageCameraPositionAndScale(float t)
 {
+#ifdef DEBUG_VIEW_FUNCTIONALITY
     if (m_in_touch)
     {
         return;
@@ -220,9 +227,22 @@ void View::onRescaleTick(float t)
             m_view_scale = m_default_view_scale;
         }
     }
+#else
+    Player &player = master_t::subsystem<Player>();
+    
+    if (player.isAvatarCreated())
+    {
+        pr::Vec2 body_postion = player.getBody()->getPosition();
+        
+        m_cur_positon = body_postion;
+    }
+    
+#endif
 
+    
+    
     validateScale();
-    moveView(0,0);
+    validatePosition();
 }
 
 pr::Vec2 View::currentCameraPosition() const
@@ -242,20 +262,16 @@ void View::validateScale()
     }
 }
 
-void View::moveView(float dx, float dy)
+void View::validatePosition()
 {
     m_half_screen_in_world_size.x = pixelToWorld(screenToPixel(m_size.width)) / 2;;
     m_half_screen_in_world_size.y = pixelToWorld(screenToPixel(m_size.height)) / 2;
-
+    
     float x_margin = m_half_screen_in_world_size.x;
     float y_margin = m_half_screen_in_world_size.y;
     
-    dx = -pixelToWorld(screenToPixel(dx));
-    dy = -pixelToWorld(screenToPixel(dy));
-    
     pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
     
-    m_cur_positon.x += dx;
     if (m_cur_positon.x < x_margin)
     {
         m_cur_positon.x = x_margin;
@@ -264,8 +280,7 @@ void View::moveView(float dx, float dy)
     {
         m_cur_positon.x = world_size.x - x_margin;
     }
-
-    m_cur_positon.y += dy;
+    
     if (m_cur_positon.y < y_margin)
     {
         m_cur_positon.y = y_margin;
@@ -274,6 +289,24 @@ void View::moveView(float dx, float dy)
     {
         m_cur_positon.y = world_size.y - y_margin;
     }
+
+}
+
+void View::moveViewBy(float dx, float dy)
+{
+    dx = -pixelToWorld(screenToPixel(dx));
+    dy = -pixelToWorld(screenToPixel(dy));
+    
+    m_cur_positon.x += dx;
+    m_cur_positon.y += dy;
+    validatePosition();
+}
+
+void View::moveViewToPosition(const pr::Vec2 &position)
+{
+    m_cur_positon = position;
+    
+    validatePosition();
 }
 
 void View::addSprite(cc::CCNode *sprite, int z_order)

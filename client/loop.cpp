@@ -74,7 +74,7 @@ void Loop::TimeLoop_t::update(float t)
 
     t -= remainder; // calculate real time
     
-    master_t::subsystem<View>().onRescaleTick(t); // manage dynamic scale
+    master_t::subsystem<View>().manageCameraPositionAndScale(t); // manage dynamic scale
     
     master_t::subsystem<ObjectManager>().update_dynamic_objects_state(t);
 
