@@ -1,0 +1,163 @@
+{
+    "background_base": "test_background_base",
+    "background_parallax": "test_background_lvl_1",
+    "background_treks": [
+                         "wow_trek_7"
+                         ],
+    "world_size": {
+        "width": 96,
+        "height": 32
+    },
+    "platforms": {
+        "star": [
+                 {
+                 "x": 40,
+                 "y": 30
+                 },
+                 {
+                 "x": 37.5,
+                 "y": 25
+                 },
+                 {
+                 "x": 32.5,
+                 "y": 22.5
+                 },
+                 {
+                 "x": 37.5,
+                 "y": 20
+                 },
+                 {
+                 "x": 40,
+                 "y": 15
+                 },
+                 {
+                 "x": 42.5,
+                 "y": 20
+                 },
+                 {
+                 "x": 47.5,
+                 "y": 22.5
+                 },
+                 {
+                 "x": 42.5,
+                 "y": 25
+                 }
+                 ],
+        "ground": [
+                   {
+                   "x": 10,
+                   "y": 0
+                   },
+                   {
+                   "x": 12,
+                   "y": 3
+                   },
+                   {
+                   "x": 14,
+                   "y": 6
+                   },
+                   {
+                   "x": 15,
+                   "y": 7
+                   },
+                   {
+                   "x": 20,
+                   "y": 7.25
+                   },
+                   {
+                   "x": 35,
+                   "y": 6.77
+                   },
+                   {
+                   "x": 55,
+                   "y": 7
+                   },
+                   {
+                   "x": 75,
+                   "y": 7.24
+                   },
+                   {
+                   "x": 77,
+                   "y": 5
+                   },
+                   {
+                   "x": 79,
+                   "y": 3
+                   },
+                   {
+                   "x": 84,
+                   "y": 0
+                   }
+                   ]
+    },
+    "objects": {
+        "enemy1": {
+            "class": "enemy",
+            "appear_time": 0,
+            "position": {
+                "x": 40.5,
+                "y": 9.5
+            }
+        },
+        "enemy2": {
+            "class": "enemy",
+            "appear_time": 2.75,
+            "position": {
+                "x": 48.5,
+                "y": 9.5
+            }
+        },
+        "ball0": {
+            "class": "ball",
+            "appear_time": 0,
+            "position": {
+                "x": 40,
+                "y": 40
+            }
+        },
+        "ball1": {
+            "class": "ball",
+            "appear_time": 1,
+            "position": {
+                "x": 41,
+                "y": 40
+            }
+        },
+        "ball2": {
+            "class": "ball",
+            "appear_time": 2,
+            "position": {
+                "x": 42,
+                "y": 40
+            }
+        },
+        "ball3": {
+            "class": "ball",
+            "appear_time": 3,
+            "position": {
+                "x": 43,
+                "y": 40
+            }
+        },
+        "ball4": {
+            "class": "ball",
+            "appear_time": 4,
+            "position": {
+                "x": 44,
+                "y": 40
+            }
+        },
+        "ball5": {
+            "class": "ball",
+            "appear_time": 5,
+            "position": {
+                "x": 45,
+                "y": 40
+            }
+        }
+    },
+    "player_start_position": {
+        "x": 47,
+        "y": 32
+    }
+}
