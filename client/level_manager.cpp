@@ -83,7 +83,15 @@ void LevelManager::loadLevel(const char *level_name)
     // 6. Create level objects
     auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
     
-    auto enemy1 = objects::Enemy::create(pr::Vec2(40.5f, 9.5f));
+    objects::Enemy::create(pr::Vec2(40.5f, 9.5f));
+    
+    struct delayed_enemy {
+        static void create()
+        {
+            objects::Enemy::create(pr::Vec2(48.5f, 9.5f));
+        }
+    };
+    master_t::subsystem<Loop>().schedule(std::bind(delayed_enemy::create), 2.75);
 
 	//need using CCW winding for platform description!
 	std::vector<pr::Vec2> points;
