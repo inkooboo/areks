@@ -168,7 +168,7 @@ namespace objects
 			b2WorldManifold m;
 			contact->GetWorldManifold( &m );
 			pr::Vec2 p(m.points[0]);
-            master_t::subsystem<Loop>().executeOnce( std::bind(&Head::hook, this, other, p) );
+			master_t::subsystem<Physics>().execute_after_step( std::bind(&Head::hook, this, other, p) );
         }
 
         pr::Vec2 Head::getPosition() const
@@ -208,15 +208,18 @@ namespace objects
         //don't use reference for point because lazy execute this function
 		void Head::hook(BaseObject* obj, pr::Vec2 point)
 		{
-			assert( _state != HOOK && "State already HOOK!" );
+			// Head::hook can called several times because collide can happen several times withing one physic step
+			//assert( _state != HOOK && "State already HOOK!" );
+			if( _state != HOOK )
+			{
+				_state = HOOK;
+				setCollideNone();
+				_attach_joint_def.Initialize( _body.get(), obj->getBody(), point.tob2Vec2() );
 
-			_state = HOOK;
-			setCollideNone();
-			_attach_joint_def.Initialize( _body.get(), obj->getBody(), point.tob2Vec2() );
-
-			_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
-			master_t::subsystem<Player>().createNeck();
-			//_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
+				_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
+				master_t::subsystem<Player>().createNeck();
+				//_attach_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &_attach_joint_def );
+			}
 		}
 
 		void Head::unhook()

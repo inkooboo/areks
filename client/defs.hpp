@@ -56,4 +56,6 @@ namespace filter
     };
 }
 
+typedef std::function<void()> LazyFunction;
+
 #endif

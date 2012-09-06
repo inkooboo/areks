@@ -44,6 +44,8 @@ public:
 
     BodyOwner CreateBody( defs::OneShapeBaseDef& def );
 
+	void execute_after_step( LazyFunction func );
+
 private:
     std::unique_ptr<b2World> _b2World_ptr;
     pr::Vec2 m_world_size;
@@ -51,6 +53,8 @@ private:
     ContactListener _contact_listener;
 
     std::vector<shared_ptr<b2JointDef> > _joint_defs;
+
+	std::vector<LazyFunction> _to_exec_funcs;
 };
 
 #endif

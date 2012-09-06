@@ -8,7 +8,6 @@
 # include <memory>
 # include <list>
 
-typedef std::function<void()> LazyFunction;
 inline void lazyDoNothing() {};
 
 class Loop : public subsystem_t
@@ -39,7 +38,6 @@ public:
     
     void reload();
 
-    void executeOnce(LazyFunction func);
     void schedule(LazyFunction func, float delay);
 
 private:
@@ -49,10 +47,8 @@ private:
         TimeLoop_t() : remainder(0.f) {}
 
         virtual void update( float t ) override;
-        void executeOnce(LazyFunction func);
 
-        float remainder;
-        std::vector<LazyFunction> exec_once;        
+        float remainder; 
         std::list<std::unique_ptr<Scheduled>> scheduled_list;
     };
     

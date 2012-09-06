@@ -68,6 +68,13 @@ void Physics::step( float dt )
     _joint_defs.clear();
     
     _b2World_ptr->Step( dt, velocityIterations, positionIterations );
+
+	//execute lazy calculations
+    for( auto it = _to_exec_funcs.begin(), end = _to_exec_funcs.end(); it != end; ++it )
+    {
+        (*it)();
+    }
+    _to_exec_funcs.clear();
 }
 
 class OneObjectQueryCallback : public b2QueryCallback
@@ -138,5 +145,10 @@ BodyOwner Physics::CreateBody( defs::OneShapeBaseDef& def )
     BodyOwner ret( _b2World_ptr->CreateBody( def.getBodyDef() ) );
     ret->CreateFixture( def.getFixtureDef() );
     return ret;
+}
+
+void Physics::execute_after_step( LazyFunction func )
+{
+	_to_exec_funcs.push_back( func );
 }
 

@@ -37,11 +37,6 @@ void Loop::reload()
     start();
 }
 
-void Loop::executeOnce(LazyFunction func)
-{
-    _time_loop.executeOnce( func );
-}
-
 void Loop::schedule(LazyFunction func, float delay)
 {
     using namespace cocos2d;
@@ -78,13 +73,6 @@ void Loop::TimeLoop_t::update(float t)
     
     master_t::subsystem<ObjectManager>().update_dynamic_objects_state(t);
 
-    //execute lazy calculations
-    for( auto it = exec_once.begin(), end = exec_once.end(); it != end; ++it )
-    {
-        (*it)();
-    }
-    exec_once.clear();
-
     //delegate management to ObjectManager
     master_t::subsystem<ObjectManager>().collect_garbage_objects();
 
@@ -100,11 +88,6 @@ void Loop::TimeLoop_t::update(float t)
             ++it;
         }
     }
-}
-
-void Loop::TimeLoop_t::executeOnce(std::function<void()> func)
-{
-    exec_once.push_back( func );
 }
 
 void Loop::ViewLoop_t::tick( float t )
