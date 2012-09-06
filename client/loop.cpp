@@ -27,7 +27,8 @@ void Loop::start()
 
 void Loop::stop() 
 { 
-    m_sheduler.unscheduleAllSelectors(); //FIXME our shedules will never destroy (they mark themselfs to destory on func() )
+    m_sheduler.unscheduleAllSelectors();
+    _time_loop.scheduled_list.clear();
 }
 
 void Loop::reload()
