@@ -25,6 +25,7 @@ namespace res
     std::string sound_effect(const char *name);
     std::string background_sound(const char *name);
     
+    std::string level_description(const char *name);
     
     std::string load_file_content(const std::string &file_name);
 }

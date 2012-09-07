@@ -245,6 +245,7 @@
 		849BF75015F7431700F2972D /* flying_text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF74D15F7431700F2972D /* flying_text.cpp */; };
 		849BF75315F74FCC00F2972D /* effect_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF75115F74FCB00F2972D /* effect_manager.cpp */; };
 		849BF75715F7702000F2972D /* arrow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 849BF75515F7702000F2972D /* arrow.cpp */; };
+		849BF76015FA03B200F2972D /* levels in Resources */ = {isa = PBXBuildFile; fileRef = 849BF75F15FA03B200F2972D /* levels */; };
 		84B5213415EE3D1F00F149A8 /* animations in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212415EE3D1F00F149A8 /* animations */; };
 		84B5213515EE3D1F00F149A8 /* bg_sound in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212515EE3D1F00F149A8 /* bg_sound */; };
 		84B5213615EE3D1F00F149A8 /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = 84B5212615EE3D1F00F149A8 /* config.txt */; };
@@ -757,7 +758,6 @@
 		8404AEBA15D539F10030B061 /* AppController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = AppController.mm; path = ios/AppController.mm; sourceTree = "<group>"; };
 		8404AEBC15D539F10030B061 /* RootViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RootViewController.h; path = ios/RootViewController.h; sourceTree = "<group>"; };
 		8404AEBD15D539F10030B061 /* RootViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = RootViewController.mm; path = ios/RootViewController.mm; sourceTree = "<group>"; };
-		8404AED315D53A610030B061 /* config.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = config.hpp; sourceTree = "<group>"; };
 		8404AED415D53A610030B061 /* master.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = master.hpp; sourceTree = "<group>"; };
 		8404AED515D53A610030B061 /* noncopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = noncopyable.hpp; sourceTree = "<group>"; };
 		8404AED615D53A610030B061 /* subsystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = subsystem.hpp; sourceTree = "<group>"; };
@@ -812,6 +812,8 @@
 		849BF75215F74FCB00F2972D /* effect_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = effect_manager.hpp; sourceTree = "<group>"; };
 		849BF75515F7702000F2972D /* arrow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = arrow.cpp; path = effects/arrow.cpp; sourceTree = "<group>"; };
 		849BF75615F7702000F2972D /* arrow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = arrow.hpp; path = effects/arrow.hpp; sourceTree = "<group>"; };
+		849BF75815F9F46B00F2972D /* logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = logger.hpp; sourceTree = "<group>"; };
+		849BF75F15FA03B200F2972D /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; name = levels; path = ../../../resources/levels; sourceTree = "<group>"; };
 		84B5212415EE3D1F00F149A8 /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; name = animations; path = ../../../resources/animations; sourceTree = "<group>"; };
 		84B5212515EE3D1F00F149A8 /* bg_sound */ = {isa = PBXFileReference; lastKnownFileType = folder; name = bg_sound; path = ../../../resources/bg_sound; sourceTree = "<group>"; };
 		84B5212615EE3D1F00F149A8 /* config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = config.txt; path = ../../../resources/config.txt; sourceTree = "<group>"; };
@@ -1859,10 +1861,10 @@
 		8404AED215D53A610030B061 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				8404AED315D53A610030B061 /* config.hpp */,
 				8404AED415D53A610030B061 /* master.hpp */,
 				8404AED515D53A610030B061 /* noncopyable.hpp */,
 				8404AED615D53A610030B061 /* subsystem.hpp */,
+				849BF75815F9F46B00F2972D /* logger.hpp */,
 			);
 			name = common;
 			path = ../../../common;
@@ -1871,6 +1873,7 @@
 		849B9CEC15E3B33D00366740 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				849BF75F15FA03B200F2972D /* levels */,
 				84B5212415EE3D1F00F149A8 /* animations */,
 				84B5212515EE3D1F00F149A8 /* bg_sound */,
 				84B5212615EE3D1F00F149A8 /* config.txt */,
@@ -2064,6 +2067,7 @@
 				84B5214115EE3D1F00F149A8 /* iTunesArtwork in Resources */,
 				84B5214215EE3D1F00F149A8 /* pictures in Resources */,
 				84B5214315EE3D1F00F149A8 /* sound_fx in Resources */,
+				849BF76015FA03B200F2972D /* levels in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

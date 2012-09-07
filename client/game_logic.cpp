@@ -66,7 +66,7 @@ void GameLogic::onEndLoading(float)
 {
     transitScene(m_current_scene);
     
-    master_t::subsystem<LevelManager>().loadLevel("");
+    master_t::subsystem<LevelManager>().loadLevel("test_level");
     
 #ifndef NO_SOUND
     master_t::subsystem<cd::SimpleAudioEngine>().resumeBackgroundMusic();

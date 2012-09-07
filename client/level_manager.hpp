@@ -16,6 +16,8 @@
 
 class LevelManager : public subsystem_t
 {
+    DEFINE_LOGGER(LevelManager);
+    
     virtual void start() override;
     virtual void stop() override;
     

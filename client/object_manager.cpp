@@ -1,8 +1,49 @@
 #include "object_manager.hpp"
 
-#include "objects/object_interfaces.hpp"
+#include "master.hpp"
+#include "loop.hpp"
 
+#include "objects/object_interfaces.hpp"
+#include "objects/ball.hpp"
+#include "objects/enemy.hpp"
+
+#include <json/json.h>
 #include <algorithm>
+
+void object_creator(const Json::Value description)
+{
+    const std::string class_name = description["class"].asString();
+    bool repeat = description.get("repeat", false).asBool();
+    float delay = description.get("appear_delay", 0.f).asFloat();
+    
+    const Json::Value pos_descr = description["position"];
+    pr::Vec2 position(pos_descr.get("x", 0.f).asFloat(), pos_descr.get("y", 0.f).asFloat());
+    
+    // create object
+    if (class_name == "ball")
+    {
+        objects::Ball::create(position);
+    }
+    else if (class_name == "enemy")
+    {
+        objects::Enemy::create(position);
+    }
+//    else if ()
+//    {
+//    }
+    
+    // schedule new creation if need
+    if (repeat)
+    {
+        master_t::subsystem<Loop>().schedule(std::bind(object_creator, description), delay);
+    }
+}
+
+void ObjectManager::create_object_factory(const Json::Value &description)
+{
+    float delay = description.get("appear_delay", 0.f).asFloat();
+    master_t::subsystem<Loop>().schedule(std::bind(object_creator, description), delay);
+}
 
 void ObjectManager::start()
 {

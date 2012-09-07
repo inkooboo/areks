@@ -11,6 +11,9 @@
 # include "CCFileUtils.h"
 # include "SimpleAudioEngine.h"
 
+#include "logger.hpp"
+
+# include <functional>
 # include <memory>
 
 namespace cc = cocos2d;

@@ -4,6 +4,7 @@
 #include "subsystem.hpp"
 #include "objects/base_object.hpp"
 
+# include <json/json.h>
 # include <vector>
 
 class DynamicObject;
@@ -33,6 +34,8 @@ public:
     
     void collect_garbage_objects();
     
+    void create_object_factory(const Json::Value &description);
+                               
 private:
     std::vector< BaseObject* > _objects;
     std::vector< DynamicObject* > _dyn_objects;

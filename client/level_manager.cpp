@@ -19,17 +19,11 @@
 
 #include "objects/background.hpp"
 #include "objects/platform.hpp"
-#include "objects/ball.hpp"
-#include "objects/rope.hpp"
-#include "objects/enemy.hpp"
 
-
-//for testing
-#include <time.h>
+#include <json/json.h>
 
 void LevelManager::start()
 {
-    //read from config current level info
 }
 
 void LevelManager::stop()
@@ -39,132 +33,92 @@ void LevelManager::stop()
 
 LevelManager::LevelManager()
 {
-    
 }
 
 void LevelManager::loadLevel(const char *level_name)
 {
-    // 0. Unschedule all
+    log() << "Begin loading of level \"" << level_name << "\"";
+    std::string level_description_str = res::load_file_content(res::level_description(level_name));
+    
+    Json::Value description;
+    Json::Reader parser;
+    parser.parse(level_description_str, description);
+    
+    log() << "reload scheduler";
     master_t::subsystem<Loop>().reload();
     
-    // 0.1 Remove effects
+    log() << "reload effects";
     master_t::subsystem<EffectManager>().reload();
     
-    // 1. Clear all objects
+    log() << "clear old objects";
     master_t::subsystem<ObjectManager>().reload();
+    log() << "reload avatar";
     master_t::subsystem<Player>().reload();
     
-    // 2. Load background
-    const std::string bg_name_base = res::picture("test_background_base");
-    const std::string bg_name_lvl_1 = res::picture("test_background_lvl_1");
+
+    log() << "load background";
+    const std::string bg_name_base = res::picture(description["background_base"].asCString());
+    const std::string bg_name_parallax = res::picture(description["background_parallax"].asCString());
+    log() << "background base picture = " << bg_name_base;
+    log() << "background parallax picture = " << bg_name_parallax;
     
     cc::CCSprite *bg = cc::CCSprite::create(bg_name_base.c_str());
     cc::CCSize bg_size = bg->getContentSize();
     bg->release();
     
-    // 3. Load world params
-    pr::Vec2 world_size(96.f, 32.f);
+    log() << "load world size";
+    const Json::Value &world_size_descr = description["world_size"];
+    float world_size_x = world_size_descr["width"].asFloat();
+    float world_size_y = world_size_descr["height"].asFloat();
+    pr::Vec2 world_size = pr::Vec2(world_size_x, world_size_y);
+    log() << "world size = {" << world_size_x << "," << world_size_y << "}";
     
+    log() << "reload physics";
     master_t::subsystem<Physics>().reload(world_size);
     
-    // 4. Reload view parameters
-    
+    log() << "reload view parameters";
     master_t::subsystem<View>().reload(bg_size, world_size);
     
-    // 5. Preload background music
 #ifndef NO_SOUND
-    const std::string bg_music_file = res::background_sound("wow_trek_7");
+    log() << "preload background music";
+    const std::string bg_music_file = res::background_sound(description["background_trek"].asCString());
+    log() << "background music file = " << bg_music_file;
     master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
     master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str(), true);
     master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
     master_t::subsystem<cd::SimpleAudioEngine>().setBackgroundMusicVolume(float(0.1));
 #endif
     
-    // 6. Create level objects
-    auto background = objects::Background::create(bg_name_base, bg_name_lvl_1);
+    log() << "create background";
+    objects::Background::create(bg_name_base, bg_name_parallax);
     
-    objects::Enemy::create(pr::Vec2(40.5f, 9.5f));
     
-    struct delayed_enemy {
-        static void create()
+    log() << "create platforms";
+    const Json::Value &platforms = description["platforms"];
+    for (auto it = platforms.begin(); it != platforms.end(); ++it)
+    {
+        const Json::Value &platform = *it;
+        
+        std::vector<pr::Vec2> points;
+        for (unsigned int i = 0; i < platform.size(); ++i)
         {
-            objects::Enemy::create(pr::Vec2(48.5f, 9.5f));
+            const Json::Value &point = platform[i];
+            points.push_back(pr::Vec2(point["x"].asFloat(), point["y"].asFloat()));
         }
-    };
-    master_t::subsystem<Loop>().schedule(std::bind(delayed_enemy::create), 2.75);
-
-	//need using CCW winding for platform description!
-	std::vector<pr::Vec2> points;
-	points.push_back( pr::Vec2(40, 30) );
-	points.push_back( pr::Vec2(37.5, 25) );
-	points.push_back( pr::Vec2(32.5, 22.5) );
-	points.push_back( pr::Vec2(37.5, 20) );
-	points.push_back( pr::Vec2(40, 15) );
-	points.push_back( pr::Vec2(42.5, 20) );
-	points.push_back( pr::Vec2(47.5, 22.5) );
-	points.push_back( pr::Vec2(42.5, 25) );
-
-	auto platform1 = objects::Platform::create( points );
-	auto ball1 = objects::Ball::create( pr::Vec2(40, 40) );
-	auto ball2 = objects::Ball::create( pr::Vec2(41, 40) );
-	auto ball3 = objects::Ball::create( pr::Vec2(42, 40) );
-	auto ball4 = objects::Ball::create( pr::Vec2(43, 40) );
-	auto ball5 = objects::Ball::create( pr::Vec2(44, 40) );
-	auto ball6 = objects::Ball::create( pr::Vec2(45, 40) );
-
-	for( auto it = points.begin(), end = points.end(); it!=end; ++it )
-	{
-		it->x+=15;
-		it->y-=7;
-	}
-
-	auto platform2 = objects::Platform::create( points );
-
-	points.clear();
-
-	pr::Vec2 ground_begin(10, 7);
-	float ground_length = 60;
-	pr::Vec2 ground_coord = ground_begin;
-	points.push_back( ground_coord );
-
-	ground_coord.y -= 4;
-	points.push_back( ground_coord );
-
-	ground_coord.x += ground_length;
-	points.push_back( ground_coord );
-
-	std::srand( time(0) );
-
-	size_t min_ground_y = 7;
-	for( float x = ground_coord.x - 5; x > ground_begin.x; x-=5 )
-	{
-		points.push_back( pr::Vec2( x, (float(rand() % 2) / 2.f + min_ground_y + 1) ) );
-	}
-
-	auto platform3 = objects::Platform::create( points );
-
-	master_t::subsystem<Player>().createAvatar( pr::Vec2(ground_begin.x + 37.f, min_ground_y + 25) );
-
-    //auto platform00 = objects::Platform::create( pr::Vec2(0, 0), pr::Vec2(1, 1) );
-    //auto platformx0 = objects::Platform::create( pr::Vec2(world_size.x, 0), pr::Vec2(1, 1) );
-    //auto platform0y = objects::Platform::create( pr::Vec2(0, world_size.y), pr::Vec2(1, 1) );
-    //auto platformxy = objects::Platform::create( pr::Vec2(world_size.x, world_size.y), pr::Vec2(1, 1) );
+        objects::Platform::create(points);
+    }
     
-    //auto platform1 = objects::Platform::create( pr::Vec2(47, 19), pr::Vec2(10, 1) );
-    //auto platform2 = objects::Platform::create( pr::Vec2(17, 10), pr::Vec2(13, 4) );
-    //auto platform3 = objects::Platform::create( pr::Vec2(77, 12), pr::Vec2(17, 2) );
-    //auto ball = objects::Ball::create( pr::Vec2(60, 15) );
-    //auto rope = objects::Rope::create( pr::Vec2(47, 17.5), platform1, pr::Vec2(60, 15.5), ball );
-
-    //pr::Vec2* vertices = new pr::Vec2[4];
-    //vertices[0] = pr::Vec2(10,20);
-    //vertices[1] = pr::Vec2(10,10);
-    //vertices[2] = pr::Vec2(20,10);
-    //vertices[3] = pr::Vec2(20,20);
-    //auto platform = objects::Platform::create( vertices, 4 );
-    //delete[] vertices;
-    //auto ball = objects::Ball::create( pr::Vec2(22, 15) );
-    //auto rope = objects::Rope::create( pr::Vec2(15, 10), platform, pr::Vec2(22, 15.5), ball );
-
-    //auto rope = objects::Rope::create( pr::Vec2(7, 11), ball, pr::Vec2(10, 14.5), platform );
+    log() << "create objects";
+    const Json::Value objects = description["objects"];
+    auto obj_names = objects.getMemberNames();
+    for (auto it = obj_names.begin(); it != obj_names.end(); ++it)
+    {
+        log() << "    " << *it;
+        const Json::Value obj = objects[*it];
+        master_t::subsystem<ObjectManager>().create_object_factory(obj);
+    }
+    
+    log() << "create player avatar";
+    const Json::Value &player_position = description["player_start_position"];
+	master_t::subsystem<Player>().createAvatar( pr::Vec2(player_position["x"].asFloat(), player_position["y"].asFloat()) );
 }

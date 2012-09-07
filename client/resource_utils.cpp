@@ -70,6 +70,15 @@ namespace res
         return ret;
     }
     
+    std::string level_description(const char *name)
+    {
+        std::string ret("levels/");
+        ret += name;
+        ret += ".json";
+        return ret;
+    }
+    
+    
     std::string load_file_content(const std::string &file_name)
     {
         const char *full_path = cc::CCFileUtils::sharedFileUtils()->fullPathFromRelativePath(file_name.c_str());

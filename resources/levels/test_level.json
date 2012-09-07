@@ -1,9 +1,7 @@
 {
     "background_base": "test_background_base",
     "background_parallax": "test_background_lvl_1",
-    "background_treks": [
-                         "wow_trek_7"
-                         ],
+    "background_trek": "wow_trek_7",
     "world_size": {
         "width": 96,
         "height": 32
@@ -50,50 +48,71 @@
                    },
                    {
                    "x": 12,
-                   "y": 3
-                   },
-                   {
-                   "x": 14,
-                   "y": 6
-                   },
-                   {
-                   "x": 15,
-                   "y": 7
-                   },
-                   {
-                   "x": 20,
-                   "y": 7.25
-                   },
-                   {
-                   "x": 35,
-                   "y": 6.77
-                   },
-                   {
-                   "x": 55,
-                   "y": 7
-                   },
-                   {
-                   "x": 75,
-                   "y": 7.24
-                   },
-                   {
-                   "x": 77,
                    "y": 5
                    },
                    {
+                   "x": 14,
+                   "y": 8
+                   },
+                   {
+                   "x": 15,
+                   "y": 9
+                   },
+                   {
+                   "x": 20,
+                   "y": 9.25
+                   },
+                   {
+                   "x": 35,
+                   "y": 8.77
+                   },
+                   {
+                   "x": 55,
+                   "y": 9
+                   },
+                   {
+                   "x": 75,
+                   "y": 14.24
+                   },
+                   {
+                   "x": 77,
+                   "y": 7
+                   },
+                   {
                    "x": 79,
-                   "y": 3
+                   "y": 5
                    },
                    {
                    "x": 84,
                    "y": 0
                    }
-                   ]
+                   ],
+        "another": [
+                    {
+                    "x": 54,
+                    "y": 20
+                    },
+                    {
+                    "x": 57,
+                    "y": 18
+                    },
+                    {
+                    "x": 55,
+                    "y": 17
+                    },
+                    {
+                    "x": 52,
+                    "y": 19
+                    },
+                    {
+                    "x": 50,
+                    "y": 18.6
+                    }
+                    ]
     },
     "objects": {
         "enemy1": {
             "class": "enemy",
-            "appear_time": 0,
             "position": {
                 "x": 40.5,
                 "y": 9.5
@@ -101,7 +120,7 @@
         },
         "enemy2": {
             "class": "enemy",
-            "appear_time": 2.75,
+            "appear_delay": 2.75,
             "position": {
                 "x": 48.5,
                 "y": 9.5
@@ -109,7 +128,6 @@
         },
         "ball0": {
             "class": "ball",
-            "appear_time": 0,
             "position": {
                 "x": 40,
                 "y": 40
@@ -117,7 +135,6 @@
         },
         "ball1": {
             "class": "ball",
-            "appear_time": 1,
             "position": {
                 "x": 41,
                 "y": 40
@@ -125,7 +142,6 @@
         },
         "ball2": {
             "class": "ball",
-            "appear_time": 2,
             "position": {
                 "x": 42,
                 "y": 40
@@ -133,7 +149,6 @@
         },
         "ball3": {
             "class": "ball",
-            "appear_time": 3,
             "position": {
                 "x": 43,
                 "y": 40
@@ -141,15 +156,15 @@
         },
         "ball4": {
             "class": "ball",
-            "appear_time": 4,
             "position": {
                 "x": 44,
                 "y": 40
             }
         },
-        "ball5": {
+        "infinite balls": {
             "class": "ball",
-            "appear_time": 5,
+            "appear_delay": 5,
+            "repeat" : true,
             "position": {
                 "x": 45,
                 "y": 40

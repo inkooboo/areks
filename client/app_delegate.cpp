@@ -2,8 +2,6 @@
 
 #include "defs.hpp"
 
-#include "config.hpp"
-
 #include "object_manager.hpp"
 #include "physics.hpp"
 #include "view.hpp"
@@ -41,15 +39,11 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set FPS. the default value is 1.0/60 if you don't call this
     pDirector->setAnimationInterval(1.0 / 60);
 
-    //init config_t
-    std::string cfg_str(res::load_file_content("config.txt"));
-    
     //init master
     m_master_ptr.reset( new master_t);
 
     m_master_ptr->add_external_subsystem<AppDelegate>(this);
     m_master_ptr->add_external_subsystem<cd::SimpleAudioEngine>(CocosDenshion::SimpleAudioEngine::sharedEngine());
-    m_master_ptr->add_unmanaged_subsystem<config_t>(cfg_str);
     m_master_ptr->add_managed_subsystem<ObjectManager>();
     m_master_ptr->add_managed_subsystem<Physics>();
     m_master_ptr->add_managed_subsystem<View>();
