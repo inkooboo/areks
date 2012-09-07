@@ -3,6 +3,29 @@
 
 #include "defs.hpp"
 
+namespace group
+{
+    enum
+    {
+        PLAYER = -1
+    };
+}
+
+namespace filter
+{
+    enum
+    {
+		NONE = 0,
+        
+        PLATFORMS = 1,
+		OBJECTS = 1 << 1,
+		HEAD = 1 << 2,
+		NECK = 1 << 3,
+        
+		ALL = 0xffff
+    };
+}
+
 class BodyOwner
 {
 public:

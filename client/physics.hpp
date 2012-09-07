@@ -6,7 +6,7 @@
 
 # include "defs.hpp"
 
-#include "body_definitions.hpp"
+# include "body_definitions.hpp"
 
 class ContactListener : public b2ContactListener
 {
