@@ -11,8 +11,10 @@
 
 static const float DEFAULT_WORLD_TICK_TIME = 1.f/60.f;
 static const float DEFAULT_VIEW_TICK_TIME = 1.f/33.f;
+static const float BOOST_GAME_SPEED = 1.4f;
 
 Loop::Loop()
+    : m_reminder(0)
 {
     using namespace cocos2d;
     cc::CCDirector::sharedDirector()->getScheduler()->scheduleUpdateForTarget( &m_sheduler, 0, false);
@@ -21,14 +23,15 @@ Loop::Loop()
 void Loop::start()
 {
     using namespace cocos2d;
-    m_sheduler.scheduleUpdateForTarget( &_time_loop, 0, false);
-    m_sheduler.scheduleSelector( schedule_selector(ViewLoop_t::tick), &_view_loop, DEFAULT_VIEW_TICK_TIME, false);
+    m_sheduler.scheduleUpdateForTarget(this, 0, false);
+    m_sheduler.scheduleSelector(schedule_selector(Loop::update_view), this, DEFAULT_VIEW_TICK_TIME, false);
 }
 
 void Loop::stop() 
 { 
     m_sheduler.unscheduleAllSelectors();
-    _time_loop.scheduled_list.clear();
+    m_scheduled_list.clear();
+    m_reminder = 0;
 }
 
 void Loop::reload()
@@ -40,48 +43,42 @@ void Loop::reload()
 void Loop::schedule(LazyFunction func, float delay)
 {
     using namespace cocos2d;
-    _time_loop.scheduled_list.push_back(std::unique_ptr<Scheduled>(new Scheduled(func, &m_sheduler)));
-    Scheduled *sch = _time_loop.scheduled_list.back().get();
+    m_scheduled_list.push_back(std::unique_ptr<Scheduled>(new Scheduled(func, &m_sheduler)));
+    Scheduled *sch = m_scheduled_list.back().get();
     m_sheduler.scheduleSelector( schedule_selector(Scheduled::func), sch, 0, false, 0, delay);
 }
 
-void Loop::TimeLoop_t::update(float t)
+void Loop::update(float delta)
 {
-	//FOR TEST
-	t *= 1.4f;
-	//
+	delta *= BOOST_GAME_SPEED; // speed up game time
 
-    float ft = t + remainder;
 
-    float diff = DEFAULT_WORLD_TICK_TIME;
-    while (ft > 0)
+    float corrected_delta = delta + m_reminder; // add reminder from previous tick
+
+    while (corrected_delta > DEFAULT_WORLD_TICK_TIME) // step physics
     {
-        if (ft - DEFAULT_WORLD_TICK_TIME < 0)
-        {
-            remainder = ft;
-        }
-        else
-        {
-            master_t::subsystem<Physics>().step( diff );
-        }
-        ft -= DEFAULT_WORLD_TICK_TIME;
+        master_t::subsystem<Physics>().step(DEFAULT_WORLD_TICK_TIME);
+        corrected_delta -= DEFAULT_WORLD_TICK_TIME;
     }
-
-    t -= remainder; // calculate real time
     
-    master_t::subsystem<View>().manageCameraPositionAndScale(t); // manage dynamic scale
-    
-    master_t::subsystem<ObjectManager>().update_dynamic_objects_state(t);
+    m_reminder = corrected_delta; // new reminder
 
-    //delegate management to ObjectManager
+    delta -= m_reminder; // set delta to time passed in physics
+    
+
+    master_t::subsystem<View>().manageCameraPositionAndScale(delta); // manage dynamic scale
+    
+
+    master_t::subsystem<ObjectManager>().update_dynamic_objects_state(delta);
     master_t::subsystem<ObjectManager>().collect_garbage_objects();
 
+
     // remove scheduled items
-    for (auto it = scheduled_list.begin(), end = scheduled_list.end(); it != end;)
+    for (auto it = m_scheduled_list.begin(), end = m_scheduled_list.end(); it != end;)
     {
         if ((*it)->die_bitch)
         {
-            it = scheduled_list.erase(it);
+            it = m_scheduled_list.erase(it);
         }
         else
         {
@@ -90,9 +87,9 @@ void Loop::TimeLoop_t::update(float t)
     }
 }
 
-void Loop::ViewLoop_t::tick( float t )
+void Loop::update_view(float dt)
 {
-    master_t::subsystem<ObjectManager>().update_objects(t);
+    master_t::subsystem<ObjectManager>().update_objects(dt);
     
-    master_t::subsystem<EffectManager>().update_effects(t);
+    master_t::subsystem<EffectManager>().update_effects(dt);
 }

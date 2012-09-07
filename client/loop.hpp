@@ -10,10 +10,21 @@
 
 inline void lazyDoNothing() {};
 
-class Loop : public subsystem_t
+class Loop : public subsystem_t, public cc::CCObject
 {
     virtual void start() override;
     virtual void stop() override;
+
+public:
+    Loop();
+    
+    void reload();
+    
+    void schedule(LazyFunction func, float delay);
+    
+    virtual void update(float dt) override;
+
+    void update_view(float dt);
 
 public:
     struct Scheduled : public cc::CCObject
@@ -33,33 +44,9 @@ public:
         bool die_bitch;
     };
     
-public:
-    Loop();
-    
-    void reload();
-
-    void schedule(LazyFunction func, float delay);
-
 private:
-
-    struct TimeLoop_t : public cc::CCObject
-    {
-        TimeLoop_t() : remainder(0.f) {}
-
-        virtual void update( float t ) override;
-
-        float remainder; 
-        std::list<std::unique_ptr<Scheduled>> scheduled_list;
-    };
-    
-    struct ViewLoop_t : public cc::CCObject
-    {
-        void tick( float t );   
-    };
-    
-    TimeLoop_t _time_loop;
-    ViewLoop_t _view_loop;
-    
+    std::list<std::unique_ptr<Scheduled>> m_scheduled_list;
+    float m_reminder;
     cc::CCScheduler m_sheduler;
 };
 
