@@ -10,9 +10,12 @@
 #include "objects/player/body.hpp"
 #include "objects/ball.hpp"
 
+static const size_t TOUCH_ACCURACY = 10; //pixels
+
 void ActionHandler::start()
 {
     enable();
+	_active_target = &(master_t::subsystem<Player>());
 }
 
 void ActionHandler::stop()
@@ -21,6 +24,7 @@ void ActionHandler::stop()
 }
 
 ActionHandler::ActionHandler()
+	: _active_target(0)
 {
 }
 
@@ -45,87 +49,111 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     cc::CCPoint location = invert_y_coord(pTouch->locationInView());
     int id = pTouch->getID();
     
-    TouchPtr touch = std::make_shared<Touch>();
+    action::TouchPtr touch = std::make_shared<action::Touch>();
     touch->begin = location;
     touch->from = location;
 
     View &view = master_t::subsystem<View>();
 	Player &player = master_t::subsystem<Player>();
 
+	m_touches[id] = touch;
+	m_touches_ids.push_back(id);
+
     // determine touch type and init touch handlers
-    if (m_touches.size() == 0)
-    {
-        // 1. first scale touch OR
-        // 2. possible view move touch OR
-        // 3. main hero selection
-#ifdef DEBUG_VIEW_FUNCTIONALITY
-        auto ball = objects::Ball::create(view.toWorldCoordinates(touch->begin));
-        
-		touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
-#else
-		if( player.isAvatarCreated() )
-		{
-			if( master_t::subsystem<Physics>().checkObject( view.toWorldCoordinates(touch->begin), static_cast<BaseObject*>(player.getBody()) ) )
-			{
-				player.onTouchBodyBegin(touch);
-				touch->on_move = std::bind(&Player::onTouchBodyMove, &player, std::placeholders::_1); 
-				touch->on_end = std::bind(&Player::onTouchBodyEnd, &player, std::placeholders::_1);
-			}
-			else
-			{
-				touch->on_end = std::bind(&Player::onTouchTarget, &player, std::placeholders::_1);
-			}
-		}
-#endif
-    }
-    
-#ifdef DEBUG_VIEW_FUNCTIONALITY
     if (m_touches.size() == 1)
     {
-        //scale second touch
-        TouchPtr first_touch = m_touches.begin()->second;
-        first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
-        first_touch->on_end = std::bind(&View::onTouchEnd, &view, first_touch);
-        touch->on_end = std::bind(&View::onTouchEnd, &view, std::placeholders::_1);
-        touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
     }
-#endif
-    
-    m_touches[id] = touch;
-    
+	else if (m_touches.size() == 2)
+    {
+		if(_active_target)
+		{
+			if( _active_target->multi_touch_type() == ActionTarget::SHARING )
+			{
+				_active_target->onTwoTouchBegin( m_touches[m_touches_ids[0]], m_touches[m_touches_ids[1]] );
+			}
+		}
+	}
+
     return true;
 }
 
 void ActionHandler::ccTouchMoved (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 {
-    TouchPtr &touch = m_touches[pTouch->getID()];
+	action::TouchPtr &touch = m_touches[pTouch->getID()];
 
-    touch->to = invert_y_coord(pTouch->locationInView());
+	touch->to = invert_y_coord(pTouch->locationInView());
 
-    if (touch->on_move)
-    {
-        touch->on_move(touch);
-    }
+	if( _active_target )
+	{
+		if( m_touches.size() == 2 && _active_target->multi_touch_type() == ActionTarget::SHARING)
+		{
+			_active_target->onTwoTouchContinue( m_touches[m_touches_ids[0]], m_touches[m_touches_ids[1]]);
+		}
+		else
+		{
+			if( touch->type == action::Touch::TARGET )
+			{
+				pr::Vec2 begin( touch->begin.x, touch->begin.y );
+				pr::Vec2 end( touch->to.x, touch->to.y );
+				if( pr::distance(begin, end) > TOUCH_ACCURACY )
+				{
+					touch->type = action::Touch::MOVE;
+					_active_target->onMoveTouchBegin( touch );
+				}
+			}
 
-    touch->from = touch->to;
+			if( touch->type == action::Touch::MOVE )
+			{
+				_active_target->onMoveTouchContinue( touch );
+			}
+
+		}
+	}
+
+	touch->from = touch->to;
 }
 
 void ActionHandler::ccTouchEnded (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
 {
-    int id = pTouch->getID();
+	int id = pTouch->getID();
+
+	if( _active_target )
+	{
     
-    TouchPtr &touch = m_touches[id];
+		action::TouchPtr &touch = m_touches[id];
     
-    touch->end = invert_y_coord(pTouch->locationInView());
+		touch->end = invert_y_coord(pTouch->locationInView());
+
+		if( m_touches.size() == 2 && _active_target->multi_touch_type() == ActionTarget::SHARING)
+		{
+			_active_target->onTwoTouchEnd( m_touches[m_touches_ids[0]], m_touches[m_touches_ids[1]]);
+		}
+		else
+		{
+			switch( touch->type )
+			{
+			case action::Touch::TARGET:
+				{
+					_active_target->onTargetTouch( touch );
+					break;
+				}
+			case action::Touch::MOVE:
+				{
+					_active_target->onMoveTouchEnd( touch );
+					break;
+				}
+			default:
+				{
+					assert( false && "Unknown touch type!" );
+				}
+			}
+		}
     
-    if (touch->on_end)
-    {
-        touch->on_end(touch);
-    }
-    
-    touch->ended = true;
-    
-    m_touches.erase(id);
+	}
+
+	m_touches.erase(id);
+	auto delete_it = std::find( m_touches_ids.begin(), m_touches_ids.end(), id );
+	m_touches_ids.erase( delete_it );
 }
 
 void ActionHandler::ccTouchCancelled (cc::CCTouch *pTouch, cc::CCEvent *pEvent)

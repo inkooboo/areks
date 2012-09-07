@@ -6,7 +6,7 @@
 
 #include "primitives.hpp"
 
-#include "action_handler.hpp"
+#include "action_target.hpp"
     
 namespace objects
 {
@@ -20,10 +20,15 @@ namespace objects
     
 }//end namespace objects
     
-class Player : public subsystem_t
+class Player : public subsystem_t, public ActionTarget
 {
     virtual void start() override;
     virtual void stop() override;
+
+	virtual void onTargetTouch(action::TouchPtr &touch) override;
+	virtual void onMoveTouchBegin(action::TouchPtr &touch) override;
+	virtual void onMoveTouchContinue(action::TouchPtr &touch) override;
+	virtual void onMoveTouchEnd(action::TouchPtr &touch) override;
     
 public:
     Player();
@@ -46,18 +51,8 @@ public:
     objects::player::Body* getBody();
     objects::player::Head* getHead();
 	objects::player::Neck2* getNeck();
-
-public:
-	void onTouchTarget(ActionHandler::TouchPtr &touch);
-
-	void onTouchBodyBegin(ActionHandler::TouchPtr &touch);
-	void onTouchBodyMove(ActionHandler::TouchPtr &touch);
-	void onTouchBodyEnd(ActionHandler::TouchPtr &touch);
     
 private:
-    void controlBodyBegin();
-    void controlBodyEnd();
-
     objects::player::Body* _body;
     objects::player::Head* _head;
 	objects::player::Neck2* _neck;

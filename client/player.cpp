@@ -106,24 +106,52 @@ void Player::destroyNeck()
 	_neck = 0;
 }
 
-void Player::onTouchTarget(ActionHandler::TouchPtr &touch)
+void Player::onTargetTouch(action::TouchPtr &touch)
 {
 	if( isAvatarCreated() )
 	{
-		View& view = master_t::subsystem<View>();
-		shoot( view.toWorldCoordinates(touch->end) );
+		switch( _head->getState() )
+		{
+		case objects::player::Head::REST:
+			{
+				View& view = master_t::subsystem<View>();
+				shoot( view.toWorldCoordinates(touch->end) );
+				break;
+			}
+		case objects::player::Head::HOOK:
+			{
+				unhook();
+				break;
+			}
+		}
 	}
+
 }
 
-void Player::onTouchBodyBegin(ActionHandler::TouchPtr &touch)
+class ActionRecorder
 {
-	if( _head->getState() == objects::player::Head::HOOK )
+public:
+
+	float length;
+};
+
+void Player::onMoveTouchBegin(action::TouchPtr &touch)
+{
+	if( isAvatarCreated() && _head->getState() == objects::player::Head::HOOK )
 	{
-        controlBodyBegin();
+        b2BodyDef bd;
+		_temp_body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &bd );
+		b2MouseJointDef mouse_def; 
+
+		mouse_def.bodyA = _temp_body;
+		mouse_def.bodyB = _body->getBody();
+		mouse_def.target = _body->getPosition().tob2Vec2();
+		mouse_def.maxForce = 5.f * _body->getBody()->GetMass();
+		_mouse_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &mouse_def );
 	}
 }
 
-void Player::onTouchBodyMove(ActionHandler::TouchPtr &touch)
+void Player::onMoveTouchContinue(action::TouchPtr &touch)
 {
 	if(_mouse_joint)
 	{
@@ -152,39 +180,16 @@ void Player::onTouchBodyMove(ActionHandler::TouchPtr &touch)
 	}
 }
 
-void Player::onTouchBodyEnd(ActionHandler::TouchPtr &touch)
+void Player::onMoveTouchEnd(action::TouchPtr &touch)
 {
 	if( _mouse_joint )
 	{
-        controlBodyEnd();
+        master_t::subsystem<Physics>().worldEngine()->DestroyBody( _temp_body );
+		_temp_body = 0;
+
+		//mouse joint automatic delete with _temp_body
+		_mouse_joint = 0;
 	}
-}
 
-void Player::controlBodyBegin()
-{
- //   	b2BodyDef bd;
-	//bd.type = b2_staticBody;
-	//_temp_body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &bd );
-	//for testing
-	b2BodyDef bd;
-	_temp_body = master_t::subsystem<Physics>().worldEngine()->CreateBody( &bd );
-    b2MouseJointDef mouse_def; 
-
-	mouse_def.bodyA = _temp_body;
-	mouse_def.bodyB = _body->getBody();
-	mouse_def.target = _body->getPosition().tob2Vec2();
-	mouse_def.maxForce = 5.f * _body->getBody()->GetMass();
-	_mouse_joint = master_t::subsystem<Physics>().worldEngine()->CreateJoint( &mouse_def );
-}
-
-void Player::controlBodyEnd()
-{
-	master_t::subsystem<Physics>().worldEngine()->DestroyBody( _temp_body );
-	_temp_body = 0;
-
-	//mouse joint automatic delete with _temp_body
-	_mouse_joint = 0;
-
-	unhook();
 }
     

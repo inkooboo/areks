@@ -8,27 +8,14 @@
 # include <functional>
 # include <memory>
 
+#include "action_target.hpp"
+
 class ActionHandler : public cc::CCObject, public cc::CCTargetedTouchDelegate, public subsystem_t
 {
     virtual void start() override;
     virtual void stop() override;
 
-public:
-    struct Touch;
-    typedef std::shared_ptr<Touch> TouchPtr;
-    
-    struct Touch
-    {
-        Touch() : ended(false) {}
-        cc::CCPoint begin;
-        cc::CCPoint from;
-        cc::CCPoint to;
-        cc::CCPoint end;
-        std::function<void(TouchPtr &touch)> on_move;
-        std::function<void(TouchPtr &touch)> on_end;
-        bool ended;
-    };
-    
+public:    
     ActionHandler();
 
     void enable();
@@ -42,7 +29,10 @@ private:
     virtual void ccTouchCancelled (cc::CCTouch *pTouch, cc::CCEvent *pEvent) override;
 
     
-    std::map<int,TouchPtr> m_touches;
+    std::map<int,action::TouchPtr> m_touches;
+	std::vector<int> m_touches_ids;
+
+	ActionTarget* _active_target;
 };
 
 #endif

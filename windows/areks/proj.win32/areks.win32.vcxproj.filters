@@ -264,6 +264,9 @@
     <ClInclude Include="..\..\..\client\effects\arrow.hpp">
       <Filter>source\client\effects</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\client\action_target.hpp">
+      <Filter>source\client</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="areks.rc" />

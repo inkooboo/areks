@@ -131,6 +131,7 @@
     <ResourceCompile Include="areks.rc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\client\action_target.hpp" />
     <ClInclude Include="..\..\..\client\action_handler.hpp" />
     <ClInclude Include="..\..\..\client\animation.hpp" />
     <ClInclude Include="..\..\..\client\app_delegate.h" />
