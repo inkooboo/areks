@@ -26,7 +26,7 @@
 
 /// If defined, indicates that Json use exception to report invalid type manipulation
 /// instead of C assert macro.
-# define JSON_USE_EXCEPTION 1
+# define JSON_USE_EXCEPTION 0
 
 /// If defined, indicates that the source file is amalgated
 /// to prevent private header inclusion.

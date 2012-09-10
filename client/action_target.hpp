@@ -32,7 +32,7 @@ namespace action
 	class ActionTarget
 	{
 	public:
-		virtual ~ActionTarget() = 0 { }
+		inline virtual ~ActionTarget() = 0;
 
 		virtual void onTargetTouch(action::TouchPtr &touch) {};
 
@@ -56,5 +56,7 @@ namespace action
 		virtual void onTwoTouchEnd(action::TouchPtr &touch1, action::TouchPtr &touch2) {};
 
 	};
+
+	inline ActionTarget::~ActionTarget() {}
 
 #endif

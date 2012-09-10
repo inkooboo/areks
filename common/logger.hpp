@@ -41,11 +41,8 @@ struct LogOnDestruction
     {
         if (m_ss_ptr)
         {
-            try {
-                CCLOG("%s", m_ss_ptr->str().c_str());
-            }
-            catch(...)
-            {}
+            CCLOG("%s", m_ss_ptr->str().c_str());
+
             delete m_ss_ptr;
         }
     }

@@ -440,7 +440,7 @@ void PolygonSprite::draw(void)
 
 void PolygonSprite::ignoreAnchorPointForPosition(bool value)
 {
-    CCAssert(false, "ignoreAnchorPointForPosition is invalid in CCSprite");
+    assert(false && "ignoreAnchorPointForPosition is invalid in CCSprite");
     //CCNode::ignoreAnchorPointForPosition(value);
 }
 
@@ -559,7 +559,7 @@ void PolygonSprite::updateBlendFunc(void)
 void PolygonSprite::setTexture(cc::CCTexture2D *texture)
 {
     // accept texture==nil as argument
-    CCAssert( !texture || dynamic_cast<cc::CCTexture2D*>(texture), "setTexture expects a CCTexture2D. Invalid argument");
+    assert( (!texture || dynamic_cast<cc::CCTexture2D*>(texture)) && "setTexture expects a CCTexture2D. Invalid argument");
 
     if ( m_pobTexture != texture )
     {
