@@ -9,7 +9,7 @@
 #import "AppController.h"
 #import "cocos2d.h"
 #import "EAGLView.h"
-#import "AppDelegate.h"
+#import "app_delegate.h"
 
 #import "RootViewController.h"
 
