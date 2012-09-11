@@ -86,7 +86,7 @@ void LevelManager::loadLevel(const char *level_name)
     master_t::subsystem<cd::SimpleAudioEngine>().preloadBackgroundMusic(bg_music_file.c_str());
     master_t::subsystem<cd::SimpleAudioEngine>().playBackgroundMusic(bg_music_file.c_str(), true);
     master_t::subsystem<cd::SimpleAudioEngine>().pauseBackgroundMusic();
-    master_t::subsystem<cd::SimpleAudioEngine>().setBackgroundMusicVolume(float(0.1));
+    master_t::subsystem<cd::SimpleAudioEngine>().setBackgroundMusicVolume(float(0.3));
 #endif
     
     log() << "create background";
