@@ -924,7 +924,6 @@
 				8404AED215D53A610030B061 /* common */,
 				8404ABE215D539EC0030B061 /* libs */,
 				8404AEB615D539F10030B061 /* ios */,
-				8404AEBF15D539F10030B061 /* Classes */,
 				8404AEB415D539F10030B061 /* Supporting Files */,
 			);
 			path = areks;
@@ -1825,13 +1824,6 @@
 				8404AEBD15D539F10030B061 /* RootViewController.mm */,
 			);
 			name = ios;
-			sourceTree = "<group>";
-		};
-		8404AEBF15D539F10030B061 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Classes;
 			sourceTree = "<group>";
 		};
 		8404AECD15D53A610030B061 /* client */ = {
