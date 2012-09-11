@@ -57,7 +57,7 @@ bool PolygonSprite::init(cc::CCTexture2D *pTexture, std::vector<cc::ccVertex3F>*
 	m_triangles.swap( *triangles );
 
     // shader program
-    setShaderProgram(cc::CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTextureColor));
+    setShaderProgram(cc::CCShaderCache::sharedShaderCache()->programForKey(kCCShader_PositionTexture));
 
     m_bOpacityModifyRGB = true;
     m_nOpacity = 255;
