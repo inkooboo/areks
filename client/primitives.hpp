@@ -86,6 +86,16 @@ namespace primitives
             y /= a;
         }
 
+		Vec2 operator*(float a) const
+		{
+			return Vec2( x*2, y*2 );
+		}
+
+		Vec2 operator/(float a) const
+		{
+			return Vec2( x/2, y/2 );
+		}
+
         Vec2& absolutize();
         Vec2& normalize();
 

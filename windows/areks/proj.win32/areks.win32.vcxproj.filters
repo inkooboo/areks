@@ -123,9 +123,6 @@
     <ClInclude Include="..\..\..\common\master.hpp">
       <Filter>source\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\common\config.hpp">
-      <Filter>source\common</Filter>
-    </ClInclude>
     <ClInclude Include="main.h">
       <Filter>source\win</Filter>
     </ClInclude>
@@ -266,6 +263,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\client\action_target.hpp">
       <Filter>source\client</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\common\logger.hpp">
+      <Filter>source\common</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

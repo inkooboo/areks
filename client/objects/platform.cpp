@@ -72,31 +72,70 @@ namespace objects
 		//
         //init view
 		//
+
+		//init ground
 		cc::CCPoint origin = lower_bound.toCCPoint();
 		cc::CCSize rect_size = (upper_bound - lower_bound).toCCSize();
 		cc::CCRect rect( origin.x,origin.y, rect_size.width, rect_size.height );
 
 		cc::CCSprite* sprite = cc::CCSprite::create( res::picture("ground").c_str() );
-		cc::CCTexture2D* tex = sprite->getTexture();
+		cc::CCTexture2D* ground_tex = sprite->getTexture();
 		
 		cc::ccTexParams tex_params = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT };
-		tex->setTexParameters( &tex_params );
+		ground_tex->setTexParameters( &tex_params );
 
-		_sprite = PolygonSprite::create( tex, triangles, rect );
-		_sprite->setPosition( _center.toCCPoint() );
+		_ground_sprite = PolygonSprite::create( ground_tex, triangles, rect );
+		//_ground_sprite->setPosition( _center.toCCPoint() );
+
+		//init grass
+
+		sprite = cc::CCSprite::create( res::picture("grass").c_str() );
+		cc::CCTexture2D* grass_tex = sprite->getTexture();
+		cc::ccTexParams grass_tex_params = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_CLAMP };
+		grass_tex->setTexParameters( &grass_tex_params );
+		
+		_grass_sprites = cc::CCSpriteBatchNode::create( grass_tex );
+
+		float grass_height = grass_tex->getPixelsHigh();
+
+		auto it_g = vertices.begin(), end_g = vertices.end(), prev_g = vertices.end();
+		--prev_g;
+
+		for( ; it_g != end_g; ++it_g )
+		{
+			//used CCW, so prev - right point and it - left point
+			float w_length = pr::distance( *prev_g, *it_g );
+			float length = master_t::subsystem<View>().worldToPixel( w_length );
+
+			cc::CCSprite* grass_sprite = cc::CCSprite::create( grass_tex, cc::CCRect( 0, 0, length, grass_height ) );
+
+			_grass_sprites->addChild( grass_sprite );
+
+			_grass_points.push_back(  (*prev_g + *it_g)/2  );
+			_grass_angles.push_back( pr::angleAxisX( *prev_g - *it_g ) );
+
+			prev_g = it_g;
+		}
         
-        master_t::subsystem<View>().addSprite(_sprite);
+        master_t::subsystem<View>().addSprite(_ground_sprite);
+		master_t::subsystem<View>().addSprite(_grass_sprites, 1);
         draw();
     }
 
     Platform::~Platform()
     {
-        master_t::subsystem<View>().removeSprite(_sprite);
+        master_t::subsystem<View>().removeSprite(_ground_sprite);
+		master_t::subsystem<View>().removeSprite(_grass_sprites);
     }
         
     void Platform::draw()
     {
-        master_t::subsystem<View>().drawSpriteHelper(_sprite, _center.toCCPoint(), 0);
+        master_t::subsystem<View>().drawSpriteHelper(_ground_sprite, _center.toCCPoint(), 0);
+		for( unsigned int count = _grass_sprites->getChildren()->count(), i = 0; i < count; ++i )
+		{
+			cc::CCSprite* sprite = static_cast<cc::CCSprite*>( _grass_sprites->getChildren()->objectAtIndex(i) );
+			master_t::subsystem<View>().drawSpriteHelper( sprite, _grass_points[i], _grass_angles[i] );
+		}
     }
 
     b2Body* Platform::getBody()

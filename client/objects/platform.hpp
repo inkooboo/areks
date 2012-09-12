@@ -26,8 +26,10 @@ namespace objects
         ~Platform();
 
         BodyOwner _body;
-        cc::CCNode* _sprite;
-		std::vector<cc::CCSprite*> _sprites;
+        cc::CCNode* _ground_sprite;
+		cc::CCSpriteBatchNode* _grass_sprites;
+		std::vector<pr::Vec2> _grass_points;
+		std::vector<float> _grass_angles;
 		pr::Vec2 _center;
     };
     
