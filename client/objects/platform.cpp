@@ -91,7 +91,7 @@ namespace objects
 
 		sprite = cc::CCSprite::create( res::picture("grass").c_str() );
 		cc::CCTexture2D* grass_tex = sprite->getTexture();
-		cc::ccTexParams grass_tex_params = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_CLAMP };
+		cc::ccTexParams grass_tex_params = { GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_CLAMP_TO_EDGE };
 		grass_tex->setTexParameters( &grass_tex_params );
 		
 		_grass_sprites = cc::CCSpriteBatchNode::create( grass_tex );
