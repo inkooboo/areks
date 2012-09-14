@@ -9,6 +9,7 @@
 #include "level_manager.hpp"
 #include "player.hpp"
 #include "effect_manager.hpp"
+#include "level_manager/action_handler.hpp"
 #include "resource_utils.hpp"
 
 AppDelegate::AppDelegate()

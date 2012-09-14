@@ -20,7 +20,7 @@ void View::start()
 
     m_scene->addChild(m_game_layer);
 
-#ifdef DEBUG_VIEW_FUNCTIONALITY
+#ifdef LEVEL_MANAGER
     m_in_touch = false;
 #endif
 }
@@ -104,7 +104,11 @@ void View::createGameLayerMenu()
 
 void View::menuExit(cocos2d::CCObject*)
 {
+#ifdef LEVEL_MANAGER
+
+#else
     master_t::subsystem<GameLogic>().loadScene(master_t::subsystem<MainMenu>().scene());
+#endif
 }
 
 void View::menuTest(cocos2d::CCObject*s)
@@ -169,7 +173,7 @@ cc::CCLayer * View::gameLayer()
     return m_game_layer;
 }
 
-#ifdef DEBUG_VIEW_FUNCTIONALITY
+#ifdef LEVEL_MANAGER
 void View::onTouchEnd(ActionHandler::TouchPtr &touch)
 {
     m_in_touch = false;
@@ -203,7 +207,7 @@ void View::onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr
 
 void View::manageCameraPositionAndScale(float t)
 {
-#ifdef DEBUG_VIEW_FUNCTIONALITY
+#ifdef LEVEL_MANAGER
     if (m_in_touch)
     {
         return;

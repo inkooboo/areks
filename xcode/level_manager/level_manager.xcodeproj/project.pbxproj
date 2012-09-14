@@ -277,6 +277,7 @@
 		841155E815FF796100CB9769 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841155DF15FF796100CB9769 /* json_value.cpp */; };
 		841155E915FF796100CB9769 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 841155E015FF796100CB9769 /* json_valueiterator.inl */; };
 		841155EA15FF796100CB9769 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841155E115FF796100CB9769 /* json_writer.cpp */; };
+		84B57D56160346DF00332B73 /* action_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B57D54160346DF00332B73 /* action_handler.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -852,6 +853,8 @@
 		841155E215FF796100CB9769 /* reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = reader.h; sourceTree = "<group>"; };
 		841155E315FF796100CB9769 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
 		841155E415FF796100CB9769 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
+		84B57D54160346DF00332B73 /* action_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = action_handler.cpp; path = ../../../level_manager/action_handler.cpp; sourceTree = "<group>"; };
+		84B57D55160346DF00332B73 /* action_handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = action_handler.hpp; path = ../../../level_manager/action_handler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1892,6 +1895,8 @@
 		8411556615FF74FC00CB9769 /* level_manager */ = {
 			isa = PBXGroup;
 			children = (
+				84B57D54160346DF00332B73 /* action_handler.cpp */,
+				84B57D55160346DF00332B73 /* action_handler.hpp */,
 				8411556715FF752C00CB9769 /* app_delegate.cpp */,
 				8411556815FF752C00CB9769 /* app_delegate.h */,
 			);
@@ -2296,6 +2301,7 @@
 				841155E715FF796100CB9769 /* json_reader.cpp in Sources */,
 				841155E815FF796100CB9769 /* json_value.cpp in Sources */,
 				841155EA15FF796100CB9769 /* json_writer.cpp in Sources */,
+				84B57D56160346DF00332B73 /* action_handler.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2364,6 +2370,13 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = level_manager/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					DEBUG,
+					"COCOS2D_DEBUG=1",
+					USE_FILE32API,
+					TARGET_OS_IPHONE,
+					LEVEL_MANAGER,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = (
 					"\"$(PROJECT_NAME)/../../../cocos2dx/cocos2dx/kazmath/include\"",
@@ -2374,13 +2387,18 @@
 					"\"$(PROJECT_NAME)/../../..\"",
 					"\"$(PROJECT_NAME)/../../../client\"",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/../../resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/LMInfo.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"level_manager/../../../cocos2dx\"";
+				VALIDATE_PRODUCT = NO;
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2394,6 +2412,12 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = level_manager/Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					NDEBUG,
+					USE_FILE32API,
+					TARGET_OS_IPHONE,
+					LEVEL_MANAGER,
+				);
 				"GCC_THUMB_SUPPORT[arch=armv6]" = "";
 				HEADER_SEARCH_PATHS = (
 					"\"$(PROJECT_NAME)/../../../cocos2dx/cocos2dx/kazmath/include\"",
@@ -2404,14 +2428,18 @@
 					"\"$(PROJECT_NAME)/../../..\"",
 					"\"$(PROJECT_NAME)/../../../client\"",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/../../resources/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../resources/LMInfo.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"level_manager/../../../cocos2dx\"";
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
+				VALID_ARCHS = armv7;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

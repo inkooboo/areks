@@ -4,7 +4,12 @@
 # include "defs.hpp"
 # include "subsystem.hpp"
 # include "primitives.hpp"
+
+#ifdef LEVEL_MANAGER
+# include "level_manager/action_handler.hpp"
+#else
 # include "action_handler.hpp"
+#endif
 
 class View : public cc::CCObject, public subsystem_t
 {
@@ -20,7 +25,7 @@ public:
     void menuExit(cc::CCObject*s);
     void menuTest(cc::CCObject*);
 
-#ifdef DEBUG_VIEW_FUNCTIONALITY
+#ifdef LEVEL_MANAGER
     void onTouchMove(ActionHandler::TouchPtr &touch);
     void onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);
     void onTouchEnd(ActionHandler::TouchPtr &touch);
@@ -54,7 +59,7 @@ private:
     void validateScale();
     void validatePosition();
     
-#ifdef DEBUG_VIEW_FUNCTIONALITY
+#ifdef LEVEL_MANAGER
     bool m_in_touch;
 #endif
     cc::CCScene *m_scene;
