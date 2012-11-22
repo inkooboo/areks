@@ -10,6 +10,10 @@
 
 #include "effects/flying_text.hpp"
 
+#ifdef LEVEL_MANAGER
+#  include "level_manager/app_delegate.h"
+#endif
+
 #include <algorithm>
 
 void View::start()
@@ -105,7 +109,7 @@ void View::createGameLayerMenu()
 void View::menuExit(cocos2d::CCObject*)
 {
 #ifdef LEVEL_MANAGER
-
+    master_t::subsystem<AppDelegate>().end_application();
 #else
     master_t::subsystem<GameLogic>().loadScene(master_t::subsystem<MainMenu>().scene());
 #endif
@@ -213,24 +217,24 @@ void View::manageCameraPositionAndScale(float t)
         return;
     }
     
-    static const float timed_rescale_speed = .25;
- 
-    if (m_view_scale > m_default_view_scale)
-    {
-        m_view_scale -= t * timed_rescale_speed;
-        if (m_view_scale < m_default_view_scale)
-        {
-            m_view_scale = m_default_view_scale;
-        }
-    }
-    else if (m_view_scale < m_default_view_scale)
-    {
-        m_view_scale += t * timed_rescale_speed;
-        if (m_view_scale > m_default_view_scale)
-        {
-            m_view_scale = m_default_view_scale;
-        }
-    }
+//    static const float timed_rescale_speed = .25;
+// 
+//    if (m_view_scale > m_default_view_scale)
+//    {
+//        m_view_scale -= t * timed_rescale_speed;
+//        if (m_view_scale < m_default_view_scale)
+//        {
+//            m_view_scale = m_default_view_scale;
+//        }
+//    }
+//    else if (m_view_scale < m_default_view_scale)
+//    {
+//        m_view_scale += t * timed_rescale_speed;
+//        if (m_view_scale > m_default_view_scale)
+//        {
+//            m_view_scale = m_default_view_scale;
+//        }
+//    }
 #else
     Player &player = master_t::subsystem<Player>();
     

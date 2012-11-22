@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -142,7 +142,7 @@
     <ClInclude Include="..\..\..\client\effects\flying_text.hpp" />
     <ClInclude Include="..\..\..\client\effect_manager.hpp" />
     <ClInclude Include="..\..\..\client\game_logic.hpp" />
-    <ClInclude Include="..\..\..\client\level_manager.hpp" />
+    <ClInclude Include="..\..\..\client\level_loader.hpp" />
     <ClInclude Include="..\..\..\client\loading_screen.hpp" />
     <ClInclude Include="..\..\..\client\loop.hpp" />
     <ClInclude Include="..\..\..\client\main_menu.hpp" />
@@ -193,7 +193,7 @@
     <ClCompile Include="..\..\..\client\effects\flying_text.cpp" />
     <ClCompile Include="..\..\..\client\effect_manager.cpp" />
     <ClCompile Include="..\..\..\client\game_logic.cpp" />
-    <ClCompile Include="..\..\..\client\level_manager.cpp" />
+    <ClCompile Include="..\..\..\client\level_loader.cpp" />
     <ClCompile Include="..\..\..\client\loading_screen.cpp" />
     <ClCompile Include="..\..\..\client\loop.cpp" />
     <ClCompile Include="..\..\..\client\main_menu.cpp" />

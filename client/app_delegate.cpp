@@ -8,7 +8,7 @@
 #include "loop.hpp"
 #include "action_handler.hpp"
 #include "game_logic.hpp"
-#include "level_manager.hpp"
+#include "level_loader.hpp"
 #include "splash_screen.hpp"
 #include "main_menu.hpp"
 #include "loading_screen.hpp"
@@ -48,7 +48,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_managed_subsystem<Physics>();
     m_master_ptr->add_managed_subsystem<View>();
     m_master_ptr->add_managed_subsystem<Loop>();
-    m_master_ptr->add_managed_subsystem<LevelManager>();
+    m_master_ptr->add_managed_subsystem<LevelLoader>();
     m_master_ptr->add_managed_subsystem<SplashScreen>();
     m_master_ptr->add_managed_subsystem<LoadingScreen>();
     m_master_ptr->add_managed_subsystem<MainMenu>();

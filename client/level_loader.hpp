@@ -14,15 +14,15 @@
 
 # include "defs.hpp"
 
-class LevelManager : public subsystem_t
+class LevelLoader : public subsystem_t
 {
-    DEFINE_LOGGER(LevelManager);
+    DEFINE_LOGGER(LevelLoader);
     
     virtual void start() override;
     virtual void stop() override;
     
 public:
-    LevelManager();
+    LevelLoader();
     
     void loadLevel(const char *level_name);
 };

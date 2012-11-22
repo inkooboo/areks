@@ -6,7 +6,7 @@
 //
 //
 
-#include "level_manager.hpp"
+#include "level_loader.hpp"
 
 #include "view.hpp"
 #include "physics.hpp"
@@ -22,20 +22,20 @@
 
 #include <json/json.h>
 
-void LevelManager::start()
+void LevelLoader::start()
 {
 }
 
-void LevelManager::stop()
+void LevelLoader::stop()
 {
     
 }
 
-LevelManager::LevelManager()
+LevelLoader::LevelLoader()
 {
 }
 
-void LevelManager::loadLevel(const char *level_name)
+void LevelLoader::loadLevel(const char *level_name)
 {
     log() << "Begin loading of level \"" << level_name << "\"";
     std::string level_description_str = res::load_file_content(res::level_description(level_name));

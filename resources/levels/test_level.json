@@ -164,7 +164,7 @@
         "infinite balls": {
             "class": "ball",
             "appear_delay": 5,
-            "repeat" : true,
+            //"repeat" : true,
             "position": {
                 "x": 45,
                 "y": 31.5

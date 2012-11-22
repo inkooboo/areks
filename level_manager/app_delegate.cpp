@@ -6,7 +6,7 @@
 #include "physics.hpp"
 #include "view.hpp"
 #include "loop.hpp"
-#include "level_manager.hpp"
+#include "level_loader.hpp"
 #include "player.hpp"
 #include "effect_manager.hpp"
 #include "level_manager/action_handler.hpp"
@@ -44,13 +44,17 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_managed_subsystem<Physics>();
     m_master_ptr->add_managed_subsystem<View>();
     m_master_ptr->add_managed_subsystem<Loop>();
-    m_master_ptr->add_managed_subsystem<LevelManager>();
+    m_master_ptr->add_managed_subsystem<LevelLoader>();
     m_master_ptr->add_managed_subsystem<Player>();
 	m_master_ptr->add_managed_subsystem<ActionHandler>();
 	m_master_ptr->add_managed_subsystem<EffectManager>();
 
     // run
     m_master_ptr->start();
+    
+    cc::CCDirector::sharedDirector()->runWithScene(master_t::subsystem<View>().scene());
+    master_t::subsystem<LevelLoader>().loadLevel("test_level");    
+    
     return true;
 }
 

@@ -250,7 +250,7 @@
 		841155BB15FF78F500CB9769 /* arrow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411558615FF78F500CB9769 /* arrow.cpp */; };
 		841155BC15FF78F500CB9769 /* effect_base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411558815FF78F500CB9769 /* effect_base.cpp */; };
 		841155BD15FF78F500CB9769 /* flying_text.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411558A15FF78F500CB9769 /* flying_text.cpp */; };
-		841155BE15FF78F500CB9769 /* level_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411558C15FF78F500CB9769 /* level_manager.cpp */; };
+		841155BE15FF78F500CB9769 /* level_loader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411558C15FF78F500CB9769 /* level_loader.cpp */; };
 		841155BF15FF78F500CB9769 /* loop.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411558E15FF78F500CB9769 /* loop.cpp */; };
 		841155C015FF78F500CB9769 /* object_manager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411559015FF78F500CB9769 /* object_manager.cpp */; };
 		841155C115FF78F500CB9769 /* background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411559315FF78F500CB9769 /* background.cpp */; };
@@ -795,8 +795,8 @@
 		8411558915FF78F500CB9769 /* effect_base.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = effect_base.hpp; sourceTree = "<group>"; };
 		8411558A15FF78F500CB9769 /* flying_text.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = flying_text.cpp; sourceTree = "<group>"; };
 		8411558B15FF78F500CB9769 /* flying_text.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = flying_text.hpp; sourceTree = "<group>"; };
-		8411558C15FF78F500CB9769 /* level_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = level_manager.cpp; path = ../../../client/level_manager.cpp; sourceTree = "<group>"; };
-		8411558D15FF78F500CB9769 /* level_manager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = level_manager.hpp; path = ../../../client/level_manager.hpp; sourceTree = "<group>"; };
+		8411558C15FF78F500CB9769 /* level_loader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = level_loader.cpp; path = ../../../client/level_loader.cpp; sourceTree = "<group>"; };
+		8411558D15FF78F500CB9769 /* level_loader.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = level_loader.hpp; path = ../../../client/level_loader.hpp; sourceTree = "<group>"; };
 		8411558E15FF78F500CB9769 /* loop.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = loop.cpp; path = ../../../client/loop.cpp; sourceTree = "<group>"; };
 		8411558F15FF78F500CB9769 /* loop.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = loop.hpp; path = ../../../client/loop.hpp; sourceTree = "<group>"; };
 		8411559015FF78F500CB9769 /* object_manager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = object_manager.cpp; path = ../../../client/object_manager.cpp; sourceTree = "<group>"; };
@@ -1855,8 +1855,8 @@
 				8411558315FF78F500CB9769 /* effect_manager.cpp */,
 				8411558415FF78F500CB9769 /* effect_manager.hpp */,
 				8411558515FF78F500CB9769 /* effects */,
-				8411558C15FF78F500CB9769 /* level_manager.cpp */,
-				8411558D15FF78F500CB9769 /* level_manager.hpp */,
+				8411558C15FF78F500CB9769 /* level_loader.cpp */,
+				8411558D15FF78F500CB9769 /* level_loader.hpp */,
 				8411558E15FF78F500CB9769 /* loop.cpp */,
 				8411558F15FF78F500CB9769 /* loop.hpp */,
 				8411559015FF78F500CB9769 /* object_manager.cpp */,
@@ -2277,7 +2277,7 @@
 				841155BB15FF78F500CB9769 /* arrow.cpp in Sources */,
 				841155BC15FF78F500CB9769 /* effect_base.cpp in Sources */,
 				841155BD15FF78F500CB9769 /* flying_text.cpp in Sources */,
-				841155BE15FF78F500CB9769 /* level_manager.cpp in Sources */,
+				841155BE15FF78F500CB9769 /* level_loader.cpp in Sources */,
 				841155BF15FF78F500CB9769 /* loop.cpp in Sources */,
 				841155C015FF78F500CB9769 /* object_manager.cpp in Sources */,
 				841155C115FF78F500CB9769 /* background.cpp in Sources */,

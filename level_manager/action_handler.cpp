@@ -50,15 +50,14 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     touch->from = location;
 
     View &view = master_t::subsystem<View>();
-	Player &player = master_t::subsystem<Player>();
 
     // determine touch type and init touch handlers
     if (m_touches.size() == 0)
     {
         // 1. first scale touch OR
         // 2. possible view move touch OR
-        // 3. main hero selection
-        auto ball = objects::Ball::create(view.toWorldCoordinates(touch->begin));
+        
+        //auto ball = objects::Ball::create(view.toWorldCoordinates(touch->begin));
         
 		touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
     }

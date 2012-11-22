@@ -7,7 +7,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>level_manager</string>
 	<key>CFBundleExecutable</key>
-	<string>level_manager</string>
+	<string>${EXECUTABLE_NAME}</string>
 	<key>CFBundleIconFile</key>
 	<string>Icon.png</string>
 	<key>CFBundleIconFiles</key>
@@ -38,11 +38,11 @@
 		</dict>
 	</dict>
 	<key>CFBundleIdentifier</key>
-	<string>com.inkooboo.areks_level_manager</string>
+	<string>inkooboo.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>level_manager</string>
+	<string>${PRODUCT_NAME}</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>

@@ -308,18 +308,18 @@ static bool _initWithString(const char * pText, cocos2d::CCImage::ETextAlign eAl
         
         // measure text size with specified font and determine the rectangle to draw text in
         unsigned uHoriFlag = eAlign & 0x0f;
-        UITextAlignment align = (2 == uHoriFlag) ? UITextAlignmentRight
-                                : (3 == uHoriFlag) ? UITextAlignmentCenter
-                                : UITextAlignmentLeft;
+        NSTextAlignment align = (2 == uHoriFlag) ? NSTextAlignmentRight
+                                : (3 == uHoriFlag) ? NSTextAlignmentCenter
+                                : NSTextAlignmentLeft;
         
         // normal fonts
         if( [font isKindOfClass:[UIFont class] ] )
         {
-            [str drawInRect:CGRectMake(0, startH, dim.width, dim.height) withFont:font lineBreakMode:UILineBreakModeWordWrap alignment:align];
+            [str drawInRect:CGRectMake(0, startH, dim.width, dim.height) withFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:align];
         }
         else // ZFont class 
         {
-            [FontLabelStringDrawingHelper drawInRect:str rect:CGRectMake(0, startH, dim.width, dim.height) withZFont:font lineBreakMode:UILineBreakModeWordWrap alignment:align];
+            [FontLabelStringDrawingHelper drawInRect:str rect:CGRectMake(0, startH, dim.width, dim.height) withZFont:font lineBreakMode:NSLineBreakByWordWrapping alignment:align];
         }
         
         UIGraphicsPopContext();

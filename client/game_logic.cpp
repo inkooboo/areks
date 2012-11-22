@@ -3,7 +3,7 @@
 #include "splash_screen.hpp"
 #include "view.hpp"
 #include "main_menu.hpp"
-#include "level_manager.hpp"
+#include "level_loader.hpp"
 #include "loop.hpp"
 #include "loading_screen.hpp"
 
@@ -66,7 +66,7 @@ void GameLogic::onEndLoading(float)
 {
     transitScene(m_current_scene);
     
-    master_t::subsystem<LevelManager>().loadLevel("test_level");
+    master_t::subsystem<LevelLoader>().loadLevel("test_level");
     
 #ifndef NO_SOUND
     master_t::subsystem<cd::SimpleAudioEngine>().resumeBackgroundMusic();
