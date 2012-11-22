@@ -53,9 +53,6 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     touch->begin = location;
     touch->from = location;
 
-    View &view = master_t::subsystem<View>();
-	Player &player = master_t::subsystem<Player>();
-
 	m_touches[id] = touch;
 	m_touches_ids.push_back(id);
 

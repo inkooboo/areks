@@ -1,18 +1,8 @@
 #include "view.hpp"
 
 #include "master.hpp"
-#include "physics.hpp"
 #include "resource_utils.hpp"
-#include "game_logic.hpp"
-#include "main_menu.hpp"
-#include "player.hpp"
-#include "objects/player/body.hpp"
-
-#include "effects/flying_text.hpp"
-
-#ifdef LEVEL_MANAGER
-#  include "level_manager/app_delegate.h"
-#endif
+#include "physics.hpp"
 
 #include <algorithm>
 
@@ -23,10 +13,6 @@ void View::start()
     createGameLayerMenu();
 
     m_scene->addChild(m_game_layer);
-
-#ifdef LEVEL_MANAGER
-    m_in_touch = false;
-#endif
 }
 
 void View::stop()
@@ -106,31 +92,6 @@ void View::createGameLayerMenu()
 }
 
 
-void View::menuExit(cocos2d::CCObject*)
-{
-#ifdef LEVEL_MANAGER
-    master_t::subsystem<AppDelegate>().end_application();
-#else
-    master_t::subsystem<GameLogic>().loadScene(master_t::subsystem<MainMenu>().scene());
-#endif
-}
-
-void View::menuTest(cocos2d::CCObject*s)
-{
-    /// test sound fx. Remove it.
-#ifndef NO_SOUND
-    master_t::subsystem<cd::SimpleAudioEngine>().playEffect(res::sound_effect("046").c_str());
-#endif
-    ///
-    
-    /// test effects. Remove it.
-    pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
-    world_size *= .5f;
-    
-    effects::FlyingText::create(world_size, m_game_layer, "Test Text", 14, cc::ccc3(190, 255, 190), 5.f);
-    ///
-}
-
 float View::pixelScale() const
 {
     return m_view_scale;
@@ -177,81 +138,6 @@ cc::CCLayer * View::gameLayer()
     return m_game_layer;
 }
 
-#ifdef LEVEL_MANAGER
-void View::onTouchEnd(ActionHandler::TouchPtr &touch)
-{
-    m_in_touch = false;
-}
-
-void View::onTouchMove(ActionHandler::TouchPtr &touch)
-{
-    moveViewBy(touch->to.x - touch->from.x, touch->to.y - touch->from.y);
-}
-
-void View::onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2)
-{
-    m_in_touch = true;
-    float dx1 = touch1->from.x - touch2->from.x;
-    float dy1 = touch1->from.y - touch2->from.y;
-    float distance1 = sqrt(dx1 * dx1 + dy1 * dy1);
-    
-    float dx2 = touch1->to.x - touch2->to.x;
-    float dy2 = touch1->to.y - touch2->to.y;
-    float distance2 = sqrt(dx2 * dx2 + dy2 * dy2);
-    
-    float d = distance2 - distance1;
-    
-    float touch_scale_speed = m_default_view_scale / 100;
-    
-    m_view_scale += d * touch_scale_speed;
-    validateScale();
-    validatePosition();
-}
-#endif
-
-void View::manageCameraPositionAndScale(float t)
-{
-#ifdef LEVEL_MANAGER
-    if (m_in_touch)
-    {
-        return;
-    }
-    
-//    static const float timed_rescale_speed = .25;
-// 
-//    if (m_view_scale > m_default_view_scale)
-//    {
-//        m_view_scale -= t * timed_rescale_speed;
-//        if (m_view_scale < m_default_view_scale)
-//        {
-//            m_view_scale = m_default_view_scale;
-//        }
-//    }
-//    else if (m_view_scale < m_default_view_scale)
-//    {
-//        m_view_scale += t * timed_rescale_speed;
-//        if (m_view_scale > m_default_view_scale)
-//        {
-//            m_view_scale = m_default_view_scale;
-//        }
-//    }
-#else
-    Player &player = master_t::subsystem<Player>();
-    
-    if (player.isAvatarCreated())
-    {
-        pr::Vec2 body_postion = player.getBody()->getPosition();
-        
-        m_cur_positon = body_postion;
-    }
-    
-#endif
-
-    
-    
-    validateScale();
-    validatePosition();
-}
 
 pr::Vec2 View::currentCameraPosition() const
 {

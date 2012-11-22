@@ -25,7 +25,7 @@ class master_t : private noncopyable_t
 {
 public:
     template <typename SubsystemType>
-    inline void add_managed_subsystem();
+    inline void add_managed_subsystem(SubsystemType *instance = 0); // instance can be used in case of virtual inheritance
     
     template <typename SubsystemType, typename Arg1>
     inline void add_unmanaged_subsystem(Arg1 arg);
@@ -97,12 +97,19 @@ namespace internal
 }
 
 template <typename SubsystemType>
-inline void master_t::add_managed_subsystem()
+inline void master_t::add_managed_subsystem(SubsystemType *existing_instance)
 {
     SubsystemType **instance = internal::subsystem_instance<SubsystemType>();
     assert(*instance == 0 && "Instance for this subsystem was already added!");
     
-    *instance = new SubsystemType();
+    if (existing_instance)
+    {
+        *instance = existing_instance;
+    }
+    else
+    {
+        *instance = new SubsystemType();
+    }
     m_subsystems.push_back(std::unique_ptr<subsystem_t>(*instance));
 }
 

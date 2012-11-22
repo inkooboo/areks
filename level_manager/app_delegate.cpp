@@ -4,7 +4,7 @@
 
 #include "object_manager.hpp"
 #include "physics.hpp"
-#include "view.hpp"
+#include "level_manager/lm_view.hpp"
 #include "loop.hpp"
 #include "level_loader.hpp"
 #include "player.hpp"
@@ -42,7 +42,7 @@ bool AppDelegate::applicationDidFinishLaunching()
     m_master_ptr->add_external_subsystem<cd::SimpleAudioEngine>(CocosDenshion::SimpleAudioEngine::sharedEngine());
     m_master_ptr->add_managed_subsystem<ObjectManager>();
     m_master_ptr->add_managed_subsystem<Physics>();
-    m_master_ptr->add_managed_subsystem<View>();
+    m_master_ptr->add_managed_subsystem<View>(new LMView);
     m_master_ptr->add_managed_subsystem<Loop>();
     m_master_ptr->add_managed_subsystem<LevelLoader>();
     m_master_ptr->add_managed_subsystem<Player>();

@@ -5,14 +5,9 @@
 # include "subsystem.hpp"
 # include "primitives.hpp"
 
-#ifdef LEVEL_MANAGER
-# include "level_manager/action_handler.hpp"
-#else
-# include "action_handler.hpp"
-#endif
-
 class View : public cc::CCObject, public subsystem_t
 {
+protected:
     virtual void start() override;
     virtual void stop() override;
     
@@ -22,15 +17,9 @@ public:
 
     cc::CCScene * scene();
 
-    void menuExit(cc::CCObject*s);
-    void menuTest(cc::CCObject*);
+    virtual void menuExit(cc::CCObject*) {}
+    virtual void menuTest(cc::CCObject*) {}
 
-#ifdef LEVEL_MANAGER
-    void onTouchMove(ActionHandler::TouchPtr &touch);
-    void onTouchScale(ActionHandler::TouchPtr &touch1, ActionHandler::TouchPtr &touch2);
-    void onTouchEnd(ActionHandler::TouchPtr &touch);
-#endif
-    
     void reload(cc::CCSize bg_size, pr::Vec2 world_size);
     
     float pixelScale() const;
@@ -45,7 +34,7 @@ public:
     void moveViewBy(float dx, float dy);
     void moveViewToPosition(const pr::Vec2 &position);
     
-    void manageCameraPositionAndScale(float t);
+    virtual void manageCameraPositionAndScale(float t) {}
     
     pr::Vec2 currentCameraPosition() const;
 
@@ -53,15 +42,12 @@ public:
     void removeSprite(cc::CCNode *sprite);
     void drawSpriteHelper(cc::CCNode *sprite, pr::Vec2 position, float angle);
 
-private:
+protected:
     void createGameLayerMenu();
 
     void validateScale();
     void validatePosition();
     
-#ifdef LEVEL_MANAGER
-    bool m_in_touch;
-#endif
     cc::CCScene *m_scene;
     cc::CCLayer *m_game_layer;
     

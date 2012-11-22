@@ -2,7 +2,7 @@
 
 #include "master.hpp"
 
-#include "view.hpp"
+#include "level_manager/lm_view.hpp"
 #include "player.hpp"
 
 #include "physics.hpp"
@@ -49,7 +49,7 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
     touch->begin = location;
     touch->from = location;
 
-    View &view = master_t::subsystem<View>();
+    LMView &view = static_cast<LMView &>(master_t::subsystem<View>());
 
     // determine touch type and init touch handlers
     if (m_touches.size() == 0)
@@ -59,7 +59,7 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         
         //auto ball = objects::Ball::create(view.toWorldCoordinates(touch->begin));
         
-		touch->on_move = std::bind(&View::onTouchMove, &view, std::placeholders::_1);
+		touch->on_move = std::bind(&LMView::onTouchMove, &view, std::placeholders::_1);
     }
     
     if (m_touches.size() == 1)
@@ -67,9 +67,9 @@ bool ActionHandler::ccTouchBegan (cc::CCTouch *pTouch, cc::CCEvent *pEvent)
         //scale second touch
         TouchPtr first_touch = m_touches.begin()->second;
         first_touch->on_move = std::function<void(TouchPtr &touch)>(); // disable movement
-        first_touch->on_end = std::bind(&View::onTouchEnd, &view, first_touch);
-        touch->on_end = std::bind(&View::onTouchEnd, &view, std::placeholders::_1);
-        touch->on_move = std::bind(&View::onTouchScale, &view, first_touch, std::placeholders::_1);
+        first_touch->on_end = std::bind(&LMView::onTouchEnd, &view, first_touch);
+        touch->on_end = std::bind(&LMView::onTouchEnd, &view, std::placeholders::_1);
+        touch->on_move = std::bind(&LMView::onTouchScale, &view, first_touch, std::placeholders::_1);
     }
     
     m_touches[id] = touch;
