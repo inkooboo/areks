@@ -10,8 +10,6 @@ void View::start()
 {
     m_game_layer = cc::CCLayer::create();
     
-    createGameLayerMenu();
-
     m_scene->addChild(m_game_layer);
 }
 
@@ -65,27 +63,9 @@ void View::reload(cc::CCSize bg_size, pr::Vec2 world_size)
     
 }
 
-void View::createGameLayerMenu()
+void View::createGameLayerMenu(cc::CCArray* pArrayOfItems)
 {
-    using namespace cocos2d;
-    
-    cc::CCMenuItemImage *pClose = cc::CCMenuItemImage::create(
-                                                            res::picture("CloseNormal").c_str(),
-                                                            res::picture("CloseSelected").c_str(),
-                                                            this,
-                                                            menu_selector(View::menuExit) );
-    
-    pClose->setPosition( ccp(m_size.width - 27, m_size.height - 28) );
-    
-    cc::CCMenuItemImage *pReload = cc::CCMenuItemImage::create(
-                                                               res::picture("shesterenka").c_str(),
-                                                               res::picture("shesterenka_p").c_str(),
-                                                               this,
-                                                               menu_selector(View::menuTest) );
-    
-    pReload->setPosition( ccp(m_size.width - 27, 28) );
-
-    cc::CCMenu* menu = cc::CCMenu::create(pClose, pReload, NULL);
+    cc::CCMenu* menu = cc::CCMenu::create(pArrayOfItems);
     menu->setPosition( cc::CCPointZero );
     menu->setVisible(true);
     m_game_layer->addChild(menu, 100);

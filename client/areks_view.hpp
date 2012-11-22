@@ -9,6 +9,7 @@
 #ifndef areks_arek_view_hpp
 #define areks_arek_view_hpp
 
+#include "defs.hpp"
 #include "master.hpp"
 #include "resource_utils.hpp"
 #include "view.hpp"
@@ -20,14 +21,39 @@
 #include "effects/flying_text.hpp"
 
 
-struct AreksView : public View
+struct AreksView : public cc::CCObject, public View
 {
-    virtual void menuExit(cc::CCObject*) override
+    virtual void start() override
+    {
+        View::start();
+        
+        using namespace cocos2d;
+        
+        cc::CCMenuItemImage *pClose = cc::CCMenuItemImage::create(
+                                                                  res::picture("CloseNormal").c_str(),
+                                                                  res::picture("CloseSelected").c_str(),
+                                                                  this,
+                                                                  menu_selector(AreksView::menuExit) );
+        
+        pClose->setPosition( ccp(m_size.width - 27, m_size.height - 28) );
+        
+        cc::CCMenuItemImage *pReload = cc::CCMenuItemImage::create(
+                                                                   res::picture("shesterenka").c_str(),
+                                                                   res::picture("shesterenka_p").c_str(),
+                                                                   this,
+                                                                   menu_selector(AreksView::menuTest) );
+        
+        pReload->setPosition( ccp(m_size.width - 27, 28) );
+        
+        createGameLayerMenu(cc::CCArray::create(pClose, pReload, NULL));
+    }
+    
+    void menuExit(cc::CCObject*)
     {
         master_t::subsystem<GameLogic>().loadScene(master_t::subsystem<MainMenu>().scene());
     }
     
-    virtual void menuTest(cc::CCObject*) override
+    void menuTest(cc::CCObject*)
     {
         /// test sound fx. Remove it.
 #ifndef NO_SOUND

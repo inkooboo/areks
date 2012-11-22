@@ -5,7 +5,7 @@
 # include "subsystem.hpp"
 # include "primitives.hpp"
 
-class View : public cc::CCObject, public subsystem_t
+class View : public subsystem_t
 {
 protected:
     virtual void start() override;
@@ -16,9 +16,6 @@ public:
     ~View();
 
     cc::CCScene * scene();
-
-    virtual void menuExit(cc::CCObject*) {}
-    virtual void menuTest(cc::CCObject*) {}
 
     void reload(cc::CCSize bg_size, pr::Vec2 world_size);
     
@@ -43,7 +40,7 @@ public:
     void drawSpriteHelper(cc::CCNode *sprite, pr::Vec2 position, float angle);
 
 protected:
-    void createGameLayerMenu();
+    void createGameLayerMenu(cc::CCArray* pArrayOfItems);
 
     void validateScale();
     void validatePosition();

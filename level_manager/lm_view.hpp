@@ -9,24 +9,47 @@
 #ifndef level_manager_view_traits_hpp
 #define level_manager_view_traits_hpp
 
+#include "defs.hpp"
 #include "level_manager/action_handler.hpp"
 #include "level_manager/app_delegate.h"
+#include "resource_utils.hpp"
 #include "view.hpp"
 
-struct LMView : public View
+
+struct LMView : public cc::CCObject, public View
 {
     virtual void start() override
     {
         View::start();
         m_in_touch = false;
+
+        using namespace cocos2d;
+        
+        cc::CCMenuItemImage *pClose = cc::CCMenuItemImage::create(
+                                                                  res::picture("CloseNormal").c_str(),
+                                                                  res::picture("CloseSelected").c_str(),
+                                                                  this,
+                                                                  menu_selector(LMView::menuExit) );
+        
+        pClose->setPosition( ccp(m_size.width - 27, m_size.height - 28) );
+        
+        cc::CCMenuItemImage *pReload = cc::CCMenuItemImage::create(
+                                                                   res::picture("shesterenka").c_str(),
+                                                                   res::picture("shesterenka_p").c_str(),
+                                                                   this,
+                                                                   menu_selector(LMView::menuTest) );
+        
+        pReload->setPosition( ccp(m_size.width - 27, 28) );
+        
+        createGameLayerMenu(cc::CCArray::create(pClose, pReload, NULL));
     }
     
-    virtual void menuExit(cc::CCObject*) override
+    void menuExit(cc::CCObject*)
     {
         master_t::subsystem<AppDelegate>().end_application();
     }
     
-    virtual void menuTest(cc::CCObject*) override
+    void menuTest(cc::CCObject*)
     {
         
     }
