@@ -15,6 +15,8 @@
 #include "resource_utils.hpp"
 #include "view.hpp"
 
+#include "level_manager/tool_manager.hpp"
+#include "level_manager/tools.hpp"
 
 struct LMView : public cc::CCObject, public View
 {
@@ -33,15 +35,24 @@ struct LMView : public cc::CCObject, public View
         
         pClose->setPosition( ccp(m_size.width - 27, m_size.height - 28) );
         
-        cc::CCMenuItemImage *pReload = cc::CCMenuItemImage::create(
-                                                                   res::picture("shesterenka").c_str(),
-                                                                   res::picture("shesterenka_p").c_str(),
+//        cc::CCMenuItemImage *pReload = cc::CCMenuItemImage::create(
+//                                                                   res::picture("shesterenka").c_str(),
+//                                                                   res::picture("shesterenka_p").c_str(),
+//                                                                   this,
+//                                                                   menu_selector(LMView::menuTest) );
+//        
+//        pReload->setPosition( ccp(m_size.width - 27, 28) );
+        
+        cc::CCMenuItemImage *platfrom_tool = cc::CCMenuItemImage::create(
+                                                                   res::picture("platform_tool").c_str(),
+                                                                   res::picture("platform_tool").c_str(),
                                                                    this,
-                                                                   menu_selector(LMView::menuTest) );
+                                                                   menu_selector(LMView::menuPlatformTool) );
+
+        platfrom_tool->setPosition( ccp(28, m_size.height - 27) );
+
         
-        pReload->setPosition( ccp(m_size.width - 27, 28) );
-        
-        createGameLayerMenu(cc::CCArray::create(pClose, pReload, NULL));
+        createGameLayerMenu(cc::CCArray::create(pClose, platfrom_tool, NULL));
     }
     
     void menuExit(cc::CCObject*)
@@ -49,11 +60,16 @@ struct LMView : public cc::CCObject, public View
         master_t::subsystem<AppDelegate>().end_application();
     }
     
-    void menuTest(cc::CCObject*)
-    {
-        
-    }
+//    void menuTest(cc::CCObject*)
+//    {
+//        
+//    }
 
+    void menuPlatformTool(cc::CCObject*)
+    {
+        master_t::subsystem<ToolManager>().resetcurrentTool<PlatformTool>();
+    }
+    
     virtual void manageCameraPositionAndScale(float t) override
     {
         if (m_in_touch)

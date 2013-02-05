@@ -277,6 +277,7 @@
 		841155E815FF796100CB9769 /* json_value.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841155DF15FF796100CB9769 /* json_value.cpp */; };
 		841155E915FF796100CB9769 /* json_valueiterator.inl in Resources */ = {isa = PBXBuildFile; fileRef = 841155E015FF796100CB9769 /* json_valueiterator.inl */; };
 		841155EA15FF796100CB9769 /* json_writer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841155E115FF796100CB9769 /* json_writer.cpp */; };
+		84A99EC416C1518E00E8C7F3 /* tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84A99EC316C1518D00E8C7F3 /* tools.cpp */; };
 		84B57D56160346DF00332B73 /* action_handler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84B57D54160346DF00332B73 /* action_handler.cpp */; };
 /* End PBXBuildFile section */
 
@@ -778,7 +779,6 @@
 		8411556715FF752C00CB9769 /* app_delegate.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = app_delegate.cpp; path = ../../../level_manager/app_delegate.cpp; sourceTree = "<group>"; };
 		8411556815FF752C00CB9769 /* app_delegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = app_delegate.h; path = ../../../level_manager/app_delegate.h; sourceTree = "<group>"; };
 		8411556A15FF754000CB9769 /* logger.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = logger.hpp; path = ../../../common/logger.hpp; sourceTree = "<group>"; };
-		8411556B15FF754000CB9769 /* master_cpp11.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = master_cpp11.hpp; path = ../../../common/master_cpp11.hpp; sourceTree = "<group>"; };
 		8411556C15FF754000CB9769 /* master.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = master.hpp; path = ../../../common/master.hpp; sourceTree = "<group>"; };
 		8411556D15FF754000CB9769 /* noncopyable.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = noncopyable.hpp; path = ../../../common/noncopyable.hpp; sourceTree = "<group>"; };
 		8411556E15FF754000CB9769 /* subsystem.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = subsystem.hpp; path = ../../../common/subsystem.hpp; sourceTree = "<group>"; };
@@ -854,6 +854,9 @@
 		841155E315FF796100CB9769 /* value.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = value.h; sourceTree = "<group>"; };
 		841155E415FF796100CB9769 /* writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = writer.h; sourceTree = "<group>"; };
 		84629073165E35E1003D28C2 /* lm_view.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = lm_view.hpp; path = ../../../level_manager/lm_view.hpp; sourceTree = "<group>"; };
+		84A99EBF16C1481800E8C7F3 /* tools.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tools.hpp; path = ../../../level_manager/tools.hpp; sourceTree = "<group>"; };
+		84A99EC016C14BDB00E8C7F3 /* tool_manager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = tool_manager.hpp; path = ../../../level_manager/tool_manager.hpp; sourceTree = "<group>"; };
+		84A99EC316C1518D00E8C7F3 /* tools.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = tools.cpp; path = ../../../level_manager/tools.cpp; sourceTree = "<group>"; };
 		84B57D54160346DF00332B73 /* action_handler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = action_handler.cpp; path = ../../../level_manager/action_handler.cpp; sourceTree = "<group>"; };
 		84B57D55160346DF00332B73 /* action_handler.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = action_handler.hpp; path = ../../../level_manager/action_handler.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1885,7 +1888,6 @@
 			isa = PBXGroup;
 			children = (
 				8411556A15FF754000CB9769 /* logger.hpp */,
-				8411556B15FF754000CB9769 /* master_cpp11.hpp */,
 				8411556C15FF754000CB9769 /* master.hpp */,
 				8411556D15FF754000CB9769 /* noncopyable.hpp */,
 				8411556E15FF754000CB9769 /* subsystem.hpp */,
@@ -1901,6 +1903,9 @@
 				8411556715FF752C00CB9769 /* app_delegate.cpp */,
 				8411556815FF752C00CB9769 /* app_delegate.h */,
 				84629073165E35E1003D28C2 /* lm_view.hpp */,
+				84A99EBF16C1481800E8C7F3 /* tools.hpp */,
+				84A99EC316C1518D00E8C7F3 /* tools.cpp */,
+				84A99EC016C14BDB00E8C7F3 /* tool_manager.hpp */,
 			);
 			name = level_manager;
 			sourceTree = "<group>";
@@ -2304,6 +2309,7 @@
 				841155E815FF796100CB9769 /* json_value.cpp in Sources */,
 				841155EA15FF796100CB9769 /* json_writer.cpp in Sources */,
 				84B57D56160346DF00332B73 /* action_handler.cpp in Sources */,
+				84A99EC416C1518E00E8C7F3 /* tools.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

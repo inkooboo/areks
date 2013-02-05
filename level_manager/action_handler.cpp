@@ -3,6 +3,7 @@
 #include "master.hpp"
 
 #include "level_manager/lm_view.hpp"
+#include "level_manager/tool_manager.hpp"
 #include "player.hpp"
 
 #include "physics.hpp"

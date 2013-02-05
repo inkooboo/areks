@@ -111,6 +111,16 @@ namespace primitives
 
 namespace pr = primitives;
 
+inline bool operator==(pr::Vec2 const& a, pr::Vec2 const& b)
+{
+    return (a.x == b.x) && (a.y == b.y);
+}
+
+inline bool operator!=(pr::Vec2 const& a, pr::Vec2 const& b)
+{
+    return !(a==b);
+}
+
 inline pr::Vec2 operator-(pr::Vec2 const& a, pr::Vec2 const& b)
 {
     return pr::Vec2( a.x - b.x, a.y - b.y );

@@ -11,6 +11,7 @@
 #include "effect_manager.hpp"
 #include "level_manager/action_handler.hpp"
 #include "resource_utils.hpp"
+#include "level_manager/tool_manager.hpp"
 
 AppDelegate::AppDelegate()
 {
@@ -40,6 +41,7 @@ bool AppDelegate::applicationDidFinishLaunching()
 
     m_master_ptr->add_external_subsystem<AppDelegate>(this);
     m_master_ptr->add_external_subsystem<cd::SimpleAudioEngine>(CocosDenshion::SimpleAudioEngine::sharedEngine());
+    m_master_ptr->add_unmanaged_subsystem<ToolManager>();
     m_master_ptr->add_managed_subsystem<ObjectManager>();
     m_master_ptr->add_managed_subsystem<Physics>();
     m_master_ptr->add_managed_subsystem<View,LMView>();
