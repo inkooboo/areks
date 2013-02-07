@@ -281,7 +281,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		8411522215FF739700CB9769 /* level_manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = level_manager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8411522215FF739700CB9769 /* LM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8411522615FF739700CB9769 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		8411522815FF739700CB9769 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
 		8411522A15FF739700CB9769 /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
@@ -889,7 +889,7 @@
 		8411522315FF739700CB9769 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8411522215FF739700CB9769 /* level_manager.app */,
+				8411522215FF739700CB9769 /* LM.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1984,9 +1984,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8411522115FF739700CB9769 /* level_manager */ = {
+		8411522115FF739700CB9769 /* LM */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8411553915FF739C00CB9769 /* Build configuration list for PBXNativeTarget "level_manager" */;
+			buildConfigurationList = 8411553915FF739C00CB9769 /* Build configuration list for PBXNativeTarget "LM" */;
 			buildPhases = (
 				8411521E15FF739700CB9769 /* Sources */,
 				8411521F15FF739700CB9769 /* Frameworks */,
@@ -1996,9 +1996,9 @@
 			);
 			dependencies = (
 			);
-			name = level_manager;
+			name = LM;
 			productName = level_manager;
-			productReference = 8411522215FF739700CB9769 /* level_manager.app */;
+			productReference = 8411522215FF739700CB9769 /* LM.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -2021,7 +2021,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8411522115FF739700CB9769 /* level_manager */,
+				8411522115FF739700CB9769 /* LM */,
 			);
 		};
 /* End PBXProject section */
@@ -2389,13 +2389,13 @@
 					"\"$(PROJECT_NAME)/../../..\"",
 					"\"$(PROJECT_NAME)/../../../client\"",
 				);
-				INFOPLIST_FILE = ../../resources/Info.plist;
+				INFOPLIST_FILE = ../../resources/LMInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LM;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"level_manager/../../../cocos2dx\"";
@@ -2430,13 +2430,13 @@
 					"\"$(PROJECT_NAME)/../../..\"",
 					"\"$(PROJECT_NAME)/../../../client\"",
 				);
-				INFOPLIST_FILE = ../../resources/Info.plist;
+				INFOPLIST_FILE = ../../resources/LMInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxml2",
 					"-lz",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = LM;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"level_manager/../../../cocos2dx\"";
@@ -2458,7 +2458,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8411553915FF739C00CB9769 /* Build configuration list for PBXNativeTarget "level_manager" */ = {
+		8411553915FF739C00CB9769 /* Build configuration list for PBXNativeTarget "LM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8411553A15FF739C00CB9769 /* Debug */,
