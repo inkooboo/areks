@@ -45,6 +45,11 @@ void ObjectManager::reload()
     start();
 }
 
+void ObjectManager::addObject(std::shared_ptr<BaseObject> object)
+{
+    _objects.insert(object);
+}
+
 std::shared_ptr<BaseObject> ObjectManager::createObject(const Json::Value &description)
 {
     std::shared_ptr<BaseObject> ret;
@@ -81,12 +86,12 @@ std::shared_ptr<BaseObject> ObjectManager::createObject(const Json::Value &descr
     //    {
     //    }
     
-    _objects.insert(ret);
+    addObject(ret);
     
     return ret;
 }
 
-void ObjectManager::destroyObject(std::shared_ptr<BaseObject> &obj_ptr)
+void ObjectManager::destroyObject(std::shared_ptr<BaseObject> obj_ptr)
 {
     auto to_del_it = _objects.find(obj_ptr);
 

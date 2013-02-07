@@ -25,7 +25,7 @@ namespace objects
 
         Head* Head::create()
         {
-            BaseObject* body = master_t::subsystem<Player>().getBody();
+            std::shared_ptr<BaseObject> body = master_t::subsystem<Player>().getBody();
             return new Head( body->getPosition() );
         }
         
@@ -89,7 +89,7 @@ namespace objects
                 }
                 case FLY:
                 {
-                    BaseObject* obj = master_t::subsystem<Player>().getBody();
+                    std::shared_ptr<BaseObject> obj = master_t::subsystem<Player>().getBody();
                     float dis = pr::distance( pr::Vec2(_body->GetPosition()), obj->getPosition() );
                     if( dis >= master_t::subsystem<Player>().getNeckMaxLength() )
                     {
@@ -103,7 +103,7 @@ namespace objects
                 }
                 case RETURN:
                 {
-                    BaseObject* obj = master_t::subsystem<Player>().getBody();
+                    std::shared_ptr<BaseObject> obj = master_t::subsystem<Player>().getBody();
                     pr::Vec2 home_pos = obj->getPosition();
                     pr::Vec2 self_pos = pr::Vec2(_body->GetPosition());
                     float dis = pr::distance( home_pos, self_pos );

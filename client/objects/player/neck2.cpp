@@ -23,7 +23,7 @@ namespace objects
     namespace player
     {
     
-		Neck2* Neck2::create( pr::Vec2 const& a_point, objects::player::Body* body, pr::Vec2 const& b_point, objects::player::Head* head )
+		Neck2* Neck2::create( pr::Vec2 const& a_point, std::shared_ptr<objects::player::Body> body, pr::Vec2 const& b_point, std::shared_ptr<objects::player::Head> head )
 		{
 			return new Neck2( a_point, body->getBody(), b_point, head->getBody() );
 		}

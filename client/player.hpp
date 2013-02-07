@@ -7,7 +7,9 @@
 #include "primitives.hpp"
 
 #include "action_target.hpp"
-    
+
+#include <memory>
+
 namespace objects
 {
 
@@ -48,14 +50,14 @@ public:
 
     void reload();
 
-    objects::player::Body* getBody();
-    objects::player::Head* getHead();
-	objects::player::Neck2* getNeck();
+    std::shared_ptr<objects::player::Body> getBody();
+    std::shared_ptr<objects::player::Head> getHead();
+	std::shared_ptr<objects::player::Neck2> getNeck();
     
 private:
-    objects::player::Body* _body;
-    objects::player::Head* _head;
-	objects::player::Neck2* _neck;
+    std::shared_ptr<objects::player::Body> _body;
+    std::shared_ptr<objects::player::Head> _head;
+	std::shared_ptr<objects::player::Neck2> _neck;
     static const float _neck_max_lenght;
 
 	//for testing

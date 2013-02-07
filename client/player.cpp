@@ -4,7 +4,7 @@
 #include "objects/player/head.hpp"
 #include "objects/player/neck2.hpp"
 #include "objects/player/neck.hpp"
-
+#include "object_manager.hpp"
 #include "master.hpp"
 
 #include "view.hpp"
@@ -22,9 +22,9 @@ void Player::start()
 
 void Player::stop()
 {
-    _body = 0;
-    _head = 0;
-    _neck = 0;
+    _body.reset();
+    _head.reset();
+    _neck.reset();
 }
 
 void Player::reload()
@@ -34,18 +34,17 @@ void Player::reload()
 }
 
 Player::Player()
-    : _body(0)
-    , _head(0)
-	, _neck(0)
-
-	, _mouse_joint(0)
+    : _mouse_joint(0)
 {
 }
 
 void Player::createAvatar( pr::Vec2 const& position )
 {
-    _body = objects::player::Body::create( position );
-    _head = objects::player::Head::create();
+    _body.reset(objects::player::Body::create( position ));
+    _head.reset(objects::player::Head::create());
+
+    master_t::subsystem<ObjectManager>().addObject(std::static_pointer_cast<BaseObject>(_body));
+    master_t::subsystem<ObjectManager>().addObject(std::static_pointer_cast<BaseObject>(_head));
 }
 
 bool Player::isAvatarCreated() const
@@ -70,19 +69,19 @@ void Player::unhook()
 	_head->return_home();
 }
 
-objects::player::Body* Player::getBody()
+std::shared_ptr<objects::player::Body> Player::getBody()
 {
     assert(isAvatarCreated() && "Player avatar don't created!");
     return _body;
 }
 
-objects::player::Head* Player::getHead()
+std::shared_ptr<objects::player::Head> Player::getHead()
 {
     assert( _head && "Player head don't exist!");
     return _head;
 }
 
-objects::player::Neck2* Player::getNeck()
+std::shared_ptr<objects::player::Neck2> Player::getNeck()
 {
     assert( _neck && "Player neck don't exist!");
     return _neck;
@@ -96,15 +95,17 @@ float Player::getNeckMaxLength() const
 void Player::createNeck()
 {
 	assert( !_neck && "Should not create more than one neck!" );
-	_neck = objects::player::Neck2::create( _body->getPosition(), _body, _head->getPosition(), _head );
+	_neck.reset(objects::player::Neck2::create( _body->getPosition(), _body, _head->getPosition(), _head ));
+
+    master_t::subsystem<ObjectManager>().addObject(std::static_pointer_cast<BaseObject>(_neck));
 }
 
 void Player::destroyNeck()
 {
 	assert( _neck && "Neck2 don't exist!" );
-    // TODO
-	//_neck->destroy();
-	_neck = 0;
+
+    master_t::subsystem<ObjectManager>().destroyObject(std::static_pointer_cast<BaseObject>(_neck));
+	_neck.reset();
 }
 
 void Player::onTargetTouch(action::TouchPtr &touch)

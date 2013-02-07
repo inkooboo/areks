@@ -7,6 +7,7 @@
 #include "body_definitions.hpp"
 
 #include <vector>
+#include <memory>
 
 namespace objects
 {
@@ -19,7 +20,7 @@ namespace objects
         class Neck2 : public BaseObject
 		{
 		public:
-			static Neck2* create( pr::Vec2 const& a_point, objects::player::Body* body, pr::Vec2 const& b_point, objects::player::Head* head );
+			static Neck2* create( pr::Vec2 const& a_point, std::shared_ptr<objects::player::Body> body, pr::Vec2 const& b_point, std::shared_ptr<objects::player::Head> head );
 
 			virtual void draw() override;
 

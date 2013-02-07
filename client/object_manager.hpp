@@ -20,7 +20,8 @@ public:
     void reload();
     
     std::shared_ptr<BaseObject> createObject(const Json::Value &description);
-    void destroyObject(std::shared_ptr<BaseObject> &obj_ptr);
+    void destroyObject(std::shared_ptr<BaseObject> obj_ptr);
+    void addObject(std::shared_ptr<BaseObject> object);
 
     void update_dynamic_objects_state(float dt);
     void update_objects(float dt);

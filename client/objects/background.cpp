@@ -10,6 +10,7 @@
 
 #include "view.hpp"
 #include "physics.hpp"
+#include "object_manager.hpp"
 
 namespace objects
 {
@@ -95,8 +96,8 @@ namespace objects
 
     void Background::collide( BaseObject* other, b2Contact *contact )
     {
-        // TODO
-        //other->destroy();
+        std::shared_ptr<BaseObject> no_own_ptr(other, [] (BaseObject*) {});
+        master_t::subsystem<ObjectManager>().destroyObject(no_own_ptr);
     }
 
 } //namespace objects
