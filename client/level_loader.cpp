@@ -79,7 +79,7 @@ void LevelLoader::loadLevel(const char *level_name)
     log() << "reload view parameters";
     master_t::subsystem<View>().reload(bg_size, world_size);
     
-#ifndef NO_SOUND
+#ifdef NO_SOUND
     log() << "preload background music";
     const std::string bg_music_file = res::background_sound(description["background_trek"].asCString());
     log() << "background music file = " << bg_music_file;

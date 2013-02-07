@@ -2,7 +2,7 @@
 #define _AREKS_PLAYER_NECK2_HPP_
 
 #include "defs.hpp"
-#include "base_object.hpp"
+#include "objects/base_object.hpp"
 #include "primitives.hpp"
 #include "body_definitions.hpp"
 

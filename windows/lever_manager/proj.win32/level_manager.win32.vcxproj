@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -18,13 +18,11 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v120_CTP_Nov2012</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v110</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -57,7 +55,7 @@
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;STRICT;_CRT_SECURE_NO_WARNINGS;_SCL_SECURE_NO_WARNINGS_DEBUG;COCOS2D_DEBUG=1;NO_SOUND;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <DisableSpecificWarnings>4267;4251;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -158,6 +156,7 @@
     <ClInclude Include="..\..\..\client\objects\ball.hpp" />
     <ClInclude Include="..\..\..\client\object_manager.hpp" />
     <ClInclude Include="..\..\..\client\objects\base_object.hpp" />
+    <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp" />
     <ClInclude Include="..\..\..\client\objects\platform.hpp" />
     <ClInclude Include="..\..\..\client\player.hpp" />
     <ClInclude Include="..\..\..\client\polygon_sprite.hpp" />
@@ -208,6 +207,7 @@
     <ClCompile Include="..\..\..\client\objects\ball.cpp" />
     <ClCompile Include="..\..\..\client\object_manager.cpp" />
     <ClCompile Include="..\..\..\client\objects\base_object.cpp" />
+    <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp" />
     <ClCompile Include="..\..\..\client\objects\platform.cpp" />
     <ClCompile Include="..\..\..\client\physics.cpp" />
     <ClCompile Include="..\..\..\client\player.cpp" />

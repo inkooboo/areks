@@ -7,7 +7,7 @@
 #include "view.hpp"
 
 #include "body.hpp"
-#include "base_object.hpp"
+#include "objects/base_object.hpp"
 
 static const float HEAD_SPEED = 30.f;
 static const float RETURN_ACCURACY = 0.5f;

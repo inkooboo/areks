@@ -4,7 +4,7 @@
 #include "defs.hpp"
 #include "primitives.hpp"
 #include "body_definitions.hpp"
-#include "base_object.hpp"
+#include "objects/base_object.hpp"
 
 namespace objects
 {

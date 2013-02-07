@@ -13,6 +13,9 @@
     <ClCompile Include="..\..\..\client\objects\platform.cpp">
       <Filter>source\client\objects</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\objects\object_interfaces.cpp">
+      <Filter>source\client\objects</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\client\objects\background.cpp">
       <Filter>source\client\objects</Filter>
     </ClCompile>
@@ -67,6 +70,9 @@
     <ClCompile Include="..\..\..\client\game_logic.cpp">
       <Filter>source\client\subsystems</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\client\level_manager.cpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\client\loading_screen.cpp">
       <Filter>source\client\subsystems</Filter>
     </ClCompile>
@@ -106,7 +112,6 @@
     <ClCompile Include="..\..\..\client\effects\arrow.cpp">
       <Filter>source\client\effects</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\client\level_loader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\common\subsystem.hpp">
@@ -137,6 +142,9 @@
       <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\platform.hpp">
+      <Filter>source\client\objects</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\client\objects\object_interfaces.hpp">
       <Filter>source\client\objects</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\client\objects\background.hpp">
@@ -211,6 +219,9 @@
     <ClInclude Include="..\..\..\client\game_logic.hpp">
       <Filter>source\client\subsystems</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\client\level_manager.hpp">
+      <Filter>source\client\subsystems</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\client\loading_screen.hpp">
       <Filter>source\client\subsystems</Filter>
     </ClInclude>
@@ -256,7 +267,6 @@
     <ClInclude Include="..\..\..\common\logger.hpp">
       <Filter>source\common</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\client\level_loader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="areks.rc" />

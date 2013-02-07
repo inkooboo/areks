@@ -3,7 +3,7 @@
 
 #include "defs.hpp"
 #include "primitives.hpp"
-#include "base_object.hpp"
+#include "objects/base_object.hpp"
 #include "body_definitions.hpp"
 
 namespace objects
