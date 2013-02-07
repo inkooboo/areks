@@ -102,7 +102,8 @@ void Player::createNeck()
 void Player::destroyNeck()
 {
 	assert( _neck && "Neck2 don't exist!" );
-	_neck->destroy();
+    // TODO
+	//_neck->destroy();
 	_neck = 0;
 }
 

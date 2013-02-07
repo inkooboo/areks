@@ -15,17 +15,13 @@
 namespace objects
 {
    
-    Rope* Rope::create( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body )
+    Rope::Rope( pr::Vec2 const& a_point, BaseObject* a_body, pr::Vec2 const& b_point, BaseObject* b_body )
+        : Rope(a_point, a_body->getBody(), b_point, b_body->getBody())
     {
-        return new Rope( a_point, a_body, b_point, b_body );
-    }
-
-    Rope* Rope::create( pr::Vec2 const& a_point, BaseObject* a_body, pr::Vec2 const& b_point, BaseObject* b_body )
-    {
-        return new Rope( a_point, a_body->getBody(), b_point, b_body->getBody() );
     }
 
     Rope::Rope( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body )
+        : BaseObject(Json::Value())
     {
         float distance = pr::distance( a_point, b_point );
 

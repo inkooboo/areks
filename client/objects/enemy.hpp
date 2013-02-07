@@ -13,14 +13,14 @@
 # include "defs.hpp"
 
 # include "primitives.hpp"
-# include "object_interfaces.hpp"
+# include "base_object.hpp"
 # include "body_definitions.hpp"
 # include "animation.hpp"
 
 namespace objects
 {
     
-    class Enemy : public DynamicObject
+    class Enemy : public BaseObject
     {
         enum State
         {
@@ -32,8 +32,9 @@ namespace objects
         };
         
     public:
-        static Enemy * create(const pr::Vec2 &position);
-        
+        Enemy(const Json::Value &description);
+        ~Enemy();
+
         virtual void draw() override;
         
         virtual void updateState(float t) override;
@@ -46,9 +47,6 @@ namespace objects
         
     private:
         State m_state;
-        
-        Enemy( pr::Vec2 const& position );
-        ~Enemy();
         
         BodyOwner _body;
         Animation m_animation;

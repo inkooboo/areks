@@ -2,9 +2,9 @@
 #define _AREKS_PLAYER_HEAD_HPP_
 
 #include "defs.hpp"
-#include "objects/object_interfaces.hpp"
 #include "primitives.hpp"
 #include "body_definitions.hpp"
+#include "base_object.hpp"
 
 namespace objects
 {
@@ -12,7 +12,7 @@ namespace objects
     namespace player
     {
     
-        class Head : public DynamicObject
+        class Head : public BaseObject
         {
         public:
             enum State

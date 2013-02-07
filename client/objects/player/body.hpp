@@ -2,8 +2,8 @@
 #define _AREKS_PLAYER_BODY_HPP_
 
 #include "defs.hpp"
-#include "objects/object_interfaces.hpp"
 #include "primitives.hpp"
+#include "base_object.hpp"
 #include "body_definitions.hpp"
 
 namespace objects
@@ -12,7 +12,7 @@ namespace objects
     namespace player
     {
     
-        class Body : public DynamicObject
+        class Body : public BaseObject
         {
         public:
             static Body* create( pr::Vec2 const& position );

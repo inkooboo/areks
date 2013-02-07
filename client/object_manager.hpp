@@ -5,9 +5,9 @@
 #include "objects/base_object.hpp"
 
 # include <json/json.h>
-# include <vector>
-
-class DynamicObject;
+# include <set>
+# include <list>
+# include <memory>
 
 class ObjectManager : public subsystem_t
 {
@@ -19,28 +19,17 @@ public:
     
     void reload();
     
-    //don't uses this methods manually!
-    void registerObject( BaseObject* obj_ptr );
-    void removeObject( BaseObject* obj_otr );
-
-    //don't uses this methods manually!
-    void registerDynamicObject( DynamicObject* obj_ptr );
-    void removeDynamicObject( DynamicObject* obj_ptr );
-
-    void destroyObject( BaseObject* obj_ptr );
+    std::shared_ptr<BaseObject> createObject(const Json::Value &description);
+    void destroyObject(std::shared_ptr<BaseObject> &obj_ptr);
 
     void update_dynamic_objects_state(float dt);
     void update_objects(float dt);
-    
     void collect_garbage_objects();
-    
-    void create_object_factory(const Json::Value &description);
                                
 private:
-    std::vector< BaseObject* > _objects;
-    std::vector< DynamicObject* > _dyn_objects;
+    std::set<std::shared_ptr<BaseObject>> _objects;
 
-    std::vector<BaseObject*> _to_delete_list;
+    std::list<std::shared_ptr<BaseObject>> _to_delete_list;
 };
 
 #endif

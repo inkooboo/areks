@@ -3,46 +3,25 @@
 #include "master.hpp"
 #include "loop.hpp"
 
-#include "objects/object_interfaces.hpp"
 #include "objects/ball.hpp"
 #include "objects/enemy.hpp"
+#include "objects/background.hpp"
+#include "objects/platform.hpp"
 
 #include <json/json.h>
 #include <algorithm>
 
-void object_creator(const Json::Value description)
+void delayed_object_creator(Json::Value description)
 {
-    const std::string class_name = description["class"].asString();
-    bool repeat = description.get("repeat", false).asBool();
-    float delay = description.get("appear_delay", 0.f).asFloat();
-    
-    const Json::Value pos_descr = description["position"];
-    pr::Vec2 position(pos_descr.get("x", 0.f).asFloat(), pos_descr.get("y", 0.f).asFloat());
-    
-    // create object
-    if (class_name == "ball")
-    {
-        objects::Ball::create(position);
-    }
-    else if (class_name == "enemy")
-    {
-        objects::Enemy::create(position);
-    }
-//    else if ()
-//    {
-//    }
+    master_t::subsystem<ObjectManager>().createObject(description);
     
     // schedule new creation if need
+    bool repeat = description.get("repeat", false).asBool();
+    float delay = description.get("appear_delay", 0.f).asFloat();
     if (repeat)
     {
-        master_t::subsystem<Loop>().schedule(std::bind(object_creator, description), delay);
+        master_t::subsystem<Loop>().schedule(std::bind(delayed_object_creator, description), delay);
     }
-}
-
-void ObjectManager::create_object_factory(const Json::Value &description)
-{
-    float delay = description.get("appear_delay", 0.f).asFloat();
-    master_t::subsystem<Loop>().schedule(std::bind(object_creator, description), delay);
 }
 
 void ObjectManager::start()
@@ -51,13 +30,7 @@ void ObjectManager::start()
 
 void ObjectManager::stop()
 {
-    auto it = _objects.begin();
-    auto end = _objects.end();
-
-    for( ; it != end; ++it )
-    {
-        (*it)->destroy();
-    }
+    _objects.clear();
 
     collect_garbage_objects();
 }
@@ -72,75 +45,78 @@ void ObjectManager::reload()
     start();
 }
 
-void ObjectManager::registerObject( BaseObject* obj_ptr )
+std::shared_ptr<BaseObject> ObjectManager::createObject(const Json::Value &description)
 {
-    assert( std::find( _objects.begin(), _objects.end(), obj_ptr ) == _objects.end() );
-    _objects.push_back( obj_ptr );
-}
-
-void ObjectManager::removeObject( BaseObject* obj_ptr )
-{
-    auto to_delete = std::find( _objects.begin(), _objects.end(), obj_ptr );
-    assert( to_delete != _objects.end() );
+    std::shared_ptr<BaseObject> ret;
     
-    _objects.erase( to_delete );
-}
-
-void ObjectManager::registerDynamicObject( DynamicObject* obj_ptr )
-{
-    assert( std::find( _dyn_objects.begin(), _dyn_objects.end(), obj_ptr ) == _dyn_objects.end() );
-    _dyn_objects.push_back( obj_ptr );
-}
-
-void ObjectManager::removeDynamicObject( DynamicObject* obj_ptr )
-{
-    auto to_delete = std::find( _dyn_objects.begin(), _dyn_objects.end(), obj_ptr );
-    assert( to_delete != _dyn_objects.end() );
-    
-    _dyn_objects.erase( to_delete );
-}
-
-void ObjectManager::destroyObject( BaseObject* obj_ptr )
-{
-    assert( std::find( _objects.begin(), _objects.end(), obj_ptr ) != _objects.end() );
-
-    auto it = std::find( _to_delete_list.begin(), _to_delete_list.end(), obj_ptr );
-    if( it == _to_delete_list.end() )
+    if (description.isMember("appear_delay"))
     {
-        _to_delete_list.push_back( obj_ptr );
+        float delay = description.get("appear_delay", 0.f).asFloat();
+        master_t::subsystem<Loop>().schedule(std::bind(delayed_object_creator, description), delay);
+        
+        return ret;
     }
+
+    const std::string class_name = description["class"].asString();
+    // create object
+    if (class_name == "ball")
+    {
+        ret.reset(new objects::Ball(description));
+    }
+    else if (class_name == "enemy")
+    {
+        ret.reset(new objects::Enemy(description));
+    }
+    else if (class_name == "background")
+    {
+        ret.reset(new objects::Background(description));
+    }
+    else if (class_name == "platform")
+    {
+        ret.reset(new objects::Platform(description));
+    }
+    // TODO ADD DEFAULT OBJECT
+    
+    //    else if ()
+    //    {
+    //    }
+    
+    _objects.insert(ret);
+    
+    return ret;
+}
+
+void ObjectManager::destroyObject(std::shared_ptr<BaseObject> &obj_ptr)
+{
+    auto to_del_it = _objects.find(obj_ptr);
+
+    if (to_del_it == _objects.end())
+    {
+        return;
+    }
+    
+    _to_delete_list.push_back(*to_del_it);
+    
+    _objects.erase(to_del_it);
 }
 
 void ObjectManager::update_dynamic_objects_state(float dt)
 {
-    auto it = _dyn_objects.begin();
-    auto end = _dyn_objects.end();
-    
-    for (; it != end; ++it)
+    for(auto obj : _objects)
     {
-        (*it)->updateState(dt);
+        obj->updateState(dt);
     }
 }
 
 void ObjectManager::update_objects(float dt)
 {
-    auto it = _objects.begin();
-    auto end = _objects.end();
-    
-    for( ; it != end; ++it )
+    for(auto obj : _objects)
     {
-        (*it)->draw();
+        obj->draw();
     }    
 }
 
 void ObjectManager::collect_garbage_objects()
 {
-    auto it = _to_delete_list.begin();
-    auto end = _to_delete_list.end();
-
-    for( ; it!=end; ++it )
-    {
-        delete (*it);
-    }
     _to_delete_list.clear();
 }

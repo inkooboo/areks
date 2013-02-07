@@ -14,13 +14,12 @@
 namespace objects
 {
 
-    Background* Background::create(const std::string &file_name_base, const std::string &file_name_lvl_1)
+    Background::Background(const Json::Value &description)
+        : BaseObject(description)
     {
-        return new Background( file_name_base, file_name_lvl_1 );
-    }
-    
-    Background::Background(const std::string &file_name_base,  const std::string &file_name_lvl_1)
-    {
+        std::string file_name_base = description["bg_name_base"].asString();
+        std::string file_name_lvl_1 = description["bg_name_parallax"].asString();
+        
         pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
 
         //
@@ -96,7 +95,8 @@ namespace objects
 
     void Background::collide( BaseObject* other, b2Contact *contact )
     {
-        other->destroy();
+        // TODO
+        //other->destroy();
     }
 
 } //namespace objects

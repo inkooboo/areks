@@ -9,13 +9,12 @@
 namespace objects
 {
 
-        Ball* Ball::create( pr::Vec2 const& position )
+        Ball::Ball(const Json::Value &description)
+            : BaseObject(description)
         {
-            return new Ball( position );
-        }
+            const Json::Value pos_descr = description["position"];
+            pr::Vec2 position(pos_descr.get("x", 0.f).asFloat(), pos_descr.get("y", 0.f).asFloat());
 
-        Ball::Ball( pr::Vec2 const& position )
-        {
             //
             //init physics
             //

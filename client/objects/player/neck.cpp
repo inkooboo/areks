@@ -30,6 +30,7 @@ namespace objects
 		}
 
 		Neck::Neck( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body )
+            : BaseObject(Json::Value())
 		{
 			float distance = pr::distance( a_point, b_point );
 

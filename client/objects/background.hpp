@@ -13,6 +13,7 @@
 # include "primitives.hpp"
 # include "body_definitions.hpp"
 
+# include <json/value.h>
 # include <string>
 
 namespace objects
@@ -20,7 +21,8 @@ namespace objects
     class Background : public BaseObject
     {
     public:
-        static Background* create(const std::string &file_name_base, const std::string &file_name_lvl_1);
+        Background(const Json::Value &description);
+        ~Background();
         
         virtual void draw() override;
 
@@ -29,9 +31,6 @@ namespace objects
         virtual void collide( BaseObject* other, b2Contact *contact ) override;
         
     private:
-        Background(const std::string &file_name_base, const std::string &file_name_lvl_1);
-        ~Background();
-
         BodyOwner _body;
         cc::CCSprite *_sprite_base;
         cc::CCSprite *_sprite_lvl_1;

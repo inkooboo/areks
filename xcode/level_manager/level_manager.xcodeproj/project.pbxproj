@@ -257,7 +257,6 @@
 		841155C215FF78F500CB9769 /* ball.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411559515FF78F500CB9769 /* ball.cpp */; };
 		841155C315FF78F500CB9769 /* base_object.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411559715FF78F500CB9769 /* base_object.cpp */; };
 		841155C415FF78F500CB9769 /* enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411559915FF78F500CB9769 /* enemy.cpp */; };
-		841155C515FF78F500CB9769 /* object_interfaces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411559B15FF78F500CB9769 /* object_interfaces.cpp */; };
 		841155C615FF78F500CB9769 /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 8411559D15FF78F500CB9769 /* platform.cpp */; };
 		841155C715FF78F500CB9769 /* body.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841155A015FF78F500CB9769 /* body.cpp */; };
 		841155C815FF78F500CB9769 /* head.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 841155A215FF78F500CB9769 /* head.cpp */; };
@@ -809,8 +808,6 @@
 		8411559815FF78F500CB9769 /* base_object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = base_object.hpp; sourceTree = "<group>"; };
 		8411559915FF78F500CB9769 /* enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemy.cpp; sourceTree = "<group>"; };
 		8411559A15FF78F500CB9769 /* enemy.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = enemy.hpp; sourceTree = "<group>"; };
-		8411559B15FF78F500CB9769 /* object_interfaces.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object_interfaces.cpp; sourceTree = "<group>"; };
-		8411559C15FF78F500CB9769 /* object_interfaces.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = object_interfaces.hpp; sourceTree = "<group>"; };
 		8411559D15FF78F500CB9769 /* platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
 		8411559E15FF78F500CB9769 /* platform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
 		841155A015FF78F500CB9769 /* body.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = body.cpp; sourceTree = "<group>"; };
@@ -1935,8 +1932,6 @@
 				8411559815FF78F500CB9769 /* base_object.hpp */,
 				8411559915FF78F500CB9769 /* enemy.cpp */,
 				8411559A15FF78F500CB9769 /* enemy.hpp */,
-				8411559B15FF78F500CB9769 /* object_interfaces.cpp */,
-				8411559C15FF78F500CB9769 /* object_interfaces.hpp */,
 				8411559D15FF78F500CB9769 /* platform.cpp */,
 				8411559E15FF78F500CB9769 /* platform.hpp */,
 				8411559F15FF78F500CB9769 /* player */,
@@ -2291,7 +2286,6 @@
 				841155C215FF78F500CB9769 /* ball.cpp in Sources */,
 				841155C315FF78F500CB9769 /* base_object.cpp in Sources */,
 				841155C415FF78F500CB9769 /* enemy.cpp in Sources */,
-				841155C515FF78F500CB9769 /* object_interfaces.cpp in Sources */,
 				841155C615FF78F500CB9769 /* platform.cpp in Sources */,
 				841155C715FF78F500CB9769 /* body.cpp in Sources */,
 				841155C815FF78F500CB9769 /* head.cpp in Sources */,
@@ -2395,7 +2389,7 @@
 					"\"$(PROJECT_NAME)/../../..\"",
 					"\"$(PROJECT_NAME)/../../../client\"",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/../../resources/LMInfo.plist";
+				INFOPLIST_FILE = ../../resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -2406,7 +2400,7 @@
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"level_manager/../../../cocos2dx\"";
 				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = armv7;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -2436,7 +2430,7 @@
 					"\"$(PROJECT_NAME)/../../..\"",
 					"\"$(PROJECT_NAME)/../../../client\"",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/../../resources/LMInfo.plist";
+				INFOPLIST_FILE = ../../resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				OTHER_LDFLAGS = (
 					"-lxml2",
@@ -2446,8 +2440,8 @@
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				USER_HEADER_SEARCH_PATHS = "\"level_manager/../../../cocos2dx\"";
-				VALIDATE_PRODUCT = NO;
-				VALID_ARCHS = armv7;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

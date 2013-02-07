@@ -4,18 +4,19 @@
 #include "defs.hpp"
 
 #include "primitives.hpp"
-#include "object_interfaces.hpp"
+#include "base_object.hpp"
 
 #include <vector>
 
 namespace objects
 {
 
-    class Rope : public DynamicObject
+    class Rope : public BaseObject
     {
     public:
-        static Rope* create( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body );
-        static Rope* create( pr::Vec2 const& a_point, BaseObject* a_body, pr::Vec2 const& b_point, BaseObject* b_body );
+        Rope( pr::Vec2 const& a_point, BaseObject* a_body, pr::Vec2 const& b_point, BaseObject* b_body );
+        Rope( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body );
+        ~Rope();
 
         virtual void draw() override;
 
@@ -28,8 +29,6 @@ namespace objects
         virtual pr::Vec2 getPosition() const override;
 
     private:
-        Rope( pr::Vec2 const& a_point, b2Body* a_body, pr::Vec2 const& b_point, b2Body* b_body );
-        ~Rope();
 
         std::vector<b2Body*> _sticks_bodies;
         std::vector<cc::CCSprite*> _sticks_sprites;

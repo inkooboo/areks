@@ -15,16 +15,19 @@ namespace objects
 	static const float PLATFORM_RESTITUTION = 0.2f;
 	static const float PLATFORM_FRICTION = 0.3f;
 
-    Platform* Platform::create(std::vector<pr::Vec2> const& vertices)
+    Platform::Platform(const Json::Value &description)
+        : BaseObject(description)
     {
-        return new Platform(vertices);
-    }
+		assert( (description["points"].isArray() && (description["points"].size() > 2)) && "Min vertices count of platform = 3!");
 
-    Platform::Platform(std::vector<pr::Vec2> const& vertices)
-    {
-		//convert polygon into triangles
-		assert( (vertices.size()>2) && "Min vertices count of platform = 3!");
-
+        const Json::Value &points = description["points"];
+        std::vector<pr::Vec2> vertices;
+        for (unsigned int i = 0; i < points.size(); ++i)
+        {
+            const Json::Value &point = points[i];
+            vertices.push_back(pr::Vec2(point["x"].asFloat(), point["y"].asFloat()));
+        }
+        
         Vector2dVector triangles;
 		Triangulate::Process( vertices, triangles );
 

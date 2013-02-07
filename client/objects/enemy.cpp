@@ -11,19 +11,16 @@
 #include "physics.hpp"
 #include "view.hpp"
 
-#include "body_definitions.hpp"
-
 namespace objects
 {
-    
-    Enemy * Enemy::create( pr::Vec2 const& position )
+        
+    Enemy::Enemy(const Json::Value &description)
+        : BaseObject(description)
+        , m_animation("midget")
     {
-        return new Enemy( position );
-    }
-    
-    Enemy::Enemy( pr::Vec2 const& position )
-        : m_animation("midget")
-    {
+        const Json::Value pos_descr = description["position"];
+        pr::Vec2 position(pos_descr.get("x", 0.f).asFloat(), pos_descr.get("y", 0.f).asFloat());
+
         pr::Vec2 size = pr::Vec2(2,3.14);
         
         //

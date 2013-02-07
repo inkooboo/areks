@@ -3,7 +3,6 @@
 #include "master.hpp"
 
 #include "object_manager.hpp"
-#include "objects/object_interfaces.hpp"
 
 #include "physics.hpp"
 #include "view.hpp"

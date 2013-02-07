@@ -1,19 +1,20 @@
 #ifndef _AREKS_BALL_HPP_
-#define _AREKS_BALL_HPP_
+# define _AREKS_BALL_HPP_
 
-#include "defs.hpp"
+# include "defs.hpp"
 
-#include "primitives.hpp"
-#include "object_interfaces.hpp"
-#include "body_definitions.hpp"
+# include "primitives.hpp"
+# include "base_object.hpp"
+# include "body_definitions.hpp"
 
 namespace objects
 {
 
-    class Ball : public DynamicObject
+    class Ball : public BaseObject
     {
     public:
-        static Ball* create( pr::Vec2 const& position );
+        Ball(const Json::Value &description);
+        ~Ball();
 
         virtual void draw() override;
 
@@ -24,8 +25,6 @@ namespace objects
         virtual pr::Vec2 getPosition() const override;
 
     private:
-        Ball( pr::Vec2 const& position );
-        ~Ball();
 
         BodyOwner _body;
         cc::CCSprite* _sprite;

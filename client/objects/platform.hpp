@@ -1,30 +1,30 @@
 #ifndef _AREKS_OBJECT_PLATFORM_HPP_
-#define _AREKS_OBJECT_PLATFORM_HPP_
+# define _AREKS_OBJECT_PLATFORM_HPP_
 
-#include "defs.hpp"
-#include "object_interfaces.hpp"
+# include "defs.hpp"
 
-#include "primitives.hpp"
-#include "body_definitions.hpp"
+# include "primitives.hpp"
+# include "base_object.hpp"
+# include "body_definitions.hpp"
 
-#include <vector>
+# include <json/value.h>
+
+# include <vector>
 
 namespace objects
 {
 
-    class Platform : public StaticObject
+    class Platform : public BaseObject
     {
     public:
-        static Platform* create(std::vector<pr::Vec2> const& vertices);
-        
+        Platform(const Json::Value &description);
+        ~Platform();
+
         virtual void draw() override;
 
         virtual b2Body* getBody() override;
         
     private:
-        Platform(std::vector<pr::Vec2> const& vertices);
-        ~Platform();
-
         BodyOwner _body;
         cc::CCNode* _ground_sprite;
 		cc::CCSpriteBatchNode* _grass_sprites;

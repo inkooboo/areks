@@ -17,6 +17,7 @@ namespace objects
         }
         
         Body::Body( pr::Vec2 const& position )
+            : BaseObject(Json::Value())
         {
             static const pr::Vec2 size = pr::Vec2( 1.5f, 1.5f );
             //

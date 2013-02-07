@@ -60,11 +60,11 @@ struct AreksView : public cc::CCObject, public View
         master_t::subsystem<cd::SimpleAudioEngine>().playEffect(res::sound_effect("046").c_str());
 #endif
         ///
-
+        
         /// test effects. Remove it.
         pr::Vec2 world_size = master_t::subsystem<Physics>().worldSize();
         world_size *= .5f;
-
+        
         effects::FlyingText::create(world_size, m_game_layer, "Test Text", 14, cc::ccc3(190, 255, 190), 5.f);
         ///
         
@@ -73,11 +73,11 @@ struct AreksView : public cc::CCObject, public View
     virtual void manageCameraPositionAndScale(float t) override
     {
         Player &player = master_t::subsystem<Player>();
-
+        
         if (player.isAvatarCreated())
         {
             pr::Vec2 body_postion = player.getBody()->getPosition();
-
+            
             m_cur_positon = body_postion;
         }
         

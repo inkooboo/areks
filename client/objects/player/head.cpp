@@ -7,6 +7,7 @@
 #include "view.hpp"
 
 #include "body.hpp"
+#include "base_object.hpp"
 
 static const float HEAD_SPEED = 30.f;
 static const float RETURN_ACCURACY = 0.5f;
@@ -24,12 +25,13 @@ namespace objects
 
         Head* Head::create()
         {
-            DynamicObject* body = master_t::subsystem<Player>().getBody();
+            BaseObject* body = master_t::subsystem<Player>().getBody();
             return new Head( body->getPosition() );
         }
         
         Head::Head( pr::Vec2 const& position )
-            : _state( REST )
+            : BaseObject(Json::Value())
+            , _state( REST )
 			, _attach_joint(0)
         {
             static const pr::Vec2 size = pr::Vec2( 0.4f, 0.4f );
@@ -87,7 +89,7 @@ namespace objects
                 }
                 case FLY:
                 {
-                    DynamicObject* obj = master_t::subsystem<Player>().getBody();
+                    BaseObject* obj = master_t::subsystem<Player>().getBody();
                     float dis = pr::distance( pr::Vec2(_body->GetPosition()), obj->getPosition() );
                     if( dis >= master_t::subsystem<Player>().getNeckMaxLength() )
                     {
@@ -101,7 +103,7 @@ namespace objects
                 }
                 case RETURN:
                 {
-                    DynamicObject* obj = master_t::subsystem<Player>().getBody();
+                    BaseObject* obj = master_t::subsystem<Player>().getBody();
                     pr::Vec2 home_pos = obj->getPosition();
                     pr::Vec2 self_pos = pr::Vec2(_body->GetPosition());
                     float dis = pr::distance( home_pos, self_pos );

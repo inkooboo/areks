@@ -5,19 +5,13 @@
 #include "object_manager.hpp"
 #include "view.hpp"
 
-BaseObject::BaseObject()
-{
-    master_t::subsystem<ObjectManager>().registerObject(this);
-}
-
 BaseObject::~BaseObject()
 {
-    master_t::subsystem<ObjectManager>().removeObject(this);
 }
 
-void BaseObject::destroy()
+BaseObject::BaseObject(const Json::Value &description)
+    : m_description(description)
 {
-    master_t::subsystem<ObjectManager>().destroyObject( this );
 }
 
 void BaseObject::releaseJoints( b2Body* body )

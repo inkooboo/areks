@@ -2,7 +2,7 @@
 #define _AREKS_PLAYER_NECK2_HPP_
 
 #include "defs.hpp"
-#include "objects/object_interfaces.hpp"
+#include "base_object.hpp"
 #include "primitives.hpp"
 #include "body_definitions.hpp"
 
@@ -16,7 +16,7 @@ namespace objects
 		class Head;
 		class Body;
     
-        class Neck2 : public DynamicObject
+        class Neck2 : public BaseObject
 		{
 		public:
 			static Neck2* create( pr::Vec2 const& a_point, objects::player::Body* body, pr::Vec2 const& b_point, objects::player::Head* head );

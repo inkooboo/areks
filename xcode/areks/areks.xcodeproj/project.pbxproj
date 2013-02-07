@@ -275,7 +275,6 @@
 		84FD597115DB7E82000E6454 /* platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD596315DB7E82000E6454 /* platform.cpp */; };
 		84FD597215DB7E82000E6454 /* physics.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD596515DB7E82000E6454 /* physics.cpp */; };
 		84FD597315DB7E82000E6454 /* view.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD596815DB7E82000E6454 /* view.cpp */; };
-		84FD59AD15DB8DD0000E6454 /* object_interfaces.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD59AC15DB8DD0000E6454 /* object_interfaces.cpp */; };
 		84FD59AF15DB9670000E6454 /* background.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD59AE15DB9670000E6454 /* background.cpp */; };
 		84FD59B115DB9ED4000E6454 /* primitives.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 84FD59B015DB9ED4000E6454 /* primitives.cpp */; };
 /* End PBXBuildFile section */
@@ -853,7 +852,6 @@
 		84FD595E15DB7E82000E6454 /* background.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = background.hpp; sourceTree = "<group>"; };
 		84FD595F15DB7E82000E6454 /* base_object.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = base_object.cpp; sourceTree = "<group>"; };
 		84FD596015DB7E82000E6454 /* base_object.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = base_object.hpp; sourceTree = "<group>"; };
-		84FD596215DB7E82000E6454 /* object_interfaces.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = object_interfaces.hpp; sourceTree = "<group>"; };
 		84FD596315DB7E82000E6454 /* platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = platform.cpp; sourceTree = "<group>"; };
 		84FD596415DB7E82000E6454 /* platform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = platform.hpp; sourceTree = "<group>"; };
 		84FD596515DB7E82000E6454 /* physics.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = physics.cpp; sourceTree = "<group>"; };
@@ -861,7 +859,6 @@
 		84FD596715DB7E82000E6454 /* primitives.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = primitives.hpp; sourceTree = "<group>"; };
 		84FD596815DB7E82000E6454 /* view.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = view.cpp; sourceTree = "<group>"; };
 		84FD596915DB7E82000E6454 /* view.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = view.hpp; sourceTree = "<group>"; };
-		84FD59AC15DB8DD0000E6454 /* object_interfaces.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = object_interfaces.cpp; sourceTree = "<group>"; };
 		84FD59AE15DB9670000E6454 /* background.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = background.cpp; sourceTree = "<group>"; };
 		84FD59B015DB9ED4000E6454 /* primitives.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = primitives.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1983,11 +1980,9 @@
 				84634B0A15E21990000713B6 /* ball.hpp */,
 				84634B0315DE45EF000713B6 /* rope.cpp */,
 				84634B0415DE45F0000713B6 /* rope.hpp */,
-				84FD59AC15DB8DD0000E6454 /* object_interfaces.cpp */,
 				84FD595E15DB7E82000E6454 /* background.hpp */,
 				84FD595F15DB7E82000E6454 /* base_object.cpp */,
 				84FD596015DB7E82000E6454 /* base_object.hpp */,
-				84FD596215DB7E82000E6454 /* object_interfaces.hpp */,
 				84FD596315DB7E82000E6454 /* platform.cpp */,
 				84FD596415DB7E82000E6454 /* platform.hpp */,
 				84FD59AE15DB9670000E6454 /* background.cpp */,
@@ -2293,7 +2288,6 @@
 				84FD597115DB7E82000E6454 /* platform.cpp in Sources */,
 				84FD597215DB7E82000E6454 /* physics.cpp in Sources */,
 				84FD597315DB7E82000E6454 /* view.cpp in Sources */,
-				84FD59AD15DB8DD0000E6454 /* object_interfaces.cpp in Sources */,
 				84FD59AF15DB9670000E6454 /* background.cpp in Sources */,
 				84FD59B115DB9ED4000E6454 /* primitives.cpp in Sources */,
 				84634B0515DE45F0000713B6 /* rope.cpp in Sources */,

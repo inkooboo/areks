@@ -90,22 +90,23 @@ void LevelLoader::loadLevel(const char *level_name)
 #endif
     
     log() << "create background";
-    objects::Background::create(bg_name_base, bg_name_parallax);
+    Json::Value bg_descr;
+    bg_descr["class"] = "background";
+    bg_descr["bg_name_base"] = bg_name_base;
+    bg_descr["bg_name_parallax"] = bg_name_parallax;
+    master_t::subsystem<ObjectManager>().createObject(bg_descr);
     
     
     log() << "create platforms";
     const Json::Value &platforms = description["platforms"];
     for (auto it = platforms.begin(); it != platforms.end(); ++it)
     {
-        const Json::Value &platform = *it;
+        const Json::Value &platform_points = *it;
+        Json::Value platform_descr;
+        platform_descr["points"] = platform_points;
+        platform_descr["class"] = "platform";
         
-        std::vector<pr::Vec2> points;
-        for (unsigned int i = 0; i < platform.size(); ++i)
-        {
-            const Json::Value &point = platform[i];
-            points.push_back(pr::Vec2(point["x"].asFloat(), point["y"].asFloat()));
-        }
-        objects::Platform::create(points);
+        master_t::subsystem<ObjectManager>().createObject(platform_descr);
     }
     
     log() << "create objects";
@@ -114,8 +115,8 @@ void LevelLoader::loadLevel(const char *level_name)
     for (auto it = obj_names.begin(); it != obj_names.end(); ++it)
     {
         log() << "    " << *it;
-        const Json::Value obj = objects[*it];
-        master_t::subsystem<ObjectManager>().create_object_factory(obj);
+        Json::Value obj = objects[*it];
+        master_t::subsystem<ObjectManager>().createObject(obj);
     }
     
     log() << "create player avatar";
